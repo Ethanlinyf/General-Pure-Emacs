@@ -15,7 +15,7 @@
 (use-package diredfl
   :init (diredfl-global-mode 1))
 
-(diredful-mode 1)
+; (diredful-mode 1)
 
  ;; Show directory first
 (setq dired-listing-switches "-alh --group-directories-first")
