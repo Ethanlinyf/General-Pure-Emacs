@@ -1,0 +1,27 @@
+#+options: ':nil *:t -:t ::t <:t H:3 \n:nil ^:t arch:headline author:t
+#+options: broken-links:nil c:nil creator:nil d:(not "LOGBOOK") date:t e:t
+#+options: email:nil f:t inline:t num:t p:nil pri:nil prop:nil stat:t tags:t
+#+options: tasks:t tex:t timestamp:t title:t toc:t todo:t |:t
+#+title: General-Pure-Emacs-Development
+#+date: <2022-05-18 Wed>
+#+author: Dr YF Lin
+#+email: e.yflin@gmail.com
+#+language: en
+#+select_tags: export
+#+exclude_tags: noexport
+#+creator: Emacs 28.1 (Org mode 9.5.2)
+#+cite_export:
+
+“From sand to the tower with spiral evolution.”  -- YF Lin
+
+* Excutive Summary
+This is the demonstration how to create this integrated platform, and how the
+configuration can be derived, from org to .el. 
+* Introduction
+This is for tutorial purpose to illustrate the development of this platform.
+* The process of the development
+** The order 
+* Metaphysics
+** Up
+** Down
+* Reference
