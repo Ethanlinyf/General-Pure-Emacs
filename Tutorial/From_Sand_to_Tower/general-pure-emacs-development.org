@@ -12,16 +12,20 @@
 #+creator: Emacs 28.1 (Org mode 9.5.2)
 #+cite_export:
 
-“From sand to the tower with spiral evolution.”  -- YF Lin
+“Something good, from sand to the tower with spiral evolution.”  -- Dr YF Lin :
+"From the tower to dust in your universe as what You wish to be" 
 
 * Excutive Summary
 This is the demonstration how to create this integrated platform, and how the
-configuration can be derived, from org to .el. 
+configuration can be derived, from this org to the platform with .el(s).
 * Introduction
 This is for tutorial purpose to illustrate the development of this platform.
 * The process of the development
-** The order 
+** Blueprint
+** The order
 * Metaphysics
 ** Up
 ** Down
+* Not yet existent
+* Floating in the air
 * Reference
