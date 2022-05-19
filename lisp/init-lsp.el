@@ -50,13 +50,43 @@
 ;;                    (lsp-bridge-mode 1)
 ;;                    )))
 
+(add-to-list 'load-path "<path-to-lsp-bridge>")
+
+;; (require 'lsp-bridge)             ;; load lsp-bridge
+;; (global-corfu-mode)               ;; use corfu as completion ui
+;; (require 'lsp-bridge-orderless)   ;; make lsp-bridge support fuzzy match, optional
+;; (require 'lsp-bridge-icon)        ;; show icon for completion items, optional
+;; (global-lsp-bridge-mode)
+
 ;; (add-to-list 'load-path "<path-to-lsp-bridge>")
 
+(require 'yasnippet)
 (require 'lsp-bridge)             ;; load lsp-bridge
-(global-corfu-mode)               ;; use corfu as completion ui
 (require 'lsp-bridge-orderless)   ;; make lsp-bridge support fuzzy match, optional
-(require 'lsp-bridge-icon)        ;; show icon for completion items, optional
+(require 'lsp-bridge-icon)        ;; show icons for completion items, optional
+(require 'lsp-bridge-jdtls)       ;; provide Java third-party library jump and -data directory support, optional
+(yas-global-mode 1)
+
+;; For corfu users:
+(setq lsp-bridge-completion-provider 'corfu)
+(require 'corfu)
+(require 'corfu-info)
+(require 'corfu-history)
+(global-corfu-mode)               ;; use corfu as completion ui
+(corfu-history-mode t)
 (global-lsp-bridge-mode)
+
+
+;; For company users:
+(setq lsp-bridge-completion-provider 'company)
+(require 'company)
+(require 'company-box)
+(company-box-mode 1)
+(global-lsp-bridge-mode)
+
+;; For Xref support
+(add-hook 'lsp-bridge-mode-hook (lambda ()
+  (add-hook 'xref-backend-functions #'lsp-bridge-xref-backend nil t)))
 
 ;;--------------------------------------------------------------------
 (provide 'init-lsp)
