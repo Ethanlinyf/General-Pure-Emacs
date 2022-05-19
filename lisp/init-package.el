@@ -84,6 +84,7 @@
                                  posframe
                                  markdown-mode
                                  eglot
+                                 epc
                                  )  "Default packages")
 
 (setq package-selected-packages puremacs/packages)
@@ -427,6 +428,11 @@ all-the-icons-ivy-rich-display-transformers-list
 (add-to-list 'eglot-server-programs '((c++-mode c-mode) "clangd"))
 (add-hook 'c-mode-hook 'eglot-ensure)
 (add-hook 'c++-mode-hook 'eglot-ensure)
+
+;;------------------------------------------------------------------------------
+(require 'epc)
+
+
 
 ;;------------------------------------------------------------------------------
 (provide 'init-package)
