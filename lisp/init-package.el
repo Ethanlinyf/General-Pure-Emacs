@@ -130,7 +130,7 @@
 (when (display-graphic-p)
   (require 'all-the-icons))
 
-(global-company-mode 1)
+;; (global-company-mode 1)
 
 ;;------------------------------------------------------------------------------
 (require 'recentf)
