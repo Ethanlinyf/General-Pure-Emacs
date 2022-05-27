@@ -23,9 +23,36 @@ This is for tutorial purpose to illustrate the development of this platform.
 * The process of the development
 ** Blueprint
 ** The order
+;; Package initialize occurs automatically, before user-init-file' is loaded,
+   but after `early-init-file'. We handle package initialization, so we mustprevent Emacs from doing it early! (u)
+#+begin_src emacs-lisp
+  (setq package-enable-at-startup nil)
+#+end_src
 * Metaphysics
 ** Up
+-- load path
+#+begin_src shell
+    (defun add-subdirs-to-load-path (&rest _)
+    "Add subdirectories to `load-path'.
+  Don't put large files in `site-lisp' directory, e.g. EAF.
+  Otherwise the startup will be very slow. "
+    (let ((default-directory (expand-file-name "site-lisp" user-emacs-directory)))
+      (normal-top-level-add-subdirs-to-load-path)))
+
+  (advice-add #'package-initialize :after #'update-load-path)
+  (advice-add #'package-initialize :after #'add-subdirs-to-load-path)
+
+   (update-load-path)
+#+end_src
+
+
 ** Down
 * Not yet existent
 * Floating in the air
 * Reference
+* Zull
+** borg:
+;; for Emacs 28.1
+;; Silence compiler warnings as they can be pretty disruptive
+;;(when (native-comp-available-p) 
+;;  (setq borg-compile-function #'native-compile))

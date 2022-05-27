@@ -1,8 +1,8 @@
 ;; init-speedup.el --- Improve Emacs Performance -*- lexical-binding: t; -*-
 ;;
-;; Copyleft (CL) 2022-2032 Dr YF Lin
+;; Copyleft (CL) 2022-2032 YF Lin
 ;;
-;; Author: Ethan YF Lin <e.yflin@gmail.com>
+;; Developing by Dr YF Lin <e.yflin@gmail.com>
 ;; URL: https://github.com/Ethanlinyf/General-Pure-Emacs
 ;; Under ThingsEngine Project: https://www.thethingsengine.org/
 ;;--------------------------------------------------------------------
@@ -11,13 +11,9 @@
 ;;--------------------------------------------------------------------
 ;;; Code:
 
-(defvar better-gc-cons-threshold (* 16 1024 1024) ; 16mb
+(defvar better-gc-cons-threshold (* 8 1024 1024)
   "The default value for `gc-cons-threshold'.
-If freezing, decrease this. If stuttering, increase this.")
-
-; defer gc futher back
-(setq gc-cons-threshold most-positive-fixnum
-      gc-cons-percentage 0.5)
+If freezing, decrease it. If stuttering, increase it.")
 
 (defvar startup/file-name-handler-alist file-name-handler-alist)
 (setq file-name-handler-alist nil)
@@ -51,14 +47,15 @@ If freezing, decrease this. If stuttering, increase this.")
                                   (garbage-collect))))
 (add-hook 'after-focus-change-function 'garbage-collect))))
 
-
 (add-hook 'emacs-startup-hook
           (lambda ()
             (message "Emacs ready in %s with %d garbage collections."
                      (format "%.2f seconds"
                              (float-time
-                              (time-subtract after-init-time before-init-time)))
+                              (time-subtract
+                               after-init-time before-init-time)))
                      gcs-done)))
 
-
+;;----------------------------------------------------------------------
 (provide 'init-speedup)
+;;; init-speedup.el ends here

@@ -20,7 +20,7 @@
 
 (package-initialize)
 
-;;add whatever packages you want here stable.stable.
+;;add whatever packages you want here 
 (defvar puremacs/packages '(
 			    company
                             company-box 
@@ -40,7 +40,7 @@
                                  all-the-icons
                                  magit
                                  window-numbering
-                                 lsp-mode
+                                 ;; lsp-mode
                                  flycheck
                                  which-key
                                  yasnippet
@@ -72,7 +72,6 @@
                                  zotxt ; for reference
                                  org-roam
                                  org-download
-                                 page-break-lines
                                  format-all
                                  htmlize ; from org-site
                                  ;;ox-twbs
@@ -166,7 +165,7 @@
 
 
 ;;(load-theme 'doom-one-light t)
-(load-theme 'doom-one t)
+;;(load-theme 'doom-one t)
 
 ;;------------------------------------------------------------------------------
 (require 'popwin)
@@ -342,7 +341,7 @@ all-the-icons-ivy-rich-display-transformers-list
   (require 'all-the-icons))
 
 ;;--------------------------------------------------------------------
-(add-to-list 'load-path (expand-file-name "~/.emacs.d/site-lisp/awesome-tab"))
+(add-to-list 'load-path (expand-file-name "site-lisp/awesome-tab" user-emacs-directory))
 
 
 (require 'awesome-tab)
@@ -416,7 +415,7 @@ all-the-icons-ivy-rich-display-transformers-list
 
 ;;--------------------------------------------------------------------------------
 
-(add-to-list 'load-path "~/.emacs.d/site-lisp/corfu-english-helper/")
+(add-to-list 'load-path (expand-file-name "site-lisp/corfu-english-helper/" user-emacs-directory))
 (require 'corfu-english-helper)
 
 ;;------------------------------------------------------------------------------

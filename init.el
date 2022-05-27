@@ -11,34 +11,48 @@
 ;;--------------------------------------------------------------------
 ;;; Code:
 
-(setq
- ;; initial-major-mode 'fundamental-mode
- initial-major-mode 'emacs-lisp-mode
- package--init-file-ensured t)
+;; Initialise the major mode for scratch
+(setq initial-major-mode 'fundamental-mode ;'emacs-lisp-mode
+      package--init-file-ensured t)
 
+;; Load the settings recorded through emacs
+(setq custom-file (expand-file-name "custom.el" user-emacs-directory))
+(when (file-exists-p custom-file) ;; Load the custom file if it exists
+  (load custom-file))
+
+;; Define a file to record emacs macros.
+(defvar pure-macro (expand-file-name "macros.el" user-emacs-directory)
+  "A file to record emacs macros.")
+
+;; Load the recorded emacs macros if it exists
+(when (file-exists-p pure-macro) 
+  (load pure-macro))
+
+;; Add to list to load the el files in a specific folder;
+(defun update-load-pathe (&rest _)
+  "To load folders includ el files."
+  (dolist (path '("lisp" "site-lisp"))
+    (push (expand-file-name path user-emacs-directory) load-path)))
+(update-load-pathe)
 
 (require 'init-const)
 (require 'init-custom)
-
+(require 'init-speedup)
 (require 'init-package)
-
-(require 'init-dashboard)
-
+;; (require 'init-dashboard)
 (require 'init-abbr)
 (require 'init-basic)
-
 (require 'init-ui)
-(require 'init-org)
-(require 'init-tex)
 (require 'init-yasnippet)
 ;;(require 'init-org-site)
 ;;(require 'init-twbs)
 (require 'init-dired)
-
+(require 'init-treemacs)
+(require 'init-org)
+(require 'init-tex)
+(require 'init-lsp)
 (require 'pure-function)
 (require 'init-test)
-(require 'init-treemacs)
-(require 'init-lsp)
 
 ;;----------------------------------------------------------------------------
 (provide 'init)
