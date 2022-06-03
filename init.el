@@ -1,10 +1,10 @@
 ;;; init.el --- The main entry of Emacs. -*- lexical-binding: t; -*-
 ;;
-;; Copyleft (CL) 2022-2032 Dr YF Lin
+;; Copyleft (CL) 2022-2032 YF Lin
 ;;
-;; Author: Ethan YF Lin <e.yflin@gmail.com>
+;; Something good as indicated, by Dr YF Lin <e.yflin@gmail.com>
 ;; URL: https://github.com/Ethanlinyf/General-Pure-Emacs
-;; Under ThingsEngine Project: https://www.thethingsengine.org/
+;; Under ThingsEngine Project: https://www.thethingsengine.org
 ;;--------------------------------------------------------------------
 ;; Commentary:
 ;; Add feature defined in the lisp folder
@@ -37,6 +37,7 @@
 
 (require 'init-const)
 (require 'init-custom)
+(require 'init-emacro)
 (require 'init-speedup)
 (require 'init-package)
 ;; (require 'init-dashboard)
@@ -44,8 +45,6 @@
 (require 'init-basic)
 (require 'init-ui)
 (require 'init-yasnippet)
-;;(require 'init-org-site)
-;;(require 'init-twbs)
 (require 'init-dired)
 (require 'init-treemacs)
 (require 'init-org)

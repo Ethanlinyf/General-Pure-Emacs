@@ -1,14 +1,14 @@
-;;; early-init.el --- Early initialization. -*- lexical-binding: t -*-
+;;; early-init.el --- Early initialisation. -*- lexical-binding: t -*-
 ;;
 ;; Copyleft (CL) 2022-2032 YF Lin
 ;;
-;; Developing by Dr YF Lin <e.yflin@gmail.com>
+;; Something good as indicated, by Dr YF Lin <e.yflin@gmail.com>
 ;; URL: https://github.com/Ethanlinyf/General-Pure-Emacs
-;; Under ThingsEngine Project: https://www.thethingsengine.org/
+;; Under ThingsEngine Project: https://www.thethingsengine.org
 ;;----------------------------------------------------------------------
 ;; Commentary:
 ;; Emacs 27 introduces early-init.el, which is run before init.el,
-;; before package and UI initialization happens.
+;; before package and UI initialisation happens.
 ;;----------------------------------------------------------------------
 ;;; Code:
 

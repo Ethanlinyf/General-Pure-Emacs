@@ -84,6 +84,7 @@
                                  markdown-mode
                                  eglot
                                  epc
+                                 corfu-doc
                                  )  "Default packages")
 
 (setq package-selected-packages puremacs/packages)
@@ -164,8 +165,8 @@
 (setq doom-modeline-buffer-file-name-style 'truncate-with-project)
 
 
-;;(load-theme 'doom-one-light t)
-;;(load-theme 'doom-one t)
+(load-theme 'doom-one-light t)
+(load-theme 'doom-one t)
 
 ;;------------------------------------------------------------------------------
 (require 'popwin)
@@ -431,8 +432,11 @@ all-the-icons-ivy-rich-display-transformers-list
 ;;------------------------------------------------------------------------------
 (require 'epc)
 
+(add-hook 'corfu-mode-hook #'corfu-doc-mode)
 
 
+;;--------------------------------------------------------------------
+(require 'posframe)
 ;;------------------------------------------------------------------------------
 (provide 'init-package)
 ;;; init-package.el ends here

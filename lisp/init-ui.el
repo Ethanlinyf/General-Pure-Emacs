@@ -49,6 +49,13 @@
 (when *is-mac*
   (toggle-frame-fullscreen))
 
+
+;; no title bar (not covienient)
+;; (when *is-mac*
+;;   (setq default-frame-alist '((undecorated . t)))
+;;   (add-to-list 'default-frame-alist '(drag-internal-border . 1))
+;;   (add-to-list 'default-frame-alist '(internal-border-width . 5)))
+
 ;;--------------------------------------------------------------------
 (provide 'init-ui)
 ;;; ends here

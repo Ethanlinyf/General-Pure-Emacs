@@ -1,10 +1,10 @@
-;;; pure.el --- To include macro into Emacs -*- lexical-binding: t; -*-
+;;; macros.el - Include macro into Emacs -*- lexical-binding: t; -*-
 ;;
-;; Copyleft (CL) 2022-2032 Dr YF Lin
+;; Copyleft (CL) 2022-2032 YF Lin
 ;;
-;; Author: Ethan YF Lin <e.yflin@gmail.com>
+;; Something good as indicated, by Dr YF Lin <e.yflin@gmail.com>
 ;; URL: https://github.com/Ethanlinyf/General-Pure-Emacs
-;; Under ThingsEngine Project: https://www.thethingsengine.org/
+;; Under ThingsEngine Project: https://www.thethingsengine.org
 ;;--------------------------------------------------------------------
 ;;; Commentary:
 ;; Add macros to Emacs
@@ -13,5 +13,5 @@
 
 
 ;;--------------------------------------------------------------------
-(provide 'puremacro)
+(provide 'init-emacro)
 ;;; ends here
