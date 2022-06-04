@@ -86,5 +86,5 @@
 ;;(add-to-list 'org-modules 'org-tempo t)
 
 ;;------------------------------------------------------------------------------
-(provide 'init-org)
+(provide 'init-i-org)
 ;;; init-orgs.el ends here

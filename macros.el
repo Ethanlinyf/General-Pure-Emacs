@@ -13,5 +13,5 @@
 
 
 ;;--------------------------------------------------------------------
-(provide 'init-emacro)
+(provide 'init-c-emacro)
 ;;; ends here

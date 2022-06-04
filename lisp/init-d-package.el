@@ -437,6 +437,38 @@ all-the-icons-ivy-rich-display-transformers-list
 
 ;;--------------------------------------------------------------------
 (require 'posframe)
+
+;;--------------------------------------------------------------------
+;; set ox-twbs
+;; (setq org-publish-project-alist
+;;       '(("org-notes"
+;;          :base-directory "~/Org-twbs/org/"
+;;          :publishing-directory "~/Org-twbs/public_html/"
+;;          :publishing-function org-twbs-publish-to-html
+;;          :with-sub-superscript nil
+;;          )))
+
+;; (defun my-org-publish-buffer ()
+;;   (interactive)
+;;   (save-buffer)
+;;   (save-excursion (org-publish-current-file))
+;;   (let* ((proj (org-publish-get-project-from-filename buffer-file-name))
+;;          (proj-plist (cdr proj))
+;;          (rel (file-relative-name buffer-file-name
+;;                                   (plist-get proj-plist :base-directory)))
+;;          (dest (plist-get proj-plist :publishing-directory)))
+;;     (browse-url (concat "file://"
+;;                         (file-name-as-directory (expand-file-name dest))
+;;                         (file-name-sans-extension rel)
+;;                         ".html"))))
+
+;; (add-hook 'org-mode-hook
+;;           (lambda ()
+;;             (local-set-key (kbd "s-\\") 'my-org-publish-buffer)))
+
+
+
+
 ;;------------------------------------------------------------------------------
-(provide 'init-package)
+(provide 'init-d-package)
 ;;; init-package.el ends here

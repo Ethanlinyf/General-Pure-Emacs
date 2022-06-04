@@ -71,4 +71,4 @@
 (global-lsp-bridge-mode)
 (when (> (frame-pixel-width) 3000) (custom-set-faces '(corfu-default ((t (:height 1.3))))))  ;; adjust default font height when running in HiDPI screen.
 ;;--------------------------------------------------------------------
-(provide 'init-lsp)
+(provide 'init-h-lsp)

@@ -21,5 +21,5 @@
 					    ))
 
 ;;--------------------------------------------------------------------
-(provide 'init-abbr)
+(provide 'init-a-abbr)
 ;;; init-abbr.el ends here

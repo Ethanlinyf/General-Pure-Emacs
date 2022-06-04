@@ -1,4 +1,4 @@
-;; init-font.el --- The fonts settings -*- lexical-binding: t; -*-
+;; init-roam.el -*- lexical-binding: t; -*-
 ;;
 ;; Copyleft (CL) 2022-2032 Dr YF Lin
 ;;
@@ -7,11 +7,11 @@
 ;; Under ThingsEngine Project: https://www.thethingsengine.org/
 ;;--------------------------------------------------------------------
 ;; Commentary:
-;; Setting fonts
+;; Configurations for roam research
 ;;--------------------------------------------------------------------
 ;;; Code:
 
 
 ;;----------------------------------------------------------------------------
-(provide 'init-font)
-;;; init-font.el ends here
+(provide 'init-i-roam)
+;;; init.el ends here

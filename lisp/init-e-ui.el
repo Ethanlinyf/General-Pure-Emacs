@@ -57,5 +57,5 @@
 ;;   (add-to-list 'default-frame-alist '(internal-border-width . 5)))
 
 ;;--------------------------------------------------------------------
-(provide 'init-ui)
+(provide 'init-e-ui)
 ;;; ends here

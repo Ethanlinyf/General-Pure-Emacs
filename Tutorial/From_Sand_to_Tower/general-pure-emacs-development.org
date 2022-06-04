@@ -28,6 +28,32 @@ This is for tutorial purpose to illustrate the development of this platform.
 #+begin_src emacs-lisp
   (setq package-enable-at-startup nil)
 #+end_src
+
+The load sequence:
+- early-lisp
+- init.el
+- custom.el
+- /lisp
+  + init-a-abbre.el
+  + init-b-basic.el
+  + init-c-const.el
+  + init-c-custom.el
+  + init-d-package.el
+  + init-e-ui.el
+  + init-e-dired.el
+  + init-e-treemacs.el
+  + init-f-dashboard.el
+  + init-g-yasnippet.el
+  + init-h-lsp.el
+  + init-i-org.el
+  + init-i-roam.el
+  + init-i-tex.el
+  + init-i-python.el
+  + init-j-purefuction
+  + init-z-test.el
+
+
+
 * Metaphysics
 ** Up
 -- load path

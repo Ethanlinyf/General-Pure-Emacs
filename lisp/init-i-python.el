@@ -1,4 +1,4 @@
-;;; init-yasnippet.el --- Settings for Yasnippet. -*- lexical-binding: t; -*-
+;;; python.el --- Settings for Python. -*- lexical-binding: t; -*-
 ;;
 ;; Copyleft (CL) 2022-2032 Dr YF Lin
 ;;
@@ -7,13 +7,11 @@
 ;; Under ThingsEngine Project: https://www.thethingsengine.org/
 ;;--------------------------------------------------------------------
 ;; Commentary:
-;; Configurations for Yasnippet
+;; Configurations for Python programming
 ;;--------------------------------------------------------------------
 ;;; Code:
 
-(require 'yasnippet)
-(yas-global-mode 1)
 
-;;--------------------------------------------------------------------
-(provide 'init-yasnippet)
-;;; ends here
+;;----------------------------------------------------------------------------
+(provide 'init-i-python)
+;;; init.el ends here

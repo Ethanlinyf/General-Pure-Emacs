@@ -14,7 +14,7 @@
 (push '(vertical-scroll-bars) default-frame-alist)
 
 ;;--------------------------------------------------------------------
-(provide 'init-test)
+(provide 'init-z-test)
 ;;; init-test.el ends here
 
 

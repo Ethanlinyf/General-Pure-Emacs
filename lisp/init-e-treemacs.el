@@ -125,5 +125,5 @@
   :config (treemacs-set-scope-type 'Tabs))
 
 ;;--------------------------------------------------------------------
-(provide 'init-treemacs)
+(provide 'init-e-treemacs)
 ;;; ends here

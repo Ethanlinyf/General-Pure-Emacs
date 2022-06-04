@@ -17,4 +17,4 @@
         (calculator-radix-grouping-mode nil))
     (calculator-number-to-string number)))
 
-(provide 'pure-function)
+(provide 'init-j-purefunction)

@@ -106,7 +106,7 @@ Loaded by `org-babel-load-file'.")
   (>= emacs-major-version 29)
   "Emacs is 29 or above.")
 
-(provide 'init-const)
+(provide 'init-b-const)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-const.el ends here

@@ -11,8 +11,8 @@
 ;;--------------------------------------------------------------------
 ;;; Code:
 
-(require 'init-const)
-(require 'init-custom)
+(require 'init-b-const)
+(require 'init-b-custom)
 
 (require 'dashboard)
 
@@ -122,5 +122,5 @@
 
 
 ;;--------------------------------------------------------------------
-(provide 'init-dashboard)
+(provide 'init-f-dashboard)
 ;;; init-dashboard.el ends here

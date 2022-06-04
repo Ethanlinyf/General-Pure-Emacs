@@ -205,4 +205,4 @@
 ;; 		        #'TeX-revert-document-buffer)
 
 ;;--------------------------------------------------------------------
-(provide 'init-tex)
+(provide 'init-i-tex)
