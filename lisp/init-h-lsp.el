@@ -59,16 +59,14 @@
 ;; (global-lsp-bridge-mode)
 
 ;; (add-to-list 'load-path "<path-to-lsp-bridge>")
-(require 'yasnippet)
-(require 'lsp-bridge)
-(require 'lsp-bridge-icon)        ;; show icons for completion items, optional
-(require 'lsp-bridge-jdtls)       ;; provide Java third-party library jump and -data directory support, optional
-(yas-global-mode 1)
 
-(require 'corfu-history)
-(require 'lsp-bridge-orderless)   ;; make lsp-bridge support fuzzy match, optional
-(corfu-history-mode t)
+;(require 'yasnippet)
+(require 'lsp-bridge)
+(require 'lsp-bridge-jdtls)       ;; provide Java third-party library jump and -data directory support, optional
+
+(yas-global-mode 1)
 (global-lsp-bridge-mode)
-(when (> (frame-pixel-width) 3000) (custom-set-faces '(corfu-default ((t (:height 1.3))))))  ;; adjust default font height when running in HiDPI screen.
+
+
 ;;--------------------------------------------------------------------
 (provide 'init-h-lsp)

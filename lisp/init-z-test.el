@@ -13,6 +13,8 @@
 
 (push '(vertical-scroll-bars) default-frame-alist)
 
+(auto-image-file-mode 1)
+
 ;;--------------------------------------------------------------------
 (provide 'init-z-test)
 ;;; init-test.el ends here

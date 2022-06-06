@@ -11,6 +11,7 @@
 ;;--------------------------------------------------------------------
 ;;; Code:
 
+;; speedup Emacs after sartup
 (defvar better-gc-cons-threshold (* 8 1024 1024)
   "The default value for `gc-cons-threshold'.
 If freezing, decrease it. If stuttering, increase it.")
@@ -81,6 +82,7 @@ If freezing, decrease it. If stuttering, increase it.")
     (push (expand-file-name path user-emacs-directory) load-path)))
 (update-load-pathe)
 
+;; load with a sequence
 (require 'init-a-abbr)
 (require 'init-b-const)
 (require 'init-b-custom)
