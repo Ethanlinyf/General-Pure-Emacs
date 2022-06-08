@@ -125,7 +125,7 @@
 (use-package gnu-elpa-keyring-update)
 ;;------------------------------------------------------------------------------
 
-(load-theme 'nord nil)
+;;(load-theme 'nord nil)
 
 (when (display-graphic-p)
   (require 'all-the-icons))
@@ -165,7 +165,7 @@
 (setq doom-modeline-buffer-file-name-style 'truncate-with-project)
 
 
-(load-theme 'doom-one-light t)
+;;(load-theme 'doom-one-light t)
 (load-theme 'doom-one t)
 
 ;;------------------------------------------------------------------------------

@@ -64,7 +64,7 @@
 (require 'lsp-bridge)
 (require 'lsp-bridge-jdtls)       ;; provide Java third-party library jump and -data directory support, optional
 
-(yas-global-mode 1)
+;(yas-global-mode 1)
 (global-lsp-bridge-mode)
 
 
