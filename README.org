@@ -1,1 +1,16 @@
 * Pure Emacs
+** Git and GitHub
+- add .gitignore
+  + folder: auto-save-list
+** early-init.el
+- Turn "Debug-on"
+  #+begin_src emacs-lisp
+    (setq debug-on-error t)
+  #+end_src
+- Puremacs is compatible from the specific version
+  #+begin_src emacs-lisp
+    (let ((minver "27.1"))
+      (when (version< emacs-version minver)
+	(error "Puremacs requires V%s or higher versions." minver)))
+  #+end_src
+- 
