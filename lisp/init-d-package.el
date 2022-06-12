@@ -23,7 +23,8 @@
 ;;add whatever packages you want here 
 (defvar puremacs/packages '(
 			    company
-                            company-box 
+                            company-box
+                            company-wordfreq
                             swiper
 				 counsel
 				 smartparens
@@ -437,6 +438,12 @@ all-the-icons-ivy-rich-display-transformers-list
 
 ;;--------------------------------------------------------------------
 (require 'posframe)
+
+;;--------------------------------------------------------------------
+
+;; (add-hook 'text-mode-hook (lambda ()
+;;                             (setq-local company-backends '(company-wordfreq))
+;;                             (setq-local company-transformers nil)))
 
 ;;--------------------------------------------------------------------
 ;; set ox-twbs

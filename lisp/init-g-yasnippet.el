@@ -1,4 +1,4 @@
-;;; init-yasnippet.el --- Settings for Yasnippet. -*- lexical-binding: t; -*-
+;;; init-g-yasnippet.el --- Settings for Yasnippet. -*- lexical-binding: t; -*-
 ;;
 ;; Copyleft (CL) 2022-2032 Dr YF Lin
 ;;

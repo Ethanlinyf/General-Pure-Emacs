@@ -50,7 +50,7 @@
                   (company-auctex-init)
                   (setq pdf-view-use-scaling t)
 		  ;(require 'init-auto-complete)
-                  (require 'init-yasnippet)
+                  (require 'init-g-yasnippet)
 		  (TeX-fold-mode 1)
 		  (auto-fill-mode 1)
                   (latex-preview-pane-enable)
