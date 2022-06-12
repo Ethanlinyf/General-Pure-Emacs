@@ -20,9 +20,9 @@
 ;;        (native-comp-available-p))
 ;;   (message "Native compilation is available")
 ;; (message "Native complation is *not* available"))
-(when emacs/>=28p
-    (if (native-comp-available-p)
-      (setq borg-compile-function #'native-compile)))
+;; (when emacs/>=28p
+;;     (if (native-comp-available-p)
+;;       (setq borg-compile-function #'native-compile)))
 
 ;; Turn off the startup help screen
 (setq inhibit-splash-screen 1)
@@ -52,6 +52,12 @@
 ;; set the system local for time
 (setq system-time-local "C")
 
+(setq-default
+ initial-scratch-message (concat ";; Somethng Good as Indicated\n\n;; Welcome to Pure Emacs for the ThingsEngine\n\n")
+ line-spacing 0.1
+ truncate-lines t
+ word-wrap t)
+
 ;; manage by git and disable make-backup-files and auto-save-default
 (setq make-backup-files nil)
 (setq auto-save-default nil)
@@ -60,7 +66,6 @@
 (fset 'yes-or-no-p 'y-or-n-p)
 (setq-default indent-tabs-mode nil)
 
-;;(setq initial-scratch-message "")
 (show-paren-mode t)
 
 (add-hook 'emacs-lisp-mode-hook 'show-paren-mode)
@@ -117,11 +122,7 @@
 
 
 
-(setq-default
- initial-scratch-message (concat ";; Welcome to ThingsEngine :)\n\n")
- line-spacing 0.1
- truncate-lines t
- word-wrap t)
+
 
 (display-time)
 (defvar display-time-24hr-format t)
