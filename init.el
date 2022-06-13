@@ -112,7 +112,7 @@
 (require 'init-e-dired)
 (require 'init-e-treemacs)
 (require 'init-f-dashboard)
-;; (require 'init-g-yasnippet)
+(require 'init-g-yasnippet)
 ;; (require 'init-h-lsp)
 ;; (require 'init-i-org)
 ;; (require 'init-i-roam)

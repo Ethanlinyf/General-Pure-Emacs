@@ -19,6 +19,8 @@
   )
 
 (package-initialize)
+(when (memq window-system '(mac ns x))
+  (exec-path-from-shell-initialize))
 
 ;;add whatever packages you want here 
 (defvar puremacs/packages '(
@@ -29,7 +31,7 @@
                             ;; swiper
 			    ;; counsel
 			    ;; smartparens
-			    ;; exec-path-from-shell
+			    exec-path-from-shell
 			    ;; nord-theme
                             doom-modeline
                             doom-themes
@@ -45,7 +47,7 @@
                             ;; ;; lsp-mode
                             ;; flycheck
                             ;; which-key
-                            ;; yasnippet
+                            ;; 
                             treemacs
                             ;; highlight-indent-guides
                             ;; multi-term
@@ -79,7 +81,7 @@
                             ;; ;;ox-twbs
                             hungry-delete
                             ;; rainbow-delimiters
-                            ;; ;;treemacs-all-the-icons
+                            treemacs-all-the-icons
                             ;; corfu
                             ;; orderless
                             ;; posframe
@@ -87,6 +89,14 @@
                             ;; eglot
                             ;; epc
                             ;; corfu-doc
+
+
+                            ;;; G
+                            yasnippet
+
+
+
+                            
                                  )  "Default packages")
 
 (setq package-selected-packages puremacs/packages)
@@ -400,5 +410,15 @@
               hungry-delete-except-modes
               '(help-mode minibuffer-mode minibuffer-inactive-mode calc-mode))
 ;;--------------------------------------------------------------------
+(add-to-list 'load-path (expand-file-name "site-lisp/awesome-tab" user-emacs-directory))
+
+(require 'awesome-tab)
+
+;(awesome-tab-mode t)
+
+(add-hook 'prog-mode-hook #'awesome-tab-mode)
+
+(add-hook 'eshell-mode-hook #'(lambda() (awesome-tab-mode -1)))
+(add-hook 'Info-mode-hook (lambda() (awesome-tab-mode -1)))
 ;;--------------------------------------------------------------------
 (provide 'init-c-package)
