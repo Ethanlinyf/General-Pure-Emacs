@@ -108,7 +108,7 @@
 (require 'init-a-abbr)
 (require 'init-b-basic)
 ;; (require 'init-c-emacro)
-;; (require 'init-d-package)
+(require 'init-c-package)
 ;; (require 'init-e-ui)
 ;; (require 'init-e-dired)
 ;; (require 'init-e-treemacs)

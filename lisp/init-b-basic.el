@@ -14,16 +14,6 @@
 (require 'init-const)
 (require 'init-custom)
 
-;; Silence compiler warnings as they can be pretty disruptive
-
-;; (if (and (fboundp 'native-comp-available-p)
-;;        (native-comp-available-p))
-;;   (message "Native compilation is available")
-;; (message "Native complation is *not* available"))
-;; (when emacs/>=28p
-;;     (if (native-comp-available-p)
-;;       (setq borg-compile-function #'native-compile)))
-
 ;; Turn off the startup help screen
 (setq inhibit-splash-screen 1)
 
@@ -33,7 +23,7 @@
 ;; Turn off the scroll bar mode
 (scroll-bar-mode -1)
 
-;; For mac
+;; keep the menu bar active
 (menu-bar-mode 1)
 
 ;; Turn on line number and the column-number-mode
@@ -52,8 +42,9 @@
 ;; set the system local for time
 (setq system-time-local "C")
 
+;; Set the initial scratch message
 (setq-default
- initial-scratch-message (concat ";; Somethng Good as Indicated\n\n;; Welcome to Pure Emacs for the ThingsEngine\n\n")
+ initial-scratch-message (concat ";; Welcome to Pure Emacs for the ThingsEngine\n;; Somethng Good as Indicated:\n\n\n")
  line-spacing 0.1
  truncate-lines t
  word-wrap t)
@@ -66,74 +57,34 @@
 (fset 'yes-or-no-p 'y-or-n-p)
 (setq-default indent-tabs-mode nil)
 
+;;See matching pairs of parentheses and other characters.
 (show-paren-mode t)
+(setq show-paren-delay 0)
+;; example for a specific mode to turn on this "show-paren-mode":
+;;(add-hook 'emacs-lisp-mode-hook 'show-paren-mode)
+(add-hook 'after-init-hook 'show-paren-mode)
+(define-advice show-paren-function (:around (fn) fix-show-paren-function)
+  "Highlight enclosing parens."
+  (cond ((looking-at-p "\\s(") (funcall fn))
+        (t (save-excursion
+            (ignore-errors (backward-up-list))
+            (funcall fn)))))
 
-(add-hook 'emacs-lisp-mode-hook 'show-paren-mode)
-
-;; add file changed from outside
+;; Add file changed from outside
 (global-auto-revert-mode 1)
 
-(setq inhibit-compacting-font-caches t)
-
-(defun indent-buffer()
-  (interactive)
-  (indent-region (point-min) (point-max)))
-
-(defun indent-region-or-buffer()
-  (interactive)
-  (save-excursion
-    (if (region-active-p)
-        (progn
-          (indent-region (region-beginning) (region-end))
-          (message "Indent selected region."))
-         (progn
-          (indent-buffer)
-          (message "Indent buffer.")))))
-
-(global-set-key (kbd "C-M-\\") 'indent-region-or-buffer)
-
-
-(setq hippie-expand-try-function-list '(try-expand-debbrev
- 					try-expand-debbrev-all-buffers
- 					try-expand-debbrev-from-kill
- 					try-complete-file-name-partially
- 					try-complete-file-name
- 					try-expand-all-abbrevs
- 					try-expand-list
- 					try-expand-line
- 					try-complete-lisp-symbol-partially
- 					try-complete-lisp-symbol))
-
-(global-set-key (kbd "M-/") 'hippie-expand)
-
-(require 'dired-x)
-;;(setq dired-recursive-deletes 'always)
-(setq dired-recursive-deletes 'top)
-(setq dired-recursive-copies 'always)
-(put 'dired-find-alternate-file 'disabled nil)
-
-;; 主动加载 Dired Mode
-;; (require 'dired)
-;; (defined-key dired-mode-map (kbd "RET") 'dired-find-alternate-file)
-
-;; 延迟加载
-(with-eval-after-load 'dired
-    (define-key dired-mode-map (kbd "RET") 'dired-find-alternate-file))
-
-
-
-
-
+;; Display time in the mini buffer
 (display-time)
 (defvar display-time-24hr-format t)
 
+;; default character
 (progn
   "Set coding system."
   (set-language-environment 'utf-8)
   (set-default-coding-systems 'utf-8)
   (prefer-coding-system 'utf-8))
 
-;; Keybindings without extra configuration
+;; Keybindings for setting mark
 (global-set-key (kbd "C-c C-'") 'set-mark-command)
 
 ;;(add-hook 'after-init-hook 'ido-mode)
@@ -142,15 +93,6 @@
 (add-hook 'after-init-hook 'winner-mode)
 (add-hook 'after-init-hook 'global-auto-revert-mode)
 ;; (add-hook 'after-init-hook 'electric-indent-mode')
-
-(add-hook 'after-init-hook 'show-paren-mode)
-;; @zilongshanren
-(define-advice show-paren-function (:around (fn) fix-show-paren-function)
-  "Highlight enclosing parens."
-  (cond ((looking-at-p "\\s(") (funcall fn))
-        (t (save-excursion
-            (ignore-errors (backward-up-list))
-            (funcall fn)))))
 
 (defun open-mirror-file ()
   "Quickly open index file."
@@ -188,69 +130,60 @@
   (interactive)
   (find-file "~/Documents/Org/plan.org"))
 (global-set-key (kbd "<f6>") 'open-plan-file)
-;; (defun jk/org-insert-headline (level)
-;;   "Insert `level' * ahead of current line."
-;;   (interactive "swhich level: ")
-;;   (jk/org-delete-headline)
-;;   (let ((x 0) (len (string-to-number level)))
-;;     (while (< x len)
-;;       (if (= len (+ x 1))
-;;           (insert "* ")
-;;         (insert "*")
-;;         )
-;;     (setq x (+ x 1)))))
-
-;; (global-set-key (kbd "C-c C-h") 'jk/org-insert-headline)
 
 ;; kill processes when quit or exit
 (setq confirm-kill-processes nil)
 
-;; (add-to-list 'load-path "~/.emacs.d/site-lisp/emacs-application-framework/")
-;; (require 'eaf)
+;; Basic Improvement -------------------------------------------------
+(defun indent-buffer()
+  (interactive)
+  (indent-region (point-min) (point-max)))
 
-    ;; (add-hook 'inferior-python-mode-hook
-    ;;           #'(lambda nil
-    ;;               (process-query-on-exit-flag
-    ;;                (get-process "Python"))))
-    ;; (eval-after-load 'python
-    ;;   #'(lambda nil
-    ;;       (progn
-    ;;         (if
-    ;;             (and
-    ;;              (executable-find "python3")
-    ;;              (string= python-shell-interpreter "python"))
-    ;;             (progn
-    ;;               (setq python-shell-interpreter "python3")))
-    ;;         (eval-after-load 'exec-path-from-shell
-    ;;           #'(lambda nil
-    ;;               (exec-path-from-shell-copy-env "PYTHONPATH"))))))
-;; (setq eaf--mac-enable-rosetta t)
-;; (require 'eaf-demo)
-;; (require 'eaf-file-sender)
-;; (require 'eaf-music-player)
-;; (require 'eaf-camera)
-;; (require 'eaf-rss-reader)
-;; (require 'eaf-terminal)
-;; (require 'eaf-image-viewer)
-;; ;; (require 'eaf-vue-demo)
-;; (require 'eaf-pdf-viewer)
-;; (require 'eaf-browser)
-;; (require 'eaf-markdown-previewer)
-;; (require 'eaf-file-browser)
-;; (require 'eaf-mermaid)
-;; (require 'eaf-file-manager)
-;; (require 'eaf-mindmap)
-;; (require 'eaf-video-player)
-;; (require 'eaf-org-previewer)
-;; (require 'eaf-airshare)
-;; (require 'eaf-jupyter)
-;; (require 'eaf-netease-cloud-music)
-;;(require 'eaf-git)
-;; (require 'eaf-system-monitor)
+(defun indent-region-or-buffer()
+  (interactive)
+  (save-excursion
+    (if (region-active-p)
+        (progn
+          (indent-region (region-beginning) (region-end))
+          (message "Indent selected region."))
+      (progn
+        (indent-buffer)
+        (message "Indent buffer.")))))
 
+(global-set-key (kbd "C-M-\\") 'indent-region-or-buffer)
 
+(setq hippie-expand-try-function-list '(try-expand-debbrev
+ 					try-expand-debbrev-all-buffers
+ 					try-expand-debbrev-from-kill
+ 					try-complete-file-name-partially
+ 					try-complete-file-name
+ 					try-expand-all-abbrevs
+ 					try-expand-list
+ 					try-expand-line
+ 					try-complete-lisp-symbol-partially
+ 					try-complete-lisp-symbol))
+(global-set-key (kbd "M-/") 'hippie-expand)
 
+;; Load Dired Mode
+;; (require 'dired)
+;; (define-key dired-mode-map (kbd "RET") 'dired-find-alternate-file)
 
+;; loading later
+(with-eval-after-load 'dired
+    (define-key dired-mode-map (kbd "RET") 'dired-find-alternate-file))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(require 'dired-x)
+;; (setq dired-recursive-deletes 'always)
+(setq dired-recursive-deletes 'top)
+(setq dired-recursive-copies 'always)
+(put 'dired-find-alternate-file 'disabled nil)
+
+;;--------------------------------------------------------------------
+(require 'recentf)
+(recentf-mode 1)
+(setq recentf-max-menu-item 30)
+
+;; 这个快捷键绑定可以用之后的插件 counsel 代替
+(global-set-key (kbd "C-x C-r") 'recentf-open-files)
+;;--------------------------------------------------------------------
 (provide 'init-b-basic)
