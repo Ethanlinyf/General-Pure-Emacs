@@ -40,13 +40,13 @@
                             ;; projectile
                             ;; counsel-projectile
                             ;; all-the-icons
-                            ;; magit
+                            magit
                             ;; window-numbering
                             ;; ;; lsp-mode
                             ;; flycheck
                             ;; which-key
                             ;; yasnippet
-                            ;; treemacs
+                            treemacs
                             ;; highlight-indent-guides
                             ;; multi-term
                             ;; ido
@@ -58,11 +58,11 @@
                             ;; reftex
                             ;; cdlatex
                             ;; auto-complete
-                            ;; all-the-icons-dired
-                            ;; diredfl
+                            all-the-icons-dired
+                            diredfl
                             ;;             ;diredful
                             ;; maxframe
-                            ;; ns-auto-titlebar ;; Set the MacOS transparent titlebar to match theme
+                            ns-auto-titlebar ;; Set the MacOS transparent titlebar to match theme
                             ;; pdf-tools
                             ;; company-auctex
                             ;; latex-preview-pane ;;latex-preview-pane is a minor mode for Emacs that enables you to preview your LaTeX files directly in Emacs. It supports PDF previews, your choice of pdflatex or xelatex, and it highlights errors in your LaTeX buffer.

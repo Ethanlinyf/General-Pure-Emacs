@@ -1,6 +1,9 @@
 ;;; -*- coding: utf-8; mode: lisp-data -*-
-(("/Users/ethanlin/.emacs.d/"
-  (dired-filename . "/Users/ethanlin/.emacs.d/lisp"))
- ("/Users/ethanlin/.emacs.d/lisp/"
-  (dired-filename . "/Users/ethanlin/.emacs.d/lisp/init-c-package.el"))
- ("/Users/ethanlin/.emacs.d/lisp/init-c-package.el" . 792))
+(("/Users/ethanlin/.emacs.d/" . 1184)
+ ("/Users/ethanlin/.emacs.d/init.el" . 4481)
+ ("/Users/ethanlin/.emacs.d/.cache/treemacs-persist" . 45)
+ ("/Users/ethanlin/.emacs.d/lisp/init-c-package.el" . 1448)
+ ("/Users/ethanlin/.emacs.d/lisp/" . 779)
+ ("/Users/ethanlin/.emacs.d/lisp/init-e-dired.el" . 1337)
+ ("/Users/ethanlin/.emacs.d/lisp/init-b-basic.el" . 1291)
+ ("/Users/ethanlin/.emacs.d/lisp/init-e-ui.el" . 1450))

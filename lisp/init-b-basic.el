@@ -44,7 +44,7 @@
 
 ;; Set the initial scratch message
 (setq-default
- initial-scratch-message (concat ";; Welcome to Pure Emacs for the ThingsEngine\n;; Somethng Good as Indicated:\n\n\n")
+ initial-scratch-message (concat ";;--------------------------------------------------------------------\n;; Welcome to Pure Emacs for the ThingsEngine\n;; Somethng Good as Indicated:\n\n\n")
  line-spacing 0.1
  truncate-lines t
  word-wrap t)
