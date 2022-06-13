@@ -35,10 +35,10 @@
                             doom-themes
                             ;; popwin
                             ;; org-superstar
-                            ;; dashboard
-                            ;; page-break-lines
-                            ;; projectile
-                            ;; counsel-projectile
+                            dashboard
+                            page-break-lines
+                            projectile
+                            counsel-projectile
                             ;; all-the-icons
                             magit
                             ;; window-numbering
@@ -60,7 +60,7 @@
                             ;; auto-complete
                             all-the-icons-dired
                             diredfl
-                            ;;             ;diredful
+                            ;;;diredful
                             ;; maxframe
                             ns-auto-titlebar ;; Set the MacOS transparent titlebar to match theme
                             ;; pdf-tools
@@ -77,7 +77,7 @@
                             ;; format-all
                             ;; htmlize ; from org-site
                             ;; ;;ox-twbs
-                            ;; hungry-delete
+                            hungry-delete
                             ;; rainbow-delimiters
                             ;; ;;treemacs-all-the-icons
                             ;; corfu
@@ -388,6 +388,17 @@
 (use-package all-the-icons
   :if (display-graphic-p))
 
-(load-theme 'doom-monokai-pro t)
+(load-theme 'doom-one t)
+
+;;--------------------------------------------------------------------
+;; Hunbgry-delete
+(require 'hungry-delete)
+;(hungry-delete-mode 1)
+(global-hungry-delete-mode 1)
+
+(setq hungry-delete-chars-to-skip " \t\f\v"
+              hungry-delete-except-modes
+              '(help-mode minibuffer-mode minibuffer-inactive-mode calc-mode))
+;;--------------------------------------------------------------------
 ;;--------------------------------------------------------------------
 (provide 'init-c-package)

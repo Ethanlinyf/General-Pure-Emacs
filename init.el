@@ -111,7 +111,7 @@
 (require 'init-e-ui)
 (require 'init-e-dired)
 (require 'init-e-treemacs)
-;; (require 'init-f-dashboard)
+(require 'init-f-dashboard)
 ;; (require 'init-g-yasnippet)
 ;; (require 'init-h-lsp)
 ;; (require 'init-i-org)
