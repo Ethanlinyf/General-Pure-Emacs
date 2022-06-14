@@ -14,5 +14,10 @@
 (require 'window-numbering)
 (add-hook 'after-init-hook #'window-numbering-mode)
 
+(all-the-icons-completion-mode t)
+
+
+(add-hook 'marginalia-mode-hook #'all-the-icons-completion-marginalia-setup)
+
 ;;--------------------------------------------------------------------
 (provide 'init-d-enhance)

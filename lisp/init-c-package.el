@@ -43,6 +43,7 @@
                             projectile
                             counsel-projectile
                             all-the-icons
+                            all-the-icons-completion
                             all-the-icons-ibuffer
                             magit
                             window-numbering
@@ -156,6 +157,10 @@
 ;; Update GPG keyring for GNU ELPA
 (use-package gnu-elpa-keyring-update)
 ;;--------------------------------------------------------------------
+
+(when (display-graphic-p)
+  (require 'all-the-icons))
+
 
 ;; Enable vertico
 (use-package vertico
@@ -445,6 +450,7 @@
 
 ;;--------------------------------------------------------------------
 ;; all-the-icons-ibuffer
+(add-hook 'ibuffer-mode-hook #'all-the-icons-ibuffer-mode)
 
 (setq all-the-icons-color-icons t)
 (setq all-the-icons-ibuffer-color-icon t)
