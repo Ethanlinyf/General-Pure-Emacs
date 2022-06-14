@@ -1,3 +1,9 @@
 [submodule "site-lisp/aweshell"]
 	path = site-lisp/aweshell
 	url = https://github.com/manateelazycat/aweshell.git
+[submodule "site-lisp/lsp-bridge"]
+	path = site-lisp/lsp-bridge
+	url = https://github.com/manateelazycat/lsp-bridge.git
+[submodule "site-lisp/awesome-tab"]
+	path = site-lisp/awesome-tab
+	url = https://github.com/manateelazycat/awesome-tab

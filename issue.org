@@ -1,0 +1,2 @@
+* DONE <2022-06-14 Tue>
+.emacs.d/site-lisp/aweshell/aweshell.el: Warning: ‘return’ is an obsolete alias (as of 27.1); use ‘cl-return’ instead.

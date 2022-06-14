@@ -36,12 +36,12 @@
                             doom-modeline
                             doom-themes
                             ;; popwin
-                            ;; org-superstar
+                            ;; 
                             dashboard
                             page-break-lines
                             projectile
                             counsel-projectile
-                            ;; all-the-icons
+                            all-the-icons
                             magit
                             ;; window-numbering
                             ;; ;; lsp-mode
@@ -65,16 +65,16 @@
                             ;;;diredful
                             ;; maxframe
                             ns-auto-titlebar ;; Set the MacOS transparent titlebar to match theme
-                            ;; pdf-tools
-                            ;; company-auctex
-                            ;; latex-preview-pane ;;latex-preview-pane is a minor mode for Emacs that enables you to preview your LaTeX files directly in Emacs. It supports PDF previews, your choice of pdflatex or xelatex, and it highlights errors in your LaTeX buffer.
+                            ;; 
+                            ;; 
+                            ;; 
                             ;; pangu-spacing ; Minor-mode to add space between Chinese and English characters.
                             ;; all-the-icons-ibuffer ; Display icons for all buffers in ibuffer.
                             ;; all-the-icons-ivy-rich ;
                             ;; good-scroll ; This package implements smooth scrolling by pixel lines. It attempts to improve upon `pixel-scroll-mode' by adding variable speed.
                             ;; elisp-format
-                            ;; zotxt ; for reference
-                            ;; org-roam
+                            ;; 
+                            ;; 
                             ;; org-download
                             ;; format-all
                             ;; htmlize ; from org-site
@@ -85,7 +85,7 @@
                             ;; corfu
                             ;; orderless
                             ;; posframe
-                            ;; markdown-mode
+                            ;; 
                             ;; eglot
                             ;; epc
                             ;; corfu-doc
@@ -94,8 +94,27 @@
                             ;;; G
                             yasnippet
 
+                            ;;; H
+                            posframe
+                            markdown-mode
 
+                            ;;; I
 
+                            ;;org
+                            org-superstar
+                            org-noter
+
+                            ;;roam-org
+                            org-roam
+
+                            ;; TeX
+                            auctex
+                            reftex
+                            cdlatex
+                            company-auctex
+                            pdf-tools
+                            latex-preview-pane ;;latex-preview-pane is a minor mode for Emacs that enables you to preview your LaTeX files directly in Emacs. It supports PDF previews, your choice of pdflatex or xelatex, and it highlights errors in your LaTeX buffer.
+                            zotxt ; for reference
                             
                                  )  "Default packages")
 
