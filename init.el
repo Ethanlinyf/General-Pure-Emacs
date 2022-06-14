@@ -11,49 +11,8 @@
 ;;--------------------------------------------------------------------
 ;;; Code:
 
-;; speedup Emacs after sartup
-;; (defvar better-gc-cons-threshold (* 8 1024 1024)
-;;   "The default value for `gc-cons-threshold'.
-;; If freezing, decrease it. If stuttering, increase it.")
-
-;; (defvar startup/file-name-handler-alist file-name-handler-alist)
-;; (setq file-name-handler-alist nil)
-
-;; (defun startup/revert-file-name-handler-alist ()
-;;   (setq file-name-handler-alist startup/file-name-handler-alist))
-
-;; (defun startup/reset-gc ()
-;;   (setq gc-cons-threshold better-gc-cons-threshold
-;; 	gc-cons-percentage 0.1))
-
-;; (add-hook 'emacs-startup-hook 'startup/revert-file-name-handler-alist)
-;; (add-hook 'emacs-startup-hook 'startup/reset-gc)
-
-;; (defun gc-minibuffer-setup-hook ()
-;;   (setq gc-cons-threshold (* better-gc-cons-threshold 2)))
-
-;; (defun gc-minibuffer-exit-hook ()
-;;   (garbage-collect)
-;;   (setq gc-cons-threshold better-gc-cons-threshold))
-
-;; (add-hook 'minibuffer-setup-hook #'gc-minibuffer-setup-hook)
-;; (add-hook 'minibuffer-exit-hook #'gc-minibuffer-exit-hook)
-
-;; (add-hook 'emacs-startup-hook
-;;           (lambda ()
-;;             (if (boundp 'after-focus-change-function)
-;;                 (add-function :after after-focus-change-function
-;;                               (lambda ()
-;;                                 (unless (frame-focus-state)
-;;                                   (garbage-collect))))
-;; (add-hook 'after-focus-change-function 'garbage-collect))))
-
-;; (setq auto-mode-case-fold nil)
-
 (unless (or (daemonp) noninteractive)
   (let ((old-file-name-handler-alist file-name-handler-alist))
-    ;; If `file-name-handler-alist' is nil, no 256 colors in TUI
-    ;; @see https://emacs-china.org/t/spacemacs-centaur-emacs/3802/839
     (setq file-name-handler-alist
           (unless (display-graphic-p)
             '(("\\(?:\\.tzst\\|\\.zst\\|\\.dz\\|\\.txz\\|\\.xz\\|\\.lzma\\|\\.lz\\|\\.g?z\\|\\.\\(?:tgz\\|svgz\\|sifz\\)\\|\\.tbz2?\\|\\.bz2\\|\\.Z\\)\\(?:~\\|\\.~[-[:alnum:]:#@^._]+\\(?:~[[:digit:]]+\\)?~\\)?\\'" . jka-compr-handler))))
@@ -86,14 +45,14 @@
 
 ;; Load the settings recorded through emacs
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
-(when (file-exists-p custom-file) ;; Load the custom file if it exists
+;; Load the custom file if it exists
+(when (file-exists-p custom-file) 
   (load custom-file))
 
 ;; Define a file to record emacs macros.
 (defvar pure-macro (expand-file-name "macros.el" user-emacs-directory)
   "A file to record emacs macros.")
-
-;; Load the recorded emacs macros if it exists
+;; Load the macro file if it exists
 (when (file-exists-p pure-macro) 
   (load pure-macro))
 
@@ -104,7 +63,7 @@
     (push (expand-file-name path user-emacs-directory) load-path)))
 (update-load-pathe)
 
-;; load with a sequence
+;; load in a order
 (require 'init-a-abbr)
 (require 'init-b-basic)
 (require 'init-c-package)

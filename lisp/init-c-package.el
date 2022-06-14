@@ -15,7 +15,7 @@
 (require 'package)
 
 (when (>= emacs-major-version 24)
-  (add-to-list 'package-archives '("melpa-stable" . "http://melpa.org/packages/") t)
+  (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
   )
 
 (package-initialize)
@@ -25,6 +25,7 @@
 ;;add whatever packages you want here 
 (defvar puremacs/packages '(
                             keycast
+                            good-scroll
 			    company
                             ;; company-box
                             ;; company-wordfreq
@@ -42,8 +43,9 @@
                             projectile
                             counsel-projectile
                             all-the-icons
+                            all-the-icons-ibuffer
                             magit
-                            ;; window-numbering
+                            window-numbering
                             ;; ;; lsp-mode
                             ;; flycheck
                             ;; which-key
@@ -84,10 +86,9 @@
                             treemacs-all-the-icons
                             ;; corfu
                             ;; orderless
-                            ;; posframe
                             ;; 
                             ;; eglot
-                            ;; epc
+                            epc
                             ;; corfu-doc
 
 
@@ -439,5 +440,42 @@
 
 (add-hook 'eshell-mode-hook #'(lambda() (awesome-tab-mode -1)))
 (add-hook 'Info-mode-hook (lambda() (awesome-tab-mode -1)))
+
+(require 'epc)
+
+;;--------------------------------------------------------------------
+;; all-the-icons-ibuffer
+
+(setq all-the-icons-color-icons t)
+(setq all-the-icons-ibuffer-color-icon t)
+(setq all-the-icons-dired-monochrome nil) ;; nil means it is colourful in dired-mode
+
+
+
+
+(all-the-icons-ibuffer-mode 1)
+
+;; Whether display the icons.
+(setq all-the-icons-ibuffer-icon t)
+
+;; Whether display the colorful icons.
+;; It respects `all-the-icons-color-icons'.
+(setq all-the-icons-ibuffer-color-icon t)
+
+;; The default icon size in ibuffer.
+(setq all-the-icons-ibuffer-icon-size 1.0)
+
+;; The default vertical adjustment of the icon in ibuffer.
+(setq all-the-icons-ibuffer-icon-v-adjust 0.0)
+
+;; Use human readable file size in ibuffer.
+(setq  all-the-icons-ibuffer-human-readable-size t)
+
+;; A list of ways to display buffer lines with `all-the-icons'.
+;; See `ibuffer-formats' for details.
+all-the-icons-ibuffer-formats
+
+
+
 ;;--------------------------------------------------------------------
 (provide 'init-c-package)

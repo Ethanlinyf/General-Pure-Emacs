@@ -1,10 +1,10 @@
 ;;; init-abbr.el --- Abbreviations. -*- lexical-binding: t; -*-
 ;;
-;; Copyleft (CL) 2022-2032 Dr YF Lin
+; Copyleft (CL) 2022-2032 YF Lin
 ;;
-;; Author: Ethan YF Lin <e.yflin@gmail.com>
+;; Something good as indicated, by Dr YF Lin <e.yflin@gmail.com>
 ;; URL: https://github.com/Ethanlinyf/General-Pure-Emacs
-;; Under ThingsEngine Project: https://www.thethingsengine.org/
+;; Under ThingsEngine Project: https://www.thethingsengine.org
 ;;--------------------------------------------------------------------
 ;; Commentary:
 ;; Some abbrevs to be used when editting
@@ -18,7 +18,9 @@
 					    ("exp1" "xxx")
 					    ;; Tudi
 					    ("exp2" "AAA")
+                                            ("eline" ";;--------------------------------------------------------------------")
 					    ))
+;;--------------------------------------------------------------------
 
 ;;--------------------------------------------------------------------
 (provide 'init-a-abbr)

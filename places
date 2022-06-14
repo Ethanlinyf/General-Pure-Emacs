@@ -1,44 +1,53 @@
 ;;; -*- coding: utf-8; mode: lisp-data -*-
-(("/Users/ethanlin/.emacs.d/init.el" . 4716)
+(("/Users/ethanlin/.emacs.d/.gitignore" . 265)
+ ("/Users/ethanlin/.emacs.d/.cache/treemacs-persist" . 45)
+ ("/Users/ethanlin/.emacs.d/init.el" . 979)
+ ("/Users/ethanlin/Documents/Test/pokemon_fight.py" . 187)
+ ("/Users/ethanlin/" . 69)
+ ("/Users/ethanlin/Documents/"
+  (dired-filename . "/Users/ethanlin/Documents/.."))
+ ("/Users/ethanlin/Documents/Test/"
+  (dired-filename . "/Users/ethanlin/Documents/Test/.."))
+ ("/Users/ethanlin/.emacs.d/lisp/init-b-basic.el" . 514)
+ ("/Users/ethanlin/.emacs.d/lisp/init-a-abbr.el" . 288)
+ ("/Users/ethanlin/.emacs.d/lisp/"
+  (dired-filename . "/Users/ethanlin/.emacs.d/lisp/init-b-basic.el"))
+ ("/Users/ethanlin/.emacs.d/lisp/init-d-enhance.el" . 459)
+ ("/Users/ethanlin/Documents/Org/plan.org" . 940)
+ ("/Users/ethanlin/.emacs.d/lisp/init-c-package.el" . 1610)
  ("/Users/ethanlin/.emacs.d/history" . 3178)
- ("/Users/ethanlin/.emacs.d/" . 1672)
- ("/Users/ethanlin/.emacs.d/snippets/"
-  (dired-filename . "/Users/ethanlin/.emacs.d/snippets/.."))
+ ("/Users/ethanlin/.emacs.d/custom.el" . 322)
+ ("/Users/ethanlin/.emacs.d/backup/" . 185)
+ ("/Users/ethanlin/.emacs.d/backup/speedup.el" . 1451)
+ ("/Users/ethanlin/.emacs.d/"
+  (dired-filename . "/Users/ethanlin/.emacs.d/backup"))
  ("/Users/ethanlin/.emacs.d/zull/"
   (dired-filename . "/Users/ethanlin/.emacs.d/zull/.."))
- ("/Users/ethanlin/.emacs.d/backup/"
-  (dired-filename . "/Users/ethanlin/.emacs.d/backup/.."))
+ ("/Users/ethanlin/.emacs.d/snippets/"
+  (dired-filename . "/Users/ethanlin/.emacs.d/snippets/.."))
  ("/Users/ethanlin/.emacs.d/site-lisp/"
   (dired-filename . "/Users/ethanlin/.emacs.d/site-lisp/.."))
- ("/Users/ethanlin/Documents/Test/pokemon_fight.py" . 344)
  ("/Users/ethanlin/.emacs.d/lisp/init-i-python.el" . 1747)
- ("/Users/ethanlin/.emacs.d/lisp/init-c-package.el" . 4035)
  ("/Users/ethanlin/.emacs.d/lisp/init-i-tex.el" . 7903)
  ("/Users/ethanlin/.emacs.d/lisp/init-i-roam.el" . 735)
  ("/Users/ethanlin/Documents/Test/test_11.org" . 79)
  ("/Users/ethanlin/.emacs.d/lisp/init-i-org.el" . 2552)
  ("/Users/ethanlin/.emacs.d/places" . 378)
  ("/Users/ethanlin/.emacs.d/issue.org" . 144)
- ("/Users/ethanlin/.emacs.d/.gitignore" . 192)
  ("/Users/ethanlin/.emacs.d/.gitmodules" . 354)
- ("/Users/ethanlin/.emacs.d/.cache/treemacs-persist" . 45)
  ("/Users/ethanlin/.emacs.d/site-lisp/aweshell/aweshell.el" . 9890)
  ("/Users/ethanlin/.emacs.d/lisp/init-h-lsp.el" . 2566)
- ("/Users/ethanlin/.emacs.d/lisp/init-d-enhance.el" . 294)
  ("/Users/ethanlin/.emacs.d/site-lisp/aweshell/"
   (dired-filename . "/Users/ethanlin/.emacs.d/site-lisp/aweshell/aweshell.el"))
  ("/Users/ethanlin/.emacs.d/lisp/init-g-yasnippet.el" . 405)
  ("/Users/ethanlin/.emacs.d/site-lisp/awesome-tab/awesome-tab.el" . 727)
  ("/Users/ethanlin/.emacs.d/lisp/init-custom.el" . 558)
  ("/Users/ethanlin/.emacs.d/lisp/init-f-dashboard.el" . 4385)
- ("/Users/ethanlin/.emacs.d/lisp/init-b-basic.el" . 946)
  ("/Users/ethanlin/pure.emacs.d/lisp/init-d-package.el" . 11824)
  ("/Users/ethanlin/pure.emacs.d/lisp/"
   (dired-filename . "/Users/ethanlin/pure.emacs.d/lisp/init-d-package.el"))
  ("/Users/ethanlin/pure.emacs.d/"
   (dired-filename . "/Users/ethanlin/pure.emacs.d/lisp"))
- ("/Users/ethanlin/.emacs.d/lisp/"
-  (dired-filename . "/Users/ethanlin/.emacs.d/lisp/init-f-dashboard.el"))
  ("/Users/ethanlin/pure.emacs.d/lisp/init-f-dashboard.el" . 578)
  ("/Users/ethanlin/.emacs.d/lisp/init-e-dired.el" . 1337)
  ("/Users/ethanlin/.emacs.d/lisp/init-e-ui.el" . 1450))
