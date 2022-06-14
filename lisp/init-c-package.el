@@ -44,12 +44,9 @@
                             counsel-projectile
                             all-the-icons
                             all-the-icons-completion
-                            all-the-icons-ibuffer
-                            magit
-                            window-numbering
+
                             ;; ;; lsp-mode
                             ;; flycheck
-                            ;; which-key
                             ;; 
                             treemacs
                             ;; highlight-indent-guides
@@ -82,8 +79,8 @@
                             ;; format-all
                             ;; htmlize ; from org-site
                             ;; ;;ox-twbs
-                            hungry-delete
-                            ;; rainbow-delimiters
+                            
+                            ;; 
                             treemacs-all-the-icons
                             ;; corfu
                             ;; orderless
@@ -92,7 +89,17 @@
                             epc
                             ;; corfu-doc
 
+                            ;;; D
+                            which-key
+                            window-numbering
+                            magit
+                            rainbow-delimiters
+                            hungry-delete
+                            ctrlf
+                            ;; format-all
+                            ;; crux
 
+                            
                             ;;; G
                             yasnippet
 
@@ -456,10 +463,7 @@
 (setq all-the-icons-ibuffer-color-icon t)
 (setq all-the-icons-dired-monochrome nil) ;; nil means it is colourful in dired-mode
 
-
-
-
-(all-the-icons-ibuffer-mode 1)
+(all-the-icons-ibuffer-mode t)
 
 ;; Whether display the icons.
 (setq all-the-icons-ibuffer-icon t)

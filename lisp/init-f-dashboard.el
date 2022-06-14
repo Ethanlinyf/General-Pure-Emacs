@@ -24,7 +24,7 @@
 ;;   (dashboard-setup-startup-hook))
 
 ;; Set the title
-(setq dashboard-banner-logo-title "Welcome to Puremacs for ThingsEngine")
+(setq dashboard-banner-logo-title "Something Good as Indicated by ThingsEngine")
 
 ;;(dashboard-heading ((t (:inherit (font-lock-string-face bold)))))
 (setq dashboard-projects-switch-function 'counsel-projectile-switch-project-action-dired)
