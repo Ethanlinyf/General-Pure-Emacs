@@ -7,3 +7,6 @@
 [submodule "site-lisp/awesome-tab"]
 	path = site-lisp/awesome-tab
 	url = https://github.com/manateelazycat/awesome-tab
+[submodule "site-lisp/word-completion"]
+	path = site-lisp/word-completion
+	url = https://github.com/wushuaibuaa/emacscompanywords.git

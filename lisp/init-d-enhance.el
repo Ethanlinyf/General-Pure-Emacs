@@ -36,8 +36,8 @@
 ;; osx-lib [install]
 
 ;; company word
-(add-to-list 'load-path (expand-file-name "site-lisp/work-completion" user-emacs-directory))
-(load "~/.emacs.d/site-lisp/work-completion/company-words.el")
+;;(add-to-list 'load-path (expand-file-name "site-lisp/word-completion" user-emacs-directory))
+(load "~/.emacs.d/site-lisp/word-completion/company-words.el")
 
 (add-hook 'prog-mode-hook (lambda() (setq split-width-threshold 80)))
 
