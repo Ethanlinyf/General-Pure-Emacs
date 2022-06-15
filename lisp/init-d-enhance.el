@@ -30,6 +30,18 @@
 ;; An intuitive and efficient solution for single-buffer text search
 (ctrlf-mode +1)
 
+;; osx-lib
+;; manually install the package osx-lib
+;; M-x package-list-packages [enter]
+;; osx-lib [install]
+
+;; company word
+(add-to-list 'load-path (expand-file-name "site-lisp/work-completion" user-emacs-directory))
+(load "~/.emacs.d/site-lisp/work-completion/company-words.el")
+
+(add-hook 'prog-mode-hook (lambda() (setq split-width-threshold 80)))
+
+
 
 ;;--------------------------------------------------------------------
 (provide 'init-d-enhance)
