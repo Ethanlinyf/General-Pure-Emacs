@@ -1,0 +1,110 @@
+#+options: ':nil *:t -:t ::t <:t H:3 \n:nil ^:t arch:headline author:t
+#+options: broken-links:nil c:nil creator:nil d:(not "LOGBOOK") date:t e:t
+#+options: email:nil f:t inline:t num:t p:nil pri:nil prop:nil stat:t tags:t
+#+options: tasks:t tex:t timestamp:t title:t toc:t todo:t |:t
+#+title: Pure Emacs Tutorial
+#+date: <2022-06-15 Wed>
+#+author: Dr YF Lin
+#+email: drlinyf@outlook.com
+#+language: en
+#+select_tags: export
+#+exclude_tags: noexport
+#+creator: Emacs 28.1 (Org mode 9.5.2)
+#+cite_export:
+
+#+begin_quote
+Something Good as Indicated by ThingsEngine -- YF Lin
+#+end_quote
+
+* Summary
+The tutorial is to demonstrate how this Emacs editor is developed. We pursume a
+simple, integrated and efficient platform with limited packages, no more
+than 100 as a pure Emacs to be using for learning, teaching, research and
+project management.
+
+Copyleft Declaration:
+#+begin_src emacs-lisp
+;; Copyleft (CL) 2018-2028 YF Lin
+;;
+;; Something good as indicated, by Dr YF Lin <e.yflin@gmail.com>
+;; URL: https://github.com/Ethanlinyf/PureEmacs
+;; Under ThingsEngine Project: https://www.thethingsengine.org
+#+end_src
+
+* Introduction
+- Pure Emacs
+- Elisp
+- Order
+* Loading Sequence
+** early-init.el
+- development with debugging
+  In this development, the configurations will continuously be optimized. When a
+  lisp error happens during Emacs running, the debuger can be called to
+  investigate immediate causes of this error.
+
+  Set the variable debug-on-error to non-nil make errors to enter the debugger.
+
+  #+begin_src emacs-lisp
+    (setq debug-on-error t)
+  #+end_src
+
+  If Emacs is not able to open, you can run Emacs in a terminal with an option ‘--debug-init’ to catch the
+  errors that may happens when loading of the init settings.
+- The minimum required version of Emacs for developping Pure Emacs
+  + how to check the version of Emacs?
+     #+begin_src emacs-lisp
+       (emacs-version)
+     #+end_src
+
+    This command returns the version description of Emacs that is running. It is
+    useful in bug reports. For example, "GNU Emacs 28.1 (build 1,
+    aarch64-apple-darwin21.4.0, NS appkit-2113.40 Version 12.3.1 (Build 21E258))
+    of 2022-06-06"
+
+    You could use "emacs-major-version" and "emacs-minor-version" to indicate
+    the major and minor version of Emacs.
+
+  + Specify the minimum required version of Emacs for this configuration
+    #+begin_src emacs-lisp
+      (let ((minver "27.1"))
+      (when (version< emacs-version minver)
+        (error "Puremacs requires V%s or higher versions." minver)))
+    #+end_src
+
+    Puremacs is compatible from the emacs version 27.1. However, the development
+    is based on 28.1.
+-  
+
+** custom.el
+** macro.el
+** init.el
+** lisp
+*** init-a-abbr.el
+*** init-b-basic.el
+**** init-const.el
+**** init-custom.el
+*** init-c-package.el
+*** init-d-enhance.el
+*** init-e-dired.el
+*** init-e-tracemacs.el
+*** init-e-ui.el
+*** init-f-dashboard.el
+*** init-g-yasnippet.el
+*** init-h-lsp.el
+*** init-i-org.el
+*** init-i-python.el
+*** init-i-roam.el
+*** init-i-tex.el
+*** init-s-special.el
+*** init-x-extra.el
+*** init-z-test.el
+** site-lisp
+*** aweshell 
+*** awesome-tab
+*** lsp-bridge
+*** word-completion
+*** Own development
+- init-j-purefunction.el
+* Referenc
+1. [[zotero://select/items/1_Y6L4QMKZ][“Gnu.Org.” Accessed June 16, 2022. https://www.gnu.org/software/emacs/manual/html_node/elisp/Error-Debugging.html.]]
+2. 
