@@ -73,8 +73,28 @@ Copyleft Declaration:
 
     Puremacs is compatible from the emacs version 27.1. However, the development
     is based on 28.1.
--  
+- Optimizing Emacs Startup
+  + "benchmark-init"
+    The [[https://www.emacswiki.org/emacs/BenchmarkInit][benchmark-init]] can be use to indicate where Emacs will spend time during
+    startup. 
 
+    benchmark-init can help to record the duration spent in ‘require’ and ‘load’
+    when emacs is runnning to laod modulesearly on in the init file. And each
+    Emacs module will be essentially benchmarked as a tabular format or as a
+    tree based on the origin of the recorded operations.
+
+    See the repository in the GitHub: https://github.com/dholm/benchmark-init-el
+    And an example below: 
+    | Module                       | Type    | ms [^] | total ms |
+    |------------------------------+---------+--------+----------|
+    | eldoc-eval                   | require |    200 |      200 |
+    | eldoc                        | require |    188 |      188 |
+    | ispell                       | require |     20 |       20 |
+    | grep                         | require |      9 |        9 |
+    | ~/.emacs.d/benchmark-init.el | load    |      1 |        1 |
+
+    
+    
 ** custom.el
 ** macro.el
 ** init.el
@@ -105,6 +125,13 @@ Copyleft Declaration:
 *** word-completion
 *** Own development
 - init-j-purefunction.el
+* Planning
+** Org
+- org-super-agenda
+  https://github.com/alphapapa/org-super-agenda
+- 
+
 * Referenc
 1. [[zotero://select/items/1_Y6L4QMKZ][“Gnu.Org.” Accessed June 16, 2022. https://www.gnu.org/software/emacs/manual/html_node/elisp/Error-Debugging.html.]]
-2. 
+2. [[zotero://select/items/1_MAW49NXR][“EmacsWiki: Optimizing Emacs Startup.” Accessed June 17, 2022. https://www.emacswiki.org/emacs/OptimizingEmacsStartup.]]
+

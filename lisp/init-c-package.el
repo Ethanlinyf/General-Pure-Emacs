@@ -124,6 +124,9 @@
                             pdf-tools
                             latex-preview-pane ;;latex-preview-pane is a minor mode for Emacs that enables you to preview your LaTeX files directly in Emacs. It supports PDF previews, your choice of pdflatex or xelatex, and it highlights errors in your LaTeX buffer.
                             zotxt ; for reference
+
+                            ;;; Website
+                            htmlize
                             
                                  )  "Default packages")
 
