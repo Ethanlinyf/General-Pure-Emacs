@@ -1,6 +1,6 @@
 #+options: ':nil *:t -:t ::t <:t H:3 \n:nil ^:t arch:headline author:t
 #+options: broken-links:nil c:nil creator:nil d:(not "LOGBOOK") date:t e:t
-#+options: email:nil f:t inline:t num:t p:nil pri:nil prop:nil stat:t tags:t
+#+options: email:nil f:t inline:t num:nil p:nil pri:nil prop:nil stat:t tags:t
 #+options: tasks:t tex:t timestamp:t title:t toc:t todo:t |:t
 #+title: Pure Emacs Tutorial
 #+date: <2022-06-15 Wed>
@@ -154,14 +154,40 @@ Copyleft Declaration:
         (add-hook 'after-init-hook 'gloable-company-mode)
       #+end_src
 
-    * Disable package at startup
+    * disable case-insensitive search
       #+begin_src emacs-lisp
         (setq package-enable-at-startup nil)
+      #+end_src
+
+    * Save time by skipping the mtime checks on *.els files
+      #+begin_src emacs-lisp
+        (setq load-prefer-newer noninteractive)
+      #+end_src
+
+    * Prevent premature redisplays
+      #+begin_src emacs-lisp
+        (setq-default inhibit-redisplay t
+                      inhibit-message t)
+        (add-hook 'window-setup-hook
+                  (lambda ()
+                    (setq-default inhibit-redisplay nil
+                                  inhibit-message nil)
+                    (redisplay)))
       #+end_src
 
     * Suppress a second case-insensitive search
       #+begin_src emacs-lisp
         (setq auto-mode-case-fold nil)
+      #+end_src
+
+    * Disable package at startup
+      #+begin_src emacs-lisp
+        (setq package-enable-at-startup nil)
+      #+end_src
+
+    * Prevent resising the fram at early stage
+      #+begin_src emacs-lisp
+        (setq frame-inhibit-implied-resize t)
       #+end_src
 
 - Specify the system default coding as "UTF-8"
@@ -209,3 +235,4 @@ Copyleft Declaration:
 * Referenc
 1. [[zotero://select/items/1_Y6L4QMKZ][“Gnu.Org.” Accessed June 16, 2022. https://www.gnu.org/software/emacs/manual/html_node/elisp/Error-Debugging.html.]]
 2. [[zotero://select/items/1_MAW49NXR][“EmacsWiki: Optimizing Emacs Startup.” Accessed June 17, 2022. https://www.emacswiki.org/emacs/OptimizingEmacsStartup.]]
+3. [[zotero://select/items/1_XC55BTU4][Doom Emacs. Emacs Lisp. 2014. Reprint, Doom Emacs, 2022. https://github.com/doomemacs/doomemacs.]]
