@@ -56,6 +56,10 @@
 ;;   (add-to-list 'default-frame-alist '(drag-internal-border . 1))
 ;;   (add-to-list 'default-frame-alist '(internal-border-width . 5)))
 
+(package-install 'popwin)
+(require 'popwin)
+(popwin-mode 1)
+
 ;;--------------------------------------------------------------------
 (provide 'init-e-ui)
 ;;; ends here

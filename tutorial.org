@@ -13,14 +13,15 @@
 #+cite_export:
 
 #+begin_quote
-Something Good as Indicated by ThingsEngine -- YF Lin
+"Something good, from sand to the tower with spiral evolution." – Dr YF Lin:
+"From the tower to dust in your universe as what You wish to be"
 #+end_quote
 
 * Summary
 The tutorial is to demonstrate how this Emacs editor is developed. We pursume a
-simple, integrated and efficient platform with limited packages, no more
-than 100 as a pure Emacs to be using for learning, teaching, research and
-project management.
+simple, integrated and efficient platform with limited packages, no more than
+100 as a pure Emacs to be using for learning, teaching, research and project
+management.
 
 Copyleft Declaration:
 #+begin_src emacs-lisp
@@ -32,12 +33,56 @@ Copyleft Declaration:
 #+end_src
 
 * Introduction
-- Pure Emacs
-- Elisp
-- Order
+- Pure Emacs \\
+  EMACS, Editing Macros, is an extensible and real-time display editor written
+  in a programming language called Elisp. With (< 100) packages for Emacs, we
+  are developing *Pure Emacs* as an simple and integrated platform to facilitate
+  learning, teachng, research and project management. This development as a
+  repository is shared through GitHub, as well as with a tutorial also published through
+  the ThingsEngine websit: Https://www.thethingsengine.org. 
+- Elisp \\
+- Order \\
+* Key Remapping
+1. M(eta): option (Mac)，left windows (Windows)
+2. s(uper): command (Mac)，left Alt (Windows)
+3. S(Shift): no need to change 
+4. C(left-Ctrl): Caps Lock 
+** Windows: SharpKeys
+- How to open with Emacs in Windows\\
+  Windows Registry Editor Version 5.00
+  #+begin_quote
+  [HKEY_CLASSES_ROOT\*\shell]
+  [HKEY_CLASSES_ROOT\*\shell\openwemacs]
+  @="&Edit with Emacs"
+  [HKEY_CLASSES_ROOT\*\shell\openwemacs\command]
+  @="C:\\emax64\\bin\\emacsclientw.exe -n \"%1\""
+  [HKEY_CLASSES_ROOT\Directory\shell\openwemacs]
+  @="Edit &with Emacs"
+  [HKEY_CLASSES_ROOT\Directory\shell\openwemacs\command]
+  @="C:\\emax64\\bin\\emacsclientw.exe -n \"%1\""
+  #+end_quote
+
+  And Emacs should be available on server-mode
+  #+begin_src emacs-lisp
+    (server-mode 1)
+  #+end_src
+** Mac:
+  #+begin_src emacs-lisp
+    (setq mac-option-modifier 'meta
+      mac-command-modifier 'super)
+  #+end_src
+
+  #+begin_src emacs-lisp
+    (global-set-key (kbd "s-a") 'mark-whole-buffer) 
+    (global-set-key (kbd "s-c") 'kill-ring-save) 
+    (global-set-key (kbd "s-s") 'save-buffer) 
+    (global-set-key (kbd "s-v") 'yank) 
+    (global-set-key (kbd "s-z") 'undo) 
+    (global-set-key (kbd "s-x") 'kill-region) 
+  #+end_src
 * Loading Sequence
 ** early-init.el
-- development with debugging
+- Development with debugging \\
   In this development, the configurations will continuously be optimized. When a
   lisp error happens during Emacs running, the debuger can be called to
   investigate immediate causes of this error.
@@ -50,7 +95,12 @@ Copyleft Declaration:
 
   If Emacs is not able to open, you can run Emacs in a terminal with an option ‘--debug-init’ to catch the
   errors that may happens when loading of the init settings.
-- The minimum required version of Emacs for developping Pure Emacs
+
+  To make the configuration effective without rebooting Emacs:
+  + M-x load-file
+  + M-x eval-buffer
+  + C-x C-e
+- The minimum required version of Emacs \\
   + how to check the version of Emacs?
      #+begin_src emacs-lisp
        (emacs-version)
@@ -92,8 +142,8 @@ Copyleft Declaration:
     | ispell                       | require |     20 |       20 |
     | grep                         | require |      9 |        9 |
     | ~/.emacs.d/benchmark-init.el | load    |      1 |        1 |
-
-    
+  + Speed up Emacs at the startup
+- 
     
 ** custom.el
 ** macro.el
@@ -129,9 +179,9 @@ Copyleft Declaration:
 ** Org
 - org-super-agenda
   https://github.com/alphapapa/org-super-agenda
+- org-noter
 - 
 
 * Referenc
 1. [[zotero://select/items/1_Y6L4QMKZ][“Gnu.Org.” Accessed June 16, 2022. https://www.gnu.org/software/emacs/manual/html_node/elisp/Error-Debugging.html.]]
 2. [[zotero://select/items/1_MAW49NXR][“EmacsWiki: Optimizing Emacs Startup.” Accessed June 17, 2022. https://www.emacswiki.org/emacs/OptimizingEmacsStartup.]]
-

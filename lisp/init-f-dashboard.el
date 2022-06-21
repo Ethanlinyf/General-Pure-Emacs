@@ -120,6 +120,9 @@
 (when (dashboard-mode)
   (awesome-tab-mode -1))
 
+;; recentf excludes files: M-x recentf-cleanup
+;; (add-to-list 'recentf-exclude
+;;              (expand-file-name "~/.emacs.d/company-statistics-cache.el"))
 
 ;;--------------------------------------------------------------------
 (provide 'init-f-dashboard)
