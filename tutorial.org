@@ -13,8 +13,7 @@
 #+cite_export:
 
 #+begin_quote
-"Something good, from sand to the tower with spiral evolution." – Dr YF Lin:
-"From the tower to dust in your universe as what You wish to be"
+"Something good, from sand to a tower with spiral evolution and from the tower to dust in your universe as You wish to be" – Dr YF Lin
 #+end_quote
 
 * Summary
@@ -143,7 +142,32 @@ Copyleft Declaration:
     | grep                         | require |      9 |        9 |
     | ~/.emacs.d/benchmark-init.el | load    |      1 |        1 |
   + Speed up Emacs at the startup
-- 
+    * Set the parameters for the gabbage collections 
+      #+begin_src emacs-lisp
+      (setq gc-cons-threshold most-positive-fixnum) ;; AT startup
+      (add-hook 'after-init-hook #'(lambda () (setq gc-cons-threshold 800000))) ;; after startup
+      #+end_src
+
+    * enable heavy modes after init
+      For example
+      #+begin_src emacs-lisp
+        (add-hook 'after-init-hook 'gloable-company-mode)
+      #+end_src
+
+    * Disable package at startup
+      #+begin_src emacs-lisp
+        (setq package-enable-at-startup nil)
+      #+end_src
+
+    * Suppress a second case-insensitive search
+      #+begin_src emacs-lisp
+        (setq auto-mode-case-fold nil)
+      #+end_src
+
+- Specify the system default coding as "UTF-8"
+   #+begin_src emacs-lisp
+     (set-language-environment "UTF-8")
+   #+end_src
     
 ** custom.el
 ** macro.el

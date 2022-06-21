@@ -25,7 +25,7 @@
 ;;add whatever packages you want here 
 (defvar puremacs/packages '(
                             keycast
-                            good-scroll
+                            ;; good-scroll
 			    company
                             ;; company-box
                             ;; company-wordfreq
@@ -96,6 +96,7 @@
                             rainbow-delimiters
                             hungry-delete
                             ctrlf
+                            popwin
                             ;; format-all
                             ;; crux
 

@@ -24,21 +24,23 @@
 (setq gc-cons-threshold most-positive-fixnum
       gc-cons-percentage 0.5)
 
-;; Default character encoding -TE
-(set-language-environment "UTF-8")
+;; Suppress a second case-insensitive search through the auto-mode-alist -TE
+(setq auto-mode-case-fold nil)
 
 ;; After early-init-file to initialise 'package' -TE
 (setq package-enable-at-startup nil)
 
+;; Default encoding system -TE
+(set-language-environment "UTF-8")
+
 ;; Inhibit resising Puremacs frame
-(setq frame-inhibit-implied-resize t)
+;; (setq frame-inhibit-implied-resize t)
 
 ;; Remove some warnings
-(setq load-prefer-newer t)
-(setq byte-compile-warnings '(cl-functions))
+;;(setq load-prefer-newer t)
+;;(setq byte-compile-warnings '(cl-functions))
 
-;; Suppress a second case-insensitive search through the auto-mode-alist -TE
-(setq auto-mode-case-fold nil)
+
 
 ;;----------------------------------------------------------------------
 ;;; early-init.el ends here -TE
