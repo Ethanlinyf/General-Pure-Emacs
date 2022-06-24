@@ -196,8 +196,170 @@ Copyleft Declaration:
    #+end_src
     
 ** custom.el
+You can configure Emacs through its interface, for example:
+[[./figure/font_setting.png]]
+The settings are generated and recorded in a customised file, which could be set
+as follows: 
+ #+begin_src emacs-lisp
+   (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
+   (when (file-exists-p custom-file) 
+     (load custom-file))
+ #+end_src
 ** macro.el
-** init.el
+Emacs has a feature using macro to enhance performance. You can create a
+sequence of actions as a macro to perform when needed.
+
+Next, we talk about how to create a macro when using Emacs.
+
+The Steps to create a macro Record and Play inside Emacs: 
+- Start recording a macro by pressing ctrl+x (
+- Perform any actions inside the Emacs editor that you would like to record.
+- Stop recording by pressing ctrl+x )
+- Play the last recorded macro by pressing ctrl+x e
+
+You can also name a macro to persist:
+- Press Ctrl+x Ctrl+k n
+- Give name-of-macro, and press ENTER
+- Run the named macro by pressing, M-x name-of-macro
+
+
+Here is an example how to perform record and play a sequence of actions inside
+the puremacs.
+
+"Example: Title case first word in each bullet points
+Let us take the following text snippet as an example.
+
+$ cat thegeekstuff.txt
+        * virtualization technologies
+        * sed and awk tips/tricks
+        * emacs tutorials
+        * bash scripting tutorial series
+1. Open the thegeekstuff.txt that has the bullet points
+Open the above sample text file, and by default the cursor will be placed in the first line.
+
+$ emacs -nw thegeekstuff.txt
+        * virtualization technologies
+        * sed and awk tips/tricks
+        * emacs tutorials
+        * bash scripting tutorial series
+2. Start the Recording
+Type: Ctrl+x (
+
+Ctrl+x ( indicates start the recording
+When you do Ctrl+x (, it will display Defining kbd macro .. at the bottom of screen.
+3. Change the case of next
+Type: M-c
+
+Press M-c which will title case the next word, and places the cursor after the word.
+4. Go to the next line
+Type: C-n
+
+Press C-n which will move the cursor to the next line.
+Refer our earlier article 7 Essential emacs Editor Navigation Fundamentals.
+5. Go to the start of line
+Type: C-a
+
+Press C-a which will move the cursor to the starting of the line.
+6. Stop recording the macro
+Type: C-x )
+
+Ctrl+x ) indicates stop the recording
+When you do Ctrl+x ), it will display Keyboard macro defined in the bottom of screen.
+7. Give name and save macro
+Type: C-x C-k n title-case-macro
+
+Ctrl+x Ctrl+k n indicates name the previous macro
+When you do Ctrl+x Ctrl+k n, it will ask ‘Name for last kbd macro:’ (enter the name you require). I am naming it as title-case-macro.
+8. Execute the macro for required number of times
+Type: M-x title-case-macro
+
+M-x title-case-macro indicates execute the macro which is stored with that name.
+To repeat the macro, just prepend the macro with C-u and count.
+
+Type: C-u 3 M-x title-case-macro
+
+C-u N indicates N number of times
+M-x title-case-macro indicates execute the macro which is stored with that name.
+So, now all your four lines are title cased, as shown below.
+
+        * Virtualization technologies
+        * Sed and awk tips/tricks
+        * Emacs tutorials
+        * Bash scripting tutorial series
+By default, emacs macro will not be available for further sessions.
+
+Saving the macro in .emacs for future session
+After you have named the macro,
+
+open the ~/.emacs file in another buffer ( from same session — do C-x C-f & open ~/.emacs file )
+insert the macro by, Type: M-x insert-kbd-macro, which will ask you the name of macro to insert.
+Give the name with which you have saved already ( in this example it is title-case-macro ), which will insert some lisp code.
+Save, and exit. In all your future session you will be able to access this macro by M-x macroname."
+
+** TODO init.el
+DEADLINE: <2022-07-01 Fri> SCHEDULED: <2022-06-27 Mon>
+- Disable to try second pass through `auto-mode-alist'
+  auto-mode-case-fold is a variable defined in `files.el'. Its value is "t".
+  "Non-nil means to try second pass through `auto-mode-alist'.
+  This means that if the first case-sensitive search through the alist fails to
+  find a matching major mode, a second case-insensitive search is made.  On
+  systems with case-insensitive file names, this variable is ignored, since only
+  a single case-insensitive search through the alist is made."
+
+  customize this variable as "nil" wil speed up Emacs startup. 
+- handle the file name to speed up Emacs
+  The variable "file-name-handler-alist" holds a list of handlers, together with
+  regular expressions that determine when to apply each handler. Each element
+  has this form:
+  #+begin_src emacs-lisp
+    (regexp . handler)
+  #+end_src
+
+  The settings in this Pure Emacs:
+  #+begin_src emacs-lisp
+    (unless (or (daemonp) noninteractive init-file-debug)
+      (let ((old-file-name-handler-alist file-name-handler-alist))
+        (setq file-name-handler-alist nil)
+        (add-hook 'emacs-startup-hook
+                  (lambda ()
+                    "Recover file name handlers."
+                    (setq file-name-handler-alist
+                          (delete-dups (append file-name-handler-alist
+                                               old-file-name-handler-alist)))))))
+  #+end_src
+- Reset the garage collection parameter.
+  Reset the parameters for the garage collections:
+  #+begin_src emacs-lisp
+    (add-hook 'emacs-startup-hook
+          (lambda ()
+            "Recover GC values after startup."
+            (setq gc-cons-threshold 80000000
+                  gc-cons-percentage 0.1)))
+  #+end_src
+  To make sure Pure Emacs can be maintained when it is running.
+- Statistic results on the time of startup and garage collections.
+  The starup time and the number of gabbage collections will be indicated in the
+  Dashboard, see below:
+  [[./figure/startupTime&GCs.png]]
+
+  #+begin_src emacs-lisp
+    (add-hook 'emacs-startup-hook
+          (lambda ()
+            (message "Emacs ready in %s with %d garbage collections."
+                     (format "%.2f seconds"
+                             (float-time
+                              (time-subtract
+                               after-init-time before-init-time)))
+                     gcs-done)))
+  #+end_src
+- Set a major mode for scratch
+  + The impact by Dashboard
+- Loading customised and macro files
+- Update load path
+- What need to be required
+  + init-a-abbr
+  + init-b-basic
+
 ** lisp
 *** init-a-abbr.el
 *** init-b-basic.el
@@ -232,7 +394,9 @@ Copyleft Declaration:
 - org-noter
 - 
 
-* Referenc
+* Reference 
 1. [[zotero://select/items/1_Y6L4QMKZ][“Gnu.Org.” Accessed June 16, 2022. https://www.gnu.org/software/emacs/manual/html_node/elisp/Error-Debugging.html.]]
 2. [[zotero://select/items/1_MAW49NXR][“EmacsWiki: Optimizing Emacs Startup.” Accessed June 17, 2022. https://www.emacswiki.org/emacs/OptimizingEmacsStartup.]]
 3. [[zotero://select/items/1_XC55BTU4][Doom Emacs. Emacs Lisp. 2014. Reprint, Doom Emacs, 2022. https://github.com/doomemacs/doomemacs.]]
+4. [[zotero://select/items/1_2Y87WF4Q][“Gnu.Org: Making Certain File Names ‘Magic.’” Accessed June 24, 2022. https://www.gnu.org/software/emacs/manual/html_node/elisp/Magic-File-Names.html.]]
+

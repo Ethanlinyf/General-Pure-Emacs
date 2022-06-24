@@ -59,7 +59,7 @@
 ;; (global-lsp-bridge-mode)
 
 ;; (add-to-list 'load-path "<path-to-lsp-bridge>")
-
+(require 'posframe)
 ;(require 'yasnippet)
 (require 'lsp-bridge)
 (require 'lsp-bridge-jdtls)       ;; provide Java third-party library jump and -data directory support, optional

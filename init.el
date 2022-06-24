@@ -10,12 +10,11 @@
 ;; Add feature defined in the lisp folder
 ;;--------------------------------------------------------------------
 ;;; Code:
+(setq auto-mode-case-fold nil)
 
-(unless (or (daemonp) noninteractive)
+(unless (or (daemonp) noninteractive init-file-debug)
   (let ((old-file-name-handler-alist file-name-handler-alist))
-    (setq file-name-handler-alist
-          (unless (display-graphic-p)
-            '(("\\(?:\\.tzst\\|\\.zst\\|\\.dz\\|\\.txz\\|\\.xz\\|\\.lzma\\|\\.lz\\|\\.g?z\\|\\.\\(?:tgz\\|svgz\\|sifz\\)\\|\\.tbz2?\\|\\.bz2\\|\\.Z\\)\\(?:~\\|\\.~[-[:alnum:]:#@^._]+\\(?:~[[:digit:]]+\\)?~\\)?\\'" . jka-compr-handler))))
+    (setq file-name-handler-alist nil)
     (add-hook 'emacs-startup-hook
               (lambda ()
                 "Recover file name handlers."

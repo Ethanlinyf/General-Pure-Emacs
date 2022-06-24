@@ -24,20 +24,13 @@
 
 ;;add whatever packages you want here 
 (defvar puremacs/packages '(
-                            keycast
-                            ;; good-scroll
+                            
 			    company
                             ;; company-box
-                            ;; company-wordfreq
-                            ;; swiper
-			    ;; counsel
 			    ;; smartparens
 			    exec-path-from-shell
-			    ;; nord-theme
                             doom-modeline
                             doom-themes
-                            ;; popwin
-                            ;; 
                             dashboard
                             page-break-lines
                             projectile
@@ -50,7 +43,7 @@
                             ;; 
                             treemacs
                             ;; highlight-indent-guides
-                            ;; multi-term
+                            multi-term
                             ;; ido
                             ;; ivy-rich
                             ;; all-the-icons-ivy-rich
@@ -128,6 +121,9 @@
 
                             ;;; Website
                             htmlize
+
+                            ;;; Optional
+                            keycast
                             
                                  )  "Default packages")
 
@@ -412,18 +408,18 @@
   (embark-collect-mode . consult-preview-at-point-mode))
 
 ;;--------------------------------------------------------------------
-(use-package simple
-  :ensure nil
-  :hook (after-init . size-indication-mode)
-  :init
-  (progn
-    (setq column-number-mode t)
-    ))
+;; (use-package simple
+;;   :ensure nil
+;;   :hook (after-init . size-indication-mode)
+;;   :init
+;;   (progn
+;;     (setq column-number-mode t)
+;;     ))
 
 ;;modeline上显示我的所有的按键和执行的命令
-(require 'keycast)
-(add-to-list 'global-mode-string '("" keycast-mode-line))
-(keycast-mode t)
+;; (require 'keycast)
+;; (add-to-list 'global-mode-string '("" keycast-mode-line))
+;; (keycast-mode t)
 
 ;; 这里的执行顺序非常重要，doom-modeline-mode 的激活时机一定要在设置global-mode-string 之后‘
 ;; (use-package doom-modeline
