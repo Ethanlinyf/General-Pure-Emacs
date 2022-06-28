@@ -62,7 +62,7 @@
                             ;; 
                             ;; 
                             ;; pangu-spacing ; Minor-mode to add space between Chinese and English characters.
-                            ;; all-the-icons-ibuffer ; Display icons for all buffers in ibuffer.
+                            all-the-icons-ibuffer ; Display icons for all buffers in ibuffer.
                             ;; all-the-icons-ivy-rich ;
                             ;; good-scroll ; This package implements smooth scrolling by pixel lines. It attempts to improve upon `pixel-scroll-mode' by adding variable speed.
                             ;; elisp-format
@@ -75,12 +75,12 @@
                             
                             ;; 
                             treemacs-all-the-icons
-                            ;; corfu
-                            ;; orderless
+                            corfu
+                            orderless
                             ;; 
                             ;; eglot
                             epc
-                            ;; corfu-doc
+                            corfu-doc
 
                             ;;; D
                             which-key
@@ -90,6 +90,8 @@
                             hungry-delete
                             ctrlf
                             popwin
+                            minions
+                            cape
                             ;; format-all
                             ;; crux
 
@@ -107,8 +109,19 @@
                             org-superstar
                             org-noter
 
-                            ;;roam-org
+                            ;;org-roam
                             org-roam
+                            org-roam-ui
+                            org-roam-bibtex
+                            websocket
+
+                            dash
+                            f
+                            s
+                            emacsql
+                            emacsql-sqlite
+                            magit-section
+                            ;; [filenotify-recursive][https://github.com/jethrokuan/filenotify-recursive]
 
                             ;; TeX
                             auctex
@@ -231,6 +244,10 @@
 
   ;; Enable recursive minibuffers
   (setq enable-recursive-minibuffers t))
+
+(use-package corfu
+  :init
+  (global-corfu-mode))
 
 ;; Optionally use the `orderless' completion style.
 (use-package orderless
@@ -426,6 +443,9 @@
 ;;   :ensure t
 ;;   :hook (after-init . doom-modeline-mode))
 (add-hook 'after-init-hook #'doom-modeline-mode)
+(setq doom-modeline-minor-modes t)
+;; (require 'minions)
+;; (add-hook 'after-doom-modeline-hook #'minions-mode)
 
 (use-package all-the-icons
   :if (display-graphic-p))

@@ -197,7 +197,7 @@ Copyleft Declaration:
     
 ** custom.el
 You can configure Emacs through its interface, for example:
-[[./figure/font_setting.png]]
+[[./figure/font_setting.png]]\\
 The settings are generated and recorded in a customised file, which could be set
 as follows: 
  #+begin_src emacs-lisp
@@ -296,8 +296,34 @@ insert the macro by, Type: M-x insert-kbd-macro, which will ask you the name of 
 Give the name with which you have saved already ( in this example it is title-case-macro ), which will insert some lisp code.
 Save, and exit. In all your future session you will be able to access this macro by M-x macroname."
 
-** TODO init.el
+** DONE init.el
 DEADLINE: <2022-07-01 Fri> SCHEDULED: <2022-06-27 Mon>
+- State "DONE"       from "NEXT"       [2022-06-25 Sat 14:58]
+What is init File? 
+Emacs has a init file, which contains initial configuration emacs loads when it starts up. It is used to initially customize emacs.
+
+Where is the Emacs init file? 
+By default, there is no init file. You can create the file with the initial customised configuration. For example:
+
+#+begin_src emacs-lisp
+  (setq initial-major-mode 'emacs-lisp-mode ;;'fundamental-mode
+      package--init-file-ensured t)
+#+end_src
+
+When Emacs is started, it normally tries to load a Lisp program from an
+initialization file, or init file for short. This file, if it exists, specifies
+how to initialize Emacs for you. Traditionally, file ~/.emacs is used as the
+init file, although Emacs also looks at ~/.emacs.el, ~/.emacs.d/init.el,
+~/.config/emacs/init.el(supported since emacs 27.1, released in 2020.), or other
+locations you could specify it: [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Find-Init.html][How Emacs find your init file]].
+
+So, on macOS, emacs is looking for init file when starting up in the following filepath, in order:
+
+~/.emacs
+~/.emacs.el
+~/.emacs.d/init.el (version)
+~/.config/emacs/init.el
+
 - Disable to try second pass through `auto-mode-alist'
   auto-mode-case-fold is a variable defined in `files.el'. Its value is "t".
   "Non-nil means to try second pass through `auto-mode-alist'.
@@ -353,15 +379,65 @@ DEADLINE: <2022-07-01 Fri> SCHEDULED: <2022-06-27 Mon>
                      gcs-done)))
   #+end_src
 - Set a major mode for scratch
-  + The impact by Dashboard
+  Here, we set the defal major mode as emacs-lisp-mode for elisp practices. 
+  #+begin_src emacs-lisp
+    (setq initial-major-mode 'emacs-lisp-mode) ;;'fundamental-mode
+  #+end_src
+
+  The default major mode is fundamental-mode and it is inheritated by Dashboard as dashboard-mode. 
 - Loading customised and macro files
+  Load the settings recorded through emacs if existing
+  #+begin_src emacs-lisp
+    (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
+      (when (file-exists-p custom-file) 
+      (load custom-file))
+  #+end_src
+
+  Define a file to record emacs macros.
+  #+begin_src emacs-lisp
+    (defvar pure-macro (expand-file-name "macros.el" user-emacs-directory)
+      "A file to record emacs macros.")
+  #+end_src
+  Load the macro file if it exists
+  #+begin_src emacs-lisp
+    (when (file-exists-p pure-macro) 
+      (load pure-macro))
+  #+end_src
+
 - Update load path
+  Add to list to load the el files in a specific folder;
+  #+begin_src emacs-lisp
+    (defun update-load-pathe (&rest _)
+      "To load folders includ el files."
+      (dolist (path '("lisp" "site-lisp"))
+        (push (expand-file-name path user-emacs-directory) load-path)))
+    (update-load-pathe)
+  #+end_src
 - What need to be required
   + init-a-abbr
   + init-b-basic
+  + init-c-package
+  + init-d-enhance
+  + init-e-ui
+  + init-e-dired
+  + init-e-dired
+  + init-e-treemacs
+  + init-f-dashboard
+  + init-g-yasnippet
+  + init-h-lsp
+  + init-i-org
+  + init-i-roam
+  + init-i-tex
+  + init-i-python
+  + init-j-purefunction
+  + init-z-test
 
-** lisp
+** TODO lisp
 *** init-a-abbr.el
+SCHEDULED: <2022-06-26 Sun>
+1. why we need abbrevs
+2. how to enable abbrev-mode
+3. how to set an abbrev 
 *** init-b-basic.el
 **** init-const.el
 **** init-custom.el

@@ -14,3 +14,5 @@
 	(error "Puremacs requires V%s or higher versions." minver)))
   #+end_src
 - 
+* Tips:
+- Run M-x all-the-icons-install-fonts to install the needed fonts and icons. 
