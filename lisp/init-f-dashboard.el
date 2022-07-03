@@ -117,8 +117,8 @@
 (advice-add #'dashboard-insert-footer :after #'my-dashboard-insert-copyright)
 
 
-(when (dashboard-mode)
-  (awesome-tab-mode -1))
+;; (when (dashboard-mode)
+;;   (awesome-tab-mode -1))
 
 ;; recentf excludes files: M-x recentf-cleanup
 ;; (add-to-list 'recentf-exclude

@@ -10,7 +10,7 @@
  '(display-time-mode t)
  '(org-agenda-files '("~/Documents/Test/test.org"))
  '(package-selected-packages
-   '(f3 minions popwin simple-httpd treemacs-tab-bar treemacs-persp treemacs-magit treemacs-projectile dired-git-info diredfl all-the-icons doom-modeline keycast embark-consult embark consult marginalia orderless vertico gnu-elpa-keyring-update diminish use-package company))
+   '(dashboard f3 minions popwin simple-httpd treemacs-tab-bar treemacs-persp treemacs-magit treemacs-projectile dired-git-info diredfl all-the-icons doom-modeline keycast embark-consult embark consult marginalia orderless vertico gnu-elpa-keyring-update diminish use-package company))
  '(size-indication-mode t)
  '(tool-bar-mode nil))
 (custom-set-faces
@@ -18,4 +18,5 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(default ((t (:family "Menlo" :foundry "nil" :slant normal :weight regular :height 140 :width normal))))
  '(dashboard-heading ((t (:inherit (font-lock-string-face bold))))))
