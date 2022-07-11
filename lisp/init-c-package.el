@@ -462,16 +462,16 @@
               hungry-delete-except-modes
               '(help-mode minibuffer-mode minibuffer-inactive-mode calc-mode))
 ;;--------------------------------------------------------------------
-;;(add-to-list 'load-path (expand-file-name "site-lisp/awesome-tab" user-emacs-directory))
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/site-lisp/awesome-tab"))
 
-;;(require 'awesome-tab)
+(require 'awesome-tab)
 
-;(awesome-tab-mode t)
+(awesome-tab-mode t)
 
-;; (add-hook 'prog-mode-hook #'awesome-tab-mode)
+(add-hook 'prog-mode-hook #'awesome-tab-mode)
 
-;; (add-hook 'eshell-mode-hook #'(lambda() (awesome-tab-mode -1)))
-;; (add-hook 'Info-mode-hook (lambda() (awesome-tab-mode -1)))
+(add-hook 'eshell-mode-hook #'(lambda() (awesome-tab-mode -1)))
+(add-hook 'Info-mode-hook (lambda() (awesome-tab-mode -1)))
 
 ;; (defun awesome-tab-buffer-groups ()
 ;; "`awesome-tab-buffer-groups' control buffers' group rules.

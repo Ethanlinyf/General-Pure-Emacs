@@ -81,7 +81,7 @@
            (lambda ()
             (set (make-local-variable 'pangu-spacing-real-insert-separtor) t)))
 
-(add-hook 'org-mode-hook #'awesome-tab-mode)
+;; (add-hook 'org-mode-hook #'awesome-tab-mode)
 ;;(require 'org-tempo)
 ;;(add-to-list 'org-modules 'org-tempo t)
 
