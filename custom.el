@@ -18,5 +18,5 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:family "Menlo" :foundry "nil" :slant normal :weight regular :height 140 :width normal))))
+ '(default ((t (:family "Menlo" :foundry "nil" :slant normal :weight regular :height 160 :width normal))))
  '(dashboard-heading ((t (:inherit (font-lock-string-face bold))))))
