@@ -17,4 +17,12 @@
         (calculator-radix-grouping-mode nil))
     (calculator-number-to-string number)))
 
+(defun my-subseq (foo n m)
+  (let ((l (length foo)))
+        (setq sub1 (nthcdr n foo))
+        (setq sub2 (butlast sub1 (- l m)))
+        sub2))
+
 (provide 'init-j-purefunction)
+
+
