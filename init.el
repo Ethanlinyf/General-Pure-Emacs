@@ -10,6 +10,7 @@
 ;; Add feature defined in the lisp folder
 ;;--------------------------------------------------------------------
 ;;; Code:
+
 (setq auto-mode-case-fold nil)
 
 (unless (or (daemonp) noninteractive init-file-debug)

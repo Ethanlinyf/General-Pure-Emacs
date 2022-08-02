@@ -116,8 +116,9 @@
     (insert "\n")))
 (advice-add #'dashboard-insert-footer :after #'my-dashboard-insert-copyright)
 
-;;(setq dashboard-projects-switch-function 'counsel-projectile-switch-project-by-name)
-
+(counsel-projectile-mode t)
+;; (setq dashboard-projects-switch-function 'counsel-projectile-switch-project-by-name)
+(setq dashboard-projects-switch-function 'counsel-projectile-switch-project-action-dired)
 
 ;; (when (dashboard-mode)
 ;;   (awesome-tab-mode nil))

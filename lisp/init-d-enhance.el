@@ -3,6 +3,7 @@
 
 (add-to-list 'load-path (expand-file-name "site-lisp/aweshell" user-emacs-directory))
 (require 'aweshell)
+(global-set-key (kbd "s-1") 'aweshell-dedicated-toggle)
 
 ;; ALT + number to swith to the number of a specific window
 (require 'window-numbering)

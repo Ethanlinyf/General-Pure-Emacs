@@ -24,7 +24,11 @@
 
 ;;add whatever packages you want here 
 (defvar puremacs/packages '(
-                            
+                            ;; wishlist:
+                            ; avy
+
+
+
 			    company
                             ;; company-box
 			    ;; smartparens
@@ -48,11 +52,6 @@
                             ;; ivy-rich
                             ;; all-the-icons-ivy-rich
                             ;; amx
-                            ;; ;;--LaTeX--
-                            ;; auctex
-                            ;; reftex
-                            ;; cdlatex
-                            ;; auto-complete
                             all-the-icons-dired
                             diredfl
                             ;;;diredful
@@ -108,6 +107,8 @@
                             ;;org
                             org-superstar
                             org-noter
+                            org-ql
+                            org-download
 
                             ;;org-roam
                             org-roam
