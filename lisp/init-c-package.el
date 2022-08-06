@@ -42,6 +42,8 @@
                             all-the-icons
                             all-the-icons-completion
 
+                            undo-tree
+
                             ;; ;; lsp-mode
                             ;; flycheck
                             ;; 

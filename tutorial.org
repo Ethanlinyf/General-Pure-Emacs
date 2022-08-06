@@ -435,9 +435,14 @@ So, on macOS, emacs is looking for init file when starting up in the following f
 ** TODO lisp
 *** init-a-abbr.el
 SCHEDULED: <2022-06-26 Sun>
-1. why we need abbrevs
-2. how to enable abbrev-mode
-3. how to set an abbrev 
+Emacs has a good feature to expand abbrivations. 
+- why we need abbrevs \\
+  It is convenient to input some repeated phrases, such as your emails, urls and
+  so on. It is also helpful to fix typos by defining abbreviations for these to
+  be corrected automatically. 
+- How to enable abbrev-mode \\
+  
+- how to set an abbrev 
 *** init-b-basic.el
 **** init-const.el
 **** init-custom.el
@@ -475,4 +480,5 @@ SCHEDULED: <2022-06-26 Sun>
 2. [[zotero://select/items/1_MAW49NXR][“EmacsWiki: Optimizing Emacs Startup.” Accessed June 17, 2022. https://www.emacswiki.org/emacs/OptimizingEmacsStartup.]]
 3. [[zotero://select/items/1_XC55BTU4][Doom Emacs. Emacs Lisp. 2014. Reprint, Doom Emacs, 2022. https://github.com/doomemacs/doomemacs.]]
 4. [[zotero://select/items/1_2Y87WF4Q][“Gnu.Org: Making Certain File Names ‘Magic.’” Accessed June 24, 2022. https://www.gnu.org/software/emacs/manual/html_node/elisp/Magic-File-Names.html.]]
+5. [[zotero://select/items/1_5IBL5GJ8][“EmacsWiki: Abbrev Mode.” Accessed August 5, 2022. https://www.emacswiki.org/emacs/AbbrevMode.]]
 

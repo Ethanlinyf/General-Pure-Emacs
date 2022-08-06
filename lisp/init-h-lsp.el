@@ -67,6 +67,7 @@
 ;(yas-global-mode 1)
 (global-lsp-bridge-mode)
 (setq acm-enable-doc nil)
+(setq lsp-bridge-complete-manually t)
 
 ;;--------------------------------------------------------------------
 (provide 'init-h-lsp)
