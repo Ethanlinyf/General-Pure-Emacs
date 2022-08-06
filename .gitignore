@@ -72,7 +72,6 @@ eaf/
 /projectile-bookmarks.eld
 /issue.org
 /plan.org
-/tmp*~
+/tmp*
 /org-roam.db
 /test.txt
-tmp*~
