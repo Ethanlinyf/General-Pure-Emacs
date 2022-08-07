@@ -27,8 +27,6 @@
                             ;; wishlist:
                             ; avy
 
-
-
 			    company
                             ;; company-box
 			    ;; smartparens
