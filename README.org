@@ -1,4 +1,4 @@
-* Pure Emacs
+* General Pure Emacs
 ** Git and GitHub
 - add .gitignore
   + folder: auto-save-list
