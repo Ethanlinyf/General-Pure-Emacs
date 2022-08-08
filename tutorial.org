@@ -41,6 +41,8 @@ Copyleft Declaration:
   the ThingsEngine websit: Https://www.thethingsengine.org. 
 - Elisp \\
 - Order \\
+* Installation
+- Run M-x all-the-icons-install-fonts to install the needed fonts and icons. 
 * Key Remapping
 1. M(eta): option (Mac)，left windows (Windows)
 2. s(uper): command (Mac)，left Alt (Windows)
