@@ -6,7 +6,7 @@
 ;; URL: https://github.com/Ethanlinyf/General-Pure-Emacs
 ;; Under ThingsEngine Project: https://www.thethingsengine.org/
 ;;--------------------------------------------------------------------
-;; Commentary:
+;;; Commentary:
 ;; Define constants.
 ;;--------------------------------------------------------------------
 ;;; Code:
@@ -106,9 +106,8 @@ Loaded by `org-babel-load-file'.")
   (>= emacs-major-version 29)
   "Emacs is 29 or above.")
 
+;;--------------------------------------------------------------------
 (provide 'init-const)
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-const.el ends here
 
 ;;;;;; Example: Switch Git Bash

@@ -6,7 +6,7 @@
 ;; URL: https://github.com/Ethanlinyf/General-Pure-Emacs
 ;; Under ThingsEngine Project: https://www.thethingsengine.org/
 ;;--------------------------------------------------------------------
-;; Commentary:
+;;; Commentary:
 ;; configurations for treemacs.
 ;;--------------------------------------------------------------------
 ;;; Code:
@@ -126,4 +126,4 @@
 
 ;;--------------------------------------------------------------------
 (provide 'init-e-treemacs)
-;;; ends here
+;;; init-e-treemacs.el ends here

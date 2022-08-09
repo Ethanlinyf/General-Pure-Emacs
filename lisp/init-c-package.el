@@ -6,8 +6,8 @@
 ;; URL: https://github.com/Ethanlinyf/General-Pure-Emacs
 ;; Under ThingsEngine Project: https://www.thethingsengine.org
 ;;--------------------------------------------------------------------
-;; Commentary:
-;; Add feature defined in the lisp folder
+;;; Commentary:
+;; Add feature defined in the Lisp folder
 ;;--------------------------------------------------------------------
 ;;; Code:
 
@@ -22,7 +22,7 @@
 (when (memq window-system '(mac ns x))
   (exec-path-from-shell-initialize))
 
-;;add whatever packages you want here 
+;; Add whatever packages you want here
 (defvar puremacs/packages '(
                             ;; wishlist:
                             ; avy
@@ -139,11 +139,12 @@
                             ;;; Optional
                             keycast
                             
-                                 )  "Default packages")
+                                 )  "Default packages.")
 
 (setq package-selected-packages puremacs/packages)
 
 (defun puremacs/packages-installed-p ()
+  "Looping all the packages."
   (cl-loop for pkg in puremacs/packages
 	when (not (package-installed-p pkg)) do (cl-return nil)
 	finally (cl-return t)))
@@ -540,3 +541,4 @@ all-the-icons-ibuffer-formats
 
 ;;--------------------------------------------------------------------
 (provide 'init-c-package)
+;;; init-c-package.el ends here

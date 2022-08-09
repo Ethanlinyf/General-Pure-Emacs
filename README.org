@@ -5,7 +5,11 @@ General Pure Emacs (GPE) is a simple configuration based on Gnu Emacs with aroun
 [[./figure/General-Pure-Emacs.png]]
 ** Feature
 - Integrated
-- Extensible
+  + Note-taken
+  + Programming
+  + Planning
+  + Management
+- Extendable
 - Instructive
 ** Installation
 *** Mac
@@ -49,7 +53,7 @@ General Pure Emacs (GPE) is a simple configuration based on Gnu Emacs with aroun
     /usr is usually a hidden folder and may not appear by default. If so, press
     shift+cmd+. (the last one is a dot) at the root directory to make it appear.
 
-  Emacs.app should now be able to access the file system without any hindrance!
+  Emacs.app should now be able to access the file system without any hindrance.
 
   The standard emacs supplied with the system is run through Terminal.app. If
   you're using emacs like this (with the system supplied or for example an
@@ -74,8 +78,12 @@ General Pure Emacs (GPE) is a simple configuration based on Gnu Emacs with aroun
 *** Linux
 ** Support/Issue
 Please report any issues about configuration at this repository. 
-** Licence
-This program is free software: you can redistribute it and/or modify it under the terms of the [[https://github.com/redguardtoo/emacs.d/blob/master/LICENSE][GNU General Public License]] as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+** License
+This program is free software: you can redistribute it and/or modify it under
+the terms of the [[https://github.com/redguardtoo/emacs.d/blob/master/LICENSE][GNU General Public License]] as published by the Free Software
+Foundation, either version 3 of the License, or (at your option) any later
+version.
 
-This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the [[https://github.com/redguardtoo/emacs.d/blob/master/LICENSE][GNU General Public License]] for more details.
-
+This program is distributed in the hope that it will be useful, but WITHOUT ANY
+WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+PARTICULAR PURPOSE. See the [[https://github.com/redguardtoo/emacs.d/blob/master/LICENSE][GNU General Public License]] for more details.

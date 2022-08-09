@@ -6,7 +6,7 @@
 ;; URL: https://github.com/Ethanlinyf/General-Pure-Emacs
 ;; Under ThingsEngine Project: https://www.thethingsengine.org
 ;;--------------------------------------------------------------------
-;; Commentary:
+;;; Commentary:
 ;; Some abbrevs to be used when editting
 ;;--------------------------------------------------------------------
 ;;; Code:
@@ -24,4 +24,5 @@
 
 ;;--------------------------------------------------------------------
 (provide 'init-a-abbr)
-;;; init-abbr.el ends here
+;;; init-a-abbr.el ends here
+

@@ -6,8 +6,8 @@
 ;; URL: https://github.com/Ethanlinyf/General-Pure-Emacs
 ;; Under ThingsEngine Project: https://www.thethingsengine.org
 ;;--------------------------------------------------------------------
-;; Commentary:
-;; Add feature defined in the lisp folder
+;;; Commentary:
+;; Add feature defined in the Lisp folder
 ;;--------------------------------------------------------------------
 ;;; Code:
 
@@ -136,10 +136,12 @@
 
 ;; Basic Improvement -------------------------------------------------
 (defun indent-buffer()
+  "To indent the buffer."
   (interactive)
   (indent-region (point-min) (point-max)))
 
 (defun indent-region-or-buffer()
+  "To indent the region or buffer."
   (interactive)
   (save-excursion
     (if (region-active-p)
@@ -187,3 +189,4 @@
 (global-set-key (kbd "C-x C-r") 'recentf-open-files)
 ;;--------------------------------------------------------------------
 (provide 'init-b-basic)
+;;; init-b-basic.el ends here

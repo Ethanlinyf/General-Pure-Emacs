@@ -6,8 +6,8 @@
 ;; URL: https://github.com/Ethanlinyf/General-Pure-Emacs
 ;; Under ThingsEngine Project: https://www.thethingsengine.org
 ;;--------------------------------------------------------------------
-;; Commentary:
-;; Add feature defined in the lisp folder
+;;; Commentary:
+;; Add feature defined in the Lisp folder
 ;;--------------------------------------------------------------------
 ;;; Code:
 
@@ -46,14 +46,14 @@
 ;; Load the settings recorded through emacs
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 ;; Load the custom file if it exists
-(when (file-exists-p custom-file) 
+(when (file-exists-p custom-file)
   (load custom-file))
 
 ;; Define a file to record emacs macros.
 (defvar pure-macro (expand-file-name "macros.el" user-emacs-directory)
-  "A file to record emacs macros.")
+  "A file to record Emacs macros.")
 ;; Load the macro file if it exists
-(when (file-exists-p pure-macro) 
+(when (file-exists-p pure-macro)
   (load pure-macro))
 
 ;; Add to list to load the el files in a specific folder;
@@ -83,3 +83,4 @@
 
 ;;----------------------------------------------------------------------------
 (provide 'init)
+;;; init.el ends here

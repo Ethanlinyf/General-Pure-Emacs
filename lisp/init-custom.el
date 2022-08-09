@@ -6,7 +6,7 @@
 ;; URL: https://github.com/Ethanlinyf/General-Pure-Emacs
 ;; Under ThingsEngine Project: https://www.thethingsengine.org/
 ;;--------------------------------------------------------------------
-;; Commentary:
+;;; Commentary:
 ;; Setting variables by hand
 ;;--------------------------------------------------------------------
 ;;; Code:
@@ -15,19 +15,19 @@
   (set-face-attribute 'default nil :font "Menlo-16" ))
 
 
-;; add when is-a-mac 
+;; Add when is-a-mac.
 ;; ExecPath: https://www.emacswiki.org/emacs/ExecPath
 (when *is-mac*
   (setenv "PATH" (concat (getenv "PATH") ":/opt/homebrew/bin"))
   (setq exec-path (append exec-path '("/opt/homebrew/bin"))))
 
 
-;(add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
-;(add-to-list 'default-frame-alist '(ns-appearance . dark)) 
+;; (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
+;; (add-to-list 'default-frame-alist '(ns-appearance . dark))
 
 (add-to-list 'default-frame-alist '(drag-internal-border . 1))
 (add-to-list 'default-frame-alist '(internal-border-width . 5))
 
 ;;------------------------------------------------------------------------------
-
 (provide 'init-custom)
+;;; init-custom.el ends here

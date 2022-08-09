@@ -6,7 +6,7 @@
 ;; URL: https://github.com/Ethanlinyf/General-Pure-Emacs
 ;; Under ThingsEngine Project: https://www.thethingsengine.org/
 ;;--------------------------------------------------------------------
-;; Commentary:
+;;; Commentary:
 ;; Configurations for dired-mode
 ;;--------------------------------------------------------------------
 ;;; Code:
@@ -39,7 +39,7 @@
 
 (setq all-the-icons-color-icons t)
 (setq all-the-icons-ibuffer-color-icon t)
-(setq all-the-icons-dired-monochrome nil) 
+(setq all-the-icons-dired-monochrome nil)
 
 ;; add when is-a-mac
 (when *is-mac*
@@ -49,4 +49,4 @@
 
 ;;----------------------------------------------------------------------------
 (provide 'init-e-dired)
-;;; ends here
+;;; init-e-dired.el ends here

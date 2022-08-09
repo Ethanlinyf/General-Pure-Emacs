@@ -1,7 +1,19 @@
-;; Awesomshell
+;;; init-d-enhance.el --- Enhancement. -*- lexical-binding: t; -*-
+;;
+; Copyleft (CL) 2022-2032 YF Lin
+;;
+;; Something good as indicated, by Dr YF Lin <e.yflin@gmail.com>
+;; URL: https://github.com/Ethanlinyf/General-Pure-Emacs
+;; Under ThingsEngine Project: https://www.thethingsengine.org
+;;--------------------------------------------------------------------
+;;; Commentary:
+;; Some enhancement for editting
+;;--------------------------------------------------------------------
+;;; Code:
+
 ;;--------------------------------------------------------------------
 
-(add-to-list 'load-path (expand-file-name "site-lisp/aweshell" user-emacs-directory))
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/site-lisp/aweshell"))
 (require 'aweshell)
 (global-set-key (kbd "s-1") 'aweshell-dedicated-toggle)
 
@@ -106,7 +118,23 @@
   :init (global-flycheck-mode))
 
 
+;;--------------------------------------------------------------------
+    (setq ispell-program-name "hunspell")
+    ;; you could set `ispell-dictionary` instead but `ispell-local-dictionary' has higher priority
+    (setq ispell-local-dictionary "en_US")
+    (setq ispell-local-dictionary-alist '(("en_US" "[[:alpha:]]" "[^[:alpha:]]" "[']" nil ("-d" "en_US,en_US-med") nil utf-8)))
+    ;; new variable `ispell-hunspell-dictionary-alist' is defined in Emacs
+    ;; If it's nil, Emacs tries to automatically set up the dictionaries.
+    (when (boundp 'ispell-hunspell-dictionary-alist)
+      (setq ispell-hunspell-dictionary-alist ispell-local-dictionary-alist))
 
+(eval-after-load "flyspell"
+  '(progn
+     (define-key flyspell-mouse-map [down-mouse-3] #'flyspell-correct-word)
+     (define-key flyspell-mouse-map [mouse-3] #'undefined)
+     (define-key flyspell-mouse-map [down-mouse-2] nil)
+     (define-key flyspell-mouse-map [mouse-2] nil)))
 
 ;;--------------------------------------------------------------------
 (provide 'init-d-enhance)
+;;; init-d-enhance.el ends here
