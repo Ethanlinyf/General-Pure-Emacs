@@ -1,6 +1,7 @@
 * General Pure Emacs
 ** Introduction
-General Pure Emacs is an integrated platform to facilitate teaching, research and project management.
+General Pure Emacs (GPE) is a simple configuration based on Gnu Emacs with around 100 packages as an integrated platform to facilitate learning/teaching, research and project management.
+
 [[./figure/General-Pure-Emacs.png]]
 ** Feature
 - Integrated

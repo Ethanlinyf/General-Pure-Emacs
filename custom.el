@@ -10,7 +10,7 @@
  '(display-time-mode t)
  '(org-agenda-files '("~/Documents/Test/test.org"))
  '(package-selected-packages
-   '(dashboard f3 minions popwin simple-httpd treemacs-tab-bar treemacs-persp treemacs-magit treemacs-projectile dired-git-info diredfl all-the-icons doom-modeline keycast embark-consult embark consult marginalia orderless vertico gnu-elpa-keyring-update diminish use-package company))
+   '(flycheck dashboard f3 minions popwin simple-httpd treemacs-tab-bar treemacs-persp treemacs-magit treemacs-projectile dired-git-info diredfl all-the-icons doom-modeline keycast embark-consult embark consult marginalia orderless vertico gnu-elpa-keyring-update diminish use-package company))
  '(size-indication-mode t)
  '(tool-bar-mode nil))
 (custom-set-faces
