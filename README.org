@@ -9,14 +9,14 @@ learning/teaching, research and project management.
 ** Feature
 - Integrated
   + Note-taken \\
-    Org-mode has useful functionalities to take notes. To quickly open an Org
-    file for note taking:
+    Org-mode has useful functionalities to take notes. Quick to open an 
+    file for note-taking, an Org file can be bounded to the key "F1":
     #+begin_src emacs-lisp
       (defun open-note-file ()
-        "Quickly open index file."
+        "Quickly open an org file for note taking."
         (interactive)
         (find-file "~/Documents/Org/note.org"))
-      (global-set-key (kbd "<f3>") 'open-note-file)
+      (global-set-key (kbd "<f1>") 'open-note-file)
     #+end_src
     
     Further extended with the Org-Roam (V2) package by saving all the links between
@@ -37,7 +37,7 @@ See more details at [[https://thethingsengine.org][Something Good]] under the Th
    #+end_src
 2. Clone this repository
    #+begin_src shell
-     git clone  https://github.com/seagle0128/.emacs.d.git ~/.emacs.d
+     git clone  git@github.com:Ethanlinyf/General-Pure-Emacs.git ~/.emacs.d
    #+end_src
 
 ** Support/Issue
