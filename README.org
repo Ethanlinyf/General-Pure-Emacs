@@ -1,83 +1,31 @@
 * General Pure Emacs
 ** Introduction
 General Pure Emacs (GPE) is a simple configuration based on Gnu Emacs with
-around 100 packages as an integrated platform to facilitate learning/teaching,
-research and project management.
+around 100 packages as an integrated platform is to facilitate
+learning/teaching, research and project management.
 
 [[./figure/General-Pure-Emacs.png]]
+
 ** Feature
 - Integrated
   + Note-taken
   + Programming
-  + Planning
+  + Plan and schedule
   + Management
 - Extensible
 - Instructive
+
+See more details at [[https://thethingsengine.org][Something Good]] under the ThingsEngine Project.
 ** Installation
-*** Mac
-- Install coreutils
-  The GNU Core Utilities are the basic file, shell and text manipulation
-  utilities of the GNU operating system. These are the core utilities which are
-  expected to exist on every operating system.
-  #+begin_src shell
-    brew install coreutils
-  #+end_src
-  
-- Update the path:
-  #+begin_src shell
-    # Make all GNU flavor commands available, may override same-name BSD flavor commands
-    # For x86 Mac
-    export PATH="/usr/local/opt/coreutils/libexec/gnubin:${PATH}"
-    export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:${MANPATH}"
+1. Backup your existing configuration
+   #+begin_src shell
+     mv ~/.emacs.d ~/.emacs.d.bak
+   #+end_src
+2. Clone this repository
+   #+begin_src shell
+     git clone  https://github.com/seagle0128/.emacs.d.git ~/.emacs.d
+   #+end_src
 
-    # For M1 Mac
-    export PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:${PATH}"
-    export MANPATH="/opt/homebrew/opt/coreutils/libexec/gnuman:${MANPATH}"
-  #+end_src
-  
-- Restore Access to File System for Emacs
-  Add Emacs and ruby to Accessibility, Full Disk Access, Files and Folders: \\
-  https://mymac.info/post/restore-access-to-file-system-for-emacs-on-macos-catalina \\
-  https://emacs.stackexchange.com/questions/53026/how-to-restore-file-system-access-in-macos-catalina/53037#53037
-
-  Emacs.app actually launches using a ruby script. As a result, MacOS
-  Catalina/Monterey uses the permissions set for ruby, not the permissions for
-  Emacs.app. Solved the problem by granting Full Disk Access to /usr/bin/ruby
-
-  Grant access as follows.
-
-  + Go to "System Preferences -> Security & Privacy -> Privacy"
-  + Select Full Disk Access from the left menu. It is about half way down in the
-    menu. A list of apps will appear in the main region of the window.
-  + Click the lock on the lower left and authenticate in order to allow making
-    changes.
-  + Click the + button under the list of software and select /usr/bin/ruby.
-    /usr is usually a hidden folder and may not appear by default. If so, press
-    shift+cmd+. (the last one is a dot) at the root directory to make it appear.
-
-  Emacs.app should now be able to access the file system without any hindrance.
-
-  The standard emacs supplied with the system is run through Terminal.app. If
-  you're using emacs like this (with the system supplied or for example an
-  installation from HomeBrew or MacPorts), you need to drag Terminal.app on to
-  the list to give access.
-
-  If you're using a third party GUI-based Emacs, you'll need to drag the .app
-  for that program on to the list.
-
-  Note that some Emacs "distributions" package together a number of Emacs
-  binaries for various macOS versions in a single folder, and dynamically at
-  runtime chooses the right one for your system. This means that the icon you
-  click to start the program is really a "placeholder" that is not Emacs itself,
-  but rather just starts up Emacs. This "placeholder" often takes the form of a
-  Ruby script. If this is the case, you'll need to drag the Ruby program on to
-  the list.
-
-  Ruby comes with macOS by default. You can find the program by opening Finder,
-  and then from the "Go" menu choose "Go to Folder". Enter "/usr/bin" and you'll
-  get that folder opened in Finder. In the folder, you'll find the ruby program
-  that you can drag on to the Full Disk Access list.
-*** Linux
 ** Support/Issue
 Please report any issues about configuration at this repository. 
 ** License
