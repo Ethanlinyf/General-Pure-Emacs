@@ -9,10 +9,20 @@ learning/teaching, research and project management.
 ** Feature
 - Integrated
   + Note-taken \\
-    Org-mode has useful functionalities to take notes, especially further
-    extended with the Org-Roam (V2) package by saving all the links between
+    Org-mode has useful functionalities to take notes. To quickly open an Org
+    file for note taking:
+    #+begin_src emacs-lisp
+      (defun open-note-file ()
+        "Quickly open index file."
+        (interactive)
+        (find-file "~/Documents/Org/note.org"))
+      (global-set-key (kbd "<f3>") 'open-note-file)
+    #+end_src
+    
+    Further extended with the Org-Roam (V2) package by saving all the links between
     files and headings in a database.
     [[./figure/org-roam-network.png]]
+
   + Programming
   + Plan and schedule
   + Management
