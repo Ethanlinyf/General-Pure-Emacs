@@ -17,9 +17,9 @@
 #+end_quote
 
 * Summary
-The tutorial is to demonstrate how this Emacs editor is developed. We pursume a
-simple, integrated and efficient platform with limited packages, no more than
-100 as a pure Emacs to be using for learning, teaching, research and project
+The tutorial is to demonstrate how this Emacs editor is customised. We pursume a
+simple, integrated and efficient platform with limited packages, around
+100 as a pure Emacs to be using for learning/teaching, research and project
 management.
 
 Copyleft Declaration:
@@ -32,10 +32,10 @@ Copyleft Declaration:
 #+end_src
 
 * Introduction
-- Pure Emacs \\
+- General Pure Emacs \\
   EMACS, Editing Macros, is an extensible and real-time display editor written
   in a programming language called Elisp. With (< 100) packages for Emacs, we
-  are developing *Pure Emacs* as an simple and integrated platform to facilitate
+  are developing *General Pure Emacs* as an simple and integrated platform to facilitate
   learning, teachng, research and project management. This development as a
   repository is shared through GitHub, as well as with a tutorial also published through
   the ThingsEngine websit: Https://www.thethingsengine.org. 
@@ -330,7 +330,7 @@ So, on macOS, emacs is looking for init file when starting up in the following f
   auto-mode-case-fold is a variable defined in `files.el'. Its value is "t".
   "Non-nil means to try second pass through `auto-mode-alist'.
   This means that if the first case-sensitive search through the alist fails to
-  find a matching major mode, a second case-insensitive search is made.  On
+  find a matching major mode, a second case-insensitive search is made On
   systems with case-insensitive file names, this variable is ignored, since only
   a single case-insensitive search through the alist is made."
 

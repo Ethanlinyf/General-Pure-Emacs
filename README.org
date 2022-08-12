@@ -1,6 +1,8 @@
 * General Pure Emacs
 ** Introduction
-General Pure Emacs (GPE) is a simple configuration based on Gnu Emacs with around 100 packages as an integrated platform to facilitate learning/teaching, research and project management.
+General Pure Emacs (GPE) is a simple configuration based on Gnu Emacs with
+around 100 packages as an integrated platform to facilitate learning/teaching,
+research and project management.
 
 [[./figure/General-Pure-Emacs.png]]
 ** Feature
@@ -9,7 +11,7 @@ General Pure Emacs (GPE) is a simple configuration based on Gnu Emacs with aroun
   + Programming
   + Planning
   + Management
-- Extendable
+- Extensible
 - Instructive
 ** Installation
 *** Mac
@@ -79,11 +81,8 @@ General Pure Emacs (GPE) is a simple configuration based on Gnu Emacs with aroun
 ** Support/Issue
 Please report any issues about configuration at this repository. 
 ** License
-This program is free software: you can redistribute it and/or modify it under
-the terms of the [[https://github.com/redguardtoo/emacs.d/blob/master/LICENSE][GNU General Public License]] as published by the Free Software
-Foundation, either version 3 of the License, or (at your option) any later
-version.
-
-This program is distributed in the hope that it will be useful, but WITHOUT ANY
-WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
-PARTICULAR PURPOSE. See the [[https://github.com/redguardtoo/emacs.d/blob/master/LICENSE][GNU General Public License]] for more details.
+This program is free software. You can redistribute and/or modify it under
+[[https://github.com/redguardtoo/emacs.d/blob/master/LICENSE][GNU General Public License]] published by the Free Software Foundation. This
+customisation is shared with the hope that it will be useful and helpful, but
+without any warranty; without even the implied warranty of merchantability or
+fitness for a particular purpose.
