@@ -8,7 +8,11 @@ learning/teaching, research and project management.
 
 ** Feature
 - Integrated
-  + Note-taken
+  + Note-taken \\
+    Org-mode has useful functionalities to take notes, especially further
+    extended with the Org-Roam (V2) package by saving all the links between
+    files and headings in a database.
+    [[./figure/org-roam-network.png]]
   + Programming
   + Plan and schedule
   + Management
