@@ -22,8 +22,9 @@ learning/teaching, research and project management.
     Further extended with the Org-Roam (V2) package by saving all the links between
     files and headings in a database.
     [[./figure/org-roam-network.png]]
-
+    
   + Programming
+    [[./figure/Emacs_elisp_programming.png]]
   + Plan and schedule
   + Management
 - Extensible
