@@ -23,9 +23,10 @@ learning/teaching, research and project management.
     files and headings in a database.
     [[./figure/org-roam-network.png]]
     
-  + Programming
+  + Programming as an IDE: q
     [[./figure/Emacs_elisp_programming.png]]
   + Plan and schedule
+    [[./figure/agenda_2.gif]]
   + Management
 - Extensible
 - Instructive
