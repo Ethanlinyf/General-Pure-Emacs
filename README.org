@@ -27,7 +27,9 @@ learning/teaching, research and project management.
     [[./figure/Emacs_elisp_programming.png]]
   + Plan and schedule
     [[./figure/agenda_2.gif]]
-  + Management
+  + Management for research as example
+    [[./figure/General-Pure-Emacs.png]]
+    
 - Extensible
 - Instructive
 
