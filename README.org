@@ -28,7 +28,7 @@ learning/teaching, research and project management.
   + Plan and schedule
     [[./figure/agenda_2.gif]]
   + Management for research as example
-    [[./figure/General-Pure-Emacs.png]]
+    [[./figure/Git-for-research-project.png]]
     
 - Extensible
 - Instructive
