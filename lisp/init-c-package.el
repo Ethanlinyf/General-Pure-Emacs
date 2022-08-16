@@ -109,6 +109,7 @@
                             org-noter
                             org-ql
                             org-download
+                            ;;valign installed
 
                             ;;org-roam
                             org-roam

@@ -1,12 +1,25 @@
-* General Pure Emacs
+#+options: ':nil *:t -:t ::t <:t H:3 \n:nil ^:t arch:headline author:t
+#+options: broken-links:nil c:nil creator:nil d:(not "LOGBOOK") date:t e:t
+#+options: email:nil f:t inline:t num:t p:nil pri:nil prop:nil stat:t tags:t
+#+options: tasks:t tex:t timestamp:t title:t toc:t todo:t |:t
+#+title: README
+#+date: <2022-08-15 Mon>
+#+author: Ethan YF Lin
+#+email: e.yflin@gmail.com
+#+language: en
+#+select_tags: export
+#+exclude_tags: noexport
+#+creator: Emacs 29.0.50 (Org mode 9.5.4)
+#+cite_export:
+
+* General Pure Emacs (GPE)
 ** Introduction
-General Pure Emacs (GPE) is a simple configuration based on Gnu Emacs with
-around 100 packages as an integrated platform is to facilitate
+GPE is a platform based on Gnu Emacs with around 100 packages to facilitate
 learning/teaching, research and project management.
 
 [[./figure/General-Pure-Emacs.png]]
 
-** Feature
+** Feature 
 - Integrated
   + Note-taken \\
     Org-mode has useful functionalities to take notes. Quick to open an 
@@ -23,18 +36,19 @@ learning/teaching, research and project management.
     files and headings in a database.
     [[./figure/org-roam-network.png]]
     
-  + Programming as an IDE: q
+  + Programming as an IDE:
     [[./figure/Emacs_elisp_programming.png]]
   + Plan and schedule
     [[./figure/agenda_2.gif]]
-  + Management for research as example
+  + Management for research purposes as an example below:
     [[./figure/Git-for-research-project.png]]
     
 - Extensible
-  + Customisation
-  + Operating on meaningful units of text
-  + Redefining self-inserting characters
-  + literary programs
+  + Customisation \\
+    Nothing cannot be custmised in this General Pure Emacs. 
+  + literate programming \\
+    The literate programming mode, Org-Babel, is able to embed multiple
+    programming languages in a org file to make it as an active document.
 - Instructive
   The [[./tutorial.org][tutorial]] how to build this platform is included in this repository.
 

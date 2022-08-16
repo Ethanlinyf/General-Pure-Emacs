@@ -85,6 +85,8 @@
 ;;(require 'org-tempo)
 ;;(add-to-list 'org-modules 'org-tempo t)
 
+(add-hook 'org-mode-hook #'valign-mode)
+
 ;;------------------------------------------------------------------------------
 (provide 'init-i-org)
 ;;; init-orgs.el ends here

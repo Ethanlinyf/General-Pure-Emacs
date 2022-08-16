@@ -10,7 +10,7 @@
  '(display-time-mode t)
  '(org-agenda-files '("~/Documents/Test/test.org"))
  '(package-selected-packages
-   '(flycheck dashboard f3 minions popwin simple-httpd treemacs-tab-bar treemacs-persp treemacs-magit treemacs-projectile dired-git-info diredfl all-the-icons doom-modeline keycast embark-consult embark consult marginalia orderless vertico gnu-elpa-keyring-update diminish use-package company))
+   '(valign company exec-path-from-shell doom-modeline doom-themes dashboard page-break-lines projectile counsel-projectile all-the-icons all-the-icons-completion undo-tree treemacs multi-term all-the-icons-dired diredfl ns-auto-titlebar all-the-icons-ibuffer treemacs-all-the-icons corfu orderless epc corfu-doc which-key window-numbering magit rainbow-delimiters hungry-delete ctrlf popwin minions cape yasnippet posframe markdown-mode org-superstar org-noter org-ql org-download Valign org-roam org-roam-ui org-roam-bibtex websocket dash f s emacsql emacsql-sqlite magit-section auctex reftex cdlatex company-auctex pdf-tools latex-preview-pane zotxt htmlize keycast))
  '(size-indication-mode t)
  '(tool-bar-mode nil))
 (custom-set-faces
