@@ -13,7 +13,8 @@
 #+cite_export:
 
 #+begin_quote
-"Something good, from sand to a tower with spiral evolution and from the tower to dust in your universe as You wish to be" – Dr YF Lin
+"Something good, from sand to a tower with spiral evolution and from the tower
+to dust in your universe being as you wish to be" – Dr YF Lin
 #+end_quote
 
 * Summary
@@ -499,16 +500,45 @@ So, on macOS, emacs is looking for init file when starting up in the following f
 
 ** TODO lisp
 *** init-a-abbr.el
-SCHEDULED: <2022-06-26 Sun>
 Emacs has a good feature to expand abbrivations. 
 - why we need abbrevs \\
   It is convenient to input some repeated phrases, such as your emails, urls and
   so on. It is also helpful to fix typos by defining abbreviations for these to
   be corrected automatically. 
 - How to enable abbrev-mode \\
+  #+begin_src emacs-lisp
+    (setq-default abbrev-mode t)
+  #+end_src
+
+  Emacs will offer to save abbrevs automatically if you have changed any of
+  them, whenever it offers to save all files (for C-x s or C-x C-c). It saves
+  them in the file specified by abbrev-file-name. This feature can be inhibited
+  by setting the variable save-abbrevs to nil; setting it to silently will save
+  the abbrevs automatically without asking.
+
+  #+begin_src emacs-lisp
+    (setq save-abbrevs nil)
+  #+end_src
+
+  How to define the abbrev items? See the following example:
+  #+begin_src emacs-lisp
+    (define-abbrev-table 'global-abbrev-table '(
+                                                ;; example 1
+                                                ("exp1" "xxx")
+                                                ;; Tudi
+                                                ("exp2" "AAA")
+                                                ("eline" ";;--------------------------------------------------------------------")
+                                                ))
+  #+end_src
+
+  
   
 - how to set an abbrev 
 *** init-b-basic.el
+Some basic settings are included in this elisp file, as well as the const and custom defaults.
+
+
+
 **** init-const.el
 **** init-custom.el
 *** init-c-package.el

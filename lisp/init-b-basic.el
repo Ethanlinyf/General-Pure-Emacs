@@ -58,8 +58,8 @@
 (setq-default indent-tabs-mode nil)
 
 ;;See matching pairs of parentheses and other characters.
-(show-paren-mode t)
-(setq show-paren-delay 0)
+;;(show-paren-mode t)
+;;(setq show-paren-delay 0)
 ;; example for a specific mode to turn on this "show-paren-mode":
 ;;(add-hook 'emacs-lisp-mode-hook 'show-paren-mode)
 (add-hook 'after-init-hook 'show-paren-mode)
@@ -70,8 +70,8 @@
             (ignore-errors (backward-up-list))
             (funcall fn)))))
 
-;; Add file changed from outside
-(global-auto-revert-mode 1)
+;; update the buffer changed from outside, see below
+;; (global-auto-revert-mode 1)
 
 ;; Display time in the mini buffer
 (display-time)
@@ -131,7 +131,7 @@
   (find-file "~/Documents/Org/plan.org"))
 (global-set-key (kbd "<f6>") 'open-plan-file)
 
-;; kill processes when quit or exit
+;; kill processes when quit or exit, live-webserver
 (setq confirm-kill-processes nil)
 
 ;; Basic Improvement -------------------------------------------------

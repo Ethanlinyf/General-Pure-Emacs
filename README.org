@@ -42,17 +42,18 @@ learning/teaching, research and project management.
     [[./figure/agenda_2.gif]]
   + Management for research purposes as an example below:
     [[./figure/Git-for-research-project.png]]
-    
+- Custmisable
 - Extensible
   + Customisation \\
     Nothing cannot be custmised in this General Pure Emacs. 
   + literate programming \\
     The literate programming mode, Org-Babel, is able to embed multiple
     programming languages in a org file to make it as an active document.
-- Instructive
+- Creative \\ 
+- Instructive \\
   The [[./tutorial.org][tutorial]] how to build this platform is included in this repository.
 
-See more details at [[https://thethingsengine.org][Something Good]] under the ThingsEngine Project.
+See more details at the website [[https://thethingsengine.org][Something Good]] under the ThingsEngine Project.
 ** Installation
 1. Backup your existing configuration
    #+begin_src shell

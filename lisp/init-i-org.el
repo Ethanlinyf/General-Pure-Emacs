@@ -87,6 +87,17 @@
 
 (add-hook 'org-mode-hook #'valign-mode)
 
+
+;;--------------------------------------------------------------------
+;; pangu-spacing
+(require 'pangu-spacing)
+;; (global-pangu-spacing-mode 1)
+
+(add-hook 'org-mode-hook #'pangu-spacing-mode)
+;; (add-hook 'org-mode-hook
+;;            '(lambda ()
+;;             (set (make-local-variable 'pangu-spacing-real-insert-separtor) t)))
+
 ;;------------------------------------------------------------------------------
 (provide 'init-i-org)
 ;;; init-orgs.el ends here

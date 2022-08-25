@@ -103,12 +103,14 @@
                             markdown-mode
 
                             ;;; I
+                            pyvenv
 
                             ;;org
                             org-superstar
                             org-noter
                             org-ql
                             org-download
+                            pangu-spacing
                             ;;valign installed
 
                             ;;org-roam
@@ -139,6 +141,7 @@
 
                             ;;; Optional
                             keycast
+                            ef-themes
                             
                                  )  "Default packages.")
 

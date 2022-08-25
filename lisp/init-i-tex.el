@@ -205,4 +205,15 @@
 ;; 		        #'TeX-revert-document-buffer)
 
 ;;--------------------------------------------------------------------
+
+(defun ddd ()
+  "Insert a dollar sign with a space in front."
+  (interactive)
+  (insert "\\"))
+
+
+(eval-after-load "latex"
+  '(define-key LaTeX-mode-map (kbd "\\") #'ddd))
+
+
 (provide 'init-i-tex)
