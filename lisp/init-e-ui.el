@@ -6,7 +6,7 @@
 ;; URL: https://github.com/Ethanlinyf/General-Pure-Emacs
 ;; Under ThingsEngine Project: https://www.thethingsengine.org/
 ;;--------------------------------------------------------------------
-;; Commentary:
+;;; Commentary:
 ;; Configurations for User Interface
 ;;--------------------------------------------------------------------
 ;;; Code:
@@ -62,4 +62,4 @@
 
 ;;--------------------------------------------------------------------
 (provide 'init-e-ui)
-;;; ends here
+;;; init-e-ui.el ends here

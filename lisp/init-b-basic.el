@@ -14,6 +14,9 @@
 (require 'init-const)
 (require 'init-custom)
 
+;; set the startup default directory
+(setq default-directory "~/")
+
 ;; Turn off the startup help screen
 (setq inhibit-splash-screen 1)
 

@@ -23,6 +23,23 @@
         (setq sub2 (butlast sub1 (- l m)))
         sub2))
 
+(defun marginalia-annotate-command (cand)
+  "Annotate command CAND with its documentation string.
+Similar to `marginalia-annotate-symbol', but does not show symbol class."
+  (when-let* ((sym (intern-soft cand))
+              (mode (if (boundp sym)
+                        sym
+                      (lookup-minor-mode-from-indicator cand))))
+    (concat
+     (if (and (boundp mode) (symbol-value mode))
+         (propertize " On" 'face 'marginalia-on)
+       (propertize " Off" 'face 'marginalia-off))
+     (marginalia-annotate-binding cand)
+     (marginalia--documentation (marginalia--function-doc sym)))))
+
+
+;;--------------------------------------------------------------------
 (provide 'init-j-purefunction)
+;;; init-j-purefunction.el ends here
 
 

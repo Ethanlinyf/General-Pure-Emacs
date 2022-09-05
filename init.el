@@ -40,8 +40,8 @@
 
 
 ;; Initialise the major mode for scratch
-(setq initial-major-mode 'emacs-lisp-mode ;;'fundamental-mode
-      package--init-file-ensured t)
+(setq initial-major-mode 'emacs-lisp-mode) ;;'fundamental-mode
+      ;package--init-file-ensured t)
 
 ;; Load the settings recorded through emacs
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
@@ -78,6 +78,7 @@
 (require 'init-i-roam)
 (require 'init-i-tex)
 (require 'init-i-python)
+(require 'init-i-lua)
 (require 'init-j-purefunction)
 (require 'init-z-test)
 

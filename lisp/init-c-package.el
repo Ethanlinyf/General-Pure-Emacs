@@ -142,6 +142,9 @@
                             ;;; Optional
                             keycast
                             ef-themes
+
+                            ;;; Programming
+                            lua-mode 
                             
                                  )  "Default packages.")
 

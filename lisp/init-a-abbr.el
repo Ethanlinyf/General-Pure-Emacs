@@ -1,6 +1,6 @@
 ;;; init-abbr.el --- Abbreviations. -*- lexical-binding: t; -*-
 ;;
-; Copyleft (CL) 2022-2032 YF Lin
+;; Copyleft (CL) 2022-2032 YF Lin
 ;;
 ;; Something good as indicated, by Dr YF Lin <e.yflin@gmail.com>
 ;; URL: https://github.com/Ethanlinyf/General-Pure-Emacs
@@ -25,4 +25,3 @@
 ;;--------------------------------------------------------------------
 (provide 'init-a-abbr)
 ;;; init-a-abbr.el ends here
-

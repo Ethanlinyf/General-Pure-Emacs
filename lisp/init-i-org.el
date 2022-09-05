@@ -6,7 +6,7 @@
 ;; URL: https://github.com/Ethanlinyf/General-Pure-Emacs
 ;; Under ThingsEngine Project: https://www.thethingsengine.org/
 ;;--------------------------------------------------------------------
-;; Commentary:
+;;; Commentary:
 ;; Configurations for org-mode
 ;;--------------------------------------------------------------------
 ;;; Code:
@@ -22,7 +22,6 @@
                                     (org-indent-mode 1))
                                     ;;(auto-save-and-publish-file-mode -1)
 )
-
 
 (setq org-pretty-entities t
       org-src-fontify-natively t
@@ -47,7 +46,7 @@
 (setq-default fill-column 80)
 (setq visual-line-mode t)
 
-(with-eval-after-load 'org       
+(with-eval-after-load 'org
   (setq org-startup-indented t) ; Enable `org-indent-mode' by default
   (add-hook 'org-mode-hook #'visual-line-mode))
 
@@ -98,6 +97,12 @@
 ;;            '(lambda ()
 ;;             (set (make-local-variable 'pangu-spacing-real-insert-separtor) t)))
 
+(require 'org-download)
+
+;; Drag-and-drop to `dired`
+(add-hook 'dired-mode-hook 'org-download-enable)
+
+
 ;;------------------------------------------------------------------------------
 (provide 'init-i-org)
-;;; init-orgs.el ends here
+;;; init-i-org.el ends here

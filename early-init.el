@@ -6,28 +6,28 @@
 ;; URL: https://github.com/Ethanlinyf/PureEmacs
 ;; Under ThingsEngine Project: https://www.thethingsengine.org
 ;;----------------------------------------------------------------------
-;; Commentary:
+;;; Commentary:
 ;; Emacs 27 introduces early-init.el, which is run before init.el,
 ;; before package and UI initialisation happens.
 ;;----------------------------------------------------------------------
 ;;; Code:
 
-;; Debugging for the setting update. -TE
+;; Debugging for the setting update.
 (setq debug-on-error t)
 
-;; Puremacs is compatible from the emacs version 27.1 -TE
+;; Puremacs is compatible from the emacs version 27.1.
 (let ((minver "28.1"))
 (when (version< emacs-version minver)
-  (error "Puremacs requires V%s or higher versions." minver)))
+  (error "Puremacs requires V%s or higher versions" minver)))
 
 ;; Garbage collection in the startup process -TE
 (setq gc-cons-threshold most-positive-fixnum
       gc-cons-percentage 0.5)
 
-;; Suppress a second case-insensitive search through the auto-mode-alist -TE
+;; Suppress a second case-insensitive search through the auto-mode-alist
 (setq auto-mode-case-fold nil)
 
-;; After early-init-file to initialise 'package' -TE
+;; After early-init-file to initialise 'package'
 (setq package-enable-at-startup nil)
 
 ;; In noninteractive sessions, prioritize non-byte-compiled source files to
@@ -48,15 +48,12 @@
                             inhibit-message nil)
               (redisplay)))
 
-;; Default encoding system -TE
+;; Default encoding system
 (set-language-environment "UTF-8")
 
 
 ;; Remove some warnings
-;;(setq load-prefer-newer t)
-;;(setq byte-compile-warnings '(cl-functions))
-
-
-
+(setq load-prefer-newer t)
+(setq byte-compile-warnings '(cl-functions))
 ;;----------------------------------------------------------------------
-;;; early-init.el ends here -TE
+;;; early-init.el ends here

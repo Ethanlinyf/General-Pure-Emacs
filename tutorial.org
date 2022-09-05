@@ -17,6 +17,12 @@
 to dust in your universe being as you wish to be" – Dr YF Lin
 #+end_quote
 
+#+DOWNLOADED: screenshot @ 2022-08-25 20:51:17
+[[file:2022-08-25_20-51-17_screenshot.png]]
+
+#+DOWNLOADED: screenshot @ 2022-08-25 20:52:36
+[[file:2022-08-25_20-52-36_screenshot.png]]
+
 * Summary
 The tutorial is to demonstrate how this Emacs editor is customised. We pursume a
 simple, integrated and efficient platform with limited packages, around
