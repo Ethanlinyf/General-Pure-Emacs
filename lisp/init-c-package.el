@@ -14,7 +14,7 @@
 (require 'cl)
 (require 'package)
 
-(when (>= emacs-major-version 24)
+(when (>= emacs-major-version 26)
   (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
   )
 
