@@ -21,8 +21,16 @@
   (error "Puremacs requires V%s or higher versions" minver)))
 
 ;; Garbage collection in the startup process -TE
-(setq gc-cons-threshold most-positive-fixnum
-      gc-cons-percentage 0.5)
+;; (setq gc-cons-threshold most-positive-fixnum
+;;gc-cons-percentage 0.5)
+(setq gc-cons-threshold most-positive-fixnum)
+(add-hook 'after-init-hook #'(lambda () (setq gc-cons-threshold 800000)))
+
+;; Default encoding system
+(set-language-environment "UTF-8")
+
+;; Prevent unwanted runtime compilation for native-comp users
+;; (setq native-comp-deferred-compilation nil)
 
 ;; Suppress a second case-insensitive search through the auto-mode-alist
 (setq auto-mode-case-fold nil)
@@ -38,18 +46,13 @@
 ;; Inhibit resising Puremacs frame
 (setq frame-inhibit-implied-resize t)
 
-  ;; Premature redisplays can substantially affect startup times and produce
-  ;; ugly flashes of unstyled Emacs.
-  (setq-default inhibit-redisplay t
-                inhibit-message t)
-  (add-hook 'window-setup-hook
-            (lambda ()
+(setq-default inhibit-redisplay t
+              inhibit-message t)
+(add-hook 'window-setup-hook
+           (lambda ()
               (setq-default inhibit-redisplay nil
                             inhibit-message nil)
               (redisplay)))
-
-;; Default encoding system
-(set-language-environment "UTF-8")
 
 
 ;; Remove some warnings

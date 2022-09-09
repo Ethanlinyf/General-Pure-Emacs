@@ -11,8 +11,9 @@
 ;;--------------------------------------------------------------------
 ;;; Code:
 
-(require 'init-const)
-(require 'init-custom)
+(require 'pure-const)
+(require 'pure-custom)
+(require 'pure-function)
 
 ;; set the startup default directory
 (setq default-directory "~/")
@@ -26,15 +27,20 @@
 ;; Turn off the scroll bar mode
 (scroll-bar-mode -1)
 
-;; keep the menu bar active
+;; Keep the menu bar active
 (menu-bar-mode 1)
+
+;;(setq initial-frame-alist (quote ((fullscreen . maximized))))
+(when *is-mac*
+  (toggle-frame-fullscreen))
+
 
 ;; Turn on line number and the column-number-mode
 (global-linum-mode 1)
 (column-number-mode 1)
 
 ;; Change the cursor type
-(setq-default cursor-type 'bar)
+;; (setq-default cursor-type 'bar)
 
 ;; Enable hightline globally
 (global-hl-line-mode 1)
@@ -42,14 +48,14 @@
 ;; Disable the ring bell function
 (setq ring-bell-function 'ignore)
 
-;; set the system local for time
+;; Set the system local for time
 (setq system-time-local "C")
 
 ;; Set the initial scratch message
 (setq-default
  initial-scratch-message (concat ";;--------------------------------------------------------------------\n;; Welcome to Pure Emacs for the ThingsEngine\n;; Somethng Good as Indicated:\n\n\n")
  line-spacing 0.1
- truncate-lines t
+ truncate-lines nil
  word-wrap t)
 
 ;; manage by git and disable make-backup-files and auto-save-default
@@ -72,9 +78,6 @@
         (t (save-excursion
             (ignore-errors (backward-up-list))
             (funcall fn)))))
-
-;; update the buffer changed from outside, see below
-;; (global-auto-revert-mode 1)
 
 ;; Display time in the mini buffer
 (display-time)
@@ -169,11 +172,7 @@
  					try-complete-lisp-symbol))
 (global-set-key (kbd "M-/") 'hippie-expand)
 
-;; Load Dired Mode
-;; (require 'dired)
-;; (define-key dired-mode-map (kbd "RET") 'dired-find-alternate-file)
-
-;; loading later
+;; Loading later
 (with-eval-after-load 'dired
     (define-key dired-mode-map (kbd "RET") 'dired-find-alternate-file))
 

@@ -6,13 +6,10 @@
 ;; URL: https://github.com/Ethanlinyf/General-Pure-Emacs
 ;; Under ThingsEngine Project: https://www.thethingsengine.org/
 ;;--------------------------------------------------------------------
-;; Commentary:
+;;; Commentary:
 ;; Configurations for dashboard.
 ;;--------------------------------------------------------------------
 ;;; Code:
-
-(require 'init-const)
-(require 'init-custom)
 
 (require 'dashboard)
 
@@ -131,4 +128,4 @@
 
 ;;--------------------------------------------------------------------
 (provide 'init-f-dashboard)
-;;; init-dashboard.el ends here
+;;; init-f-dashboard.el ends here

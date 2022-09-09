@@ -1,4 +1,4 @@
-;;; init-abbr.el --- Abbreviations. -*- lexical-binding: t; -*-
+;;; init-c-package.el --- Pligins for Emacs. -*- lexical-binding: t; -*-
 ;;
 ;; Copyleft (CL) 2022-2032 YF Lin
 ;;
@@ -7,19 +7,14 @@
 ;; Under ThingsEngine Project: https://www.thethingsengine.org
 ;;--------------------------------------------------------------------
 ;;; Commentary:
-;; Some abbrevs to be used when editting
+;; Add feature defined in the Lisp folder
 ;;--------------------------------------------------------------------
 ;;; Code:
 
-(setq-default abbrev-mode t)
-(setq save-abbrevs nil)
-(define-abbrev-table 'global-abbrev-table '(
-					    ;; example 1
-					    ("exp1" "xxx")
-					    ("exp2" "AAA")
-                                            ("eline" ";;--------------------------------------------------------------------")
-					    ))
+(require 'package)
+
+
 
 ;;--------------------------------------------------------------------
-(provide 'init-a-abbr)
-;;; init-a-abbr.el ends here
+(provide 'init-t-package)
+;;; init-t-package.el ends here

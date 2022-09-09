@@ -1,4 +1,4 @@
-;;; init-const.el -- Better default configurations. -*- lexical-binding: t; -*-
+;;; pure-const.el -- Better default configurations. -*- lexical-binding: t; -*-
 ;;
 ;; Copyleft (CL) 2022-2032 Dr YF Lin
 ;;
@@ -107,7 +107,7 @@ Loaded by `org-babel-load-file'.")
   "Emacs is 29 or above.")
 
 ;;--------------------------------------------------------------------
-(provide 'init-const)
+(provide 'pure-const)
 ;;; init-const.el ends here
 
 ;;;;;; Example: Switch Git Bash

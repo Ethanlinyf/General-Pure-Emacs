@@ -163,7 +163,7 @@
     (when (not (package-installed-p pkg))
       (package-install pkg))))
 
-;;------------------------------------------------------------------------------
+;;------------------------------------------------------------------------------d
 ;; Setup `use-package'
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
@@ -185,11 +185,7 @@
 
 ;; Update GPG keyring for GNU ELPA
 (use-package gnu-elpa-keyring-update)
-;;--------------------------------------------------------------------
-
-(when (display-graphic-p)
-  (require 'all-the-icons))
-
+;;--------------------------------------------------------------------d
 
 ;; Enable vertico
 (use-package vertico
@@ -223,9 +219,7 @@
 	      savehist-autosave-interval 300)
   )
 
-(use-package saveplace
-  :ensure nil
-  :hook (after-init . save-place-mode))
+;;--------------------------------------------------------------------d 
 
 ;; A few more useful configurations...
 (use-package emacs
@@ -253,6 +247,8 @@
 
   ;; Enable recursive minibuffers
   (setq enable-recursive-minibuffers t))
+
+;;--------------------------------------------------------------------d 
 
 (use-package corfu
   :init

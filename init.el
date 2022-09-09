@@ -11,8 +11,6 @@
 ;;--------------------------------------------------------------------
 ;;; Code:
 
-(setq auto-mode-case-fold nil)
-
 (unless (or (daemonp) noninteractive init-file-debug)
   (let ((old-file-name-handler-alist file-name-handler-alist))
     (setq file-name-handler-alist nil)
@@ -22,12 +20,6 @@
                 (setq file-name-handler-alist
                       (delete-dups (append file-name-handler-alist
                                            old-file-name-handler-alist)))))))
-
-(add-hook 'emacs-startup-hook
-          (lambda ()
-            "Recover GC values after startup."
-            (setq gc-cons-threshold 80000000
-                  gc-cons-percentage 0.1)))
 
 (add-hook 'emacs-startup-hook
           (lambda ()
@@ -49,6 +41,8 @@
 (when (file-exists-p custom-file)
   (load custom-file))
 
+
+
 ;; Define a file to record emacs macros.
 (defvar pure-macro (expand-file-name "macros.el" user-emacs-directory)
   "A file to record Emacs macros.")
@@ -66,11 +60,21 @@
 ;; load in a order
 (require 'init-a-abbr)
 (require 'init-b-basic)
-(require 'init-c-package)
-(require 'init-d-enhance)
-(require 'init-e-ui)
+
+(require 'init-0-package)
+(require 'init-t-package)
+(require 'init-t-minibuffer)
+(require 'init-t-enhance)
+(require 'init-t-IDE)
+(require 'init-t-ui)
+
+;; (require 'init-c-package)
+;; (require 'init-d-enhance)
+;; (require 'init-e-ui)
 (require 'init-e-dired)
-(require 'init-e-treemacs)
+;; (require 'init-e-treemacs)
+
+
 (require 'init-f-dashboard)
 (require 'init-g-yasnippet)
 (require 'init-h-lsp)
@@ -79,7 +83,6 @@
 (require 'init-i-tex)
 (require 'init-i-python)
 (require 'init-i-lua)
-(require 'init-j-purefunction)
 (require 'init-z-test)
 
 ;;----------------------------------------------------------------------------

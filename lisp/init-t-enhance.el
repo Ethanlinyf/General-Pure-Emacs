@@ -1,4 +1,4 @@
-;;; init-d-enhance.el --- Enhancement. -*- lexical-binding: t; -*-
+;;; init-t-enhance.el --- Enhancement. -*- lexical-binding: t; -*-
 ;;
 ; Copyleft (CL) 2022-2032 YF Lin
 ;;
@@ -11,61 +11,45 @@
 ;;--------------------------------------------------------------------
 ;;; Code:
 
-;;--------------------------------------------------------------------
-
-
-(when (display-graphic-p)
-  (require 'all-the-icons))
-
 (use-package saveplace
   :ensure nil
   :hook (after-init . save-place-mode))
 
+;; ALT + number to swith to the number of a specific window
+(use-package window-numbering
+  :hook (after-init . window-numbering-mode))
+
+(use-package which-key
+  :diminish
+  :bind ("C-h M-m" . which-key-show-major-mode)
+  :hook (after-init . which-key-mode)
+  :init (setq which-key-max-description-length 30
+              which-key-show-remaining-keys t))
+
+;;--------------------------------------------------------------------
 
 ;;modeline上显示我的所有的按键和执行的命令
 ;; (require 'keycast)
 ;; (add-to-list 'global-mode-string '("" keycast-mode-line))
 ;; (keycast-mode t)
 
-(add-to-list 'load-path (expand-file-name "~/.emacs.d/site-lisp/aweshell"))
-(require 'aweshell)
-(global-set-key (kbd "s-1") 'aweshell-dedicated-toggle)
+;;--------------------------------------------------------------------
+;; displeay keystrok and commands on modeline
+;; (require 'keycast)
+;; (add-to-list 'global-mode-string '("" keycast-mode-line))
+;; (keycast-mode t)
 
-;; ALT + number to swith to the number of a specific window
-(require 'window-numbering)
-(add-hook 'after-init-hook #'window-numbering-mode)
+;;--------------------------------------------------------------------
 
-;; Display minor-mode in the mode line
-(require 'minions)
-(minions-mode t)
+;; Hungry deletion
+(use-package hungry-delete
+  :diminish
+  :hook (after-init . global-hungry-delete-mode)
+  :init (setq hungry-delete-chars-to-skip " \t\f\v"
+              hungry-delete-except-modes
+              '(minibuffer-mode help-modeminibuffer-inactive-mode calc-mode)))
 
-(all-the-icons-completion-mode t)
-
-
-(add-hook 'marginalia-mode-hook #'all-the-icons-completion-marginalia-setup)
-
-;; add which key
-(require 'which-key)
-(which-key-mode 1)
-
-
-(add-hook 'foo-mode-hook #'rainbow-delimiters-mode)
-(add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
-
-;; An intuitive and efficient solution for single-buffer text search
-(ctrlf-mode +1)
-
-;; osx-lib
-;; manually install the package osx-lib
-;; M-x package-list-packages [enter]
-;; osx-lib [install]
-
-;; company word
-;;(add-to-list 'load-path (expand-file-name "site-lisp/word-completion" user-emacs-directory))
-(load "~/.emacs.d/site-lisp/word-completion/company-words.el")
-
-(add-hook 'prog-mode-hook (lambda() (setq split-width-threshold 80)))
-
+;;--------------------------------------------------------------------
 ;; Mouse wheel scroll behavior
 (setq
       ;; mouse-wheel-scroll-amount '(1 ((shift) . 1))
@@ -83,12 +67,19 @@
 (setq delete-by-moving-to-trash t)  ;; disable delete directly
 
 ;;--------------------------------------------------------------------
+
+(add-hook 'prog-mode-hook (lambda() (setq split-width-threshold 80)))
+
+
+
+;;--------------------------------------------------------------------
 (setq ispell-program-name "hunspell")
 (setq ispell-local-dictionary "de_DE")
 (setq ispell-local-dictionary-alist
       '(("de_DE" "[[:alpha:]]" "[^[:alpha:]]" "[']" nil nil nil utf-8)))
 
 ;;--------------------------------------------------------------------
+
 ;; Add extensions
 (use-package cape
   ;; Bind dedicated completion commands
@@ -150,5 +141,5 @@
      (define-key flyspell-mouse-map [mouse-2] nil)))
 
 ;;--------------------------------------------------------------------
-(provide 'init-d-enhance)
-;;; init-d-enhance.el ends here
+(provide 'init-t-enhance)
+;;; init-t-enhance.el ends here

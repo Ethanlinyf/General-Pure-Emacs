@@ -39,7 +39,7 @@ Similar to `marginalia-annotate-symbol', but does not show symbol class."
 
 
 ;;--------------------------------------------------------------------
-(provide 'init-j-purefunction)
-;;; init-j-purefunction.el ends here
+(provide 'pure-function)
+;;; pure-function.el ends here
 
 

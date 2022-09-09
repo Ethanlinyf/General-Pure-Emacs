@@ -1,4 +1,4 @@
-;;; init-custom.el --- Custom set varaiables by hand. -*- lexical-binding: t; -*-
+;;; pure-custom.el --- Custom set varaiables by hand. -*- lexical-binding: t; -*-
 ;;
 ;; Copyleft (CL) 2022-2032 Dr YF Lin
 ;;
@@ -29,5 +29,5 @@
 (add-to-list 'default-frame-alist '(internal-border-width . 5))
 
 ;;------------------------------------------------------------------------------
-(provide 'init-custom)
+(provide 'pure-custom)
 ;;; init-custom.el ends here
