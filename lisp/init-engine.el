@@ -1,4 +1,4 @@
-;;; init-t-package.el --- Pligins for Emacs. -*- lexical-binding: t; -*-
+;;; init-engine.el --- Pligins for Emacs. -*- lexical-binding: t; -*-
 ;;
 ;; Copyleft (CL) 2022-2032 YF Lin
 ;;
@@ -11,7 +11,7 @@
 ;;--------------------------------------------------------------------
 ;;; Code:
 
-;;(require 'cl)
+;(require 'cl)
 (require 'package)
 
 ;; (setq package-check-signature nil
@@ -24,8 +24,8 @@
 (unless (bound-and-true-p package--initialized)
   (package-initialize))
 
-(when (memq window-system '(mac ns x))
-  (exec-path-from-shell-initialize))
+;(when (memq window-system '(mac ns x))
+;  (exec-path-from-shell-initialize))
 
 ;; Setup `use-package'
 (unless (package-installed-p 'use-package)
@@ -79,6 +79,6 @@
   (setq enable-recursive-minibuffers t))
 
 ;;--------------------------------------------------------------------
-(provide 'init-t-package)
-;;; init-t-package.el ends here
+(provide 'init-engine)
+;;; init-engine.el ends here
 

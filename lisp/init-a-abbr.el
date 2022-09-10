@@ -11,6 +11,16 @@
 ;;--------------------------------------------------------------------
 ;;; Code:
 
+;; (use-package abbrev
+;;   :diminish abbrev-mode
+;;   :config
+;;   :init
+;;   (setq-default abbrev-mode t)
+;;   (setq save-abbrevs nil)
+;;   (if (file-exists-p "~/emacs.d/abbrev_defs")
+;;       (quietly-read-abbrev-file)))
+
+
 (setq-default abbrev-mode t)
 (setq save-abbrevs nil)
 (define-abbrev-table 'global-abbrev-table '(

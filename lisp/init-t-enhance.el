@@ -11,6 +11,12 @@
 ;;--------------------------------------------------------------------
 ;;; Code:
 
+(when (memq window-system '(mac ns))
+  (use-package exec-path-from-shell
+    :ensure t
+    :config
+    (exec-path-from-shell-initialize)))
+
 (use-package saveplace
   :ensure nil
   :hook (after-init . save-place-mode))
@@ -25,13 +31,6 @@
   :hook (after-init . which-key-mode)
   :init (setq which-key-max-description-length 30
               which-key-show-remaining-keys t))
-
-;;--------------------------------------------------------------------
-
-;;modeline上显示我的所有的按键和执行的命令
-;; (require 'keycast)
-;; (add-to-list 'global-mode-string '("" keycast-mode-line))
-;; (keycast-mode t)
 
 ;;--------------------------------------------------------------------
 ;; displeay keystrok and commands on modeline

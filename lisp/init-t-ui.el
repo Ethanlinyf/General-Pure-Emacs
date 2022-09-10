@@ -110,12 +110,13 @@ all-the-icons-ibuffer-formats
 ;;--------------------------------------------------------------------
 
 (use-package all-the-icons-completion
-  :ensure t
-  :hook (after-init . all-the-icons-completion-mode))
+  :ensure nil
+  :hook ((after-init . all-the-icons-completion-mode)
+         (marginalia-mode-hook . all-the-icons-completion-marginalia-setup)))
 
-;; (all-the-icons-completion-mode t)
+;(all-the-icons-completion-mode)
 
-(add-hook 'marginalia-mode-hook #'all-the-icons-completion-marginalia-setup)
+;(add-hook 'marginalia-mode-hook #'all-the-icons-completion-marginalia-setup)
 
 
 

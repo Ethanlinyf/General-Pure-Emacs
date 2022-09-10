@@ -18,6 +18,12 @@
 ;; set the startup default directory
 (setq default-directory "~/")
 
+;; abbrev settings
+(setq-default abbrev-mode t)
+(setq save-abbrevs nil)
+(setq abbrev-file-name             ;; tell emacs where to read abbrev
+      "~/.emacs.d/abbrev_defs")    ;; definitions from...
+
 ;; Turn off the startup help screen
 (setq inhibit-splash-screen 1)
 

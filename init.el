@@ -41,8 +41,6 @@
 (when (file-exists-p custom-file)
   (load custom-file))
 
-
-
 ;; Define a file to record emacs macros.
 (defvar pure-macro (expand-file-name "macros.el" user-emacs-directory)
   "A file to record Emacs macros.")
@@ -58,32 +56,32 @@
 (update-load-pathe)
 
 ;; load in a order
-(require 'init-a-abbr)
-(require 'init-b-basic)
+(require 'init-engine)
+;(require 'init-0-package)
 
-(require 'init-0-package)
-(require 'init-t-package)
+(require 'init-b-basic)
 (require 'init-t-minibuffer)
 (require 'init-t-enhance)
 (require 'init-t-IDE)
 (require 'init-t-ui)
 
+;; ;(require 'init-a-abbr)
+;; (require 'init-b-basic)
 ;; (require 'init-c-package)
 ;; (require 'init-d-enhance)
 ;; (require 'init-e-ui)
-(require 'init-e-dired)
 ;; (require 'init-e-treemacs)
 
-
+(require 'init-e-dired)
 (require 'init-f-dashboard)
-(require 'init-g-yasnippet)
-(require 'init-h-lsp)
-(require 'init-i-org)
-(require 'init-i-roam)
-(require 'init-i-tex)
-(require 'init-i-python)
-(require 'init-i-lua)
-(require 'init-z-test)
+;; (require 'init-g-yasnippet)
+;; (require 'init-h-lsp)
+;; (require 'init-i-org)
+;; (require 'init-i-roam)
+;; (require 'init-i-tex)
+;; (require 'init-i-python)
+;; (require 'init-i-lua)
+;; (require 'init-z-test)
 
 ;;----------------------------------------------------------------------------
 (provide 'init)

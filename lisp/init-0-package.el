@@ -11,7 +11,7 @@
 ;;--------------------------------------------------------------------
 ;;; Code:
 
-(require 'cl)
+;; (require 'cl)
 (require 'package)
 
 (when (>= emacs-major-version 26)
