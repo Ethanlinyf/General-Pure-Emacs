@@ -54,7 +54,6 @@
                             inhibit-message nil)
               (redisplay)))
 
-
 ;; Remove some warnings
 (setq load-prefer-newer t)
 (setq byte-compile-warnings '(cl-functions))
