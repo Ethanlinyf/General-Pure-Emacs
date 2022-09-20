@@ -30,9 +30,8 @@
                                after-init-time before-init-time)))
                      gcs-done)))
 
-
 ;; Initialise the major mode for scratch
-(setq initial-major-mode 'emacs-lisp-mode) ;;'fundamental-mode
+(setq initial-major-mode 'org-mode); 'emacs-lisp-mode) ;;'fundamental-mode
       ;package--init-file-ensured t)
 
 ;; Load the settings recorded through emacs
@@ -56,32 +55,23 @@
 (update-load-pathe)
 
 ;; load in a order
-(require 'init-engine)
 ;(require 'init-0-package)
-
+(require 'init-a-engine)
 (require 'init-b-basic)
 (require 'init-t-minibuffer)
 (require 'init-t-enhance)
-(require 'init-t-IDE)
+(require 'init-t-platform)
 (require 'init-t-ui)
-
-;; ;(require 'init-a-abbr)
-;; (require 'init-b-basic)
-;; (require 'init-c-package)
-;; (require 'init-d-enhance)
-;; (require 'init-e-ui)
-;; (require 'init-e-treemacs)
-
 (require 'init-e-dired)
 (require 'init-f-dashboard)
-;; (require 'init-g-yasnippet)
-;; (require 'init-h-lsp)
-;; (require 'init-i-org)
-;; (require 'init-i-roam)
-;; (require 'init-i-tex)
-;; (require 'init-i-python)
-;; (require 'init-i-lua)
-;; (require 'init-z-test)
+(require 'init-g-yasnippet)
+(require 'init-h-lsp)
+(require 'init-i-org)
+(require 'init-i-roam)
+(require 'init-i-tex)
+(require 'init-i-python)
+(require 'init-i-lua)
+(require 'init-z-test)
 
 ;;----------------------------------------------------------------------------
 (provide 'init)

@@ -56,9 +56,10 @@
 (use-package all-the-icons
   :if (display-graphic-p))
 
-(use-package doom-modeline
-  :ensure t
-  :hook (after-init . doom-modeline-mode))
+;; move to basic.el
+;; (use-package doom-modeline
+;;   :ensure t
+;;   :hook (after-init . doom-modeline-mode))
 
 (setq doom-modeline-minor-modes t)
 
@@ -134,6 +135,39 @@ all-the-icons-ibuffer-formats
 (use-package popwin
   :ensure nil
   :hook (after-init . popwin-mode))
+
+
+;;--------------------------------------------------------------------
+(require 'lin)
+
+(setq lin-face 'lin-mac) ; check doc string for alternative styles
+
+;; You can use this to live update the face:
+;;
+;; (customize-set-variable 'lin-face 'lin-green)
+
+(setq lin-mode-hooks
+      '(bongo-mode-hook
+        org-mode-hook
+        dired-mode-hook
+        elfeed-search-mode-hook
+        git-rebase-mode-hook
+        grep-mode-hook
+        ibuffer-mode-hook
+        ilist-mode-hook
+        ledger-report-mode-hook
+        log-view-mode-hook
+        magit-log-mode-hook
+        mu4e-headers-mode-hook
+        notmuch-search-mode-hook
+        notmuch-tree-mode-hook
+        occur-mode-hook
+        org-agenda-mode-hook
+        pdf-outline-buffer-mode-hook
+        proced-mode-hook
+        tabulated-list-mode-hook))
+
+(lin-global-mode 1)
 
 ;;--------------------------------------------------------------------
 (provide 'init-t-ui)

@@ -1,4 +1,4 @@
-;;; init-engine.el --- Pligins for Emacs. -*- lexical-binding: t; -*-
+;;; init-a-engine.el --- Pligins for Emacs. -*- lexical-binding: t; -*-
 ;;
 ;; Copyleft (CL) 2022-2032 YF Lin
 ;;
@@ -7,7 +7,7 @@
 ;; Under ThingsEngine Project: https://www.thethingsengine.org
 ;;--------------------------------------------------------------------
 ;;; Commentary:
-;; Add feature defined in the Lisp folder
+;; Add packages as plugins to facilitate Emascs as General Pure Emacs
 ;;--------------------------------------------------------------------
 ;;; Code:
 
@@ -79,6 +79,6 @@
   (setq enable-recursive-minibuffers t))
 
 ;;--------------------------------------------------------------------
-(provide 'init-engine)
-;;; init-engine.el ends here
+(provide 'init-a-engine)
+;;; init-a-engine.el ends here
 

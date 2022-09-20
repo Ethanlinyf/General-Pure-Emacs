@@ -80,6 +80,7 @@
                             ;; eglot
                             epc
                             corfu-doc
+                            lin
 
                             ;;; D
                             which-key

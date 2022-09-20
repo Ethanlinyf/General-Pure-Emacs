@@ -18,12 +18,6 @@
 ;; set the startup default directory
 (setq default-directory "~/")
 
-;; abbrev settings
-(setq-default abbrev-mode t)
-(setq save-abbrevs nil)
-(setq abbrev-file-name             ;; tell emacs where to read abbrev
-      "~/.emacs.d/abbrev_defs")    ;; definitions from...
-
 ;; Turn off the startup help screen
 (setq inhibit-splash-screen 1)
 
@@ -59,7 +53,7 @@
 
 ;; Set the initial scratch message
 (setq-default
- initial-scratch-message (concat ";;--------------------------------------------------------------------\n;; Welcome to Pure Emacs for the ThingsEngine\n;; Somethng Good as Indicated:\n\n\n")
+ initial-scratch-message (concat ";;--------------------------------------------------------------------\n;; Welcome to General Pure Emacs for ThingsEngine\n;; Somethng Good as Indicated:\n\n\n")
  line-spacing 0.1
  truncate-lines nil
  word-wrap t)
@@ -71,19 +65,6 @@
 
 (fset 'yes-or-no-p 'y-or-n-p)
 (setq-default indent-tabs-mode nil)
-
-;;See matching pairs of parentheses and other characters.
-;;(show-paren-mode t)
-;;(setq show-paren-delay 0)
-;; example for a specific mode to turn on this "show-paren-mode":
-;;(add-hook 'emacs-lisp-mode-hook 'show-paren-mode)
-(add-hook 'after-init-hook 'show-paren-mode)
-(define-advice show-paren-function (:around (fn) fix-show-paren-function)
-  "Highlight enclosing parens."
-  (cond ((looking-at-p "\\s(") (funcall fn))
-        (t (save-excursion
-            (ignore-errors (backward-up-list))
-            (funcall fn)))))
 
 ;; Display time in the mini buffer
 (display-time)
@@ -98,13 +79,6 @@
 
 ;; Keybindings for setting mark
 (global-set-key (kbd "C-c C-'") 'set-mark-command)
-
-;;(add-hook 'after-init-hook 'ido-mode)
-(add-hook 'after-init-hook 'recentf-mode)
-(add-hook 'after-init-hook 'electric-pair-mode)
-(add-hook 'after-init-hook 'winner-mode)
-(add-hook 'after-init-hook 'global-auto-revert-mode)
-;; (add-hook 'after-init-hook 'electric-indent-mode')
 
 (defun open-mirror-file ()
   "Quickly open index file."
@@ -166,35 +140,31 @@
 
 (global-set-key (kbd "C-M-\\") 'indent-region-or-buffer)
 
-(setq hippie-expand-try-function-list '(try-expand-debbrev
- 					try-expand-debbrev-all-buffers
- 					try-expand-debbrev-from-kill
- 					try-complete-file-name-partially
- 					try-complete-file-name
- 					try-expand-all-abbrevs
- 					try-expand-list
- 					try-expand-line
- 					try-complete-lisp-symbol-partially
- 					try-complete-lisp-symbol))
-(global-set-key (kbd "M-/") 'hippie-expand)
 
-;; Loading later
-(with-eval-after-load 'dired
-    (define-key dired-mode-map (kbd "RET") 'dired-find-alternate-file))
 
-(require 'dired-x)
-;; (setq dired-recursive-deletes 'always)
-(setq dired-recursive-deletes 'top)
-(setq dired-recursive-copies 'always)
-(put 'dired-find-alternate-file 'disabled nil)
+(with-eval-after-load "dired"
+  (put 'dired-find-alternate-file 'disabled nil)
+  (define-key dired-mode-map (kbd "RET") 'dired-find-alternate-file)
+  (define-key dired-mode-map (kbd "<mouse-2>") 'dired-find-alternate-file)
+  )
 
-;;--------------------------------------------------------------------
-(require 'recentf)
-(recentf-mode 1)
-(setq recentf-max-menu-item 30)
+(when *is-mac*
+  (setq insert-directory-program "gls" dired-use-ls-dired t)
+  (setq dired-listing-switches "-al --group-directories-first"))
 
-;; The following could be implemented by counsel
-(global-set-key (kbd "C-x C-r") 'recentf-open-files)
+
+;;-----------------For org mode -------------------------------------
+(require 'org-superstar)
+(add-hook 'org-mode-hook (lambda () (org-superstar-mode 1)
+                                    (org-indent-mode 1)))
+
+
+;;------------------------ User Interface ----------------------------
+(use-package doom-modeline
+  :ensure t
+  :hook (after-init . doom-modeline-mode))
+
+
 ;;--------------------------------------------------------------------
 (provide 'init-b-basic)
 ;;; init-b-basic.el ends here

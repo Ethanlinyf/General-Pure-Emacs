@@ -11,6 +11,52 @@
 ;;--------------------------------------------------------------------
 ;;; Code:
 
+;; abbrev settings
+(setq-default abbrev-mode t)
+(setq save-abbrevs nil)
+(setq abbrev-file-name             ;; tell emacs where to read abbrev
+      "~/.emacs.d/abbrev_defs")    ;; definitions from...
+
+;;(add-hook 'after-init-hook 'ido-mode)
+(add-hook 'after-init-hook 'recentf-mode)
+(add-hook 'after-init-hook 'electric-pair-mode)
+(add-hook 'after-init-hook 'winner-mode)
+(add-hook 'after-init-hook 'global-auto-revert-mode)
+;; (add-hook 'after-init-hook 'electric-indent-mode')
+
+;;See matching pairs of parentheses and other characters.
+;;(show-paren-mode t)
+;;(setq show-paren-delay 0)
+;; example for a specific mode to turn on this "show-paren-mode":
+;;(add-hook 'emacs-lisp-mode-hook 'show-paren-mode)
+(add-hook 'after-init-hook 'show-paren-mode)
+(define-advice show-paren-function (:around (fn) fix-show-paren-function)
+  "Highlight enclosing parens."
+  (cond ((looking-at-p "\\s(") (funcall fn))
+        (t (save-excursion
+            (ignore-errors (backward-up-list))
+            (funcall fn)))))
+
+(setq hippie-expand-try-function-list '(try-expand-debbrev
+ 					try-expand-debbrev-all-buffers
+ 					try-expand-debbrev-from-kill
+ 					try-complete-file-name-partially
+ 					try-complete-file-name
+ 					try-expand-all-abbrevs
+ 					try-expand-list
+ 					try-expand-line
+ 					try-complete-lisp-symbol-partially
+ 					try-complete-lisp-symbol))
+(global-set-key (kbd "M-/") 'hippie-expand)
+
+;;--------------------------------------------------------------------
+(require 'recentf)
+(recentf-mode 1)
+(setq recentf-max-menu-item 30)
+
+;; The following could be implemented by counsel
+(global-set-key (kbd "C-x C-r") 'recentf-open-files)
+
 (when (memq window-system '(mac ns))
   (use-package exec-path-from-shell
     :ensure t
@@ -119,7 +165,7 @@
 ;; Flycheck
 (use-package flycheck
   :ensure t
-  :init (global-flycheck-mode))
+  :init (setq global-flycheck-mode nil))
 
 
 ;;--------------------------------------------------------------------

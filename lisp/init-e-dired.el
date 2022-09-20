@@ -11,6 +11,16 @@
 ;;--------------------------------------------------------------------
 ;;; Code:
 
+;; Loading later
+(with-eval-after-load 'dired
+    (define-key dired-mode-map (kbd "RET") 'dired-find-alternate-file))
+
+(require 'dired-x)
+;; (setq dired-recursive-deletes 'always)
+(setq dired-recursive-deletes 'top)
+(setq dired-recursive-copies 'always)
+(put 'dired-find-alternate-file 'disabled nil)
+
 ;; Colourful dired
 (use-package diredfl
   :init (diredfl-global-mode 1))
@@ -20,19 +30,20 @@
  ;; Show directory first
 (setq dired-listing-switches "-alh --group-directories-first")
 
-  ;; Show git info in dired
-  (use-package dired-git-info
-    :bind (:map dired-mode-map
-           (")" . dired-git-info-mode)))
+;; Show git info in dired
+(use-package dired-git-info
+  :bind (:map dired-mode-map
+              (")" . dired-git-info-mode)))
 
 
 (add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
 
-(with-eval-after-load "dired"
-  (put 'dired-find-alternate-file 'disabled nil)
-  (define-key dired-mode-map (kbd "RET") 'dired-find-alternate-file)
-  (define-key dired-mode-map (kbd "<mouse-2>") 'dired-find-alternate-file)
-  )
+;; move this part to basic
+;; (with-eval-after-load "dired"
+;;   (put 'dired-find-alternate-file 'disabled nil)
+;;   (define-key dired-mode-map (kbd "RET") 'dired-find-alternate-file)
+;;   (define-key dired-mode-map (kbd "<mouse-2>") 'dired-find-alternate-file)
+;;   )
 
 ;(require 'diredful)
 ;(diredful-mode 1)
@@ -42,9 +53,9 @@
 (setq all-the-icons-dired-monochrome nil)
 
 ;; add when is-a-mac
-(when *is-mac*
-  (setq insert-directory-program "gls" dired-use-ls-dired t)
-  (setq dired-listing-switches "-al --group-directories-first"))
+;; (when *is-mac*
+;;   (setq insert-directory-program "gls" dired-use-ls-dired t)
+;;   (setq dired-listing-switches "-al --group-directories-first"))
 
 
 ;;----------------------------------------------------------------------------

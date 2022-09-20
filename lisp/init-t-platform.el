@@ -1,4 +1,4 @@
-;;; init-t-IDE.el --- IDE -*- lexical-binding: t; -*-
+;;; init-t-platform.el --- IDE -*- lexical-binding: t; -*-
 ;;
 ; Copyleft (CL) 2022-2032 YF Lin
 ;;
@@ -187,5 +187,5 @@
 (global-set-key (kbd "s-1") 'aweshell-dedicated-toggle)
 
 ;;--------------------------------------------------------------------
-(provide 'init-t-IDE)
-;;; init-t-IDEe.el ends here
+(provide 'init-t-platform)
+;;; init-t-platform.el ends here
