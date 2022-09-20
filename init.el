@@ -11,6 +11,8 @@
 ;;--------------------------------------------------------------------
 ;;; Code:
 
+
+;; startup time
 (add-hook 'emacs-startup-hook
           (lambda ()
             (message "Emacs ready in %s with %d garbage collections."
@@ -45,23 +47,21 @@
 (update-load-pathe)
 
 ;; load in a order
-;(require 'init-0-package)
+;(require 'init-0-plugin)
 (require 'init-a-engine)
 (require 'init-b-basic)
 (require 'init-c-minibuffer)
 (require 'init-d-dired)
 (require 'init-e-enhance)
-(require 'init-t-platform)
-(require 'init-t-ui)
-(require 'init-f-dashboard)
-(require 'init-g-yasnippet)
-(require 'init-h-lsp)
+(require 'init-f-platform)
+(require 'init-g-interface)
+(require 'init-h-dashboard)
 (require 'init-i-org)
 (require 'init-i-roam)
 (require 'init-i-tex)
 (require 'init-i-python)
 (require 'init-i-lua)
-(require 'init-z-test)
+;; (require 'init-z-test)
 
 ;;----------------------------------------------------------------------------
 (provide 'init)

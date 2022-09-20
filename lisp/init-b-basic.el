@@ -163,7 +163,9 @@
   :ensure t
   :hook (after-init . doom-modeline-mode))
 
-
+;;--------------------------------------------------------------------
+(require 'yasnippet)
+(yas-global-mode 1)
 ;;--------------------------------------------------------------------
 (provide 'init-b-basic)
 ;;; init-b-basic.el ends here

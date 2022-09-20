@@ -1,4 +1,4 @@
-;;; init-TE-dashboard.el --- General Pure Emacs Dashboard configurations.	-*- lexical-binding: t no-byte-compile: t -*-
+;;; init-h-dashboard.el --- General Pure Emacs Dashboard configurations.	-*- lexical-binding: t no-byte-compile: t -*-
 ;;
 ;; Copyleft (CL) 2022-2032 Dr YF Lin
 ;;
@@ -127,5 +127,5 @@
 ;;              (expand-file-name "~/.emacs.d/company-statistics-cache.el"))
 
 ;;--------------------------------------------------------------------
-(provide 'init-f-dashboard)
-;;; init-f-dashboard.el ends here
+(provide 'init-h-dashboard)
+;;; init-h-dashboard.el ends here

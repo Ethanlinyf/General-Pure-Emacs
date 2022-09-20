@@ -1,4 +1,4 @@
-;;; init-t-platform.el --- IDE -*- lexical-binding: t; -*-
+;;; init-f-platform.el --- IDE -*- lexical-binding: t; -*-
 ;;
 ; Copyleft (CL) 2022-2032 YF Lin
 ;;
@@ -62,7 +62,9 @@
 ;;     ))
 
 ;;--------------------------------------------------------------------
+(require 'winum)
 
+(winum-mode)
 (use-package treemacs
   :ensure t
   :defer t
@@ -183,5 +185,12 @@
 (global-set-key (kbd "s-1") 'aweshell-dedicated-toggle)
 
 ;;--------------------------------------------------------------------
-(provide 'init-t-platform)
-;;; init-t-platform.el ends here
+(require 'epc)
+
+(add-to-list 'load-path "~/.emacs.d/site-lisp/lsp-bridge")
+
+(require 'lsp-bridge)
+(global-lsp-bridge-mode)
+;;--------------------------------------------------------------------
+(provide 'init-f-platform)
+;;; init-f-platform.el ends here
