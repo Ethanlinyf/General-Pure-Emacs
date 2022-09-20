@@ -1,4 +1,4 @@
-;;; dired.el --- Settings for dired-mode -*- lexical-binding: t; -*-
+;;; init-d-dired.el --- Settings for dired-mode -*- lexical-binding: t; -*-
 ;;
 ;; Copyleft (CL) 2022-2032 Dr YF Lin
 ;;
@@ -35,7 +35,6 @@
   :bind (:map dired-mode-map
               (")" . dired-git-info-mode)))
 
-
 (add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
 
 ;; move this part to basic
@@ -57,7 +56,6 @@
 ;;   (setq insert-directory-program "gls" dired-use-ls-dired t)
 ;;   (setq dired-listing-switches "-al --group-directories-first"))
 
-
 ;;----------------------------------------------------------------------------
-(provide 'init-e-dired)
-;;; init-e-dired.el ends here
+(provide 'init-d-dired)
+;;; init-d-dired.el ends here

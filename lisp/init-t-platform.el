@@ -176,10 +176,6 @@
   :ensure t
   :config (treemacs-set-scope-type 'Tabs))
 
-;;-------------------------------------------------------------------- 
-
-(require 'epc)
-
 ;;--------------------------------------------------------------------
 
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/site-lisp/aweshell"))

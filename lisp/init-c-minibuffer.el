@@ -224,6 +224,6 @@
 
 
 ;;--------------------------------------------------------------------
-(provide 'init-t-minibuffer)
-;;; init-t-minibuffer.el ends here
+(provide 'init-c-minibuffer)
+;;; init-c-minibuffer.el ends here
 

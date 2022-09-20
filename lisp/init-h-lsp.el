@@ -1,3 +1,7 @@
+
+
+(require 'epc)
+
 (add-to-list 'load-path "~/.emacs.d/site-lisp/lsp-bridge")
 
 ;; (require 'lsp-bridge)             ;; load lsp-bridge

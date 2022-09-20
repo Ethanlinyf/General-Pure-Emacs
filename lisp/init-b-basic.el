@@ -1,4 +1,4 @@
-;; init-basic.el -- Better default configurations. -*- lexical-binding: t; -*-
+;; init-b-basic.el -- Better default configurations. -*- lexical-binding: t; -*-
 ;;
 ;; Copyleft (CL) 2022-2032 YF Lin
 ;;
@@ -120,7 +120,7 @@
 ;; kill processes when quit or exit, live-webserver
 (setq confirm-kill-processes nil)
 
-;; Basic Improvement -------------------------------------------------
+;; ------------------ Indent Region or Buffer ------------------------
 (defun indent-buffer()
   "To indent the buffer."
   (interactive)
@@ -140,13 +140,12 @@
 
 (global-set-key (kbd "C-M-\\") 'indent-region-or-buffer)
 
-
+;;--------------------- Dired Mode ----------------------------------- 
 
 (with-eval-after-load "dired"
   (put 'dired-find-alternate-file 'disabled nil)
   (define-key dired-mode-map (kbd "RET") 'dired-find-alternate-file)
-  (define-key dired-mode-map (kbd "<mouse-2>") 'dired-find-alternate-file)
-  )
+  (define-key dired-mode-map (kbd "<mouse-2>") 'dired-find-alternate-file))
 
 (when *is-mac*
   (setq insert-directory-program "gls" dired-use-ls-dired t)

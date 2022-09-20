@@ -1,4 +1,4 @@
-;;; init-t-enhance.el --- Enhancement. -*- lexical-binding: t; -*-
+;;; init-e-enhance.el --- Enhancement. -*- lexical-binding: t; -*-
 ;;
 ; Copyleft (CL) 2022-2032 YF Lin
 ;;
@@ -186,5 +186,5 @@
      (define-key flyspell-mouse-map [mouse-2] nil)))
 
 ;;--------------------------------------------------------------------
-(provide 'init-t-enhance)
-;;; init-t-enhance.el ends here
+(provide 'init-e-enhance)
+;;; init-e-enhance.el ends here
