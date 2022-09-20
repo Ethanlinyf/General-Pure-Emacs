@@ -2,7 +2,7 @@
 #+options: broken-links:nil c:nil creator:nil d:(not "LOGBOOK") date:t e:t
 #+options: email:nil f:t inline:t num:t p:nil pri:nil prop:nil stat:t tags:t
 #+options: tasks:t tex:t timestamp:t title:t toc:t todo:t |:t
-#+title: Something Good as Indicated
+#+title: General Pure Emacs (GPE)
 #+date: <2022-08-15 Mon>
 #+author: Ethan YF Lin
 #+email: e.yflin@gmail.com
@@ -12,12 +12,12 @@
 #+creator: Emacs 29.0.50 (Org mode 9.5.4)
 #+cite_export:
 
-* General Pure Emacs (GPE)
-** Introduction
+
+* Introduction
 GPE is a platform based on Gnu Emacs with around 100 packages to facilitate
 learning/teaching, research and project management.
 
-** A basic structure for Puremacs
+* A basic structure for Puremacs
 #+BEGIN_EXAMPLE
 .emacs.d/
   |
@@ -38,7 +38,7 @@ learning/teaching, research and project management.
 
 [[./site-lisp/figure/General-Pure-Emacs.png]]
 
-** Feature 
+* Feature 
 - Integrated
   + Note-taken \\
     Org-mode has useful functionalities to take notes. Quick to open an 
@@ -73,7 +73,7 @@ learning/teaching, research and project management.
   The [[./tutorial.org][tutorial]] how to build this platform is included in this repository.
 
 See more details at the website [[https://thethingsengine.org][Something Good]] under the ThingsEngine Project.
-** Installation
+* Installation
 1. Backup your existing configuration
    #+begin_src shell
      mv ~/.emacs.d ~/.emacs.d.bak
@@ -83,9 +83,9 @@ See more details at the website [[https://thethingsengine.org][Something Good]] 
      git clone  git@github.com:Ethanlinyf/General-Pure-Emacs.git ~/.emacs.d
    #+end_src
 
-** Support/Issue
+* Support/Issue
 Please report any issues about configuration at this repository. 
-** License
+* License
 This program is free software. You can redistribute and/or modify it under
 [[https://github.com/redguardtoo/emacs.d/blob/master/LICENSE][GNU General Public License]] published by the Free Software Foundation. This
 customisation is shared with the hope that it will be useful and helpful, but
