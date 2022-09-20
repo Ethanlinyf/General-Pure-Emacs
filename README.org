@@ -17,7 +17,7 @@
 GPE is a platform based on Gnu Emacs with around 100 packages to facilitate
 learning/teaching, research and project management.
 
-[[./figure/General-Pure-Emacs.png]]
+[[./site-lisp/figure/General-Pure-Emacs.png]]
 
 ** Feature 
 - Integrated
@@ -34,14 +34,14 @@ learning/teaching, research and project management.
     
     Further extended with the Org-Roam (V2) package by saving all the links between
     files and headings in a database.
-    [[./figure/org-roam-network.png]]
+    [[./site-lisp/figure/org-roam-network.png]]
     
   + Programming as an IDE:
-    [[./figure/Emacs_elisp_programming.png]]
+    [[./site-lisp/figure/Emacs_elisp_programming.png]]
   + Plan and schedule
-    [[./figure/agenda_2.gif]]
+    [[./site-lisp/figure/agenda_2.gif]]
   + Management for research purposes as an example below:
-    [[./figure/Git-for-research-project.png]]
+    [[./site-lisp/figure/Git-for-research-project.png]]
 - Custmisable
 - Extensible
   + Customisation \\

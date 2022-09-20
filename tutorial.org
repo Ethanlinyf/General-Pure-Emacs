@@ -17,12 +17,6 @@
 to dust in your universe being as you wish to be" – Dr YF Lin
 #+end_quote
 
-#+DOWNLOADED: screenshot @ 2022-08-25 20:51:17
-[[file:2022-08-25_20-51-17_screenshot.png]]
-
-#+DOWNLOADED: screenshot @ 2022-08-25 20:52:36
-[[file:2022-08-25_20-52-36_screenshot.png]]
-
 * Summary
 The tutorial is to demonstrate how this Emacs editor is customised. We pursume a
 simple, integrated and efficient platform with limited packages, around
@@ -269,7 +263,7 @@ Copyleft Declaration:
     
 ** custom.el
 You can configure Emacs through its interface, for example:
-[[./figure/font_setting.png]]\\
+[[./site-lisp/figure/font_setting.png]]\\
 The settings are generated and recorded in a customised file, which could be set
 as follows: 
  #+begin_src emacs-lisp
@@ -438,7 +432,7 @@ So, on macOS, emacs is looking for init file when starting up in the following f
 - Statistic results on the time of startup and garage collections.
   The starup time and the number of gabbage collections will be indicated in the
   Dashboard, see below:
-  [[./figure/startupTime&GCs.png]]
+  [[./site-lisp/figure/startupTime&GCs.png]]
 
   #+begin_src emacs-lisp
     (add-hook 'emacs-startup-hook

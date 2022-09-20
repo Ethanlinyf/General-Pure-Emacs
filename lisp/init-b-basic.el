@@ -15,8 +15,8 @@
 (require 'pure-custom)
 (require 'pure-function)
 
-;; set the startup default directory
-(setq default-directory "~/")
+;; ;; set the startup default directory -- move to init.el
+;; (setq default-directory "~/")
 
 ;; Turn off the startup help screen
 (setq inhibit-splash-screen 1)

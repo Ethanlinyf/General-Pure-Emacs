@@ -11,6 +11,8 @@
 ;;--------------------------------------------------------------------
 ;;; Code:
 
+;; set the startup default directory
+(setq default-directory "~/")
 
 ;; startup time
 (add-hook 'emacs-startup-hook
@@ -33,7 +35,7 @@
   (load custom-file))
 
 ;; Define a file to record emacs macros.
-(defvar pure-macro (expand-file-name "macros.el" user-emacs-directory)
+(defvar pure-macro (expand-file-name "site-lisp/pure-macros.el" user-emacs-directory)
   "A file to record Emacs macros.")
 ;; Load the macro file if it exists
 (when (file-exists-p pure-macro)
