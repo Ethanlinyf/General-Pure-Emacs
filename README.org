@@ -17,6 +17,25 @@
 GPE is a platform based on Gnu Emacs with around 100 packages to facilitate
 learning/teaching, research and project management.
 
+** A basic structure for Puremacs
+#+BEGIN_EXAMPLE
+.emacs.d/
+  |
+  |-- early-init
+  |-- init.el
+  |
+  |-- lisp/
+  |   |-- init-basic.el
+  |   |-- init-packages.el 
+  |
+  |-- site-lisp/ 
+  |   |-- modules 
+  |
+  |-- custom.el                        
+  |                    
+  |-- ...
+#+END_EXAMPLE
+
 [[./site-lisp/figure/General-Pure-Emacs.png]]
 
 ** Feature 
