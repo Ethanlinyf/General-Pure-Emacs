@@ -202,8 +202,8 @@
 
 (add-to-list 'load-path "~/.emacs.d/site-lisp/lsp-bridge")
 
-;(require 'lsp-bridge)
-;(global-lsp-bridge-mode)
+(require 'lsp-bridge)
+(global-lsp-bridge-mode)
 ;;--------------------------------------------------------------------
 (provide 'init-f-platform)
 ;;; init-f-platform.el ends here

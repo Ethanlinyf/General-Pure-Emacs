@@ -17,9 +17,17 @@
 ;; (setq package-check-signature nil
 ;;       load-prefer-newer t)
 
+;; (setq package-archives
+;;       '(("gnu"   . "https://elpa.gnu.org/packages/")
+;;         ("melpa" . "https://melpa.org/packages/")
+;;         ("melpa-stable" . "https://stable.melpa.org/packages/")))
 (when (>= emacs-major-version 26)
+  (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/") t)
   (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
+  (add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/") t)
   )
+
+
 
 (unless (bound-and-true-p package--initialized)
   (package-initialize))
