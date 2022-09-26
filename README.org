@@ -21,21 +21,22 @@ learning/teaching, research and project management.
 
 * A basic structure of Puremacs
 #+BEGIN_EXAMPLE
-.emacs.d/
-  |
-  |-- early-init
-  |-- init.el
-  |
-  |-- lisp/
-  |   |-- init-basic.el
-  |   |-- init-packages.el 
-  |
-  |-- site-lisp/ 
-  |   |-- modules 
-  |
-  |-- custom.el                        
-  |                    
-  |-- ...
+  .emacs.d/
+     |
+     |-- early-init
+     |-- init.el
+     |
+     |-- lisp/
+     |   |-- init-engine.el
+     |   |-- init-basic.el
+     |   |-- init- ...
+     |
+     |-- site-lisp/ 
+     |   |-- lsp-bridge
+     |
+     |-- custom.el                        
+     |                    
+     |-- ...
 #+END_EXAMPLE
 
 * Feature 

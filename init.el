@@ -13,6 +13,7 @@
 
 ;; set the startup default directory
 (setq default-directory "~/")
+(setq user-emacs-directory "~/.emacs.d/")
 
 ;; startup time
 (add-hook 'emacs-startup-hook
@@ -41,6 +42,13 @@
 (when (file-exists-p pure-macro)
   (load pure-macro))
 
+;; Personal settings for GPE.
+(defvar pure-individual (expand-file-name "init-individual.el" user-emacs-directory)
+  "A file to record Emacs macros.")
+;; Load the personal setting file if it exists
+(when (file-exists-p pure-individual)
+  (load pure-individual))
+
 ;; Add to list to load the el files in a specific folder;
 (defun update-load-pathe (&rest _)
   "To load folders includ el files."
@@ -63,7 +71,7 @@
 (require 'init-i-tex)
 (require 'init-i-python)
 (require 'init-i-lua)
-;; (require 'init-z-test)
+(require 'init-z-test)
 
 ;;----------------------------------------------------------------------------
 (provide 'init)

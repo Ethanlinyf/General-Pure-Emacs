@@ -76,3 +76,4 @@ eaf/
 /org-roam.db
 /test.txt
 /abbrev_defs
+/init-individual.el

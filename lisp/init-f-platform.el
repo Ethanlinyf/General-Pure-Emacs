@@ -50,6 +50,19 @@
 ;;     (t
 ;;     (awesome-tab-get-group-name (current-buffer))))))
 
+
+(defun awesome-tab-hide-tab (x)
+  (let ((name (format "%s" x)))
+    (or
+     (string-prefix-p "*epc" name)
+     (string-prefix-p "*helm" name)
+     (string-prefix-p "*Compile-Log*" name)
+     (string-prefix-p "*lsp" name)
+     (and (string-prefix-p "magit" name)
+               (not (file-name-extension name)))
+     )))
+
+
 ;;-------------------------------------------------------------------- 
 
 ;; https://github.com/re5et/simp
@@ -189,8 +202,8 @@
 
 (add-to-list 'load-path "~/.emacs.d/site-lisp/lsp-bridge")
 
-(require 'lsp-bridge)
-(global-lsp-bridge-mode)
+;(require 'lsp-bridge)
+;(global-lsp-bridge-mode)
 ;;--------------------------------------------------------------------
 (provide 'init-f-platform)
 ;;; init-f-platform.el ends here

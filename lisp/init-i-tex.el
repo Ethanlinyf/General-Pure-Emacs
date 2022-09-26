@@ -50,7 +50,7 @@
                   (company-auctex-init)
                   (setq pdf-view-use-scaling t)
 		  ;(require 'init-auto-complete)
-                  (require 'init-g-yasnippet)
+                  ;;(require 'init-g-yasnippet)
 		  (TeX-fold-mode 1)
 		  (auto-fill-mode 1)
                   (latex-preview-pane-enable)
@@ -123,14 +123,14 @@
                   (add-hook 'pdf-view-mode-hook (lambda() (linum-mode -1)))
 ));;
 
-;; (use-package pdf-tools
-;;    :pin manual
-;;    :config
-;;    (pdf-tools-install)
-;;    (setq-default pdf-view-display-size 'fit-width)
-;;    (define-key pdf-view-mode-map (kbd "C-s") 'isearch-forward)
-;;    :custom
-;;    (pdf-annot-activate-created-annotations t "automatically annotate highlights"))
+(use-package pdf-tools
+   :pin manual
+   :config
+   (pdf-tools-install)
+   (setq-default pdf-view-display-size 'fit-width)
+   (define-key pdf-view-mode-map (kbd "C-s") 'isearch-forward)
+   :custom
+   (pdf-annot-activate-created-annotations t "automatically annotate highlights"))
 
 
 

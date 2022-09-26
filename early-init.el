@@ -35,12 +35,16 @@
 ;; Suppress a second case-insensitive search through the auto-mode-alist
 (setq auto-mode-case-fold nil)
 
-;; After early-init-file to initialise 'package'
+;; After early-init-file to initialise 'package'. Make initialization
+;; slightly faster See the (package-initialize) in the file
+;; init-a-engine.el, which make the initiation will be executed just
+;; once.
 (setq package-enable-at-startup nil)
 
-;; In noninteractive sessions, prioritize non-byte-compiled source files to
-;; prevent the use of stale byte-code. Otherwise, it saves us a little IO time
-;; to skip the mtime checks on every *.elc file. -- Doom Emacs
+;; In noninteractive sessions, prioritise non-byte-compiled source
+;; files to prevent the use of stale byte-code. Otherwise, it saves us
+;; a little IO time to skip the mtime checks on every *.elc file. 
+;; from Doom Emacs
 (setq load-prefer-newer noninteractive)
 
 ;; Inhibit resising Puremacs frame
@@ -49,13 +53,12 @@
 (setq-default inhibit-redisplay t
               inhibit-message t)
 (add-hook 'window-setup-hook
-           (lambda ()
-              (setq-default inhibit-redisplay nil
-                            inhibit-message nil)
-              (redisplay)))
+          (lambda ()
+            (setq-default inhibit-redisplay nil
+                          inhibit-message nil)
+            (redisplay)))
 
 ;; Remove some warnings
-(setq load-prefer-newer t)
 (setq byte-compile-warnings '(cl-functions))
 ;;----------------------------------------------------------------------
 ;;; early-init.el ends here
