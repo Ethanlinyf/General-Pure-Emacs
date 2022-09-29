@@ -26,7 +26,7 @@
                      gcs-done)))
 
 ;; Initialise the major mode for scratch
-(setq initial-major-mode 'org-mode); 'emacs-lisp-mode) ;;'fundamental-mode
+(setq initial-major-mode 'fundamental-mode); 'emacs-lisp-mode) ;;'fundamental-mode
       ;package--init-file-ensured t)
 
 ;; Load the settings recorded through emacs

@@ -20,7 +20,7 @@
 ;;        (get-buffer-process (current-buffer))
 ;;        nil "_"))))
 
-(setq python-shell-completion-native-enable nil)
+;; (setq python-shell-completion-native-enable nil)
 
 ;; (use-package python
 ;;   :ensure nil
@@ -33,9 +33,9 @@
 ;;   :config
 ;;   ;; Default to Python 3. Prefer the versioned Python binaries since some
 ;;   ;; systems stupidly make the unversioned one point at Python 2.
-;;   (when (and (executable-find "python3")
+;;   (when (and (executable-find "python")
 ;;              (string= python-shell-interpreter "python"))
-;;     (setq python-shell-interpreter "python3"))
+;;     (setq python-shell-interpreter "/usr/local/bin/python"))
 
 ;;   ;; Env vars
 ;;   (with-eval-after-load 'exec-path-from-shell
@@ -43,9 +43,6 @@
 
 ;;   ;; Live Coding in Python
 ;;   (use-package live-py-mode))
-
-
-
 
 ;;----------------------------------------------------------------------------
 (provide 'init-i-python)

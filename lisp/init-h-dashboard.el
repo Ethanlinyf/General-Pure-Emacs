@@ -120,7 +120,7 @@
 ;; (when (dashboard-mode)
 ;;   (awesome-tab-mode nil))
 
-(add-hook 'dashboard-mode-hook #'(lambda() (awesome-tab-mode -1)))
+;(add-hook 'dashboard-mode-hook #'(lambda() (awesome-tab-mode -1)))
 
 ;; recentf excludes files: M-x recentf-cleanup
 ;; (add-to-list 'recentf-exclude

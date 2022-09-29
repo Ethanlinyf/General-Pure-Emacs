@@ -22,9 +22,15 @@
 
 ;; Garbage collection in the startup process -TE
 ;; (setq gc-cons-threshold most-positive-fixnum
-;;gc-cons-percentage 0.5)
+;;       gc-cons-percentage 0.5)
+;; (setq gc-cons-threshold most-positive-fixnum)
+;; (add-hook 'after-init-hook #'(lambda () (setq gc-cons-threshold 800000)))
 (setq gc-cons-threshold most-positive-fixnum)
-(add-hook 'after-init-hook #'(lambda () (setq gc-cons-threshold 800000)))
+(add-hook 'emacs-startup-hook
+          (lambda ()
+            "Recover GC values after startup."
+            (setq gc-cons-threshold 800000)))
+
 
 ;; Default encoding system
 (set-language-environment "UTF-8")
