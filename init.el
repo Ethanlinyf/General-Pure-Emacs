@@ -11,11 +11,7 @@
 ;;--------------------------------------------------------------------
 ;;; Code:
 
-;; set the startup default directory
-(setq default-directory "~/")
-(setq user-emacs-directory "~/.emacs.d/")
-
-;; startup time
+;; Startup time
 (add-hook 'emacs-startup-hook
           (lambda ()
             (message "Emacs ready in %s with %d garbage collections."
@@ -24,6 +20,10 @@
                               (time-subtract
                                after-init-time before-init-time)))
                      gcs-done)))
+
+;; set the startup default directory
+;(setq default-directory "~/")
+(setq user-emacs-directory "~/.emacs.d/")
 
 ;; Initialise the major mode for scratch, fundamental-mode or text-mode
 ;; Prevent setting it as a rich mode, such as org-mode, which will 
@@ -53,23 +53,33 @@
 
 ;; Add to list to load the el files in a specific folder;
 (defun update-load-path (&rest _)
-  "To load folders includ el files."
+  "To update 'load-path'"
   (dolist (path '("lisp" "site-lisp"))
     (push (expand-file-name path user-emacs-directory) load-path)))
 
+(defun add-extradirs-to-load-path (&rest _)
+  "Include extra dirs to 'load-path'"
+  (let ((default-directory (expand-file-name "site-lisp" user-emacs-directory)))
+    (normal-top-level-add-subdirs-to-load-path)))
+
 (advice-add #'package-initialize :after #'update-load-path)
+(advice-add #'package-initialize :after #'add-extradirs-to-load-path)
 
 (update-load-path)
 
 ;(require 'init-0-plugin)
 (require 'init-a-engine)
+
 (require 'init-b-basic)
 (require 'init-c-minibuffer)
 (require 'init-d-dired)
+
 (require 'init-e-enhance)
 (require 'init-f-platform)
+
 (require 'init-g-interface)
 (require 'init-h-dashboard)
+
 (require 'init-i-org)
 (require 'init-i-roam)
 (require 'init-i-tex)
