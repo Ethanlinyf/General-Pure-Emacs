@@ -17,7 +17,6 @@
                    (abbreviate-file-name (buffer-file-name))
                  "%b"))))
 
-
 (setq initial-frame-alist (quote ((fullscreen . maximized))))
 
 ;; Window size and features
@@ -25,18 +24,18 @@
  window-resize-pixelwise t
  frame-resize-pixelwise t)
 
-(when (fboundp 'tool-bar-mode)
-  (tool-bar-mode -1))
+;; (when (fboundp 'tool-bar-mode)
+;;   (tool-bar-mode -1))
 
-(when (fboundp 'set-scroll-bar-mode)
-  (set-scroll-bar-mode nil))
+;; (when (fboundp 'set-scroll-bar-mode)
+;;   (set-scroll-bar-mode nil))
 
-(when *is-mac*
-  (menu-bar-mode 1))
+;; (when *is-mac*
+;;   (menu-bar-mode 1))
 
-(let ((no-border '(internal-border-width . 0)))
-  (add-to-list 'default-frame-alist no-border)
-  (add-to-list 'initial-frame-alist no-border))
+;; (let ((no-border '(internal-border-width . 0)))
+;;   (add-to-list 'default-frame-alist no-border)
+;;   (add-to-list 'initial-frame-alist no-border))
 
 (when (and *is-mac* (fboundp 'toggle-frame-fullscreen))
   ;; Command-Option-f to toggle fullscreen mode
@@ -115,9 +114,9 @@ all-the-icons-ibuffer-formats
   :hook ((after-init . all-the-icons-completion-mode)
          (marginalia-mode-hook . all-the-icons-completion-marginalia-setup)))
 
-;(all-the-icons-completion-mode)
+                                        ;(all-the-icons-completion-mode)
 
-;(add-hook 'marginalia-mode-hook #'all-the-icons-completion-marginalia-setup)
+                                        ;(add-hook 'marginalia-mode-hook #'all-the-icons-completion-marginalia-setup)
 
 
 

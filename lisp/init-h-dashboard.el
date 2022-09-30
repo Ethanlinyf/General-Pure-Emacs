@@ -27,9 +27,9 @@
 (setq dashboard-projects-switch-function 'counsel-projectile-switch-project-action-dired)
 
 ;; set the number of items for each heading
-(setq dashboard-items '((recents  . 5)
+(setq dashboard-items '((recents  . 8)
                         (bookmarks . 5)
-                        (projects . 5)
+                        (projects . 6)
                         ;;(agenda . 5)
                         ;;(registers . 5)
                         ))

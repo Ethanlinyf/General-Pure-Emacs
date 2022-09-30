@@ -25,8 +25,10 @@
                                after-init-time before-init-time)))
                      gcs-done)))
 
-;; Initialise the major mode for scratch
-(setq initial-major-mode 'fundamental-mode); 'emacs-lisp-mode) ;;'fundamental-mode
+;; Initialise the major mode for scratch, fundamental-mode or text-mode
+;; Prevent setting it as a rich mode, such as org-mode, which will 
+;; slow down the sartup speed. 
+(setq initial-major-mode 'text-mode); ;;'
       ;package--init-file-ensured t)
 
 ;; Load the settings recorded through emacs
@@ -50,13 +52,15 @@
   (load pure-individual))
 
 ;; Add to list to load the el files in a specific folder;
-(defun update-load-pathe (&rest _)
+(defun update-load-path (&rest _)
   "To load folders includ el files."
   (dolist (path '("lisp" "site-lisp"))
     (push (expand-file-name path user-emacs-directory) load-path)))
-(update-load-pathe)
 
-;; load in a order
+(advice-add #'package-initialize :after #'update-load-path)
+
+(update-load-path)
+
 ;(require 'init-0-plugin)
 (require 'init-a-engine)
 (require 'init-b-basic)

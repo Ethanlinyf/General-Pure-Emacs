@@ -15,9 +15,6 @@
 (require 'pure-custom)
 (require 'pure-function)
 
-;; ;; set the startup default directory -- move to init.el
-;; (setq default-directory "~/")
-
 ;; Turn off the startup help screen
 (setq inhibit-splash-screen 1)
 
@@ -33,7 +30,6 @@
 ;;(setq initial-frame-alist (quote ((fullscreen . maximized))))
 (when *is-mac*
   (toggle-frame-fullscreen))
-
 
 ;; Turn on line number and the column-number-mode
 (global-linum-mode 1)
@@ -53,15 +49,56 @@
 
 ;; Set the initial scratch message
 (setq-default
- initial-scratch-message (concat "\n;; Welcome to General Pure Emacs for ThingsEngine\n;; Somethng Good as Indicated:\n\n\n")
+ initial-scratch-message (concat ";;--------------------------------------------------------------------\n;; Welcome to General Pure Emacs for ThingsEngine\n;; Somethng Good as Indicated:\n\n\n")
  line-spacing 0.1
  truncate-lines nil
  word-wrap t)
 
+;;--------------------------------------------------------------------
+ (with-no-warnings
+  ;; Key Modifiers
+  (cond
+   (sys/mac-port-p
+    ;; Compatible with Emacs Mac port
+    (setq mac-option-modifier 'meta
+          mac-command-modifier 'super)
+    (bind-keys ([(super a)] . mark-whole-buffer)
+               ([(super c)] . kill-ring-save)
+               ([(super l)] . goto-line)
+               ([(super q)] . save-buffers-kill-emacs)
+               ([(super s)] . save-buffer)
+               ([(super v)] . yank)
+               ;([(super w)] . delete-frame)
+               ([(super z)] . undo)))
+   (sys/win32p
+    ;; make PC keyboard's Win key or other to type Super or Hyper
+    ;; (setq w32-pass-lwindow-to-system nil)
+    (setq w32-lwindow-modifier 'super     ; Left Windows key
+          w32-apps-modifier 'hyper)       ; Menu/App key
+    (w32-register-hot-key [s-t])))
+  
+  ;; Optimization
+  (when sys/win32p
+    (setq w32-get-true-file-attributes nil   ; decrease file IO workload
+          w32-pipe-read-delay 0              ; faster IPC
+          w32-pipe-buffer-size (* 64 1024))) ; read more at a time (was 4K)
+  (unless sys/macp
+    (setq command-line-ns-option-alist nil))
+  (unless sys/linuxp
+    (setq command-line-x-option-alist nil))
+
+  ;; Increase how much is read from processes in a single chunk (default is 4kb)
+  (setq read-process-output-max #x10000)  ; 64kb
+
+  ;; Don't ping things that look like domain names.
+  (setq ffap-machine-p-known 'reject))
+
+;;--------------------------------------------------------------------
 ;; manage by git and disable make-backup-files and auto-save-default
 (setq make-backup-files nil)
 (setq auto-save-default nil)
 (delete-selection-mode 1)
+(setq tab-width 2)
 
 (fset 'yes-or-no-p 'y-or-n-p)
 (setq-default indent-tabs-mode nil)
@@ -166,6 +203,11 @@
 ;;--------------------------------------------------------------------
 (require 'yasnippet)
 (yas-global-mode 1)
+
+;;--------------------------------------------------------------------
+ (use-package so-long
+   :hook (after-init . global-so-long-mode))
+
 ;;--------------------------------------------------------------------
 (provide 'init-b-basic)
 ;;; init-b-basic.el ends here

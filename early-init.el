@@ -28,15 +28,11 @@
 (setq gc-cons-threshold most-positive-fixnum)
 (add-hook 'emacs-startup-hook
           (lambda ()
-            "Recover GC values after startup."
             (setq gc-cons-threshold 800000)))
 
 
-;; Default encoding system
-(set-language-environment "UTF-8")
-
 ;; Prevent unwanted runtime compilation for native-comp users
-;; (setq native-comp-deferred-compilation nil)
+(setq native-comp-deferred-compilation nil)
 
 ;; Suppress a second case-insensitive search through the auto-mode-alist
 (setq auto-mode-case-fold nil)
@@ -56,6 +52,7 @@
 ;; Inhibit resising Puremacs frame
 (setq frame-inhibit-implied-resize t)
 
+;; To suppress flashing at startup
 (setq-default inhibit-redisplay t
               inhibit-message t)
 (add-hook 'window-setup-hook
@@ -66,5 +63,12 @@
 
 ;; Remove some warnings
 (setq byte-compile-warnings '(cl-functions))
+
+;; Default settings for the frame before initialisation
+(push '(menu-bar-lines . 0) default-frame-alist)
+(push '(tool-bar-lines . 0) default-frame-alist)
+(push '(vertical-scroll-bars) default-frame-alist)
+(when (featurep 'ns)
+  (push '(ns-transparent-titlebar . t) default-frame-alist))
 ;;----------------------------------------------------------------------
 ;;; early-init.el ends here

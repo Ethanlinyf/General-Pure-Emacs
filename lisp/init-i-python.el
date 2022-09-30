@@ -20,7 +20,7 @@
 ;;        (get-buffer-process (current-buffer))
 ;;        nil "_"))))
 
-;; (setq python-shell-completion-native-enable nil)
+(setq python-shell-completion-native-enable nil)
 
 ;; (use-package python
 ;;   :ensure nil
