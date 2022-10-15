@@ -11,6 +11,10 @@
 ;;--------------------------------------------------------------------
 ;;; Code:
 
+;; (setq insert-directory-program "gls" dired-use-ls-dired t)
+;; (dirvish-override-dired-mode)
+
+
 ;; abbrev settings
 (setq-default abbrev-mode t)
 (setq save-abbrevs nil)

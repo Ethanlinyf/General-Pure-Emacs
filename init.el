@@ -7,7 +7,7 @@
 ;; Under ThingsEngine Project: https://www.thethingsengine.org
 ;;--------------------------------------------------------------------
 ;;; Commentary:
-;; Add feature defined in the Lisp folder
+;; init file for General Pure Emacs
 ;;--------------------------------------------------------------------
 ;;; Code:
 
@@ -28,7 +28,7 @@
 ;; Initialise the major mode for scratch, fundamental-mode or text-mode
 ;; Prevent setting it as a rich mode, such as org-mode, which will 
 ;; slow down the sartup speed. 
-(setq initial-major-mode 'text-mode); ;;'
+(setq initial-major-mode 'text-mode);
       ;package--init-file-ensured t)
 
 ;; Load the settings recorded through emacs
@@ -78,15 +78,18 @@
 (require 'init-f-platform)
 
 (require 'init-g-interface)
-(require 'init-h-dashboard)
+;; (require 'init-h-dashboard)
 
 (require 'init-i-org)
 (require 'init-i-roam)
 (require 'init-i-tex)
 (require 'init-i-python)
 (require 'init-i-lua)
-(require 'init-z-test)
+
+;; (require 'init-p-julia)
+
+;; (require 'init-z-test)
 
 ;;----------------------------------------------------------------------------
-(provide 'init)
+;; (provide 'init)
 ;;; init.el ends here

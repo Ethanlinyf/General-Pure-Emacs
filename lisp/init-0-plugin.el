@@ -26,7 +26,7 @@
 (defvar puremacs/packages '(
                             ;; wishlist:
                             ; avy
-
+                            oauth2
 			    company
                             ;; company-box
 			    ;; smartparens
@@ -128,6 +128,11 @@
                             magit-section
                             ;; [filenotify-recursive][https://github.com/jethrokuan/filenotify-recursive]
 
+                            ;; programming
+                            
+                            julia-repl
+
+
                             ;; TeX
                             auctex
                             reftex
@@ -145,7 +150,10 @@
                             ef-themes
 
                             ;;; Programming
-                            lua-mode 
+                            lua-mode
+
+                            ;;; deno-bridge:
+                            websocket ;; dependency for the package, org-roam-ui-20220225.2151
                             
                                  )  "Default packages.")
 

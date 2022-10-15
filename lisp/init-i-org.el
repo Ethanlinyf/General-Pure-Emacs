@@ -43,7 +43,7 @@
 (setq org-default-notes-file (concat org-directory "/note.org"))
 
 (add-hook 'org-mode-hook #'auto-fill-mode)
-(setq-default fill-column 70)
+;(setq-default fill-column 70)
 (setq visual-line-mode t)
 
 (with-eval-after-load 'org

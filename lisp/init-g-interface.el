@@ -167,6 +167,8 @@ all-the-icons-ibuffer-formats
         tabulated-list-mode-hook))
 
 (lin-global-mode 1)
+;;--------------------------------------------------------------------
+ (auto-image-file-mode 1)
 
 ;;--------------------------------------------------------------------
 (provide 'init-g-interface)

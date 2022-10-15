@@ -70,5 +70,8 @@
 (push '(vertical-scroll-bars) default-frame-alist)
 (when (featurep 'ns)
   (push '(ns-transparent-titlebar . t) default-frame-alist))
+
+;; Turn off the startup help screen
+(setq inhibit-splash-screen 1)
 ;;----------------------------------------------------------------------
 ;;; early-init.el ends here

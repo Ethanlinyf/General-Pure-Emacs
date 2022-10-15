@@ -13,7 +13,9 @@
 
 (push '(vertical-scroll-bars) default-frame-alist)
 
-(auto-image-file-mode 1)
+
+
+;; (require 'julia-mode)
 
 ;;--------------------------------------------------------------------
 (provide 'init-z-test)

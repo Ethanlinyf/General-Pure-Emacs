@@ -15,18 +15,6 @@
 (require 'pure-custom)
 (require 'pure-function)
 
-;; Turn off the startup help screen
-(setq inhibit-splash-screen 1)
-
-;; Turn off the "tool-bar-mode" minor mode
-(tool-bar-mode -1)
-
-;; Turn off the scroll bar mode
-(scroll-bar-mode -1)
-
-;; Keep the menu bar active
-(menu-bar-mode 1)
-
 ;;(setq initial-frame-alist (quote ((fullscreen . maximized))))
 (when *is-mac*
   (toggle-frame-fullscreen))
