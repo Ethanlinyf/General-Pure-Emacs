@@ -11,7 +11,7 @@
 ;;--------------------------------------------------------------------
 ;;; Code:
 
-(require 'cl)
+;(require 'cl)
 (require 'package)
 
 ;; (setq package-check-signature nil

@@ -78,7 +78,7 @@
 (require 'init-f-platform)
 
 (require 'init-g-interface)
-;; (require 'init-h-dashboard)
+(require 'init-h-dashboard)
 
 (require 'init-i-org)
 (require 'init-i-roam)
@@ -88,7 +88,7 @@
 
 ;; (require 'init-p-julia)
 
-;; (require 'init-z-test)
+(require 'init-z-test)
 
 ;;----------------------------------------------------------------------------
 ;; (provide 'init)

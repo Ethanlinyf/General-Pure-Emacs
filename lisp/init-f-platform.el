@@ -78,6 +78,7 @@
 (require 'winum)
 
 (winum-mode)
+(require 'treemacs)
 (use-package treemacs
   :ensure t
   :defer t
@@ -192,6 +193,9 @@
   :after (treemacs)
   :ensure t
   :config (treemacs-set-scope-type 'Tabs))
+
+(require 'treemacs-all-the-icons)
+(treemacs-load-theme "all-the-icons")
 
 ;;--------------------------------------------------------------------
 
