@@ -85,6 +85,7 @@
 (require 'init-i-tex)
 (require 'init-i-python)
 (require 'init-i-lua)
+(require 'pure-duplicate-line)
 
 ;; (require 'init-p-julia)
 
