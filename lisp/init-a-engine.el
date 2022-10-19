@@ -11,16 +11,12 @@
 ;;--------------------------------------------------------------------
 ;;; Code:
 
-;(require 'cl)
+(require 'cl)
 (require 'package)
 
 ;; (setq package-check-signature nil
 ;;       load-prefer-newer t)
 
-;; (setq package-archives
-;;       '(("gnu"   . "https://elpa.gnu.org/packages/")
-;;         ("melpa" . "https://melpa.org/packages/")
-;;         ("melpa-stable" . "https://stable.melpa.org/packages/")))
 (when (>= emacs-major-version 28)
   (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/") t)
   (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
@@ -30,9 +26,6 @@
 ;; Initialise packages
 (unless (bound-and-true-p package--initialized)
   (package-initialize))
-
-;(when (memq window-system '(mac ns x))
-;  (exec-path-from-shell-initialize))
 
 ;; Setup `use-package'
 (unless (package-installed-p 'use-package)

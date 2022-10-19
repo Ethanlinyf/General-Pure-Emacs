@@ -11,6 +11,9 @@
 ;;--------------------------------------------------------------------
 ;;; Code:
 
+(require 'pure-duplicate-line)
+
+
 ;; (setq insert-directory-program "gls" dired-use-ls-dired t)
 ;; (dirvish-override-dired-mode)
 

@@ -565,7 +565,9 @@ Some basic settings are included in this elisp file, as well as the const and cu
 - init-j-purefunction.el
 * Planning
 1. straight + use-package
-2. integration
+2. integration (Done, setting in the awsometab)
+3. the full path of the file is too long in the dashboard
+   
 ** Org
 - org-super-agenda
   https://github.com/alphapapa/org-super-agenda
