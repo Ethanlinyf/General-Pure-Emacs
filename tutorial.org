@@ -480,22 +480,20 @@ So, on macOS, emacs is looking for init file when starting up in the following f
     (update-load-pathe)
   #+end_src
 - What need to be required
-  + init-a-abbr
+  + init-a-engine
   + init-b-basic
-  + init-c-package
-  + init-d-enhance
-  + init-e-ui
-  + init-e-dired
-  + init-e-dired
-  + init-e-treemacs
-  + init-f-dashboard
-  + init-g-yasnippet
-  + init-h-lsp
+  + init-c-minibuffer
+  + init-d-dired
+  + init-e-enhance
+  + init-f-platform
+  + init-g-interface
+  + init-h-dashboard
   + init-i-org
   + init-i-roam
   + init-i-tex
   + init-i-python
-  + init-j-purefunction
+  + init-i-julia
+  + init-i-lua
   + init-z-test
 
 ** TODO lisp
@@ -563,10 +561,6 @@ Some basic settings are included in this elisp file, as well as the const and cu
 *** word-completion
 *** Own development
 - init-j-purefunction.el
-* Planning
-1. straight + use-package
-2. integration (Done, setting in the awsometab)
-3. the full path of the file is too long in the dashboard
    
 ** Org
 - org-super-agenda
@@ -580,3 +574,5 @@ Some basic settings are included in this elisp file, as well as the const and cu
 3. [[zotero://select/items/1_XC55BTU4][Doom Emacs. Emacs Lisp. 2014. Reprint, Doom Emacs, 2022. https://github.com/doomemacs/doomemacs.]]
 4. [[zotero://select/items/1_2Y87WF4Q][“Gnu.Org: Making Certain File Names ‘Magic.’” Accessed June 24, 2022. https://www.gnu.org/software/emacs/manual/html_node/elisp/Magic-File-Names.html.]]
 5. [[zotero://select/items/1_5IBL5GJ8][“EmacsWiki: Abbrev Mode.” Accessed August 5, 2022. https://www.emacswiki.org/emacs/AbbrevMode.]]
+
+

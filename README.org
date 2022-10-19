@@ -29,10 +29,28 @@ learning/teaching, research and project management.
      |-- lisp/
      |   |-- init-engine.el
      |   |-- init-basic.el
-     |   |-- init- ...
+     |   |-- init-minibuffer
+     |   |-- init-dired
+     |   |-- init-enhance
+     |   |-- init-platform
+     |   |-- init-interface
+     |   |-- init-dashboard
+     |   |-- init-org
+     |   |-- init-roam
+     |   |-- init-LaTeX
+     |   |-- init-Java
+     |   |-- init-python
+     |   |-- init-lua
+     |   |-- init-julia
      |
      |-- site-lisp/ 
      |   |-- lsp-bridge
+     |   |-- aweshell
+     |   |-- awesome-tab
+     |   |-- pure-const
+     |   |-- pure-custom
+     |   |-- pure-function
+     |   |-- pure-macros
      |
      |-- custom.el                        
      |                    
