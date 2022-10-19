@@ -87,10 +87,7 @@
 (require 'init-i-lua)
 (require 'init-p-julia)
 
-
-
-
-(require 'init-z-test)
+; (require 'init-z-test)
 
 ;;----------------------------------------------------------------------------
 ;; (provide 'init)

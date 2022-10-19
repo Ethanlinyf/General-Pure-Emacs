@@ -13,10 +13,7 @@
 
 (require 'pure-duplicate-line)
 
-
-;; (setq insert-directory-program "gls" dired-use-ls-dired t)
 ;; (dirvish-override-dired-mode)
-
 
 ;; abbrev settings
 (setq-default abbrev-mode t)
@@ -31,11 +28,6 @@
 (add-hook 'after-init-hook 'global-auto-revert-mode)
 ;; (add-hook 'after-init-hook 'electric-indent-mode')
 
-;;See matching pairs of parentheses and other characters.
-;;(show-paren-mode t)
-;;(setq show-paren-delay 0)
-;; example for a specific mode to turn on this "show-paren-mode":
-;;(add-hook 'emacs-lisp-mode-hook 'show-paren-mode)
 (add-hook 'after-init-hook 'show-paren-mode)
 (define-advice show-paren-function (:around (fn) fix-show-paren-function)
   "Highlight enclosing parens."
@@ -57,10 +49,6 @@
 (global-set-key (kbd "M-/") 'hippie-expand)
 
 ;;--------------------------------------------------------------------
-;; (require 'recentf)
-;; (recentf-mode 1)
-;; (setq recentf-max-menu-item 30)
-
 ;; from centaur emacs
 (use-package recentf
   :ensure nil
@@ -76,17 +64,6 @@
   :config
   (push (expand-file-name recentf-save-file) recentf-exclude)
   (add-to-list 'recentf-filename-handlers #'abbreviate-file-name))
-
-
-
-
-
-
-
-
-
-
-
 
 ;; The following could be implemented by counsel
 (global-set-key (kbd "C-x C-r") 'recentf-open-files)
@@ -119,7 +96,6 @@
 ;; (keycast-mode t)
 
 ;;--------------------------------------------------------------------
-
 ;; Hungry deletion
 (use-package hungry-delete
   :diminish
@@ -146,10 +122,7 @@
 (setq delete-by-moving-to-trash t)  ;; disable delete directly
 
 ;;--------------------------------------------------------------------
-
 (add-hook 'prog-mode-hook (lambda() (setq split-width-threshold 80)))
-
-
 
 ;;--------------------------------------------------------------------
 (setq ispell-program-name "hunspell")
@@ -158,7 +131,6 @@
       '(("de_DE" "[[:alpha:]]" "[^[:alpha:]]" "[']" nil nil nil utf-8)))
 
 ;;--------------------------------------------------------------------
-
 ;; Add extensions
 (use-package cape
   ;; Bind dedicated completion commands
@@ -183,16 +155,16 @@
   ;; Add `completion-at-point-functions', used by `completion-at-point'.
   (add-to-list 'completion-at-point-functions #'cape-file)
   (add-to-list 'completion-at-point-functions #'cape-dabbrev)
-  ;;(add-to-list 'completion-at-point-functions #'cape-history)
-  ;;(add-to-list 'completion-at-point-functions #'cape-keyword)
-  ;;(add-to-list 'completion-at-point-functions #'cape-tex)
-  ;;(add-to-list 'completion-at-point-functions #'cape-sgml)
-  ;;(add-to-list 'completion-at-point-functions #'cape-rfc1345)
-  ;;(add-to-list 'completion-at-point-functions #'cape-abbrev)
-  ;;(add-to-list 'completion-at-point-functions #'cape-ispell)
-  ;;(add-to-list 'completion-at-point-functions #'cape-dict)
-  ;;(add-to-list 'completion-at-point-functions #'cape-symbol)
-  ;;(add-to-list 'completion-at-point-functions #'cape-line)
+  (add-to-list 'completion-at-point-functions #'cape-history)
+  (add-to-list 'completion-at-point-functions #'cape-keyword)
+  (add-to-list 'completion-at-point-functions #'cape-tex)
+  (add-to-list 'completion-at-point-functions #'cape-sgml)
+  (add-to-list 'completion-at-point-functions #'cape-rfc1345)
+  (add-to-list 'completion-at-point-functions #'cape-abbrev)
+  (add-to-list 'completion-at-point-functions #'cape-ispell)
+  (add-to-list 'completion-at-point-functions #'cape-dict)
+  (add-to-list 'completion-at-point-functions #'cape-symbol)
+  (add-to-list 'completion-at-point-functions #'cape-line)
 )
 
 ;;--------------------------------------------------------------------
@@ -201,16 +173,15 @@
   :ensure t
   :init (setq global-flycheck-mode nil))
 
-
 ;;--------------------------------------------------------------------
-    (setq ispell-program-name "hunspell")
-    ;; you could set `ispell-dictionary` instead but `ispell-local-dictionary' has higher priority
-    (setq ispell-local-dictionary "en_US")
-    (setq ispell-local-dictionary-alist '(("en_US" "[[:alpha:]]" "[^[:alpha:]]" "[']" nil ("-d" "en_US,en_US-med") nil utf-8)))
-    ;; new variable `ispell-hunspell-dictionary-alist' is defined in Emacs
-    ;; If it's nil, Emacs tries to automatically set up the dictionaries.
-    (when (boundp 'ispell-hunspell-dictionary-alist)
-      (setq ispell-hunspell-dictionary-alist ispell-local-dictionary-alist))
+(setq ispell-program-name "hunspell")
+;; you could set `ispell-dictionary` instead but `ispell-local-dictionary' has higher priority
+(setq ispell-local-dictionary "en_US")
+(setq ispell-local-dictionary-alist '(("en_US" "[[:alpha:]]" "[^[:alpha:]]" "[']" nil ("-d" "en_US,en_US-med") nil utf-8)))
+;; new variable `ispell-hunspell-dictionary-alist' is defined in Emacs
+;; If it's nil, Emacs tries to automatically set up the dictionaries.
+(when (boundp 'ispell-hunspell-dictionary-alist)
+  (setq ispell-hunspell-dictionary-alist ispell-local-dictionary-alist))
 
 (eval-after-load "flyspell"
   '(progn

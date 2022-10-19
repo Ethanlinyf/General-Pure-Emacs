@@ -15,7 +15,6 @@
 (with-eval-after-load 'dired
   (define-key dired-mode-map (kbd "RET") 'dired-find-alternate-file))
 
-
 (require 'dired-x)
 ;; (setq dired-recursive-deletes 'always)
 (setq dired-recursive-deletes 'top)
@@ -56,9 +55,6 @@
 (when *is-mac*
   (setq insert-directory-program "gls" dired-use-ls-dired t)
   (setq dired-listing-switches "-al --group-directories-first"))
-
-
-
 
 ;;----------------------------------------------------------------------------
 (provide 'init-d-dired)

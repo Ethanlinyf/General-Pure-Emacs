@@ -15,40 +15,7 @@
 (require 'awesome-tab)
 
 ;;--------------------------------------------------------------------
-
 (awesome-tab-mode t)
-
-;; (add-hook 'prog-mode-hook #'awesome-tab-mode)
-
-;; (add-hook 'eshell-mode-hook #'(lambda() (awesome-tab-mode -1)))
-;; (add-hook 'Info-mode-hook (lambda() (awesome-tab-mode -1)))
-
-;; (defun awesome-tab-buffer-groups ()
-;; "`awesome-tab-buffer-groups' control buffers' group rules.
-;; Group awesome-tab with mode if buffer is derived from `eshell-mode' `emacs-lisp-mode' `dired-mode' `org-mode' `magit-mode'.
-;; All buffer name start with * will group to \"Emacs\".
-;; Other buffer group by `awesome-tab-get-group-name' with project name."
-;; (list
-;; (cond
-;;     ((or (string-equal "*" (substring (buffer-name) 0 1))
-;; 	(memq major-mode '(magit-process-mode
-;; 			    magit-status-mode
-;; 			    magit-diff-mode
-;; 			    magit-log-mode
-;; 			    magit-file-mode
-;; 			    magit-blob-mode
-;; 			    magit-blame-mode)))
-;;     "Emacs")
-;;     ((derived-mode-p 'eshell-mode)
-;;     "EShell")
-;;     ((derived-mode-p 'dired-mode)
-;;     "Dired")
-;;     ((memq major-mode '(org-mode org-agenda-mode diary-mode))
-;;     "OrgMode")
-;;     ((derived-mode-p 'eaf-mode)
-;;     "EAF")
-;;     (t
-;;     (awesome-tab-get-group-name (current-buffer))))))
 
 (defun awesome-tab-buffer-groups ()
   "`awesome-tab-buffer-groups' control buffers' group rules.
@@ -98,17 +65,6 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 
 (when (display-graphic-p)
   (setq awesome-tab-display-icon t))
-
-;;-------------------------------------------------------------------- 
-
-;; https://github.com/re5et/simp
-;; (use-package simple
-;;   :ensure nil
-;;   :hook (after-init . size-indication-mode)
-;;   :init
-;;   (progn
-;;     (setq column-number-mode t)
-;;     ))
 
 ;;--------------------------------------------------------------------
 (require 'winum)
@@ -198,15 +154,11 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
         ("C-x t 1"   . treemacs-delete-other-windows)
         ("C-x t t"   . treemacs)
         ("s-2"       . treemacs)
-        ("s-3"       . awesome-tab-mode)
+        ;("s-3"       . awesome-tab-mode)
         ("C-x t d"   . treemacs-select-directory)
         ("C-x t B"   . treemacs-bookmark)
         ("C-x t C-t" . treemacs-find-file)
         ("C-x t M-t" . treemacs-find-tag)))
-
-;; (use-package treemacs-evil
-;;   :after (treemacs evil)
-;;   :ensure t)
 
 (use-package treemacs-projectile
   :after (treemacs projectile)
@@ -234,7 +186,6 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 (treemacs-load-theme "all-the-icons")
 
 ;;--------------------------------------------------------------------
-
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/site-lisp/aweshell"))
 (require 'aweshell)
 (global-set-key (kbd "s-1") 'aweshell-dedicated-toggle)
@@ -246,6 +197,7 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 
 (require 'lsp-bridge)
 (global-lsp-bridge-mode)
+
 ;;--------------------------------------------------------------------
 (provide 'init-f-platform)
 ;;; init-f-platform.el ends here

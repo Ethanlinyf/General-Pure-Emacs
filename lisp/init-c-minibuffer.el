@@ -15,7 +15,6 @@
 (use-package vertico
   :init
   (vertico-mode)
-
   ;; Different scroll margin
   ;; (setq vertico-scroll-margin 0)
 
@@ -30,21 +29,18 @@
   )
 
 ;;--------------------------------------------------------------------
-
 ;; Persist history over Emacs restarts. Vertico sorts by history position.
 (use-package savehist
   :init
   (savehist-mode))
 
-;;-------------------------------------------------------------------- 
-
+;;--------------------------------------------------------------------
 (use-package corfu
   :init
   (global-corfu-mode))
 
 ;;--------------------------------------------------------------------
-
-;; Optionally use the `orderless' completion style.
+;; Optionally use the 'orderless' completion style.
 (use-package orderless
   :init
   ;; Configure a custom style dispatcher (see the Consult wiki)
@@ -55,7 +51,6 @@
         completion-category-overrides '((file (styles partial-completion)))))
 
 ;;--------------------------------------------------------------------
-
 ;; Enable richer annotations using the Marginalia package
 (use-package marginalia
   ;; Either bind `marginalia-cycle` globally or only in the minibuffer
@@ -71,7 +66,6 @@
   (marginalia-mode))
 
 ;;--------------------------------------------------------------------
-
 ;; Example configuration for Consult
 (use-package consult
   ;; Replace bindings. Lazily loaded due by `use-package'.
@@ -190,7 +184,6 @@
 )
 
 ;;--------------------------------------------------------------------
-
 (use-package embark
   :ensure t
 
@@ -221,7 +214,6 @@
   ;; auto-updating embark collect buffer
   :hook
   (embark-collect-mode . consult-preview-at-point-mode))
-
 
 ;;--------------------------------------------------------------------
 (provide 'init-c-minibuffer)

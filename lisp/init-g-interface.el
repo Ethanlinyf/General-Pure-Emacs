@@ -24,19 +24,6 @@
  window-resize-pixelwise t
  frame-resize-pixelwise t)
 
-;; (when (fboundp 'tool-bar-mode)
-;;   (tool-bar-mode -1))
-
-;; (when (fboundp 'set-scroll-bar-mode)
-;;   (set-scroll-bar-mode nil))
-
-;; (when *is-mac*
-;;   (menu-bar-mode 1))
-
-;; (let ((no-border '(internal-border-width . 0)))
-;;   (add-to-list 'default-frame-alist no-border)
-;;   (add-to-list 'initial-frame-alist no-border))
-
 (when (and *is-mac* (fboundp 'toggle-frame-fullscreen))
   ;; Command-Option-f to toggle fullscreen mode
   ;; Hint: Customize `ns-use-native-fullscreen'
@@ -49,29 +36,19 @@
   (toggle-frame-fullscreen))
 
 ;;--------------------------------------------------------------------
-
 (load-theme 'doom-one t)
 
 (use-package all-the-icons
   :if (display-graphic-p))
 
-;; move to basic.el
-;; (use-package doom-modeline
-;;   :ensure t
-;;   :hook (after-init . doom-modeline-mode))
 
 (setq doom-modeline-minor-modes t)
-
-;; The following doesn't work
-;; (require 'minions)
-;; (add-hook 'after-doom-modeline-hook #'minions-mode)
 
 ;; Display minor-mode in the mode line
 (require 'minions)
 (minions-mode t)
 
 ;;--------------------------------------------------------------------
-
 (use-package all-the-icons-ibuffer
   :ensure t
   :hook (ibuffer-mode . all-the-icons-ibuffer-mode))
@@ -108,17 +85,13 @@ all-the-icons-ibuffer-formats
 (setq inhibit-compacting-font-caches t)
 
 ;;--------------------------------------------------------------------
-
 (use-package all-the-icons-completion
   :ensure nil
   :hook ((after-init . all-the-icons-completion-mode)
          (marginalia-mode-hook . all-the-icons-completion-marginalia-setup)))
 
                                         ;(all-the-icons-completion-mode)
-
                                         ;(add-hook 'marginalia-mode-hook #'all-the-icons-completion-marginalia-setup)
-
-
 
 (add-hook 'foo-mode-hook #'rainbow-delimiters-mode)
 (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
@@ -135,14 +108,12 @@ all-the-icons-ibuffer-formats
   :ensure nil
   :hook (after-init . popwin-mode))
 
-
 ;;--------------------------------------------------------------------
 (require 'lin)
 
 (setq lin-face 'lin-mac) ; check doc string for alternative styles
 
 ;; You can use this to live update the face:
-;;
 ;; (customize-set-variable 'lin-face 'lin-green)
 
 (setq lin-mode-hooks
@@ -166,9 +137,9 @@ all-the-icons-ibuffer-formats
         proced-mode-hook
         tabulated-list-mode-hook))
 
-(lin-global-mode 1)
+(lin-global-mode nil)
 ;;--------------------------------------------------------------------
- (auto-image-file-mode 1)
+(auto-image-file-mode 1)
 
 ;;--------------------------------------------------------------------
 (provide 'init-g-interface)

@@ -53,11 +53,9 @@
 ;; To disable shortcut "jump" indicators for each section, set
 (setq dashboard-show-shortcuts nil)
 
-
 (setq dashboard-set-file-icons t)
 
 (page-break-lines-mode 1)
-
 
 (setq dashboard-page-separator "\n\f\n")
 
@@ -116,11 +114,6 @@
 (counsel-projectile-mode t)
 ;; (setq dashboard-projects-switch-function 'counsel-projectile-switch-project-by-name)
 (setq dashboard-projects-switch-function 'counsel-projectile-switch-project-action-dired)
-
-;; (when (dashboard-mode)
-;;   (awesome-tab-mode nil))
-
-;(add-hook 'dashboard-mode-hook #'(lambda() (awesome-tab-mode -1)))
 
 ;; recentf excludes files: M-x recentf-cleanup
 ;; (add-to-list 'recentf-exclude

@@ -13,8 +13,6 @@
 
 (push '(vertical-scroll-bars) default-frame-alist)
 
-
-
 ;; (require 'julia-mode)
 
 ;;--------------------------------------------------------------------

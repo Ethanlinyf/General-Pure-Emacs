@@ -27,12 +27,12 @@
 (unless (bound-and-true-p package--initialized)
   (package-initialize))
 
-;; Setup `use-package'
+;; Setup 'use-package'
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package))
 
-;; Should set before loading `use-package'
+;; Should set before loading 'use-package'
 (eval-and-compile
   (setq use-package-always-ensure t)
   (setq use-package-always-defer t)
@@ -42,7 +42,7 @@
 (eval-when-compile
   (require 'use-package))
 
-;; Required by `use-package', as use-package optional dependency
+;; Required by 'use-package', as use-package optional dependency
 (use-package diminish)
 (use-package bind-key)
 
@@ -50,7 +50,6 @@
 (use-package gnu-elpa-keyring-update)
 
 ;;--------------------------------------------------------------------
-
 ;; A few more useful configurations...
 (use-package emacs
   :init
@@ -80,5 +79,4 @@
 
 ;;--------------------------------------------------------------------
 (provide 'init-a-engine)
-;;; init-a-engine.el ends here
-
+;;; init-a-engine.el ends here. +

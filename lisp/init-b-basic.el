@@ -111,7 +111,6 @@
   (find-file "~/Documents/Org/mirror.org"))
 (global-set-key (kbd "<f1>") 'open-mirror-file)
 
-
 (defun open-gtd-file ()
   "Quickly open index file."
   (interactive)
@@ -165,8 +164,7 @@
 
 (global-set-key (kbd "C-M-\\") 'indent-region-or-buffer)
 
-;;--------------------- Dired Mode ----------------------------------- 
-
+;;----------------------- Dired Mode ---------------------------------
 (with-eval-after-load "dired"
   (put 'dired-find-alternate-file 'disabled nil)
   (define-key dired-mode-map (kbd "RET") 'dired-find-alternate-file)
@@ -176,12 +174,10 @@
   (setq insert-directory-program "gls" dired-use-ls-dired t)
   (setq dired-listing-switches "-al --group-directories-first"))
 
-
-;;-----------------For org mode -------------------------------------
+;;----------------- For org mode ------------------------------------
 (require 'org-superstar)
 (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1)
                                     (org-indent-mode 1)))
-
 
 ;;------------------------ User Interface ----------------------------
 (use-package doom-modeline
@@ -198,4 +194,4 @@
 
 ;;--------------------------------------------------------------------
 (provide 'init-b-basic)
-;;; init-b-basic.el ends here
+;;; init-b-basic.el ends here, +
