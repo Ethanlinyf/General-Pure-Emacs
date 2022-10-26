@@ -102,7 +102,24 @@
 ;; Drag-and-drop to `dired`
 (add-hook 'dired-mode-hook 'org-download-enable)
 
-
+(defun eli/org-noter-set-highlight (&rest _arg)
+    "Highlight current org-noter note."
+    (save-excursion
+      (with-current-buffer (org-noter--session-notes-buffer org-noter--session)
+        (remove-overlays (point-min) (point-max) 'org-noter-current-hl t)
+        (goto-char (org-entry-beginning-position))
+        (let* ((hl (org-element-context))
+               (hl-begin (plist-get  (plist-get hl 'headline) :begin))
+               (hl-end (1- (plist-get  (plist-get hl 'headline) :contents-begin)))
+               (hl-ov (make-overlay hl-begin hl-end)))
+          (overlay-put hl-ov 'face 'mindre-keyword)
+          (overlay-put hl-ov 'org-noter-current-hl t))
+        (org-cycle-hide-drawers 'all))))
+    
+  (advice-add #'org-noter--focus-notes-region
+              :after #'eli/org-noter-set-highlight)
+  (advice-add #'org-noter-insert-note
+              :after #'eli/org-noter-set-highlight)
 ;;------------------------------------------------------------------------------
 (provide 'init-i-org)
 ;;; init-i-org.el ends here

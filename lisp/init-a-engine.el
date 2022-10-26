@@ -14,9 +14,6 @@
 (require 'cl)
 (require 'package)
 
-;; (setq package-check-signature nil
-;;       load-prefer-newer t)
-
 (when (>= emacs-major-version 28)
   (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/") t)
   (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
@@ -26,6 +23,9 @@
 ;; Initialise packages
 (unless (bound-and-true-p package--initialized)
   (package-initialize))
+
+;; (setq package-check-signature t
+;;        load-prefer-newer t)
 
 ;; Setup 'use-package'
 (unless (package-installed-p 'use-package)

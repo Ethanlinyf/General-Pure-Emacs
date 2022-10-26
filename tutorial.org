@@ -5,7 +5,7 @@
 #+title: Pure Emacs Tutorial
 #+date: <2022-06-15 Wed>
 #+author: Dr YF Lin
-#+email: drlinyf@outlook.com
+#+email: e.yflin@gmail.com 
 #+language: en
 #+select_tags: export
 #+exclude_tags: noexport
@@ -16,6 +16,9 @@
 "Something good, from sand to a tower with spiral evolution and from the tower
 to dust in your universe being as you wish to be" – Dr YF Lin
 #+end_quote
+
+Something good 
+
 
 * Summary
 The tutorial is to demonstrate how this Emacs editor is customised. We pursume a
@@ -534,9 +537,6 @@ Emacs has a good feature to expand abbrivations.
 - how to set an abbrev 
 *** init-b-basic.el
 Some basic settings are included in this elisp file, as well as the const and custom defaults.
-
-
-
 **** init-const.el
 **** init-custom.el
 *** init-c-package.el
@@ -574,5 +574,3 @@ Some basic settings are included in this elisp file, as well as the const and cu
 3. [[zotero://select/items/1_XC55BTU4][Doom Emacs. Emacs Lisp. 2014. Reprint, Doom Emacs, 2022. https://github.com/doomemacs/doomemacs.]]
 4. [[zotero://select/items/1_2Y87WF4Q][“Gnu.Org: Making Certain File Names ‘Magic.’” Accessed June 24, 2022. https://www.gnu.org/software/emacs/manual/html_node/elisp/Magic-File-Names.html.]]
 5. [[zotero://select/items/1_5IBL5GJ8][“EmacsWiki: Abbrev Mode.” Accessed August 5, 2022. https://www.emacswiki.org/emacs/AbbrevMode.]]
-
-

@@ -62,15 +62,20 @@
 (setq dashboard-set-navigator t)
 (setq dashboard-navigator-buttons
       `(;; line1
-        ((,(all-the-icons-octicon "mark-github" :height 1.1 :v-adjust 0.0)
+        ((,(all-the-icons-octicon "milestone" :height 1.1 :v-adjust 0.0)
          "Homepage"
          "Browser Homepage"
          (lambda (&rest _) (browse-url "Https://thethingsengine.org")))
-         (,(all-the-icons-faicon "linkedin" :height 1.1 :v-adjust 0.0)
-          "Linkedin"
-          ""
-          (lambda (&rest _) (browse-url "homepage")))
-         ("★" "Star" "Show stars" (lambda (&rest _) (show-stars)) warning)
+
+         (,(all-the-icons-octicon "mark-github" :height 1.1 :v-adjust 0.0)
+         "GitHub"
+         "Browser GitHub"
+         (lambda (&rest _) (browse-url "https://github.com/ethanlinyf")))
+         ;; (,(all-the-icons-faicon "linkedin" :height 1.1 :v-adjust 0.0)
+         ;;  "Linkedin"
+         ;;  ""
+         ;;  (lambda (&rest _) (browse-url "homepage")))
+         ("★" "Star" "Visit Emacs Forum" (lambda (&rest _) (browse-url "https://emacs-china.org/")))
          ("⚑" nil "Show flags" (lambda (&rest _) (message "flag")) error)
         ("?" "" "?/h" #'show-help nil "<" ">"))
          ;; line 2

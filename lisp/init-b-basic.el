@@ -43,7 +43,7 @@
  word-wrap t)
 
 ;;--------------------------------------------------------------------
- (with-no-warnings
+(with-no-warnings
   ;; Key Modifiers
   (cond
    (sys/mac-port-p
@@ -56,7 +56,7 @@
                ([(super q)] . save-buffers-kill-emacs)
                ([(super s)] . save-buffer)
                ([(super v)] . yank)
-               ;([(super w)] . delete-frame)
+                                        ;([(super w)] . delete-frame)
                ([(super z)] . undo)))
    (sys/win32p
     ;; make PC keyboard's Win key or other to type Super or Hyper

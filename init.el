@@ -21,9 +21,11 @@
                                after-init-time before-init-time)))
                      gcs-done)))
 
-;; set the startup default directory
+;; set the startup default directory,
+;; for the generic, it can be set as defaults
+;; for the specific, you could change to as you want after initiation.
 ;(setq default-directory "~/")
-(setq user-emacs-directory "~/.emacs.d/")
+;(setq user-emacs-directory "~/.emacs.d/")
 
 ;; Initialise the major mode for scratch, fundamental-mode or text-mode
 ;; Prevent setting it as a rich mode, such as org-mode, which will 
@@ -67,7 +69,6 @@
 
 (update-load-path)
 
-;(require 'init-0-plugin)
 (require 'init-a-engine)
 
 (require 'init-b-basic)
@@ -87,8 +88,8 @@
 (require 'init-i-lua)
 (require 'init-p-julia)
 
-;; (require 'init-z-test)
+;; for testing purposes
+; (require 'init-z-test)
 
 ;;----------------------------------------------------------------------------
-;; (provide 'init)
 ;;; init.el ends here
