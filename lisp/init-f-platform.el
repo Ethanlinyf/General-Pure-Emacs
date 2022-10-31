@@ -55,6 +55,7 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
      (string-prefix-p "*Compile-Log*" name)
      (string-prefix-p "*lsp" name)
      (string-prefix-p "Aweshell" name)
+     ;; (string-prefix-p "*eshell*" name)
      (string-prefix-p "*dashboard*" name)
      (string-prefix-p "*info*" name)
      (string-prefix-p "*scratch*" name)
@@ -195,6 +196,8 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 (treemacs-load-theme "all-the-icons")
 
 ;;--------------------------------------------------------------------
+(use-package company
+  :ensure t)
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/site-lisp/aweshell"))
 (require 'aweshell)
 (global-set-key (kbd "s-1") 'aweshell-dedicated-toggle)

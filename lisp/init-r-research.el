@@ -28,4 +28,12 @@
   ;; If you prefer you can use `obsidian-insert-link'
   ("C-c C-l" . obsidian-insert-wikilink)))
 ;;--------------------------------------------------------------------
+(use-package zotxt
+  :ensure t
+  :hook
+  (org-mode . org-zotxt-mode))
+
+;;--------------------------------------------------------------------
+ 
+
  (provide 'init-r-research)

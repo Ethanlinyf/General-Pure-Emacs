@@ -12,7 +12,9 @@
 ;;; Code:
 
 (use-package tex
-  :ensure auctex)
+  :ensure auctex
+  :hook
+  (LaTeX-mode . lsp-bridge-mode))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;AUCTex Initiating;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; 
 
