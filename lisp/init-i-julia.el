@@ -1,4 +1,4 @@
-;;; init-p-julia.el --- Settings for Julia. -*- lexical-binding: t; -*-
+;;; init-i-julia.el --- Settings for Julia. -*- lexical-binding: t; -*-
 ;;
 ;; Copyleft (CL) 2022-2032 Dr YF Lin
 ;;
@@ -11,11 +11,13 @@
 ;;--------------------------------------------------------------------
 ;;; Code:
 
-(require 'julia-mode)
+(use-package julia-mode
+  :ensure t)
 
-(require 'julia-repl)
-(add-hook 'julia-mode-hook 'julia-repl-mode) ;; always use minor mode
+(use-package julia-repl
+  :ensure nil
+  :hook (julia-mode . julia-repl-mode))
 
 ;;----------------------------------------------------------------------------
-(provide 'init-p-julia)
+(provide 'init-i-julia)
 ;;; init.el ends here

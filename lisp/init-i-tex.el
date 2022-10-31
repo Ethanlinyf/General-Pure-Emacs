@@ -15,7 +15,7 @@
 
 ;;(setq TeX-source-correlate-method 'synctex)
 (load "auctex.el" nil t t)
-(require 'company-auctex)
+;; (require 'company-auctex)
 ;;(load "preview-latex.el" nil t t)
 (setq TeX-auto-save t)
 (setq TeX-parse-self t)
@@ -46,8 +46,8 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;LaTex-mode settings;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (add-hook 'LaTeX-mode-hook (lambda ()
                   (require 'tex-site)
-                  (require 'company-auctex)
-                  (company-auctex-init)
+                  ;; (require 'company-auctex)
+                  ;; (company-auctex-init)
                   (setq pdf-view-use-scaling t)
 		  ;(require 'init-auto-complete)
                   ;;(require 'init-g-yasnippet)

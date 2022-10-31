@@ -11,6 +11,9 @@
 ;;--------------------------------------------------------------------
 ;;; Code:
 
+
+
+
 ;; Loading later
 (with-eval-after-load 'dired
   (define-key dired-mode-map (kbd "RET") 'dired-find-alternate-file))
@@ -23,9 +26,8 @@
 
 ;; Colourful dired
 (use-package diredfl
+  :ensure t
   :init (diredfl-global-mode 1))
-
-; (diredful-mode 1)
 
  ;; Show directory first
 (setq dired-listing-switches "-alh --group-directories-first")
@@ -35,7 +37,18 @@
   :bind (:map dired-mode-map
               (")" . dired-git-info-mode)))
 
-(add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
+
+
+(use-package all-the-icons
+  :ensure t
+  :config
+  (setq all-the-icons-color-icons t))
+
+(use-package all-the-icons-dired
+  :ensure t
+  :hook (dired-mode . all-the-icons-dired-mode)
+  :config
+  (setq all-the-icons-dired-monochrome nil))
 
 ;; move this part to basic
 ;; (with-eval-after-load "dired"
@@ -44,12 +57,16 @@
 ;;   (define-key dired-mode-map (kbd "<mouse-2>") 'dired-find-alternate-file)
 ;;   )
 
-;(require 'diredful)
-;(diredful-mode 1)
+;;(require 'diredful)
+;;(diredful-mode 1)
+;; (setq all-the-icons-color-icons t)
+;;(setq all-the-icons-ibuffer-color-icon t)
 
-(setq all-the-icons-color-icons t)
-(setq all-the-icons-ibuffer-color-icon t)
-(setq all-the-icons-dired-monochrome nil)
+(use-package all-the-icons-ibuffer
+  :ensure t
+  :hook (ibuffer-mode . all-the-icons-ibuffer-mode)
+  :config
+  (setq all-the-icons-ibuffer-color-icon t))
 
 ;; add when is-a-mac
 (when *is-mac*

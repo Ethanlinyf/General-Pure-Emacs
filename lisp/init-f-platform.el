@@ -14,12 +14,10 @@
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/site-lisp/awesome-tab"))
 (require 'awesome-tab)
 
-;;--------------------------------------------------------------------
 (awesome-tab-mode t)
 
 (defun awesome-tab-buffer-groups ()
   "`awesome-tab-buffer-groups' control buffers' group rules.
-
 Group awesome-tab with mode if buffer is derived from `eshell-mode' `emacs-lisp-mode' `dired-mode' `org-mode' `magit-mode'.
 All buffer name start with * will group to \"Emacs\".
 Other buffer group by `awesome-tab-get-group-name' with project name."
@@ -58,7 +56,6 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
      (string-prefix-p "*info*" name)
      (string-prefix-p "*scratch*" name)
      (string-prefix-p "*Messages*" name)
-     ;; (string-prefix-p "lisp" name)
      (and (string-prefix-p "magit" name)
                (not (file-name-extension name)))
      )))
@@ -70,7 +67,7 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 (require 'winum)
 
 (winum-mode)
-(require 'treemacs)
+;; (require 'treemacs)
 (use-package treemacs
   :ensure t
   :defer t
@@ -183,7 +180,11 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
   :config (treemacs-set-scope-type 'Tabs))
 
 (require 'treemacs-all-the-icons)
-(treemacs-load-theme "all-the-icons")
+(use-package treemacs-all-the-icons
+  :ensure t
+  :config
+  (treemacs-load-theme "all-the-icons"))
+
 
 ;;--------------------------------------------------------------------
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/site-lisp/aweshell"))
@@ -191,7 +192,12 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 (global-set-key (kbd "s-1") 'aweshell-dedicated-toggle)
 
 ;;--------------------------------------------------------------------
-(require 'epc)
+;; (require 'epc)
+(use-package markdown-mode
+  :ensure t)
+
+(use-package epc
+  :ensure t)
 
 (add-to-list 'load-path "~/.emacs.d/site-lisp/lsp-bridge")
 

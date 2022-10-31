@@ -86,10 +86,12 @@
 (require 'init-i-tex)
 (require 'init-i-python)
 (require 'init-i-lua)
-(require 'init-p-julia)
+(require 'init-i-julia)
+
+(require 'init-r-research)
 
 ;; for testing purposes
-; (require 'init-z-test)
+(require 'init-z-test)
 
 ;;----------------------------------------------------------------------------
 ;;; init.el ends here

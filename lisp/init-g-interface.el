@@ -36,26 +36,33 @@
   (toggle-frame-fullscreen))
 
 ;;--------------------------------------------------------------------
+(use-package doom-themes
+  :ensure t
+  :config)
+
 (load-theme 'doom-one t)
 
 (use-package all-the-icons
   :if (display-graphic-p))
 
-
 (setq doom-modeline-minor-modes t)
 
 ;; Display minor-mode in the mode line
-(require 'minions)
-(minions-mode t)
+(use-package minions
+  :ensure t
+  :hook (after-init . minions-mode))
+
+;; (require 'minions)
+;; (minions-mode t)
 
 ;;--------------------------------------------------------------------
-(use-package all-the-icons-ibuffer
-  :ensure t
-  :hook (ibuffer-mode . all-the-icons-ibuffer-mode))
+;; (use-package all-the-icons-ibuffer
+;;   :ensure t
+;;   :hook (ibuffer-mode . all-the-icons-ibuffer-mode))
 
-(setq all-the-icons-color-icons t)
-(setq all-the-icons-ibuffer-color-icon t)
-(setq all-the-icons-dired-monochrome nil) ;; nil means it is colourful in dired-mode
+;; (setq all-the-icons-color-icons t)
+;; (setq all-the-icons-ibuffer-color-icon t)
+;; (setq all-the-icons-dired-monochrome nil) ;; nil means it is colourful in dired-mode
 
 (all-the-icons-ibuffer-mode t)
 
@@ -86,12 +93,9 @@ all-the-icons-ibuffer-formats
 
 ;;--------------------------------------------------------------------
 (use-package all-the-icons-completion
-  :ensure nil
+  :ensure t
   :hook ((after-init . all-the-icons-completion-mode)
          (marginalia-mode-hook . all-the-icons-completion-marginalia-setup)))
-
-                                        ;(all-the-icons-completion-mode)
-                                        ;(add-hook 'marginalia-mode-hook #'all-the-icons-completion-marginalia-setup)
 
 (add-hook 'foo-mode-hook #'rainbow-delimiters-mode)
 (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)

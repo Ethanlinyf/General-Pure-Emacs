@@ -175,9 +175,11 @@
   (setq dired-listing-switches "-al --group-directories-first"))
 
 ;;----------------- For org mode ------------------------------------
-(require 'org-superstar)
-(add-hook 'org-mode-hook (lambda () (org-superstar-mode 1)
-                                    (org-indent-mode 1)))
+(use-package org-superstar
+  :ensure t
+  :hook (org-mode . (lambda ()
+                      (org-superstar-mode 1)
+                      (org-indent-mode 1))))
 
 ;;------------------------ User Interface ----------------------------
 (use-package doom-modeline
@@ -185,8 +187,13 @@
   :hook (after-init . doom-modeline-mode))
 
 ;;--------------------------------------------------------------------
-(require 'yasnippet)
-(yas-global-mode 1)
+;; Yet another snippet extension
+(use-package yasnippet
+  :diminish yas-minor-mode
+  :hook (after-init . yas-global-mode))
+
+;; Collection of yasnippet snippets
+(use-package yasnippet-snippets)
 
 ;;--------------------------------------------------------------------
  (use-package so-long
