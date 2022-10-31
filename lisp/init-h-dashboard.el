@@ -11,7 +11,10 @@
 ;;--------------------------------------------------------------------
 ;;; Code:
 
-(require 'dashboard)
+;; (require 'dashboard)
+
+(use-package dashboard
+  :ensure t)
 
 (dashboard-setup-startup-hook)
 ;; Or if you use use-package
@@ -55,7 +58,10 @@
 
 (setq dashboard-set-file-icons t)
 
-(page-break-lines-mode 1)
+(use-package page-break-lines
+  :ensure t
+  :init
+  (page-break-lines-mode 1))
 
 (setq dashboard-page-separator "\n\f\n")
 

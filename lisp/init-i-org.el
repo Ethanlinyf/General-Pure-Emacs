@@ -17,11 +17,11 @@
 
 ;;(require 'org-bullets)
 ;;(add-hook 'org-mode-hook #'org-bullets-mode)
-(require 'org-superstar)
-(add-hook 'org-mode-hook (lambda () (org-superstar-mode 1)
-                                    (org-indent-mode 1))
+;; (require 'org-superstar)
+;; (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1)
+;;                                     (org-indent-mode 1))
                                     ;;(auto-save-and-publish-file-mode -1)
-)
+;; )
 
 (setq org-pretty-entities t
       org-src-fontify-natively t

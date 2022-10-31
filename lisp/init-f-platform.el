@@ -16,6 +16,9 @@
 
 (awesome-tab-mode t)
 
+(use-package magit
+  :init (setq magit-diff-refine-hunk t))
+
 (defun awesome-tab-buffer-groups ()
   "`awesome-tab-buffer-groups' control buffers' group rules.
 Group awesome-tab with mode if buffer is derived from `eshell-mode' `emacs-lisp-mode' `dired-mode' `org-mode' `magit-mode'.
@@ -179,12 +182,14 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
   :ensure t
   :config (treemacs-set-scope-type 'Tabs))
 
-(require 'treemacs-all-the-icons)
-(use-package treemacs-all-the-icons
-  :ensure t
-  :config
-  (treemacs-load-theme "all-the-icons"))
 
+;; (use-package treemacs-all-the-icons
+;;   :ensure t
+;;   :init
+;;   (treemacs-load-theme "all-the-icons"))
+
+(require 'treemacs-all-the-icons)
+(treemacs-load-theme "all-the-icons")
 
 ;;--------------------------------------------------------------------
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/site-lisp/aweshell"))
