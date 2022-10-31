@@ -29,8 +29,13 @@
   ;; Hint: Customize `ns-use-native-fullscreen'
   (global-set-key (kbd "M-s-f") 'toggle-frame-fullscreen))
 
+
+(use-package ns-auto-titlebar
+  :ensure t
+  :config
+
 (when *is-mac*
-  (ns-auto-titlebar-mode))
+  (ns-auto-titlebar-mode)))
 
 (when *is-mac*
   (toggle-frame-fullscreen))
@@ -112,7 +117,7 @@ all-the-icons-ibuffer-formats
 ;; osx-lib [install]
 
 (use-package popwin
-  :ensure nil
+  :ensure t
   :hook (after-init . popwin-mode))
 
 ;;--------------------------------------------------------------------

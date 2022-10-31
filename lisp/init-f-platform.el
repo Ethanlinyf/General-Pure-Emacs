@@ -67,9 +67,12 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
   (setq awesome-tab-display-icon t))
 
 ;;--------------------------------------------------------------------
-(require 'winum)
-
-(winum-mode)
+;;(require 'winum)
+(use-package winum
+  :ensure t
+  :hook
+  (after-init . winum-mode))
+;; (winum-mode)
 ;; (require 'treemacs)
 (use-package treemacs
   :ensure t

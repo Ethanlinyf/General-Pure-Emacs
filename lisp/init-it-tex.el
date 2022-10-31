@@ -19,51 +19,34 @@
 ;;(setq TeX-source-correlate-method 'synctex)
 (load "auctex.el" nil t t)
 ;; (require 'company-auctex)
-;; (load "preview-latex.el" nil t t)
+;;(load "preview-latex.el" nil t t)
 (setq TeX-auto-save t)
 (setq TeX-parse-self t)
 (setq-default TeX-master nil)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;RefTex;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; 
-(require 'reftex)
-(add-hook 'LaTeX-mode-hook 'turn-on-reftex)
-(setq reftex-plug-into-AUCTeX t)
-(setq reftex-enable-partial-scans t)
-(setq reftex-save-parse-info t)
-(setq reftex-use-multiple-selection-buffers t)
-(setq reftex-toc-split-windows-horizontally t) ;;*toc*buffer on left。
-(setq reftex-toc-split-windows-fraction 0.2)  ;;*toc*buffer ratio。
-(autoload 'reftex-mode "reftex" "RefTeX Minor Mode" t)
-(autoload 'turn-on-reftex "reftex" "RefTeX Minor Mode" nil)
-(autoload 'reftex-citation "reftex-cite" "Make citation" nil)  
-(autoload 'reftex-index-phrase-mode "reftex-index" "Phrase mode" t)
+;; (require 'reftex)
+;; (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
+;; (setq reftex-plug-into-AUCTeX t)
+;; (setq reftex-enable-partial-scans t)
+;; (setq reftex-save-parse-info t)
+;; (setq reftex-use-multiple-selection-buffers t)
+;; (setq reftex-toc-split-windows-horizontally t) ;;*toc*buffer on left。
+;; (setq reftex-toc-split-windows-fraction 0.2)  ;;*toc*buffer ratio。
+;; (autoload 'reftex-mode "reftex" "RefTeX Minor Mode" t)
+;; (autoload 'turn-on-reftex "reftex" "RefTeX Minor Mode" nil)
+;; (autoload 'reftex-citation "reftex-cite" "Make citation" nil)  
+;; (autoload 'reftex-index-phrase-mode "reftex-index" "Phrase mode" t)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;CDLaTeX;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(use-package cdlatex
-  :ensure t
-  :hook
-  (LaTeX-mode . turn-on-cdlatex)
-  :config
-  (autoload 'cdlatex-mode "cdlatex" "CDLaTeX Mode" t)
-  (autoload 'turn-on-cdlatex "cdlatex" "CDLaTeX Mode" nil))
 ;; (add-hook 'LaTeX-mode-hook 'turn-on-cdlatex)
-
-
+;; (autoload 'cdlatex-mode "cdlatex" "CDLaTeX Mode" t)
+;; (autoload 'turn-on-cdlatex "cdlatex" "CDLaTeX Mode" nil)
 
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;LaTex-mode settings;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(use-package pdf-tools ;; need to manually download from nongnu
-   :pin manual
-   :config
-   (pdf-tools-install)
-   (setq-default pdf-view-display-size 'fit-width)
-   (define-key pdf-view-mode-map (kbd "C-s") 'isearch-forward)
-   :custom
-   (pdf-annot-activate-created-annotations t "automatically annotate highlights"))
-
-
 (add-hook 'LaTeX-mode-hook (lambda ()
                   (require 'tex-site)
                   ;; (require 'company-auctex)
@@ -73,7 +56,7 @@
                   ;;(require 'init-g-yasnippet)
 		  (TeX-fold-mode 1)
 		  (auto-fill-mode 1)
-                  ;; (latex-preview-pane-enable)
+                  (latex-preview-pane-enable)
 
 		  ;;;;;;;;;;;;;;;; flyspell settings
 		  (flyspell-mode 1)
@@ -143,7 +126,14 @@
                   (add-hook 'pdf-view-mode-hook (lambda() (linum-mode -1)))
 ));;
 
-
+(use-package pdf-tools
+   :pin manual
+   :config
+   (pdf-tools-install)
+   (setq-default pdf-view-display-size 'fit-width)
+   (define-key pdf-view-mode-map (kbd "C-s") 'isearch-forward)
+   :custom
+   (pdf-annot-activate-created-annotations t "automatically annotate highlights"))
 
 
 
@@ -181,24 +171,23 @@
 (use-package latex-preview-pane
   :ensure t
   :hook
-  (LaTeX-mode . (latex-preview-pane-enable))
   (latex-preview-pane-mode .  (setq pdf-latex-command "pdflatex"
-                                    synctex-number "1"
-                                    shell-escape-mode "-shell-escape"
-                                    auto-update-latex-preview-pane 'off)))
+                synctex-number "1"
+                shell-escape-mode "-shell-escape"
+                auto-update-latex-preview-pane 'off)))
 ;; (add-hook 'latex-preview-pane-mode-hook
 ;;           (setq pdf-latex-command "pdflatex"
 ;;                 synctex-number "1"
 ;;                 shell-escape-mode "-shell-escape"
 ;;                 auto-update-latex-preview-pane 'off))
 
-;;;; Keybindings for LaTeX-preview-pane mode
-(defun display-pdflatex-result ()
-  (interactive)
-  (unless (equal "*pdflatex-buffer*" (buffer-name (window-buffer)))
-    (display-buffer "*pdflatex-buffer*" (if (one-window-p)
-                                            'display-buffer-pop-up-window
-                                          'display-buffer-reuse-window))))
+  ;;;; Keybindings for LaTeX-preview-pane mode
+  (defun display-pdflatex-result ()
+    (interactive)
+    (unless (equal "*pdflatex-buffer*" (buffer-name (window-buffer)))
+      (display-buffer "*pdflatex-buffer*" (if (one-window-p)
+                                              'display-buffer-pop-up-window
+                                            'display-buffer-reuse-window))))
 
   ;; (add-hook 'latex-preview-pane-mode-hook
   ;;           (lambda ()
@@ -237,4 +226,4 @@
   '(define-key LaTeX-mode-map (kbd "\\") #'ddd))
 
 
-(provide 'init-i-tex)
+(provide 'init-it-tex)

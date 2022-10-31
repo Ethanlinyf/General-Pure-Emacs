@@ -123,11 +123,12 @@
 (advice-add #'dashboard-insert-footer :after #'my-dashboard-insert-copyright)
 (use-package counsel-projectile
   :ensure t
-  :config
-  (counsel-projectile-mode t))
+  :init
+  (counsel-projectile-mode t)
+  (setq dashboard-projects-switch-function 'counsel-projectile-switch-project-action-dired))
 ;; (counsel-projectile-mode t)
 ;; (setq dashboard-projects-switch-function 'counsel-projectile-switch-project-by-name)
-(setq dashboard-projects-switch-function 'counsel-projectile-switch-project-action-dired)
+
 
 ;; recentf excludes files: M-x recentf-cleanup
 ;; (add-to-list 'recentf-exclude
