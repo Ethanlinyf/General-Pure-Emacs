@@ -75,32 +75,50 @@
 (global-set-key "\C-ca" 'org-agenda)
 (global-set-key "\C-cl" 'org-store-link)
 
+
+(use-package pangu-spacing
+  :ensure t
+  :hook
+  (org-mode . pangu-spacing-mode)
+  (org-mode . (lambda ()
+            (set (make-local-variable 'pangu-spacing-real-insert-separtor) t))))
+
 ;; Pangu-spacing support: real insert separator
- (add-hook 'org-mode-hook
-           (lambda ()
-            (set (make-local-variable 'pangu-spacing-real-insert-separtor) t)))
+ ;; (add-hook 'org-mode-hook
+ ;;           (lambda ()
+ ;;            (set (make-local-variable 'pangu-spacing-real-insert-separtor) t)))
 
 ;; (add-hook 'org-mode-hook #'awesome-tab-mode)
 ;;(require 'org-tempo)
 ;;(add-to-list 'org-modules 'org-tempo t)
 
-(add-hook 'org-mode-hook #'valign-mode)
+(use-package valign
+  :ensure t
+  :hook
+  (org-mode . valign-mode))
+
+
+;; (add-hook 'org-mode-hook #'valign-mode)
 
 
 ;;--------------------------------------------------------------------
 ;; pangu-spacing
-(require 'pangu-spacing)
+;; (require 'pangu-spacing)
 ;; (global-pangu-spacing-mode 1)
 
-(add-hook 'org-mode-hook #'pangu-spacing-mode)
+;; (add-hook 'org-mode-hook #'pangu-spacing-mode)
 ;; (add-hook 'org-mode-hook
 ;;            '(lambda ()
 ;;             (set (make-local-variable 'pangu-spacing-real-insert-separtor) t)))
 
-(require 'org-download)
+;; (require 'org-download)
+(use-package org-download
+  :ensure t
+  :hook
+  (dired-mode . org-download-enable))
 
 ;; Drag-and-drop to `dired`
-(add-hook 'dired-mode-hook 'org-download-enable)
+; (add-hook 'dired-mode-hook 'org-download-enable)
 
 (defun eli/org-noter-set-highlight (&rest _arg)
     "Highlight current org-noter note."

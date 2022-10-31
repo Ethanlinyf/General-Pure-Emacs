@@ -191,5 +191,12 @@
      (define-key flyspell-mouse-map [mouse-2] nil)))
 
 ;;--------------------------------------------------------------------
+;; An intuitive and efficient solution for single-buffer text search
+(use-package ctrlf
+  :ensure t
+  :init
+  (ctrlf-mode +1))
+;;--------------------------------------------------------------------
+ 
 (provide 'init-e-enhance)
 ;;; init-e-enhance.el ends here

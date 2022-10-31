@@ -121,8 +121,11 @@
     (insert (propertize dashboard-footer 'face 'font-lock-comment-face))
     (insert "\n")))
 (advice-add #'dashboard-insert-footer :after #'my-dashboard-insert-copyright)
-
-(counsel-projectile-mode t)
+(use-package counsel-projectile
+  :ensure t
+  :config
+  (counsel-projectile-mode t))
+;; (counsel-projectile-mode t)
 ;; (setq dashboard-projects-switch-function 'counsel-projectile-switch-project-by-name)
 (setq dashboard-projects-switch-function 'counsel-projectile-switch-project-action-dired)
 

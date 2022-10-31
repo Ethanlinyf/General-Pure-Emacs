@@ -97,11 +97,14 @@ all-the-icons-ibuffer-formats
   :hook ((after-init . all-the-icons-completion-mode)
          (marginalia-mode-hook . all-the-icons-completion-marginalia-setup)))
 
-(add-hook 'foo-mode-hook #'rainbow-delimiters-mode)
-(add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
+(use-package rainbow-delimiters
+  :ensure t
+  :hook
+  (foo-mode . rainbow-delimiters-mode)
+  (prog-mode . rainbow-delimiters-mode))
 
-;; An intuitive and efficient solution for single-buffer text search
-(ctrlf-mode +1)
+;; (add-hook 'foo-mode-hook #'rainbow-delimiters-mode)
+;; (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
 
 ;; osx-lib
 ;; manually install the package osx-lib
@@ -113,9 +116,14 @@ all-the-icons-ibuffer-formats
   :hook (after-init . popwin-mode))
 
 ;;--------------------------------------------------------------------
-(require 'lin)
+;; (require 'lin)
 
-(setq lin-face 'lin-mac) ; check doc string for alternative styles
+(use-package lin
+  :ensure t
+  :config
+  (setq lin-face 'lin-mac))
+
+ ; check doc string for alternative styles
 
 ;; You can use this to live update the face:
 ;; (customize-set-variable 'lin-face 'lin-green)
@@ -141,7 +149,7 @@ all-the-icons-ibuffer-formats
 ;;         proced-mode-hook
 ;;         tabulated-list-mode-hook))
 
-(lin-global-mode nil)
+;(lin-global-mode nil)
 ;;--------------------------------------------------------------------
 (auto-image-file-mode 1)
 
