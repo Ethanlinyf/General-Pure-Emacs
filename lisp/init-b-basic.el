@@ -193,7 +193,8 @@
   :hook (after-init . yas-global-mode))
 
 ;; Collection of yasnippet snippets
-(use-package yasnippet-snippets)
+(use-package yasnippet-snippets
+  :ensure t)
 
 ;;--------------------------------------------------------------------
  (use-package so-long
@@ -201,4 +202,4 @@
 
 ;;--------------------------------------------------------------------
 (provide 'init-b-basic)
-;;; init-b-basic.el ends here, +
+;;; init-b-basic.el ends here, ++

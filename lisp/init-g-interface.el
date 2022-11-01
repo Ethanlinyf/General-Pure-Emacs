@@ -32,9 +32,8 @@
 
 (use-package ns-auto-titlebar
   :ensure t
-  :config
-
-(when *is-mac*
+  :init
+  (when *is-mac*
   (ns-auto-titlebar-mode)))
 
 (when *is-mac*
@@ -43,9 +42,10 @@
 ;;--------------------------------------------------------------------
 (use-package doom-themes
   :ensure t
-  :config)
+  :init
+  (load-theme 'doom-one t))
 
-(load-theme 'doom-one t)
+
 
 (use-package all-the-icons
   :if (display-graphic-p))

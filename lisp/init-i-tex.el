@@ -238,5 +238,20 @@
 (eval-after-load "latex"
   '(define-key LaTeX-mode-map (kbd "\\") #'ddd))
 
+;;--------------------------------------------------------------------
+;; https://github.com/haji-ali/procress
+;; (add-to-list 'load-path "~/.emacs.d/site-lisp/procress")
+;; (require 'procress)
+;; (procress-load-default-svg-images)
+;; (add-hook 'LaTeX-mode-hook #'procress-auctex-mode)
 
+;; (use-package procress
+;;   ;; :straight (:host github :repo "haji-ali/procress")
+;;   :commands procress-auctex-mode
+;;   :init
+;;   (add-hook 'LaTeX-mode-hook #'procress-auctex-mode)
+;;   :config
+;;   (procress-load-default-svg-images))
+
+;;--------------------------------------------------------------------
 (provide 'init-i-tex)

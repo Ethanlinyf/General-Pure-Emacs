@@ -87,6 +87,8 @@
 (require 'init-i-python)
 (require 'init-i-lua)
 (require 'init-i-julia)
+(require 'init-i-ts)
+
 
 (require 'init-r-research)
 

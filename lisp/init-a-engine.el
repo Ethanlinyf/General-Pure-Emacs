@@ -42,7 +42,9 @@
 ;; (setq package-check-signature t
 ;;        load-prefer-newer t)
 
+;;--------------------------------------------------------------------
 ;; Setup 'use-package'
+
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package))

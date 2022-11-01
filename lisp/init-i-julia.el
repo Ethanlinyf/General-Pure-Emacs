@@ -15,7 +15,7 @@
   :ensure t)
 
 (use-package julia-repl
-  :ensure nil
+  :ensure t
   :hook (julia-mode . julia-repl-mode))
 
 ;;----------------------------------------------------------------------------

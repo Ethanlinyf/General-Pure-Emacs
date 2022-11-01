@@ -217,5 +217,5 @@
 
 ;;--------------------------------------------------------------------
 (provide 'init-c-minibuffer)
-;;; init-c-minibuffer.el ends here
+;;; init-c-minibuffer.el ends here, +
 
