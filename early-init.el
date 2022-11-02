@@ -30,7 +30,6 @@
           (lambda ()
             (setq gc-cons-threshold 800000)))
 
-
 ;; Prevent unwanted runtime compilation for native-comp users
 (setq native-comp-deferred-compilation nil)
 

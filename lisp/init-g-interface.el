@@ -45,8 +45,6 @@
   :init
   (load-theme 'doom-one t))
 
-
-
 (use-package all-the-icons
   :if (display-graphic-p))
 
@@ -157,6 +155,8 @@ all-the-icons-ibuffer-formats
 ;(lin-global-mode nil)
 ;;--------------------------------------------------------------------
 (auto-image-file-mode 1)
+;; (face-remap-add-relative 'font-lock-keyword-face '(:inherit default))
+;; (face-remap-add-relative 'font-lock-keyword-face `(:foreground ,(face-foreground 'default)))
 
 ;;--------------------------------------------------------------------
 (provide 'init-g-interface)

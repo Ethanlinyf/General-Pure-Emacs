@@ -55,7 +55,7 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
      (string-prefix-p "*Compile-Log*" name)
      (string-prefix-p "*lsp" name)
      (string-prefix-p "Aweshell" name)
-     ;; (string-prefix-p "*eshell*" name)
+     ;; (string-prefix-p "" name)
      (string-prefix-p "*dashboard*" name)
      (string-prefix-p "*info*" name)
      (string-prefix-p "*scratch*" name)
@@ -191,6 +191,9 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 ;;   :ensure t
 ;;   :init
 ;;   (treemacs-load-theme "all-the-icons"))
+
+(use-package treemacs-all-the-icons
+  :ensure t)
 
 (require 'treemacs-all-the-icons)
 (treemacs-load-theme "all-the-icons")

@@ -20,7 +20,8 @@
   (toggle-frame-fullscreen))
 
 ;; Turn on line number and the column-number-mode
-(global-linum-mode 1)
+;; (global-linum-mode 1)
+(global-display-line-numbers-mode 1)
 (column-number-mode 1)
 
 ;; Change the cursor type

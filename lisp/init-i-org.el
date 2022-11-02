@@ -15,6 +15,15 @@
 
 (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
 
+(use-package tablist
+  :ensure t)
+
+(use-package org-noter
+  :ensure t)
+
+(use-package org-noter-pdftools
+  :ensure t)
+
 ;;(require 'org-bullets)
 ;;(add-hook 'org-mode-hook #'org-bullets-mode)
 ;; (require 'org-superstar)
@@ -119,6 +128,9 @@
 
 ;; Drag-and-drop to `dired`
 ; (add-hook 'dired-mode-hook 'org-download-enable)
+
+
+
 
 (defun eli/org-noter-set-highlight (&rest _arg)
     "Highlight current org-noter note."

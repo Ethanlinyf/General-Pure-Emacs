@@ -51,10 +51,6 @@
   (autoload 'turn-on-cdlatex "cdlatex" "CDLaTeX Mode" nil))
 ;; (add-hook 'LaTeX-mode-hook 'turn-on-cdlatex)
 
-
-
-
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;LaTex-mode settings;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (use-package pdf-tools ;; need to manually download from nongnu
    :pin manual
@@ -65,6 +61,8 @@
    :custom
    (pdf-annot-activate-created-annotations t "automatically annotate highlights"))
 
+(use-package pdf-tools
+  :ensure t)
 
 (add-hook 'LaTeX-mode-hook (lambda ()
                   (require 'tex-site)
@@ -85,7 +83,7 @@
 
 		  
 		  (turn-on-auto-fill)              ;;LaTeX mode，turn off auto fold
-		  (linum-mode 1)
+		  ;; (linum-mode 1)
 		  ;;(auto-complete-mode 1)
 		  (latex-math-mode 1)
 		  (outline-minor-mode 1)            
@@ -142,7 +140,7 @@
                         reftex-plug-into-AUCTeX t)
                   (add-hook 'TeX-after-compilation-finished-functions
 		            #'TeX-revert-document-buffer) ;
-                  (add-hook 'pdf-view-mode-hook (lambda() (linum-mode -1)))
+                  (add-hook 'pdf-view-mode-hook (lambda() (display-line-numbers-mode -1)))
 ));;
 
 
