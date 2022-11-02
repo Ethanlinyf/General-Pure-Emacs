@@ -70,14 +70,11 @@
 (update-load-path)
 
 (require 'init-a-engine)
-
 (require 'init-b-basic)
 (require 'init-c-minibuffer)
 (require 'init-d-dired)
-
 (require 'init-e-enhance)
 (require 'init-f-platform)
-
 (require 'init-g-interface)
 (require 'init-h-dashboard)
 
