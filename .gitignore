@@ -80,3 +80,5 @@ eaf/
 url/
 zull.el
 /straight
+/.DS_Store
+/elgrep-data.el
