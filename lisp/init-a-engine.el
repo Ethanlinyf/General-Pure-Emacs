@@ -28,11 +28,11 @@
 ;;       (eval-print-last-sexp)))
 ;;   (load bootstrap-file nil 'nomessage))
 
-
 (when (>= emacs-major-version 28)
   (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/") t)
   (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
   (add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/") t)
+  ;; (add-to-list 'package-archives '("nongnu" . "https://elpa.nongnu.org/nongnu/") t) ;; 
   )
 
 ;; Initialise packages
@@ -64,41 +64,47 @@
 (use-package bind-key)
 
 ;; Update GPG keyring for GNU ELPA
-(use-package gnu-elpa-keyring-update)
+(use-package gnu-elpa-keyring-update
+  :ensure t)
 
 ;;--------------------------------------------------------------------
 ;;  (straight-use-package 'use-package)
 ;; (use-package straight
 ;;   :custom (straight-use-package-by-default t))
   ;:bind  (("C-<f2>" . hydra-straight-helper/body)))
-
 ;;--------------------------------------------------------------------
-;; A few more useful configurations...
-(use-package emacs
-  :init
-  ;; Add prompt indicator to `completing-read-multiple'.
-  ;; We display [CRM<separator>], e.g., [CRM,] if the separator is a comma.
-  (defun crm-indicator (args)
-    (cons (format "[CRM%s] %s"
-                  (replace-regexp-in-string
-                   "\\`\\[.*?]\\*\\|\\[.*?]\\*\\'" ""
-                   crm-separator)
-                  (car args))
-          (cdr args)))
-  (advice-add #'completing-read-multiple :filter-args #'crm-indicator)
-
-  ;; Do not allow the cursor in the minibuffer prompt
-  (setq minibuffer-prompt-properties
-        '(read-only t cursor-intangible t face minibuffer-prompt))
-  (add-hook 'minibuffer-setup-hook #'cursor-intangible-mode)
-
-  ;; Emacs 28: Hide commands in M-x which do not work in the current mode.
-  ;; Vertico commands are hidden in normal buffers.
-  ;; (setq read-extended-command-predicate
-  ;;       #'command-completion-default-include-p)
-
-  ;; Enable recursive minibuffers
-  (setq enable-recursive-minibuffers t))
+ ; A modern Packages Menu
+(use-package paradox
+  :custom-face
+  (paradox-archive-face ((t (:inherit font-lock-doc-face))))
+  (paradox-description-face ((t (:inherit completions-annotations))))
+  :hook (after-init . paradox-enable)
+  :init (setq paradox-execute-asynchronously t
+              paradox-github-token t
+              paradox-display-star-count nil
+              paradox-status-face-alist ;
+              '(("built-in"   . font-lock-builtin-face)
+                ("available"  . success)
+                ("new"        . (success bold))
+                ("held"       . font-lock-constant-face)
+                ("disabled"   . font-lock-warning-face)
+                ("avail-obso" . font-lock-comment-face)
+                ("installed"  . font-lock-comment-face)
+                ("dependency" . font-lock-comment-face)
+                ("incompat"   . font-lock-comment-face)
+                ("deleted"    . font-lock-comment-face)
+                ("unsigned"   . font-lock-warning-face)))
+  :config
+  (add-hook 'paradox-after-execute-functions
+            (lambda (_)
+              "Display `page-break-lines' in \"*Paradox Report*\" buffer."
+              (when (fboundp 'page-break-lines-mode)
+                (let ((buf (get-buffer "*Paradox Report*"))
+                      (inhibit-read-only t))
+                  (when (buffer-live-p buf)
+                    (with-current-buffer buf
+                      (page-break-lines-mode 1))))))
+            t))
 
 ;;--------------------------------------------------------------------
 (provide 'init-a-engine)

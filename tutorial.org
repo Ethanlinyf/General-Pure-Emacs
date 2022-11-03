@@ -11,6 +11,8 @@
 #+exclude_tags: noexport
 #+creator: Emacs 28.1 (Org mode 9.5.2)
 #+cite_export:
+#+startup:overed
+
 
 #+begin_quote
 "Something good, from sand to a tower with spiral evolution and from the tower

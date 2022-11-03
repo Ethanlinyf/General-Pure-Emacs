@@ -193,10 +193,10 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 ;;   (treemacs-load-theme "all-the-icons"))
 
 (use-package treemacs-all-the-icons
-  :ensure t)
-
-(require 'treemacs-all-the-icons)
-(treemacs-load-theme "all-the-icons")
+  :ensure t
+  :init
+  (require 'treemacs-all-the-icons)
+  (treemacs-load-theme "all-the-icons"))
 
 ;;--------------------------------------------------------------------
 (use-package company

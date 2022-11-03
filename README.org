@@ -53,7 +53,7 @@ learning/teaching, research and project management.
      |   |-- pure-macros
      |
      |-- custom.el                        
-     |                    
+     |        
      |-- ...
 #+END_EXAMPLE
 
@@ -81,18 +81,21 @@ learning/teaching, research and project management.
   + Management for research purposes as an example below:
     [[./site-lisp/figure/Git-for-research-project.png]]
 - Custmisable
+  Nothing cannot be custmised in this General Pure Emacs. 
 - Extensible
-  + Customisation \\
-    Nothing cannot be custmised in this General Pure Emacs. 
   + literate programming \\
     The literate programming mode, Org-Babel, is able to embed multiple
     programming languages in a org file to make it as an active document.
+  + roam-network
 - Creative \\ 
 - Instructive \\
   The [[./tutorial.org][tutorial]] how to build this platform is included in this repository.
 
 See more details at the website [[https://thethingsengine.org][Something Good]] under the ThingsEngine Project.
 * Installation
+To enhance the default Emacs experience, the latest stable release (28.2) is
+recommended.
+
 1. Backup your existing configuration
    #+begin_src shell
      mv ~/.emacs.d ~/.emacs.d.bak
@@ -101,12 +104,15 @@ See more details at the website [[https://thethingsengine.org][Something Good]] 
    #+begin_src shell
      git clone  git@github.com:Ethanlinyf/General-Pure-Emacs.git ~/.emacs.d
    #+end_src
-
+3. GUI with icons
+   Run: M-x all-the-icons-install-fonts to install the needed fonts.
 * Support/Issue
 Please report any issues about configuration at this repository. 
 * License
-This program is free software. You can redistribute and/or modify it under
-[[https://github.com/redguardtoo/emacs.d/blob/master/LICENSE][GNU General Public License]] published by the Free Software Foundation. This
-customisation is shared with the hope that it will be useful and helpful, but
-without any warranty; without even the implied warranty of merchantability or
-fitness for a particular purpose.
+This program is free software. You can redistribute and/or modify it
+under [[https://github.com/redguardtoo/emacs.d/blob/master/LICENSE][GNU General Public License]] published by the Free Software
+Foundation, as well as Copyleft under [[thethingsengine.org][ThingsEngine]] project. The
+constributions are shared with the hope that this program will be
+useful, helpful and inspiring, but without any warranty; without even
+the implied warranty of merchantability or fitness for a particular
+purpose.
