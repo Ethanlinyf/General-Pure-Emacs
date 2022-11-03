@@ -77,7 +77,7 @@ learning/teaching, research and project management.
   + Programming as an IDE:
     [[./site-lisp/figure/Emacs_elisp_programming.png]]
   + Plan and schedule
-    [[./site-lisp/figure/agenda_2.gif]]
+    [[./site-lisp/figure/normal_task_states.png]]
   + Management for research purposes as an example below:
     [[./site-lisp/figure/Git-for-research-project.png]]
 - Custmisable
