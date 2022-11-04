@@ -36,14 +36,15 @@
   (when *is-mac*
   (ns-auto-titlebar-mode)))
 
-(when *is-mac*
-  (toggle-frame-fullscreen))
-
 ;;--------------------------------------------------------------------
 (use-package doom-themes
   :ensure t
   :init
   (load-theme 'doom-one t))
+
+(setq initial-frame-alist (quote ((fullscreen . maximized))))
+(when *is-mac*
+  (toggle-frame-fullscreen))
 
 (use-package all-the-icons
   :if (display-graphic-p))

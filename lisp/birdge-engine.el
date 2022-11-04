@@ -1,4 +1,4 @@
-;;; init-0-plugin.el --- Pligins for Emacs. -*- lexical-binding: t; -*-
+;;; init-0-engine.el --- Pligins for Emacs. -*- lexical-binding: t; -*-
 ;;
 ;; Copyleft (CL) 2022-2032 YF Lin
 ;;
@@ -173,5 +173,5 @@
       (package-install pkg))))
 
 ;;--------------------------------------------------------------------
-(provide 'init-0-plugin)
+(provide 'init-0-engine)
 ;;; init-0-plugin.el ends here

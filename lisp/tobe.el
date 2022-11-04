@@ -54,6 +54,41 @@
 ;;(require 'eaf-git)
 ;; (require 'eaf-system-monitor)
 
+
+;--------------------------------------------------------------------
+ ; A modern Packages Menu
+;; (use-package paradox
+;;   :custom-face
+;;   (paradox-archive-face ((t (:inherit font-lock-doc-face))))
+;;   (paradox-description-face ((t (:inherit completions-annotations))))
+;;   :hook (after-init . paradox-enable)
+;;   :init (setq paradox-execute-asynchronously t
+;;               paradox-github-token t
+;;               paradox-display-star-count nil
+;;               paradox-status-face-alist ;
+;;               '(("built-in"   . font-lock-builtin-face)
+;;                 ("available"  . success)
+;;                 ("new"        . (success bold))
+;;                 ("held"       . font-lock-constant-face)
+;;                 ("disabled"   . font-lock-warning-face)
+;;                 ("avail-obso" . font-lock-comment-face)
+;;                 ("installed"  . font-lock-comment-face)
+;;                 ("dependency" . font-lock-comment-face)
+;;                 ("incompat"   . font-lock-comment-face)
+;;                 ("deleted"    . font-lock-comment-face)
+;;                 ("unsigned"   . font-lock-warning-face)))
+;;   :config
+;;   (add-hook 'paradox-after-execute-functions
+;;             (lambda (_)
+;;               "Display `page-break-lines' in \"*Paradox Report*\" buffer."
+;;               (when (fboundp 'page-break-lines-mode)
+;;                 (let ((buf (get-buffer "*Paradox Report*"))
+;;                       (inhibit-read-only t))
+;;                   (when (buffer-live-p buf)
+;;                     (with-current-buffer buf
+;;                       (page-break-lines-mode 1))))))
+;;             t))
+
 ;;--------------------------------------------------------------------
 (setq inhibit-compacting-font-caches t)
 

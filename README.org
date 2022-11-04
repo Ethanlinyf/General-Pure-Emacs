@@ -75,11 +75,17 @@ learning/teaching, research and project management.
     [[./site-lisp/figure/org-roam-network.png]]
     
   + Programming as an IDE:
+    
     [[./site-lisp/figure/Emacs_elisp_programming.png]]
+    
   + Plan and schedule
+    
     [[./site-lisp/figure/normal_task_states.png]]
+    
   + Management for research purposes as an example below:
+    
     [[./site-lisp/figure/Git-for-research-project.png]]
+    
 - Custmisable
   Nothing cannot be custmised in this General Pure Emacs. 
 - Extensible
@@ -111,7 +117,7 @@ Please report any issues about configuration at this repository.
 * License
 This program is free software. You can redistribute and/or modify it
 under [[https://github.com/redguardtoo/emacs.d/blob/master/LICENSE][GNU General Public License]] published by the Free Software
-Foundation, as well as Copyleft under [[thethingsengine.org][ThingsEngine]] project. The
+Foundation, as well as Copyleft under [[https://thethingsengine.org][ThingsEngine]] project. The
 constributions are shared with the hope that this program will be
 useful, helpful and inspiring, but without any warranty; without even
 the implied warranty of merchantability or fitness for a particular

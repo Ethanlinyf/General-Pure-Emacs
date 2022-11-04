@@ -68,8 +68,11 @@
 (advice-add #'package-initialize :after #'add-extradirs-to-load-path)
 
 (update-load-path)
+;; (require 'bridge-engine)
 
-(require 'init-a-engine)
+(require 'init-0-package)
+(require 'init-1-system)
+;; (require 'init-a-authentication)
 (require 'init-b-basic)
 (require 'init-c-minibuffer)
 (require 'init-d-dired)
