@@ -11,9 +11,9 @@
 ;;--------------------------------------------------------------------
 ;;; Code:
 
+;; add tabs for the open files
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/site-lisp/awesome-tab"))
 (require 'awesome-tab)
-
 (awesome-tab-mode t)
 
 (use-package magit
@@ -73,11 +73,11 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
   :ensure t
   :hook
   (after-init . winum-mode))
-;; (winum-mode)
-;; (require 'treemacs)
+
+;;--------------------------------------------------------------------
 (use-package treemacs
   :ensure t
-  :defer t
+  ;; :defer t
   :init
   (with-eval-after-load 'winum
     (define-key winum-keymap (kbd "M-0") #'treemacs-select-window))
@@ -154,7 +154,7 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
     (treemacs-hide-gitignored-files-mode nil))
   :bind
   (:map global-map
-        ("M-0"       . treemacs-select-window)
+        ("C-M-0"       . treemacs-select-window)
         ("C-x t 1"   . treemacs-delete-other-windows)
         ("C-x t t"   . treemacs)
         ("s-2"       . treemacs)
@@ -186,12 +186,6 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
   :ensure t
   :config (treemacs-set-scope-type 'Tabs))
 
-
-;; (use-package treemacs-all-the-icons
-;;   :ensure t
-;;   :init
-;;   (treemacs-load-theme "all-the-icons"))
-
 (use-package treemacs-all-the-icons
   :ensure t
   :init
@@ -217,6 +211,11 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 
 (require 'lsp-bridge)
 (global-lsp-bridge-mode)
+
+;;--------------------------------------------------------------------
+;; blink-search
+(add-to-list 'load-path "~/.emacs.d/site-lisp/blink-search")
+(require 'blink-search)
 
 ;;--------------------------------------------------------------------
 (provide 'init-f-platform)

@@ -1,4 +1,4 @@
-;;; init-0-engine.el --- Pligins for Emacs. -*- lexical-binding: t; -*-
+;;; bridge-engine.el --- Pligins for GPEmacs. -*- lexical-binding: t; -*-
 ;;
 ;; Copyleft (CL) 2022-2032 YF Lin
 ;;
@@ -7,7 +7,7 @@
 ;; Under ThingsEngine Project: https://www.thethingsengine.org
 ;;--------------------------------------------------------------------
 ;;; Commentary:
-;; Add feature defined in the Lisp folder
+;; Add needed plugins to build General Pure Emacs
 ;;--------------------------------------------------------------------
 ;;; Code:
 
@@ -173,5 +173,5 @@
       (package-install pkg))))
 
 ;;--------------------------------------------------------------------
-(provide 'init-0-engine)
+(provide 'bridge-engine)
 ;;; init-0-plugin.el ends here

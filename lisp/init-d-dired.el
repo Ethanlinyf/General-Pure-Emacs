@@ -50,15 +50,13 @@
   :ensure t
   :init (diredfl-global-mode 1))
 
- ;; Show directory first
+;; Show directory first
 (setq dired-listing-switches "-alh --group-directories-first")
 
 ;; Show git info in dired
 (use-package dired-git-info
   :bind (:map dired-mode-map
               (")" . dired-git-info-mode)))
-
-
 
 (use-package all-the-icons
   :ensure t

@@ -16,6 +16,10 @@
   :hook
   (LaTeX-mode . lsp-bridge-mode))
 
+;; ;; enables mixing variable-pitch and fixed-pitch fonts in the same buffer
+;; (use-package mixed-pitch
+;;   :diminish)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;AUCTex Initiating;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; 
 
 ;;(setq TeX-source-correlate-method 'synctex)
@@ -53,16 +57,17 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;LaTex-mode settings;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (use-package pdf-tools ;; need to manually download from nongnu
-   :pin manual
-   :config
+   ;; :pin manual
+   :ensure t
+   :init
    (pdf-tools-install)
    (setq-default pdf-view-display-size 'fit-width)
    (define-key pdf-view-mode-map (kbd "C-s") 'isearch-forward)
    :custom
    (pdf-annot-activate-created-annotations t "automatically annotate highlights"))
 
-(use-package pdf-tools
-  :ensure t)
+;; (use-package pdf-tools
+;;  :ensure t)
 
 (add-hook 'LaTeX-mode-hook (lambda ()
                   (require 'tex-site)

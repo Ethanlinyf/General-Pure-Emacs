@@ -25,7 +25,7 @@
 ;; for the generic, it can be set as defaults
 ;; for the specific, you could change to as you want after initiation.
 ;(setq default-directory "~/")
-;(setq user-emacs-directory "~/.emacs.d/")
+                                        ;(setq user-emacs-directory "~/.emacs.d/")
 
 ;; Initialise the major mode for scratch, fundamental-mode or text-mode
 ;; Prevent setting it as a rich mode, such as org-mode, which will 
@@ -87,12 +87,12 @@
 (require 'init-i-python)
 (require 'init-i-lua)
 (require 'init-i-julia)
-(require 'init-i-ts)
+;; (require 'init-i-ts)
 
 (require 'init-r-research)
 
 ;; for testing purposes
-(require 'init-z-test)
+;; (require 'init-z-test)
 
 ;;----------------------------------------------------------------------------
 ;;; init.el ends here

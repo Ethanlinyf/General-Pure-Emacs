@@ -1,4 +1,4 @@
-;;; init-h-dashboard.el --- General Pure Emacs Dashboard configurations.	-*- lexical-binding: t no-byte-compile: t -*-
+;;; init-h-dashboard.el --- General Pure Emacs Dashboard configurations. -*- lexical-binding: t no-byte-compile: t -*-
 ;;
 ;; Copyleft (CL) 2022-2032 Dr YF Lin
 ;;
@@ -11,17 +11,10 @@
 ;;--------------------------------------------------------------------
 ;;; Code:
 
-;; (require 'dashboard)
-
 (use-package dashboard
-  :ensure t)
-
-(dashboard-setup-startup-hook)
-;; Or if you use use-package
-;; (use-package dashboard
-;;   :ensure t
-;;   :config
-;;   (dashboard-setup-startup-hook))
+  :ensure t
+  :init
+  (dashboard-setup-startup-hook))
 
 ;; Set the title
 (setq dashboard-banner-logo-title "Something Good as Indicated by ThingsEngine")
@@ -131,8 +124,9 @@
 
 
 ;; recentf excludes files: M-x recentf-cleanup
-;; (add-to-list 'recentf-exclude
-;;              (expand-file-name "~/.emacs.d/company-statistics-cache.el"))
+(add-to-list 'recentf-exclude
+             (expand-file-name "~/.emacs.d/company-statistics-cache.el")
+             (expand-file-name "~/.emacs.d/elgrep-data.el"))
 
 ;;--------------------------------------------------------------------
 (provide 'init-h-dashboard)

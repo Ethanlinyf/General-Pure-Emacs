@@ -150,6 +150,9 @@
               :after #'eli/org-noter-set-highlight)
   (advice-add #'org-noter-insert-note
               :after #'eli/org-noter-set-highlight)
+
+
+; (setq org-ellipsis 0xE2)
 ;;------------------------------------------------------------------------------
 (provide 'init-i-org)
 ;;; init-i-org.el ends here

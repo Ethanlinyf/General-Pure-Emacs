@@ -10,7 +10,7 @@
  '(display-time-mode t)
  '(exec-path-from-shell-arguments '("-l"))
  '(package-selected-packages
-   '(paradox tablist typescript-mode procress simple-httpd company auctex org-roam treemacs magit all-the-icons embark consult corfu yasnippet-snippets yasnippet counsel-projectile-rg all-the-icons-dred company-tabnine obsidian org-pdftools org-noter-pdftools modus-themes dirvish oauth2 diredful julia-repl julia-mode exec-path-from-shell live-py-mode winum org-superstar-mode lin abbrev all-the-icons-completion-mode zotxt window-numbering which-key vertico valign use-package undo-tree treemacs-tab-bar treemacs-projectile treemacs-persp treemacs-magit treemacs-all-the-icons rainbow-delimiters pyvenv popwin pdf-tools pangu-spacing page-break-lines osx-lib org-superstar org-roam-ui org-roam-bibtex org-ql org-noter org-download orderless ns-auto-titlebar multi-term minions markdown-mode marginalia lua-mode latex-preview-pane keycast hungry-delete htmlize good-scroll gnu-elpa-keyring-update flycheck f3 epc embark-consult ef-themes doom-themes doom-modeline diredfl dired-git-info diminish dashboard ctrlf counsel-projectile corfu-doc company-auctex cdlatex cape all-the-icons-ibuffer all-the-icons-dired all-the-icons-completion))
+   '(mixed-pitch simple paradox tablist typescript-mode procress simple-httpd company auctex org-roam treemacs magit all-the-icons embark consult corfu yasnippet-snippets yasnippet counsel-projectile-rg all-the-icons-dred company-tabnine obsidian org-pdftools org-noter-pdftools modus-themes dirvish oauth2 diredful julia-repl julia-mode exec-path-from-shell live-py-mode winum org-superstar-mode lin abbrev all-the-icons-completion-mode zotxt window-numbering which-key vertico valign use-package undo-tree treemacs-tab-bar treemacs-projectile treemacs-persp treemacs-magit treemacs-all-the-icons rainbow-delimiters pyvenv popwin pdf-tools pangu-spacing page-break-lines osx-lib org-superstar org-roam-ui org-roam-bibtex org-ql org-noter org-download orderless ns-auto-titlebar multi-term minions markdown-mode marginalia lua-mode latex-preview-pane keycast hungry-delete htmlize good-scroll gnu-elpa-keyring-update flycheck f3 epc embark-consult ef-themes doom-themes doom-modeline diredfl dired-git-info diminish dashboard ctrlf counsel-projectile corfu-doc company-auctex cdlatex cape all-the-icons-ibuffer all-the-icons-dired all-the-icons-completion))
  '(safe-local-variable-values
    '((eval progn
            (defun save-and-publish-website nil "Save all buffers and publish."
@@ -24,7 +24,8 @@
                   (interactive)
                   (org-publish-project "statics" t)
                   (message "Copy statics done."))
-           (defun save-and-publish-rstatics nil "Just copy statics like js, css, and image file .etc.\12                         Which is a reverse operation of `save-and-publish-statics'."
+           (defun save-and-publish-rstatics nil "Just copy statics like js, css, and image file .etc.
+                         Which is a reverse operation of `save-and-publish-statics'."
                   (interactive)
                   (org-publish-project "rstatics" t)
                   (message "Copy rstatics done."))

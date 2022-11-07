@@ -13,7 +13,6 @@
 
 (require 'pure-duplicate-line)
 
-
 ;; ------------------ Indent Region or Buffer ------------------------
 (defun indent-buffer()
   "To indent the buffer."
@@ -43,8 +42,8 @@
 (setq abbrev-file-name             ;; tell emacs where to read abbrev
       "~/.emacs.d/abbrev_defs")    ;; definitions from...
 
-;;(add-hook 'after-init-hook 'ido-mode)
-(add-hook 'after-init-hook 'recentf-mode)
+;; (add-hook 'after-init-hook 'ido-mode)
+;; (add-hook 'after-init-hook 'recentf-mode)
 (add-hook 'after-init-hook 'electric-pair-mode)
 (add-hook 'after-init-hook 'winner-mode)
 (add-hook 'after-init-hook 'global-auto-revert-mode)
@@ -84,8 +83,15 @@
                 "^/tmp/" "^/var/folders/.+$" "^/ssh:" "/persp-confs/"
                 (lambda (file) (file-in-directory-p file package-user-dir))))
   :config
-  (push (expand-file-name recentf-save-file) recentf-exclude)
-  (add-to-list 'recentf-filename-handlers #'abbreviate-file-name))
+  (push "~/.emacs.d/elgrep-data.el" recentf-exclude)
+  (add-to-list 'recentf-filename-handlers #'abbreviate-file-name)
+  (add-to-list 'recentf-exclude
+             (expand-file-name "~/.emacs.d/company-statistics-cache.el")
+             (expand-file-name "~/.emacs.d/elgrep-data.el")))
+
+;; recentf excludes files: M-x recentf-cleanup
+
+
 
 ;; The following could be implemented by counsel
 (global-set-key (kbd "C-x C-r") 'recentf-open-files)
@@ -218,6 +224,7 @@
   :ensure t
   :init
   (ctrlf-mode +1))
+
 
 ;;--------------------------------------------------------------------
  (provide 'init-e-enhance)

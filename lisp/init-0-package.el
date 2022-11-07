@@ -67,6 +67,11 @@
 (use-package gnu-elpa-keyring-update
   :ensure t)
 
+(use-package things-engine
+  :ensure nil
+  :init
+  (message "Something Good as Indicated"))
+
 ;;--------------------------------------------------------------------
 ;;  (straight-use-package 'use-package
 ;;  (use-package straight

@@ -16,7 +16,15 @@
 (require 'pure-function)
 (require 'subr-x)
 
-;;--------------------------------------------------------------------
+;; set time
+(use-package time
+  :ensure nil
+  :init
+  (setq system-time-locale "C")
+  (setq display-time-24hr-format t
+              ;; display-time-day-and-date t
+              display-time t))
+
 ;; Set UTF-8 as the default coding system
 (when (fboundp 'set-charset-priority)
   (set-charset-priority 'unicode))
@@ -29,19 +37,11 @@
 (unless sys/win32p
   (set-selection-coding-system 'utf-8))
 
-;; set time
-(use-package time
-  :ensure nil
-  :init
-  (setq system-time-locale "C")
-  (setq display-time-24hr-format t
-              ;; display-time-day-and-date t
-              display-time t))
-
 ;; Environment
 (when (or sys/mac-x-p sys/linux-x-p (daemonp))
   (use-package exec-path-from-shell
     :init (exec-path-from-shell-initialize)))
+
 ;;--------------------------------------------------------------------
 ;; A few more useful configurations...
 (use-package emacs
@@ -109,11 +109,11 @@
 ;;  make sure.
 (use-package compat
   :demand t)
-
+;;--------------------------------------------------------------------
 ;; Start server
 (use-package server
   :ensure nil
-  :if nil ;; for thethingsengine.org
+  :if nil ;; to be integrated with thethingsengine.org
   :hook (after-init . server-mode))
 ;; kill processes when quit or exit, live-webserver
 (setq confirm-kill-processes nil)

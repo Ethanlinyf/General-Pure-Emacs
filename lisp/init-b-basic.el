@@ -13,8 +13,8 @@
 
 ;; Set the initial scratch message
 (setq-default
- initial-scratch-message (concat "
-;;--------------------------------------------------------------------
+ initial-scratch-message (concat 
+";;--------------------------------------------------------------------
 ;; Welcome to General Pure Emacs for ThingsEngine
 ;; Somethng Goodas Indicated:\n\n\n")
  line-spacing 0.1
@@ -60,8 +60,8 @@
 
 ;;--------------------------------------------------------------------
 ;; Turn on line number and the column-number-mode
-(global-display-line-numbers-mode 1)
-(line-number-mode t)
+;; (global-display-line-numbers-mode 1)
+(line-number-mode 1)
 (column-number-mode 1)
 
 ;; Change the cursor type
@@ -156,4 +156,4 @@
 
 ;;--------------------------------------------------------------------
 (provide 'init-b-basic)
-;;; init-b-basic.el ends here, ++
+;;; init-b-basic.el ends here.

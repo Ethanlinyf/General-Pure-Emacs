@@ -1,5 +1,5 @@
 
-;;-------------------------------------------------------------------- 
+;;--------------------------------------------------------------------
 (unless (or (daemonp) noninteractive init-file-debug)
   (let ((old-file-name-handler-alist file-name-handler-alist))
     (setq file-name-handler-alist nil)
@@ -94,3 +94,31 @@
 
 ;;--------------------------------------------------------------------
 (setq load-prefer-newer t)
+
+
+;; Mouse & Smooth Scroll
+;; Scroll one line at a time (less "jumpy" than defaults)
+(when (display-graphic-p)
+  (setq mouse-wheel-scroll-amount '(1 ((shift) . hscroll))
+        mouse-wheel-scroll-amount-horizontal 1
+        mouse-wheel-progressive-speed nil))
+(setq scroll-step 1
+      scroll-margin 0
+      scroll-conservatively 100000
+      auto-window-vscroll nil
+      scroll-preserve-screen-position t)
+
+;; Good pixel line scrolling
+(if (fboundp 'pixel-scroll-precision-mode)
+    (pixel-scroll-precision-mode t)
+  (when (and emacs/>=27p (not sys/macp))
+    (use-package good-scroll
+      :diminish
+      :hook (after-init . good-scroll-mode)
+      :bind (([remap next] . good-scroll-up-full-screen)
+             ([remap prior] . good-scroll-down-full-screen)))))
+
+;; Smooth scrolling over images
+(use-package iscroll
+  :diminish
+  :hook (image-mode . iscroll-mode))
