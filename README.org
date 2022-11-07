@@ -112,7 +112,7 @@ learning/teaching, research and project management.
       [[./site-lisp/figure/roam-research-ui.png]]
 
 - Creative and Inovative \\
-  Push at the boundary of human knowledge with GPE:
+  Push at the boundary of knowledge with GPE:
 
   [[./site-lisp/figure/creative_emacs.jpg]]
   
