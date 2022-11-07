@@ -95,7 +95,7 @@ learning/teaching, research and project management.
 
   + literate programming \\
 
-    [[./site-lisp/figure/literate programming.png]]
+    [[./site-lisp/figure/literate-programming.png]]
 
     The literate programming mode, Org-Babel, is able to embed multiple
     programming languages in a org file to make it as an active document.
