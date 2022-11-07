@@ -91,7 +91,7 @@ learning/teaching, research and project management.
 - Extensible
   + Multiple threading and asynchronous processing with Python
     
-  [[./site-lisp/figure/GPE-Extensive.png]]
+  [[./site-lisp/figure/Emacs-framework.png]]
 
   + literate programming \\
     The literate programming mode, Org-Babel, is able to embed multiple
