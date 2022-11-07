@@ -87,7 +87,11 @@ learning/teaching, research and project management.
     [[./site-lisp/figure/Git-for-research-project.png]]
     
 - Custmisable \\
-  Nothing cannot be custmised in this General Pure Emacs. 
+  Nothing cannot be custmised in this General Pure Emacs. For example,
+  mode-line customised by doom-modeline:
+
+  [[./site-lisp/figure/mode-line.png]]
+
 - Extensible
   + Multiple threading and asynchronous processing with Python
     
@@ -117,7 +121,7 @@ recommended.
    #+begin_src shell
      git clone  git@github.com:Ethanlinyf/General-Pure-Emacs.git ~/.emacs.d
    #+end_src
-3. GUI with icons
+3. GUI with icons \\
    Run: M-x all-the-icons-install-fonts to install the needed fonts.
 * Support/Issue
 Please report any issues about configuration at this repository. 
