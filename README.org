@@ -105,7 +105,11 @@ learning/teaching, research and project management.
     programming languages in a org file to make it as an active document.
   + roam-network
 
-    [[./site-lisp/figure/roam-research.png]]
+    * How to Import and Visualize Your Roam Research, Obsidian and Zettelkasten Markdown Format Notes    [[./site-lisp/figure/roam-research.png]]
+
+    * A graphical frontend for your org-roam Zettelkasten
+
+      [[./site-lisp/figure/roam-research-ui.png]]
 
 - Creative \\ 
 - Instructive \\
