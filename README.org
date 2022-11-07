@@ -105,7 +105,7 @@ learning/teaching, research and project management.
     programming languages in a org file to make it as an active document.
   + roam-network
 
-    [[./site-lisp/figure/org-roam-network.png]]
+    [[./site-lisp/figure/roam-research.png]]
 
 - Creative \\ 
 - Instructive \\
