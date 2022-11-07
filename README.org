@@ -111,7 +111,11 @@ learning/teaching, research and project management.
 
       [[./site-lisp/figure/roam-research-ui.png]]
 
-- Creative \\ 
+- Creative and Inovative \\
+  Push at the boundary of human knowledge with GPE:
+
+  [[./site-lisp/figure/creative_emacs.jpg]]
+  
 - Instructive \\
   The [[./tutorial.org][tutorial]] how to build this platform is included in this repository.
 
