@@ -86,7 +86,7 @@ learning/teaching, research and project management.
     
     [[./site-lisp/figure/Git-for-research-project.png]]
     
-- Custmisable
+- Custmisable \\
   Nothing cannot be custmised in this General Pure Emacs. 
 - Extensible
   + Multiple threading and asynchronous processing with Python
@@ -94,6 +94,9 @@ learning/teaching, research and project management.
   [[./site-lisp/figure/Emacs-framework.png]]
 
   + literate programming \\
+
+    [[./site-lisp/figure/literate programming.png]]
+
     The literate programming mode, Org-Babel, is able to embed multiple
     programming languages in a org file to make it as an active document.
   + roam-network
