@@ -20,7 +20,7 @@
 ;; (use-package mixed-pitch
 ;;   :diminish)
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;AUCTex Initiating;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;AUCTex Initiating;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;(setq TeX-source-correlate-method 'synctex)
 (load "auctex.el" nil t t)
@@ -30,7 +30,7 @@
 (setq TeX-parse-self t)
 (setq-default TeX-master nil)
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;RefTex;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;RefTex;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (require 'reftex)
 (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
 (setq reftex-plug-into-AUCTeX t)
@@ -41,7 +41,7 @@
 (setq reftex-toc-split-windows-fraction 0.2)  ;;*toc*buffer ratio。
 (autoload 'reftex-mode "reftex" "RefTeX Minor Mode" t)
 (autoload 'turn-on-reftex "reftex" "RefTeX Minor Mode" nil)
-(autoload 'reftex-citation "reftex-cite" "Make citation" nil)  
+(autoload 'reftex-citation "reftex-cite" "Make citation" nil)
 (autoload 'reftex-index-phrase-mode "reftex-index" "Phrase mode" t)
 
 
@@ -86,12 +86,12 @@
 		  (setq flyspell-doublon-as-error-flag nil)
                   (setq split-width-threshold 80) ;; pdf-tool to open a pdf in the right side
 
-		  
+
 		  (turn-on-auto-fill)              ;;LaTeX mode，turn off auto fold
 		  ;; (linum-mode 1)
 		  ;;(auto-complete-mode 1)
 		  (latex-math-mode 1)
-		  (outline-minor-mode 1)            
+		  (outline-minor-mode 1)
   		  (imenu-add-menubar-index)
 
 		  (setq TeX-show-compilation nil)   ;;NOT display compilation windows
@@ -99,7 +99,7 @@
 		  ;;(setq TeX-engine 'default)  ;;use xelatex default
 		  (setq TeX-clean-confirm nil)
 		  (setq TeX-save-query nil)
-		 
+
                   (setq font-latex-fontify-script t)
 		  (define-key LaTeX-mode-map (kbd "TAB") 'TeX-complete-symbol)
 		  (setq TeX-electric-escape t)      ;; press \ then, jump to mini-buffer to input commands
@@ -113,14 +113,14 @@
 		  (add-to-list 'TeX-command-list '("LaTeX" "%`pdflatex -shell-escape --synctex=1%(mode)%' %t" TeX-run-TeX nil t))
 		  (setq TeX-command-default "LaTeX")
                   ;;(setq TeX-command-default "pdflatex --synctex=1")
-                  
+
                   (setq TeX-fold-env-spec-list (quote (("[comment]" ("comment")) ("[figure]" ("figure")) ("[table]" ("table"))("[itemize]"("itemize"))("[enumerate]"("enumerate"))("[description]"("description"))("[overpic]"("overpic"))("[tabularx]"("tabularx"))("[code]"("code"))("[shell]"("shell")))))
 
-		 
+
 		  (define-key LaTeX-mode-map (kbd "C-c C-p") 'reftex-parse-all)
-                  ;;(with-eval-after-load 'latex 
+                  ;;(with-eval-after-load 'latex
                   (define-key LaTeX-mode-map (kbd "C-c C-g") #'pdf-sync-forward-search)
-		  
+
                   ;;;;;;deeper directory;;;;;;;;;;;;;
                    ;(setq reftex-section-levels
                    ;     '(("part" . 0) ("chapter" . 1) ("section" . 2) ("subsection" . 3)
@@ -186,7 +186,7 @@
 (use-package latex-preview-pane
   :ensure t
   :hook
-  (LaTeX-mode . (latex-preview-pane-enable))
+  (LaTeX-mode . latex-preview-pane-enable)
   (latex-preview-pane-mode .  (setq pdf-latex-command "pdflatex"
                                     synctex-number "1"
                                     shell-escape-mode "-shell-escape"
@@ -220,7 +220,7 @@
 ;;   (setq pdf-sync-backward-display-action t
 ;;         pdf-sync-forward-display-action t
 ;;         TeX-source-correlate-mode t
-        
+
 ;;         ;; TeX-source-correlate-method '(
 ;;         ;;                               (dvi . source-specials)
 ;;         ;;                               (pdf . synctex))
