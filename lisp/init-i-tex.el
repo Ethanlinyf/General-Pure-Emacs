@@ -186,16 +186,16 @@
 (use-package latex-preview-pane
   :ensure t
   :hook
-  (LaTeX-mode . latex-preview-pane-enable)
-  (latex-preview-pane-mode .  (setq pdf-latex-command "pdflatex"
-                                    synctex-number "1"
-                                    shell-escape-mode "-shell-escape"
-                                    auto-update-latex-preview-pane 'off)))
-;; (add-hook 'latex-preview-pane-mode-hook
-;;           (setq pdf-latex-command "pdflatex"
-;;                 synctex-number "1"
-;;                 shell-escape-mode "-shell-escape"
-;;                 auto-update-latex-preview-pane 'off))
+  (LaTeX-mode . latex-preview-pane-enable))
+  ;; (latex-preview-pane-mode .  (setq pdf-latex-command "pdflatex"
+  ;;                                   synctex-number "1"
+  ;;                                   shell-escape-mode "-shell-escape"
+  ;;                                   auto-update-latex-preview-pane 'off)))
+(add-hook 'latex-preview-pane-mode-hook
+          (setq pdf-latex-command "pdflatex"
+                synctex-number "1"
+                shell-escape-mode "-shell-escape"
+                auto-update-latex-preview-pane 'off))
 
 ;;;; Keybindings for LaTeX-preview-pane mode
 (defun display-pdflatex-result ()
