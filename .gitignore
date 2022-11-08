@@ -80,7 +80,7 @@ eaf/
 url/
 zull.el
 /straight
-/.DS_Store
+.DS_Store
 /elgrep-data.el
 /packages.txt
 /custom.el

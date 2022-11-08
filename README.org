@@ -152,8 +152,8 @@ recommended.
    #+end_src
 6. Then, open Emacs(>= 28.2) to install the needed package.
    - Yes for "Need to (re)build the epdfinfo program, do it now ?":
-   - You may need to wait for a while to complete the needed packages
-     downloading.
+   - You may need to wait for a while to complete downloading the needed packages.
+7. Enjoy General Pure Emacs ~ 
 * Support/Issue
 Please report any issues about configuration at this repository.
 * License
