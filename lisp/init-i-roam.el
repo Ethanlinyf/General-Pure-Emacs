@@ -12,6 +12,9 @@
 ;;; Code:
 (use-package org-roam
   :ensure t
+  :init
+  (unless (file-exists-p "~/org-roam/")
+    (make-directory "~/org-roam/"))
   :custom
   (org-roam-directory (file-truename "~/org-roam"))
   :bind (("C-c n l" . org-roam-buffer-toggle)
@@ -26,7 +29,13 @@
   (setq org-roam-node-display-template (concat "${title:*} " (propertize "${tags:10}" 'face 'org-tag)))
   (org-roam-db-autosync-mode)
   ;; If using org-roam-protocol
-  (require 'org-roam-protocol))
+  (require 'org-roam-protocol)
+  (when emacs/>=27p
+    (use-package org-roam-ui
+      :ensure t
+      :init
+      (when (featurep 'xwidget-internal)
+        (setq org-roam-ui-browser-function #'xwidget-webkit-browse-url)))))
 
 ;;----------------------------------------------------------------------------
 (provide 'init-i-roam)

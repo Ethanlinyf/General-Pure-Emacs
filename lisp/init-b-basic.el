@@ -13,7 +13,7 @@
 
 ;; Set the initial scratch message
 (setq-default
- initial-scratch-message (concat 
+ initial-scratch-message (concat
 ";;--------------------------------------------------------------------
 ;; Welcome to General Pure Emacs for ThingsEngine
 ;; Somethng Goodas Indicated:\n\n\n")

@@ -28,8 +28,8 @@
                                         ;(setq user-emacs-directory "~/.emacs.d/")
 
 ;; Initialise the major mode for scratch, fundamental-mode or text-mode
-;; Prevent setting it as a rich mode, such as org-mode, which will 
-;; slow down the sartup speed. 
+;; Prevent setting it as a rich mode, such as org-mode, which will
+;; slow down the sartup speed.
 (setq initial-major-mode 'text-mode);
       ;package--init-file-ensured t)
 
@@ -72,7 +72,7 @@
 
 (require 'init-0-package)
 (require 'init-1-system)
-;; (require 'init-a-authentication)
+(require 'init-a-authentication)
 (require 'init-b-basic)
 (require 'init-c-minibuffer)
 (require 'init-d-dired)

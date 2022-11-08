@@ -54,7 +54,7 @@ Similar to `marginalia-annotate-symbol', but does not show symbol class."
 
 ;; Behave like vi's O command
 (defun open-previous-line (arg)
-  "Open a new line before the current one. 
+  "Open a new line before the current one.
      See also `newline-and-indent'."
   (interactive "p")
   (beginning-of-line)
@@ -67,8 +67,34 @@ Similar to `marginalia-annotate-symbol', but does not show symbol class."
 ;; Autoindent open-*-lines
 (defvar newline-and-indent t
   "Modify the behavior of the open-*-line functions to cause them to autoindent.")
+
+;;--------------------------------------------------------------------
+(defun remember-init ()
+  "Remember current position and setup."
+  (interactive)
+  (point-to-register 8)
+  (message "Have remember one position"))
+
+(defun remember-jump ()
+  "Jump to latest position and setup."
+  (interactive)
+  (let ((tmp (point-marker)))
+    (jump-to-register 8)
+    (set-register 8 tmp))
+  (message "Have back to remember position"))
+
+;;--------------------------------------------------------------------
+(defun GPE-unmark-all-buffers ()
+  "Unmark all have marked buffers."
+  (interactive)
+  (let ((current-element (current-buffer)))
+    (save-excursion
+      (dolist (element (buffer-list))
+        (set-buffer element)
+        (deactivate-mark)))
+    (switch-to-buffer current-element)
+    (deactivate-mark)))
+
 ;;--------------------------------------------------------------------
 (provide 'pure-function)
 ;;; pure-function.el ends here
-
-

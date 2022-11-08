@@ -26,7 +26,7 @@
     (if (region-active-p)
         (progn
           (indent-region (region-beginning) (region-end))
-          (message "Indent selected region."))
+           (message "Indent selected region."))
       (progn
         (indent-buffer)
         (message "Indent buffer.")))))
@@ -224,7 +224,61 @@
   :ensure t
   :init
   (ctrlf-mode +1))
+;;--------------------------------------------------------------------
+;; session save and restore
 
+;; (setq desktop-load-locked-desktop t) ; don't popup dialog ask user, load anyway
+;; (setq desktop-restore-frames nil)    ; don't restore any frame
+
+;; (defun emacs-session-restore ()
+;;   "Restore emacs session."
+;;   (interactive)
+;;   (ignore-errors
+;;     ;; Kill other windows.
+;;     (delete-other-windows)
+;;     ;; Kill unused buffers.
+;;     (kill-unused-buffers)
+;;     ;; Restore session.
+;;     (desktop-read "~/.emacs.d/")
+;;     ))
+
+;; (defun emacs-session-save (&optional arg)
+;;   "Save emacs session."
+;;   (interactive "p")
+;;   (ignore-errors
+;;     (if (equal arg 4)
+;;         ;; Kill all buffers if with prefix argument.
+;;         (mapc 'kill-buffer (buffer-list))
+;;       ;; Kill unused buffers.
+;;       (kill-unused-buffers)
+;;       ;; Save all buffers before exit.
+;;       (auto-save-buffers))
+;;     ;; Save session.
+;;     (make-directory "~/.emacs.d/" t)
+;;     (desktop-save "~/.emacs.d/")
+;;     ;; Exit emacs.
+;;     (kill-emacs)))
+;;--------------------------------------------------------------------
+;; auto-save
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/site-lisp/auto-save")) ; add auto-save to your load-path
+(require 'auto-save)
+(auto-save-enable)
+
+(setq auto-save-silent t)   ; quietly save
+(setq auto-save-delete-trailing-whitespace t)  ; automatically delete spaces at the end of the line when saving
+
+;;; custom predicates if you don't want auto save.
+;;; disable auto save mode when current filetype is an gpg file.
+(setq auto-save-disable-predicates
+      '((lambda ()
+      (string-suffix-p
+      "gpg"
+      (file-name-extension (buffer-name)) t))))
+
+;;--------------------------------------------------------------------
+;; goto-line-preview
+(use-package goto-line-preview
+  :ensure t)
 
 ;;--------------------------------------------------------------------
  (provide 'init-e-enhance)
