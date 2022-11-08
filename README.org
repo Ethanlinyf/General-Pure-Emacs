@@ -139,6 +139,10 @@ recommended.
 4. GUI with icons \\
    Run: M-x all-the-icons-install-fonts to install the needed fonts.
 5. To fetch the submodules in General Pure Emacs
+   #+begin_src shell
+     cd .emacs.d
+   #+end_src
+   Then,
    #+begin_src elisp
      git submodule update --init --recursive
 
@@ -146,6 +150,9 @@ recommended.
 
      git submodule foreach git checkout master
    #+end_src
+6. Then, open Emacs(>= 28.2) to install the needed package.
+   - Yes for "Need to (re)build the epdfinfo program, do it now ?":
+     [[./site-lisp/figure/epdfinfo.png]]
 * Support/Issue
 Please report any issues about configuration at this repository.
 * License
