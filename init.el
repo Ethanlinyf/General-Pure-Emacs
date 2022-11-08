@@ -34,7 +34,10 @@
       ;package--init-file-ensured t)
 
 ;; Load the settings recorded through emacs
-(setq custom-file (expand-file-name "custom.el" user-emacs-directory))
+(defconst custom-file (expand-file-name "custom.el" user-emacs-directory))
+(unless (file-exists-p custom-file)
+  (shell-command (concat "touch " custom-file)))
+;; (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 ;; Load the custom file if it exists
 (when (file-exists-p custom-file)
   (load custom-file))

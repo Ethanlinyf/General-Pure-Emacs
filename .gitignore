@@ -83,3 +83,4 @@ zull.el
 /.DS_Store
 /elgrep-data.el
 /packages.txt
+/custom.el
