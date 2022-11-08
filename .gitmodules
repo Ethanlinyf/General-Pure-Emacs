@@ -7,3 +7,12 @@
 [submodule "site-lisp/awesome-tab"]
 	path = site-lisp/awesome-tab
 	url = https://github.com/manateelazycat/awesome-tab
+[submodule "site-lisp/auto-save"]
+	path = site-lisp/auto-save
+	url = git@github.com:manateelazycat/auto-save.git
+[submodule "site-lisp/blink-search"]
+	path = site-lisp/blink-search
+	url = git@github.com:manateelazycat/blink-search.git
+[submodule "site-lisp/deno-bridge"]
+	path = site-lisp/deno-bridge
+	url = git@github.com:manateelazycat/deno-bridge.git

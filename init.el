@@ -39,6 +39,7 @@
   (shell-command (concat "touch " custom-file)))
 ;; (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 ;; Load the custom file if it exists
+;; (load custom-file t), or
 (when (file-exists-p custom-file)
   (load custom-file))
 
