@@ -14,12 +14,20 @@
 ;; Set the initial scratch message
 (setq-default
  initial-scratch-message (concat
-";;--------------------------------------------------------------------
+";;--------------------------------------------------------
 ;; Welcome to General Pure Emacs for ThingsEngine
-;; Somethng Goodas Indicated:\n\n\n")
+;; Somethng Good as Indicated:\n\n\n")
  line-spacing 0.1
  truncate-lines nil
  word-wrap t)
+
+;; (add-hook 'text-mode-hook #'linum-mode)
+;; (add-hook 'prog-mode-hook #'linum-mode)
+;; (add-hook 'org-mode-hook #'linum-mode)
+(use-package display-line-numbers
+  :ensure nil
+  :hook ((prog-mode yaml-mode text-mode org-mode conf-mode) . display-line-numbers-mode)
+  :init (setq display-line-numbers-width-start t))
 
 ;;--------------------------------------------------------------------
 (defun open-mirror-file ()
@@ -59,16 +67,12 @@
 (global-set-key (kbd "<f6>") 'open-plan-file)
 
 ;;--------------------------------------------------------------------
-;; Turn on line number and the column-number-mode
-;; (global-display-line-numbers-mode 1)
-(line-number-mode 1)
-(column-number-mode 1)
-
-;; Change the cursor type
-;; (setq-default cursor-type 'bar)
-
-;; Enable hightline globally
-(global-hl-line-mode 1)
+(with-no-warnings
+  (line-number-mode 1)    ;; Turn on line number and the column-number-mode
+  (column-number-mode 1)  ;; Change the cursor type
+  (global-hl-line-mode 1) ;; Enable hightline globally
+  ;; (setq-default cursor-type 'bar) ;; Change the type of cursor
+  )
 
 ;;--------------------------------------------------------------------
 ;; Key Modifiers
@@ -107,16 +111,16 @@
 
 ;;--------------------------------------------------------------------
 ;; manage by git and disable make-backup-files and auto-save-default
-(setq make-backup-files nil)
-(setq auto-save-default nil)
-(delete-selection-mode 1)
-(setq tab-width 4)
+(with-no-warnings
+  (setq make-backup-files nil)
+  (setq auto-save-default nil)
+  (delete-selection-mode 1)
+  (setq tab-width 4)
 
-(fset 'yes-or-no-p 'y-or-n-p)
-(setq-default indent-tabs-mode nil)
-
-;; Keybindings for setting mark
-(global-set-key (kbd "C-c C-'") 'set-mark-command)
+  (fset 'yes-or-no-p 'y-or-n-p)
+  (setq-default indent-tabs-mode nil)
+  (global-set-key (kbd "C-c C-'") 'set-mark-command)  ;; Keybindings for setting mark
+  )
 
 ;;----------------------- Dired Mode ---------------------------------
 (with-eval-after-load "dired"

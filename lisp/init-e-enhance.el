@@ -1,6 +1,6 @@
 ;;; init-e-enhance.el --- Enhancement. -*- lexical-binding: t; -*-
 ;;
-; Copyleft (CL) 2022-2032 YF Lin
+                                        ; Copyleft (CL) 2022-2032 YF Lin
 ;;
 ;; Something good as indicated, by Dr YF Lin <e.yflin@gmail.com>
 ;; URL: https://github.com/Ethanlinyf/General-Pure-Emacs
@@ -26,7 +26,7 @@
     (if (region-active-p)
         (progn
           (indent-region (region-beginning) (region-end))
-           (message "Indent selected region."))
+          (message "Indent selected region."))
       (progn
         (indent-buffer)
         (message "Indent buffer.")))))
@@ -43,7 +43,6 @@
       "~/.emacs.d/abbrev_defs")    ;; definitions from...
 
 ;; (add-hook 'after-init-hook 'ido-mode)
-;; (add-hook 'after-init-hook 'recentf-mode)
 (add-hook 'after-init-hook 'electric-pair-mode)
 (add-hook 'after-init-hook 'winner-mode)
 (add-hook 'after-init-hook 'global-auto-revert-mode)
@@ -54,8 +53,8 @@
   "Highlight enclosing parens."
   (cond ((looking-at-p "\\s(") (funcall fn))
         (t (save-excursion
-            (ignore-errors (backward-up-list))
-            (funcall fn)))))
+             (ignore-errors (backward-up-list))
+             (funcall fn)))))
 
 (setq hippie-expand-try-function-list '(try-expand-debbrev
  					try-expand-debbrev-all-buffers
@@ -86,15 +85,13 @@
   (push "~/.emacs.d/elgrep-data.el" recentf-exclude)
   (add-to-list 'recentf-filename-handlers #'abbreviate-file-name)
   (add-to-list 'recentf-exclude
-             (expand-file-name "~/.emacs.d/company-statistics-cache.el")
-             (expand-file-name "~/.emacs.d/elgrep-data.el")))
-
-;; recentf excludes files: M-x recentf-cleanup
-
-
+               (expand-file-name "~/.emacs.d/company-statistics-cache.el")
+               (expand-file-name "~/.emacs.d/elgrep-data.el"))
+  (when *is-mac*
+    (global-set-key (kbd "s-3") 'recentf-open-files)))
 
 ;; The following could be implemented by counsel
-(global-set-key (kbd "C-x C-r") 'recentf-open-files)
+;; (global-set-key (kbd "C-x C-r") 'recentf-open-files)
 
 (when (memq window-system '(mac ns))
   (use-package exec-path-from-shell
@@ -135,17 +132,17 @@
 ;;--------------------------------------------------------------------
 ;; Mouse wheel scroll behavior
 (setq
-      ;; mouse-wheel-scroll-amount '(1 ((shift) . 1))
-      mouse-wheel-progressive-speed nil
-      mouse-wheel-follow-mouse t
-      next-line-add-newlines nil
-      read-process-output-max (* 64 1024)
-      scroll-step 1
-      scroll-conservatively 10000
-      scroll-preserve-screen-position t
-      scroll-up-aggressively 0.01
-      scroll-down-aggressively 0.01
-      )
+ ;; mouse-wheel-scroll-amount '(1 ((shift) . 1))
+ mouse-wheel-progressive-speed nil
+ mouse-wheel-follow-mouse t
+ next-line-add-newlines nil
+ read-process-output-max (* 64 1024)
+ scroll-step 1
+ scroll-conservatively 10000
+ scroll-preserve-screen-position t
+ scroll-up-aggressively 0.01
+ scroll-down-aggressively 0.01
+ )
 
 (setq delete-by-moving-to-trash t)  ;; disable delete directly
 
@@ -193,7 +190,7 @@
   (add-to-list 'completion-at-point-functions #'cape-dict)
   (add-to-list 'completion-at-point-functions #'cape-symbol)
   (add-to-list 'completion-at-point-functions #'cape-line)
-)
+  )
 
 ;;--------------------------------------------------------------------
 ;; Flycheck
@@ -259,21 +256,21 @@
 ;;     ;; Exit emacs.
 ;;     (kill-emacs)))
 ;;--------------------------------------------------------------------
-;; auto-save
-(add-to-list 'load-path (expand-file-name "~/.emacs.d/site-lisp/auto-save")) ; add auto-save to your load-path
-(require 'auto-save)
-(auto-save-enable)
+;; ;; auto-save
+;; (add-to-list 'load-path (expand-file-name "~/.emacs.d/site-lisp/auto-save")) ; add auto-save to your load-path
+;; (require 'auto-save)
+;; (auto-save-enable)
 
-(setq auto-save-silent t)   ; quietly save
-(setq auto-save-delete-trailing-whitespace t)  ; automatically delete spaces at the end of the line when saving
+;; (setq auto-save-silent t)   ; quietly save
+;; (setq auto-save-delete-trailing-whitespace t)  ; automatically delete spaces at the end of the line when saving
 
-;;; custom predicates if you don't want auto save.
-;;; disable auto save mode when current filetype is an gpg file.
-(setq auto-save-disable-predicates
-      '((lambda ()
-      (string-suffix-p
-      "gpg"
-      (file-name-extension (buffer-name)) t))))
+;; ;;; custom predicates if you don't want auto save.
+;; ;;; disable auto save mode when current filetype is an gpg file.
+;; (setq auto-save-disable-predicates
+;;       '((lambda ()
+;;           (string-suffix-p
+;;            "gpg"
+;;            (file-name-extension (buffer-name)) t))))
 
 ;;--------------------------------------------------------------------
 ;; goto-line-preview
@@ -281,5 +278,14 @@
   :ensure t)
 
 ;;--------------------------------------------------------------------
- (provide 'init-e-enhance)
+;; golden-ratio
+(use-package golden-ratio
+  :ensure t
+  :hook
+  (after-init. golden-ratio-mode)
+  :config
+  (setq golden-ratio-auto-scale t))
+
+;;--------------------------------------------------------------------
+(provide 'init-e-enhance)
 ;;; init-e-enhance.el ends here

@@ -46,18 +46,15 @@
 (when *is-mac*
   (toggle-frame-fullscreen))
 
-(use-package all-the-icons
-  :if (display-graphic-p))
-
-(setq doom-modeline-minor-modes t)
+;; (use-package all-the-icons
+;;   :if (display-graphic-p))
 
 ;; Display minor-mode in the mode line
 (use-package minions
   :ensure t
-  :hook (after-init . minions-mode))
-
-;; (require 'minions)
-;; (minions-mode t)
+  :hook (after-init . minions-mode)
+  :init
+  (setq doom-modeline-minor-modes t))
 
 ;;--------------------------------------------------------------------
 ;; (use-package all-the-icons-ibuffer
@@ -107,21 +104,20 @@ all-the-icons-ibuffer-formats
   (foo-mode . rainbow-delimiters-mode)
   (prog-mode . rainbow-delimiters-mode))
 
-;; (add-hook 'foo-mode-hook #'rainbow-delimiters-mode)
-;; (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
-
 ;; osx-lib
 ;; manually install the package osx-lib
 ;; M-x package-list-packages [enter]
 ;; osx-lib [install]
+
+(use-package osx-lib
+  :ensure t)
 
 (use-package popwin
   :ensure t
   :hook (after-init . popwin-mode))
 
 ;;--------------------------------------------------------------------
-;; (require 'lin)
-
+;; hightlight-line
 (use-package lin
   :ensure t
   :config

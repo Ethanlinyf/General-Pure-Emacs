@@ -145,7 +145,7 @@
           (overlay-put hl-ov 'face 'mindre-keyword)
           (overlay-put hl-ov 'org-noter-current-hl t))
         (org-cycle-hide-drawers 'all))))
-    
+
   (advice-add #'org-noter--focus-notes-region
               :after #'eli/org-noter-set-highlight)
   (advice-add #'org-noter-insert-note

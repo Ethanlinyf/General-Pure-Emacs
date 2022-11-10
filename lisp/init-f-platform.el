@@ -16,9 +16,13 @@
 (require 'awesome-tab)
 (awesome-tab-mode t)
 
+;;--------------------------------------------------------------------
+;; magit for git/GitHub
 (use-package magit
   :init (setq magit-diff-refine-hunk t))
 
+;;--------------------------------------------------------------------
+;; awesome-tab
 (defun awesome-tab-buffer-groups ()
   "`awesome-tab-buffer-groups' control buffers' group rules.
 Group awesome-tab with mode if buffer is derived from `eshell-mode' `emacs-lisp-mode' `dired-mode' `org-mode' `magit-mode'.
@@ -55,7 +59,8 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
      (string-prefix-p "*Compile-Log*" name)
      (string-prefix-p "*lsp" name)
      (string-prefix-p "Aweshell" name)
-     ;; (string-prefix-p "" name)
+     (string-prefix-p "*shell*" name)
+     (string-prefix-p "*shell" name)
      (string-prefix-p "*dashboard*" name)
      (string-prefix-p "*info*" name)
      (string-prefix-p "*scratch*" name)
@@ -69,10 +74,10 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 
 ;;--------------------------------------------------------------------
 ;;(require 'winum)
-(use-package winum
-  :ensure t
-  :hook
-  (after-init . winum-mode))
+;; (use-package winum
+;;   :ensure t
+;;   :hook
+;;   (after-init . winum-mode))
 
 ;;--------------------------------------------------------------------
 (use-package treemacs
@@ -163,6 +168,8 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
         ("C-x t B"   . treemacs-bookmark)
         ("C-x t C-t" . treemacs-find-file)
         ("C-x t M-t" . treemacs-find-tag)))
+;; (add-hook 'treemacs-mode-hook (lambda() (global-linum-mode -1)))
+
 
 (use-package treemacs-projectile
   :after (treemacs projectile)

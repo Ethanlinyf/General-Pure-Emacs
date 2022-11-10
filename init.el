@@ -83,7 +83,7 @@
 (require 'init-e-enhance)
 (require 'init-f-platform)
 (require 'init-g-interface)
-;; (require 'init-h-dashboard)
+(require 'init-h-dashboard)
 
 (require 'init-i-org)
 (require 'init-i-roam)
@@ -91,12 +91,12 @@
 (require 'init-i-python)
 (require 'init-i-lua)
 (require 'init-i-julia)
-;; (require 'init-i-ts)
+(require 'init-i-ts)
 
 (require 'init-r-research)
 
 ;; for testing purposes
-;; (require 'init-z-test)
+(require 'init-z-test)
 
 ;;----------------------------------------------------------------------------
 ;;; init.el ends here

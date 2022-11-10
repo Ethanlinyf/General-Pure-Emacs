@@ -19,9 +19,9 @@
 
 (defun my-subseq (foo n m)
   (let ((l (length foo)))
-        (setq sub1 (nthcdr n foo))
-        (setq sub2 (butlast sub1 (- l m)))
-        sub2))
+    (setq sub1 (nthcdr n foo))
+    (setq sub2 (butlast sub1 (- l m)))
+    sub2))
 
 (defun marginalia-annotate-command (cand)
   "Annotate command CAND with its documentation string.
@@ -111,7 +111,43 @@ Similar to `marginalia-annotate-symbol', but does not show symbol class."
         (message "No other windows exist."))
     (setq toggle-one-window-window-configuration (current-window-configuration))
     (delete-other-windows)))
+;;--------------------------------------------------------------------
+;; format the elisp file
+(defun indent-comment-buffer ()
+  "Indent comment of buffer."
+  (interactive)
+  (indent-comment-region (point-min) (point-max)))
 
+(defun indent-comment-region (start end)
+  "Indent region."
+  (interactive "r")
+  (save-excursion
+    (setq end (copy-marker end))
+    (goto-char start)
+    (while (< (point) end)
+      (if (comment-search-forward end t)
+          (comment-indent)
+        (goto-char end)))))
+
+(defun refresh-file ()
+  "Automatic reload current file."
+  (interactive)
+  (cond ((eq major-mode 'emacs-lisp-mode)
+         (indent-buffer)
+         (indent-comment-buffer)
+         (save-buffer)
+         (load-file (buffer-file-name)))
+        ((member major-mode '(lisp-mode c-mode perl-mode))
+         (indent-buffer)
+         (indent-comment-buffer)
+         (save-buffer))
+        ((member major-mode '(haskell-mode sh-mode))
+         (indent-comment-buffer)
+         (save-buffer))
+        ((derived-mode-p 'scss-mode)
+         (require 'css-sort)
+         (css-sort))
+        (t (message "Current mode is not supported, so not reload"))))
 ;;--------------------------------------------------------------------
 (provide 'pure-function)
 ;;; pure-function.el ends here

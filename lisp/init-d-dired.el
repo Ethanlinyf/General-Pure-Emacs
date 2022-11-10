@@ -13,7 +13,13 @@
 
 ;; Loading later
 (with-eval-after-load 'dired
-  (define-key dired-mode-map (kbd "RET") 'dired-find-alternate-file))
+  (define-key dired-mode-map (kbd "RET") 'dired-find-alternate-file)
+  ;; (setq dired-recursive-deletes 'always)
+  (setq dired-recursive-deletes 'top)
+  (setq dired-recursive-copies 'always)
+  (put 'dired-find-alternate-file 'disabled nil)
+  ;; Show directory first
+  (setq dired-listing-switches "-alh --group-directories-first"))
 
 ;; from Centaur Emacs
 (use-package dired-x
@@ -40,18 +46,13 @@
   (setq dired-omit-files
         (concat dired-omit-files
                 "\\|^.DS_Store$\\|^.projectile$\\|^.git*\\|^.svn$\\|^.vscode$\\|\\.js\\.meta$\\|\\.meta$\\|\\.elc$\\|^.emacs.*")))
-;; (setq dired-recursive-deletes 'always)
-(setq dired-recursive-deletes 'top)
-(setq dired-recursive-copies 'always)
-(put 'dired-find-alternate-file 'disabled nil)
+
 
 ;; Colourful dired
 (use-package diredfl
   :ensure t
-  :init (diredfl-global-mode 1))
-
-;; Show directory first
-(setq dired-listing-switches "-alh --group-directories-first")
+  :hook
+  (dired-mode . diredfl-global-mode))
 
 ;; Show git info in dired
 (use-package dired-git-info
@@ -67,7 +68,7 @@
   :ensure t
   :hook (dired-mode . all-the-icons-dired-mode)
   :config
-  (setq all-the-icons-dired-monochrome nil))
+  (setq all-the-icons-dired-monochrome nil)) ;; nil means it is colourful in dired-mode
 
 ;; move this part to basic
 ;; (with-eval-after-load "dired"
@@ -75,11 +76,6 @@
 ;;   (define-key dired-mode-map (kbd "RET") 'dired-find-alternate-file)
 ;;   (define-key dired-mode-map (kbd "<mouse-2>") 'dired-find-alternate-file)
 ;;   )
-
-;;(require 'diredful)
-;;(diredful-mode 1)
-;; (setq all-the-icons-color-icons t)
-;;(setq all-the-icons-ibuffer-color-icon t)
 
 (use-package all-the-icons-ibuffer
   :ensure t

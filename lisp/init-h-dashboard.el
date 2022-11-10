@@ -14,42 +14,43 @@
 (use-package dashboard
   :ensure t
   :init
-  (dashboard-setup-startup-hook))
+  (dashboard-setup-startup-hook)
+  :config
 
-;; Set the title
-(setq dashboard-banner-logo-title "Something Good as Indicated by ThingsEngine")
+  ;; Set the title
+  (setq dashboard-banner-logo-title "Something Good as Indicated by ThingsEngine")
 
-;;(dashboard-heading ((t (:inherit (font-lock-string-face bold)))))
-(setq dashboard-projects-switch-function 'counsel-projectile-switch-project-action-dired)
+  ;; (dashboard-heading ((t (:inherit (font-lock-string-face bold)))))
+  (setq dashboard-projects-switch-function 'counsel-projectile-switch-project-action-dired)
 
-;; set the number of items for each heading
-(setq dashboard-items '((recents  . 8)
-                        (bookmarks . 5)
-                        (projects . 6)
-                        ;;(agenda . 5)
-                        ;;(registers . 5)
-                        ))
+  ;; set the number of items for each heading
+  (setq dashboard-items '((recents  . 8)
+                          (bookmarks . 5)
+                          (projects . 6)
+                          ;;(agenda . 5)
+                          ;;(registers . 5)
+                          ))
 
-;; set the headings's icon
-(setq dashboard-set-heading-icons t)
-(setq dashboard-heading-icons '((recents   . "file-text")
-                                (bookmarks . "bookmark")
-                                (agenda    . "calendar")
-                                (projects  . "briefcase")
-                                (registers . "database")))
+  ;; set the headings's icon
+  (setq dashboard-set-heading-icons t)
+  (setq dashboard-heading-icons '((recents   . "file-text")
+                                  (bookmarks . "bookmark")
+                                  (agenda    . "calendar")
+                                  (projects  . "briefcase")
+                                  (registers . "database")))
 
-(custom-set-faces '(dashboard-heading ((t (:inherit (font-lock-string-face bold))))))
-;(use-package dashboard
-;  :diminish dashboard-mode
-;  :custom-face (dashboard-heading ((t (:inherit (font-lock-string-face bold))))))
+  (custom-set-faces '(dashboard-heading ((t (:inherit (font-lock-string-face bold))))))
+                                        ;(use-package dashboard
+                                        ;  :diminish dashboard-mode
+                                        ;  :custom-face (dashboard-heading ((t (:inherit (font-lock-string-face bold))))))
 
-;; Content is not centered by default. To center the content, set this varable as t
-(setq dashboard-center-content t)
+  ;; Content is not centered by default. To center the content, set this varable as t
+  (setq dashboard-center-content t)
 
-;; To disable shortcut "jump" indicators for each section, set
-(setq dashboard-show-shortcuts nil)
+  ;; To disable shortcut "jump" indicators for each section, set
+  (setq dashboard-show-shortcuts nil)
 
-(setq dashboard-set-file-icons t)
+  (setq dashboard-set-file-icons t))
 
 (use-package page-break-lines
   :ensure t
@@ -92,7 +93,6 @@
        (display-graphic-p)
        (require 'all-the-icons nil t)))
 
-
 (setq dashboard-set-footer t)
 (setq dashboard-footer (format "Powered by ThingsEngine, %s" (format-time-string "%Y")))
 ;; (setq dashboard-footer-messages '("Powered by ThingsEngine"))
@@ -114,6 +114,7 @@
     (insert (propertize dashboard-footer 'face 'font-lock-comment-face))
     (insert "\n")))
 (advice-add #'dashboard-insert-footer :after #'my-dashboard-insert-copyright)
+
 (use-package counsel-projectile
   :ensure t
   :init
@@ -124,9 +125,9 @@
 
 
 ;; recentf excludes files: M-x recentf-cleanup
-(add-to-list 'recentf-exclude
-             (expand-file-name "~/.emacs.d/company-statistics-cache.el")
-             (expand-file-name "~/.emacs.d/elgrep-data.el"))
+;; (add-to-list 'recentf-exclude
+;;              (expand-file-name "~/.emacs.d/company-statistics-cache.el")
+;;              (expand-file-name "~/.emacs.d/elgrep-data.el"))
 
 ;;--------------------------------------------------------------------
 (provide 'init-h-dashboard)

@@ -5,22 +5,18 @@
 #+title: Pure Emacs Tutorial
 #+date: <2022-06-15 Wed>
 #+author: Dr YF Lin
-#+email: e.yflin@gmail.com 
+#+email: e.yflin@gmail.com
 #+language: en
 #+select_tags: export
 #+exclude_tags: noexport
 #+creator: Emacs 28.1 (Org mode 9.5.2)
 #+cite_export:
-#+startup:overed
-
+#+startup:overview
 
 #+begin_quote
 "Something good, from sand to a tower with spiral evolution and from the tower
 to dust in your universe being as you wish to be" – Dr YF Lin
 #+end_quote
-
-Something good 
-
 
 * Summary
 The tutorial is to demonstrate how this Emacs editor is customised. We pursume a
@@ -44,7 +40,7 @@ Copyleft Declaration:
   are developing *General Pure Emacs* as an simple and integrated platform to facilitate
   learning, teachng, research and project management. This development as a
   repository is shared through GitHub, as well as with a tutorial also published through
-  the ThingsEngine websit: Https://www.thethingsengine.org. 
+  the ThingsEngine websit: Https://www.thethingsengine.org.
 - Elisp \\
 - Order \\
 * Installation
@@ -57,7 +53,7 @@ Copyleft Declaration:
   #+begin_src shell
     brew install coreutils
   #+end_src
-  
+
 - Update the path:
   #+begin_src shell
     # Make all GNU flavor commands available, may override same-name BSD flavor commands
@@ -69,7 +65,7 @@ Copyleft Declaration:
     export PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:${PATH}"
     export MANPATH="/opt/homebrew/opt/coreutils/libexec/gnuman:${MANPATH}"
   #+end_src
-  
+
 - Restore Access to File System for Emacs
   Add Emacs and ruby to Accessibility, Full Disk Access, Files and Folders: \\
   https://mymac.info/post/restore-access-to-file-system-for-emacs-on-macos-catalina \\
@@ -115,8 +111,8 @@ Copyleft Declaration:
 * Key Remapping
 1. M(eta): option (Mac)，left windows (Windows)
 2. s(uper): command (Mac)，left Alt (Windows)
-3. S(Shift): no need to change 
-4. C(left-Ctrl): Caps Lock 
+3. S(Shift): no need to change
+4. C(left-Ctrl): Caps Lock
 ** Windows: SharpKeys
 - How to open with Emacs in Windows\\
   Windows Registry Editor Version 5.00
@@ -143,12 +139,12 @@ Copyleft Declaration:
   #+end_src
 
   #+begin_src emacs-lisp
-    (global-set-key (kbd "s-a") 'mark-whole-buffer) 
-    (global-set-key (kbd "s-c") 'kill-ring-save) 
-    (global-set-key (kbd "s-s") 'save-buffer) 
-    (global-set-key (kbd "s-v") 'yank) 
-    (global-set-key (kbd "s-z") 'undo) 
-    (global-set-key (kbd "s-x") 'kill-region) 
+    (global-set-key (kbd "s-a") 'mark-whole-buffer)
+    (global-set-key (kbd "s-c") 'kill-ring-save)
+    (global-set-key (kbd "s-s") 'save-buffer)
+    (global-set-key (kbd "s-v") 'yank)
+    (global-set-key (kbd "s-z") 'undo)
+    (global-set-key (kbd "s-x") 'kill-region)
   #+end_src
 * Loading Sequence
 ** early-init.el
@@ -196,7 +192,7 @@ Copyleft Declaration:
 - Optimizing Emacs Startup
   + "benchmark-init"
     The [[https://www.emacswiki.org/emacs/BenchmarkInit][benchmark-init]] can be use to indicate where Emacs will spend time during
-    startup. 
+    startup.
 
     benchmark-init can help to record the duration spent in ‘require’ and ‘load’
     when emacs is runnning to laod modulesearly on in the init file. And each
@@ -204,7 +200,7 @@ Copyleft Declaration:
     tree based on the origin of the recorded operations.
 
     See the repository in the GitHub: https://github.com/dholm/benchmark-init-el
-    And an example below: 
+    And an example below:
     | Module                       | Type    | ms [^] | total ms |
     |------------------------------+---------+--------+----------|
     | eldoc-eval                   | require |    200 |      200 |
@@ -213,7 +209,7 @@ Copyleft Declaration:
     | grep                         | require |      9 |        9 |
     | ~/.emacs.d/benchmark-init.el | load    |      1 |        1 |
   + Speed up Emacs at the startup
-    * Set the parameters for the gabbage collections 
+    * Set the parameters for the gabbage collections
       #+begin_src emacs-lisp
       (setq gc-cons-threshold most-positive-fixnum) ;; AT startup
       (add-hook 'after-init-hook #'(lambda () (setq gc-cons-threshold 800000))) ;; after startup
@@ -265,15 +261,15 @@ Copyleft Declaration:
    #+begin_src emacs-lisp
      (set-language-environment "UTF-8")
    #+end_src
-    
+
 ** custom.el
 You can configure Emacs through its interface, for example:
 [[./site-lisp/figure/font_setting.png]]\\
 The settings are generated and recorded in a customised file, which could be set
-as follows: 
+as follows:
  #+begin_src emacs-lisp
    (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
-   (when (file-exists-p custom-file) 
+   (when (file-exists-p custom-file)
      (load custom-file))
  #+end_src
 ** macro.el
@@ -282,7 +278,7 @@ sequence of actions as a macro to perform when needed.
 
 Next, we talk about how to create a macro when using Emacs.
 
-The Steps to create a macro Record and Play inside Emacs: 
+The Steps to create a macro Record and Play inside Emacs:
 - Start recording a macro by pressing ctrl+x (
 - Perform any actions inside the Emacs editor that you would like to record.
 - Stop recording by pressing ctrl+x )
@@ -370,10 +366,10 @@ Save, and exit. In all your future session you will be able to access this macro
 ** DONE init.el
 DEADLINE: <2022-07-01 Fri> SCHEDULED: <2022-06-27 Mon>
 - State "DONE"       from "NEXT"       [2022-06-25 Sat 14:58]
-What is init File? 
+What is init File?
 Emacs has a init file, which contains initial configuration emacs loads when it starts up. It is used to initially customize emacs.
 
-Where is the Emacs init file? 
+Where is the Emacs init file?
 By default, there is no init file. You can create the file with the initial customised configuration. For example:
 
 #+begin_src emacs-lisp
@@ -403,7 +399,7 @@ So, on macOS, emacs is looking for init file when starting up in the following f
   systems with case-insensitive file names, this variable is ignored, since only
   a single case-insensitive search through the alist is made."
 
-  customize this variable as "nil" wil speed up Emacs startup. 
+  customize this variable as "nil" wil speed up Emacs startup.
 - handle the file name to speed up Emacs
   The variable "file-name-handler-alist" holds a list of handlers, together with
   regular expressions that determine when to apply each handler. Each element
@@ -450,17 +446,17 @@ So, on macOS, emacs is looking for init file when starting up in the following f
                      gcs-done)))
   #+end_src
 - Set a major mode for scratch
-  Here, we set the defal major mode as emacs-lisp-mode for elisp practices. 
+  Here, we set the defal major mode as emacs-lisp-mode for elisp practices.
   #+begin_src emacs-lisp
     (setq initial-major-mode 'emacs-lisp-mode) ;;'fundamental-mode
   #+end_src
 
-  The default major mode is fundamental-mode and it is inheritated by Dashboard as dashboard-mode. 
+  The default major mode is fundamental-mode and it is inheritated by Dashboard as dashboard-mode.
 - Loading customised and macro files
   Load the settings recorded through emacs if existing
   #+begin_src emacs-lisp
     (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
-      (when (file-exists-p custom-file) 
+      (when (file-exists-p custom-file)
       (load custom-file))
   #+end_src
 
@@ -471,7 +467,7 @@ So, on macOS, emacs is looking for init file when starting up in the following f
   #+end_src
   Load the macro file if it exists
   #+begin_src emacs-lisp
-    (when (file-exists-p pure-macro) 
+    (when (file-exists-p pure-macro)
       (load pure-macro))
   #+end_src
 
@@ -503,11 +499,11 @@ So, on macOS, emacs is looking for init file when starting up in the following f
 
 ** TODO lisp
 *** init-a-abbr.el
-Emacs has a good feature to expand abbrivations. 
+Emacs has a good feature to expand abbrivations.
 - why we need abbrevs \\
   It is convenient to input some repeated phrases, such as your emails, urls and
   so on. It is also helpful to fix typos by defining abbreviations for these to
-  be corrected automatically. 
+  be corrected automatically.
 - How to enable abbrev-mode \\
   #+begin_src emacs-lisp
     (setq-default abbrev-mode t)
@@ -534,9 +530,9 @@ Emacs has a good feature to expand abbrivations.
                                                 ))
   #+end_src
 
-  
-  
-- how to set an abbrev 
+
+
+- how to set an abbrev
 *** init-b-basic.el
 Some basic settings are included in this elisp file, as well as the const and custom defaults.
 **** init-const.el
@@ -557,22 +553,23 @@ Some basic settings are included in this elisp file, as well as the const and cu
 *** init-x-extra.el
 *** init-z-test.el
 ** site-lisp
-*** aweshell 
+*** aweshell
 *** awesome-tab
 *** lsp-bridge
 *** word-completion
 *** Own development
 - init-j-purefunction.el
-   
+
 ** Org
 - org-super-agenda
   https://github.com/alphapapa/org-super-agenda
 - org-noter
-- 
+-
 
-* Reference 
+* Reference
 1. [[zotero://select/items/1_Y6L4QMKZ][“Gnu.Org.” Accessed June 16, 2022. https://www.gnu.org/software/emacs/manual/html_node/elisp/Error-Debugging.html.]]
 2. [[zotero://select/items/1_MAW49NXR][“EmacsWiki: Optimizing Emacs Startup.” Accessed June 17, 2022. https://www.emacswiki.org/emacs/OptimizingEmacsStartup.]]
 3. [[zotero://select/items/1_XC55BTU4][Doom Emacs. Emacs Lisp. 2014. Reprint, Doom Emacs, 2022. https://github.com/doomemacs/doomemacs.]]
 4. [[zotero://select/items/1_2Y87WF4Q][“Gnu.Org: Making Certain File Names ‘Magic.’” Accessed June 24, 2022. https://www.gnu.org/software/emacs/manual/html_node/elisp/Magic-File-Names.html.]]
 5. [[zotero://select/items/1_5IBL5GJ8][“EmacsWiki: Abbrev Mode.” Accessed August 5, 2022. https://www.emacswiki.org/emacs/AbbrevMode.]]
+
