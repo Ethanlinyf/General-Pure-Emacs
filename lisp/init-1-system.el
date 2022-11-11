@@ -16,6 +16,10 @@
 (require 'pure-function)
 (require 'subr-x)
 
+(use-package use-package-ensure-system-package
+  :ensure t)
+
+
 ;; set time
 (use-package time
   :ensure nil

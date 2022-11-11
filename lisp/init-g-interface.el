@@ -31,10 +31,8 @@
 
 
 (use-package ns-auto-titlebar
-  :ensure t
-  :init
-  (when *is-mac*
-  (ns-auto-titlebar-mode)))
+  :if *is-mac*
+  :hook (after-init . ns-auto-titlebar-mode))
 
 ;;--------------------------------------------------------------------
 (use-package doom-themes
@@ -110,7 +108,7 @@ all-the-icons-ibuffer-formats
 ;; osx-lib [install]
 
 (use-package osx-lib
-  :ensure t)
+  :if *is-mac*)
 
 (use-package popwin
   :ensure t

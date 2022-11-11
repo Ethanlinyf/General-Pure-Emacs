@@ -73,7 +73,7 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
   (setq awesome-tab-display-icon t))
 
 ;;--------------------------------------------------------------------
-;;(require 'winum)
+;; (require 'winum)
 ;; (use-package winum
 ;;   :ensure t
 ;;   :hook
@@ -82,7 +82,7 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 ;;--------------------------------------------------------------------
 (use-package treemacs
   :ensure t
-  ;; :defer t
+  :defer t
   :init
   (with-eval-after-load 'winum
     (define-key winum-keymap (kbd "M-0") #'treemacs-select-window))
@@ -168,8 +168,6 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
         ("C-x t B"   . treemacs-bookmark)
         ("C-x t C-t" . treemacs-find-file)
         ("C-x t M-t" . treemacs-find-tag)))
-;; (add-hook 'treemacs-mode-hook (lambda() (global-linum-mode -1)))
-
 
 (use-package treemacs-projectile
   :after (treemacs projectile)
@@ -194,35 +192,60 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
   :config (treemacs-set-scope-type 'Tabs))
 
 (use-package treemacs-all-the-icons
+  :after (treemacs all-the-icons)
   :ensure t
   :init
   (require 'treemacs-all-the-icons)
   (treemacs-load-theme "all-the-icons"))
 
 ;;--------------------------------------------------------------------
-(use-package company
-  :ensure t)
-(add-to-list 'load-path (expand-file-name "~/.emacs.d/site-lisp/aweshell"))
-(require 'aweshell)
-(global-set-key (kbd "s-1") 'aweshell-dedicated-toggle)
+;; (use-package company
+;;   :ensure t)
+;; (add-to-list 'load-path (expand-file-name "~/.emacs.d/site-lisp/aweshell"))
+;; (require 'aweshell)
+;; (global-set-key (kbd "s-1") 'aweshell-dedicated-toggle)
+
+(use-package aweshell
+  :load-path "~/.emacs.d/site-lisp/aweshell"
+  :ensure company
+  :defer t
+  :bind ("s-1" . aweshell-dedicated-toggle))
+
 
 ;;--------------------------------------------------------------------
 ;; (require 'epc)
 (use-package markdown-mode
   :ensure t)
 
-(use-package epc
-  :ensure t)
+;; (use-package epc
+;;   :ensure t)
 
-(add-to-list 'load-path "~/.emacs.d/site-lisp/lsp-bridge")
+;; (add-to-list 'load-path "~/.emacs.d/site-lisp/lsp-bridge")
 
-(require 'lsp-bridge)
-(global-lsp-bridge-mode)
+;; (require 'lsp-bridge)
+;; (global-lsp-bridge-mode)
+
+(use-package lsp-bridge
+  :load-path "~/.emacs.d/site-lisp/lsp-bridge"
+  ;; :ensure-system-package
+  ;; ((epc . "pip install epc")
+  ;;  (orjson . "pip install orjson")
+  ;;  (six . "pip install six"))
+  :ensure epc
+  :defer 2
+  :hook (after-init . global-lsp-bridge-mode))
+
+
 
 ;;--------------------------------------------------------------------
 ;; blink-search
-(add-to-list 'load-path "~/.emacs.d/site-lisp/blink-search")
-(require 'blink-search)
+;; (add-to-list 'load-path "~/.emacs.d/site-lisp/blink-search")
+;; (require 'blink-search)
+
+(use-package blink-search
+  :load-path "~/.emacs.d/site-lisp/blink-search"
+  :defer 2
+  :autoload blink-search)
 
 ;;--------------------------------------------------------------------
 (provide 'init-f-platform)
