@@ -59,6 +59,10 @@
 (eval-when-compile
   (require 'use-package))
 
+(setq use-package-compute-statistics t)
+
+
+
 ;; Required by `use-package', as use-package optional dependency
 (use-package diminish)
 (use-package bind-key)

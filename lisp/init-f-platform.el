@@ -1,6 +1,6 @@
 ;;; init-f-platform.el --- IDE -*- lexical-binding: t; -*-
 ;;
-; Copyleft (CL) 2022-2032 YF Lin
+                                        ; Copyleft (CL) 2022-2032 YF Lin
 ;;
 ;; Something good as indicated, by Dr YF Lin <e.yflin@gmail.com>
 ;; URL: https://github.com/Ethanlinyf/General-Pure-Emacs
@@ -49,7 +49,7 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
     ((memq major-mode '(org-mode org-agenda-mode diary-mode))
      "OrgMode")
     (t
-    (awesome-tab-get-group-name (current-buffer))))))
+     (awesome-tab-get-group-name (current-buffer))))))
 
 (defun awesome-tab-hide-tab (x)
   (let ((name (format "%s" x)))
@@ -66,7 +66,7 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
      (string-prefix-p "*scratch*" name)
      (string-prefix-p "*Messages*" name)
      (and (string-prefix-p "magit" name)
-               (not (file-name-extension name)))
+          (not (file-name-extension name)))
      )))
 
 (when (display-graphic-p)
@@ -89,55 +89,55 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
   :config
   (progn
     (setq treemacs-collapse-dirs                   (if treemacs-python-executable 3 0)
-           treemacs-deferred-git-apply-delay        0.5
-           treemacs-directory-name-transformer      #'identity
-           treemacs-display-in-side-window          t
-           treemacs-eldoc-display                   'simple
-           treemacs-file-event-delay                5000
-           treemacs-file-extension-regex            treemacs-last-period-regex-value
-           treemacs-file-follow-delay               0.2
-           treemacs-file-name-transformer           #'identity
-           treemacs-follow-after-init               t
-           treemacs-expand-after-init               t
-           treemacs-find-workspace-method           'find-for-file-or-pick-first
-           treemacs-git-command-pipe                ""
-           treemacs-goto-tag-strategy               'refetch-index
+          treemacs-deferred-git-apply-delay        0.5
+          treemacs-directory-name-transformer      #'identity
+          treemacs-display-in-side-window          t
+          treemacs-eldoc-display                   'simple
+          treemacs-file-event-delay                5000
+          treemacs-file-extension-regex            treemacs-last-period-regex-value
+          treemacs-file-follow-delay               0.2
+          treemacs-file-name-transformer           #'identity
+          treemacs-follow-after-init               t
+          treemacs-expand-after-init               t
+          treemacs-find-workspace-method           'find-for-file-or-pick-first
+          treemacs-git-command-pipe                ""
+          treemacs-goto-tag-strategy               'refetch-index
           ;; treemacs-header-scroll-indicators        '(nil . "^^^^^^")'
-           treemacs-indentation                     2
-           treemacs-indentation-string              " "
-           treemacs-indent-guide-style              'line
-           treemacs-is-never-other-window           nil
-           treemacs-max-git-entries                 5000
-           treemacs-missing-project-action          'ask
-           treemacs-move-forward-on-expand          nil
-           treemacs-no-png-images                   nil
-           treemacs-no-delete-other-windows         t
-           treemacs-project-follow-cleanup          nil
-           treemacs-persist-file                    (expand-file-name ".cache/treemacs-persist" user-emacs-directory)
-           treemacs-position                        'left
-           treemacs-read-string-input               'from-child-frame
-           treemacs-recenter-distance               0.1
-           treemacs-recenter-after-file-follow      nil; treemacs-recenter-after-tag-follow       nil
-           treemacs-recenter-after-project-jump     'always
-           treemacs-recenter-after-project-expand   'on-distance
-           treemacs-litter-directories              '("/node_modules" "/.venv" "/.cask")
-           treemacs-show-cursor                     nil
-           treemacs-show-hidden-files               t
-           treemacs-silent-filewatch                nil
-           treemacs-silent-refresh                  nil
-           treemacs-sorting                         'alphabetic-asc
-           treemacs-select-when-already-in-treemacs 'move-back
-           treemacs-space-between-root-nodes        t
-           treemacs-tag-follow-cleanup              t
-           treemacs-tag-follow-delay                1.5
-           treemacs-text-scale                      nil
-           treemacs-user-mode-line-format           nil
-           treemacs-user-header-line-format         nil
-           treemacs-wide-toggle-width               70
-           treemacs-width                           30
-           treemacs-width-increment                 1
-           treemacs-width-is-initially-locked       t
-           treemacs-workspace-switch-cleanup        nil
+          treemacs-indentation                     2
+          treemacs-indentation-string              " "
+          treemacs-indent-guide-style              'line
+          treemacs-is-never-other-window           nil
+          treemacs-max-git-entries                 5000
+          treemacs-missing-project-action          'ask
+          treemacs-move-forward-on-expand          nil
+          treemacs-no-png-images                   nil
+          treemacs-no-delete-other-windows         t
+          treemacs-project-follow-cleanup          nil
+          treemacs-persist-file                    (expand-file-name ".cache/treemacs-persist" user-emacs-directory)
+          treemacs-position                        'left
+          treemacs-read-string-input               'from-child-frame
+          treemacs-recenter-distance               0.1
+          treemacs-recenter-after-file-follow      nil; treemacs-recenter-after-tag-follow       nil
+          treemacs-recenter-after-project-jump     'always
+          treemacs-recenter-after-project-expand   'on-distance
+          treemacs-litter-directories              '("/node_modules" "/.venv" "/.cask")
+          treemacs-show-cursor                     nil
+          treemacs-show-hidden-files               t
+          treemacs-silent-filewatch                nil
+          treemacs-silent-refresh                  nil
+          treemacs-sorting                         'alphabetic-asc
+          treemacs-select-when-already-in-treemacs 'move-back
+          treemacs-space-between-root-nodes        t
+          treemacs-tag-follow-cleanup              t
+          treemacs-tag-follow-delay                1.5
+          treemacs-text-scale                      nil
+          treemacs-user-mode-line-format           nil
+          treemacs-user-header-line-format         nil
+          treemacs-wide-toggle-width               70
+          treemacs-width                           30
+          treemacs-width-increment                 1
+          treemacs-width-is-initially-locked       t
+          treemacs-workspace-switch-cleanup        nil
           )
 
     ;; The default width and height of the icons is 22 pixels. If you are
@@ -163,7 +163,7 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
         ("C-x t 1"   . treemacs-delete-other-windows)
         ("C-x t t"   . treemacs)
         ("s-2"       . treemacs)
-        ;("s-3"       . awesome-tab-mode)
+                                        ;("s-3"       . awesome-tab-mode)
         ("C-x t d"   . treemacs-select-directory)
         ("C-x t B"   . treemacs-bookmark)
         ("C-x t C-t" . treemacs-find-file)
@@ -247,6 +247,60 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
   :defer 2
   :autoload blink-search)
 
+;;--------------------------------------------------------------------
+
+(use-package org-transclusion
+  :ensure t)
+
+(use-package ivy
+  :ensure t)
+
+(use-package dash
+  :ensure t)
+
+
+;; (add-to-list 'load-path "~/.emacs.d/site-lisp/popweb") ; add popweb to your load-path
+
+;; ;; Org-Roam ID link and footnote link previewer
+;; (add-to-list 'load-path "~/.emacs.d/site-lisp/popweb/extension/org-roam")
+;; (require 'popweb-org-roam-link)
+
+;; ;; LaTeX preview functionality
+;; (add-to-list 'load-path "~/.emacs.d/site-lisp/popweb/extension/latex")
+;; (require 'popweb-latex)
+;; (add-hook 'latex-mode-hook #'popweb-latex-mode)
+
+;; ;; Chinese-English translation popup
+;; (add-to-list 'load-path "~/.emacs.d/site-lisp/popweb/extension/dict") ;
+;; (require 'popweb-dict-bing) ; Translation using Bing
+;; (require 'popweb-dict-youdao) ; Translation using Youdao
+
+;; (add-to-list 'load-path "~/.emacs.d/site-lisp/popweb/extension/url-preview")
+;; (require 'popweb-url)
+
+
+(use-package popweb
+  :defer t
+  :load-path "~/.emacs.d/site-lisp/popweb"
+  :hook ((org-mode tex-mode) . popweb-mode)
+  :init
+  ;; Org-Roam ID link and footnote link previewer
+  (add-to-list 'load-path "~/.emacs.d/site-lisp/popweb/extension/org-roam")
+  (require 'popweb-org-roam-link)
+
+  ;; LaTeX preview functionality
+  (add-to-list 'load-path "~/.emacs.d/site-lisp/popweb/extension/latex")
+  (require 'popweb-latex)
+  (add-hook 'latex-mode-hook #'popweb-latex-mode)
+
+  ;; Chinese-English translation popup
+  (add-to-list 'load-path "~/.emacs.d/site-lisp/popweb/extension/dict") ;
+  (require 'popweb-dict-bing) ; Translation using Bing
+  (require 'popweb-dict-youdao) ; Translation using Youdao
+
+  (add-to-list 'load-path "~/.emacs.d/site-lisp/popweb/extension/url-preview")
+  (require 'popweb-url)
+  :pin manual)
 ;;--------------------------------------------------------------------
 (provide 'init-f-platform)
 ;;; init-f-platform.el ends here

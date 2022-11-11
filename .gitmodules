@@ -16,3 +16,6 @@
 [submodule "site-lisp/deno-bridge"]
 	path = site-lisp/deno-bridge
 	url = git@github.com:manateelazycat/deno-bridge.git
+[submodule "site-lisp/popweb"]
+	path = site-lisp/popweb
+	url = git@github.com:manateelazycat/popweb.git
