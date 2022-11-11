@@ -85,15 +85,18 @@
 (require 'init-g-interface)
 (require 'init-h-dashboard)
 
-(require 'init-i-org)
-(require 'init-i-roam)
-(require 'init-i-tex)
-(require 'init-i-python)
-(require 'init-i-lua)
-(require 'init-i-julia)
-(require 'init-i-ts)
+(require 'init-i-i18n) ;; to be improved. 
 
-(require 'init-r-research)
+(require 'init-o-org)
+(require 'init-o-roam)
+
+(require 'init-p-python)
+(require 'init-p-lua)
+(require 'init-p-julia)
+(require 'init-p-ts)
+
+;; (require 'init-r-research)
+;; (require 'init-r-tex)
 
 ;; for testing purposes
 (require 'init-z-test)

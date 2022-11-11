@@ -1,4 +1,4 @@
-;;; init-julia.el --- Settings for Julia. -*- lexical-binding: t; -*-
+;;; init-ts.el --- Settings for Typecript. -*- lexical-binding: t; -*-
 ;;
 ;; Copyleft (CL) 2022-2032 Dr YF Lin
 ;;
@@ -7,17 +7,13 @@
 ;; Under ThingsEngine Project: https://www.thethingsengine.org/
 ;;--------------------------------------------------------------------
 ;; Commentary:
-;; Configurations for Julia programming
+;; Configurations for TypeScript programming
 ;;--------------------------------------------------------------------
 ;;; Code:
 
-(use-package julia-mode
+(use-package typescript-mode
   :ensure t)
 
-(use-package julia-repl
-  :ensure t
-  :hook (julia-mode . julia-repl-mode))
-
-;;----------------------------------------------------------------------------
-(provide 'init-i-julia)
-;;; init.el ends here
+;;--------------------------------------------------------------------
+(provide 'init-p-ts)
+;;; init-ts.el ends here

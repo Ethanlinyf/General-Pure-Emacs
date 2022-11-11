@@ -1,0 +1,18 @@
+;; init-i-i18n.el -- Settings for Internationalisation . -*- lexical-binding: t; -*-
+;;
+;; Copyleft (CL) 2022-2032 YF Lin
+;;
+;; Something good as indicated, by Dr YF Lin <e.yflin@gmail.com>
+;; URL: https://github.com/Ethanlinyf/General-Pure-Emacs
+;; Under ThingsEngine Project: https://www.thethingsengine.org
+;;--------------------------------------------------------------------
+;;; Commentary:
+;; The configurations for internationalisation, including imput methods, fonts, coding system, and so on. 
+;;--------------------------------------------------------------------
+;;; Code:
+(use-package pyim
+  :ensure t)
+
+;;--------------------------------------------------------------------
+(provide 'init-i-i18n)
+;;; init-i-i18n ends here.

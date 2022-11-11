@@ -283,7 +283,7 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
   :defer t
   :load-path "~/.emacs.d/site-lisp/popweb"
   :hook ((org-mode tex-mode) . popweb-mode)
-  :init
+  :config
   ;; Org-Roam ID link and footnote link previewer
   (add-to-list 'load-path "~/.emacs.d/site-lisp/popweb/extension/org-roam")
   (require 'popweb-org-roam-link)

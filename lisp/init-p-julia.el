@@ -19,5 +19,5 @@
   :hook (julia-mode . julia-repl-mode))
 
 ;;----------------------------------------------------------------------------
-(provide 'init-i-julia)
-;;; init.el ends here
+(provide 'init-p-julia)
+;;; init.el ends here.

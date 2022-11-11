@@ -1,4 +1,4 @@
-;;; init-ts.el --- Settings for Typecript. -*- lexical-binding: t; -*-
+;;; init-lua.el -- For lua programming language. -*- lexical-binding: t; -*-
 ;;
 ;; Copyleft (CL) 2022-2032 Dr YF Lin
 ;;
@@ -6,14 +6,19 @@
 ;; URL: https://github.com/Ethanlinyf/General-Pure-Emacs
 ;; Under ThingsEngine Project: https://www.thethingsengine.org/
 ;;--------------------------------------------------------------------
-;; Commentary:
-;; Configurations for TypeScript programming
+;;; Commentary:
+;; Configurations for lua programming language
 ;;--------------------------------------------------------------------
 ;;; Code:
 
-(use-package typescript-mode
+(use-package lua-mode
   :ensure t)
 
+(autoload 'lua-mode "lua-mode" "Lua editing mode." t)
+(add-to-list 'auto-mode-alist '("\\.lua$" . lua-mode))
+(add-to-list 'interpreter-mode-alist '("lua" . lua-mode))
+
+
 ;;--------------------------------------------------------------------
-(provide 'init-i-ts)
-;;; init-ts.el ends here
+(provide 'init-p-lua)
+;;; init-p-lua.el ends here.

@@ -258,5 +258,5 @@
 ;;   (procress-load-default-svg-images))
 
 ;;--------------------------------------------------------------------
-(provide 'init-i-tex)
-;;; init-tex.el ends here.
+(provide 'init-r-tex)
+;;; init-tex ends here

@@ -38,5 +38,5 @@
         (setq org-roam-ui-browser-function #'xwidget-webkit-browse-url)))))
 
 ;;----------------------------------------------------------------------------
-(provide 'init-i-roam)
-;;; init-roam ends here
+(provide 'init-o-roam)
+;;; init-roam ends here.

@@ -34,6 +34,5 @@
   (org-mode . org-zotxt-mode))
 
 ;;--------------------------------------------------------------------
- 
-
- (provide 'init-r-research)
+(provide 'init-r-research)
+;;; init-research ends here.

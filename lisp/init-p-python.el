@@ -45,5 +45,5 @@
 ;;   (use-package live-py-mode))
 
 ;;----------------------------------------------------------------------------
-(provide 'init-i-python)
-;;; init-python.el ends here
+(provide 'init-p-python)
+;;; init-python ends here
