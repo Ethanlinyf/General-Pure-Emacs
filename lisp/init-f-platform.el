@@ -280,9 +280,10 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 
 
 (use-package popweb
-  :defer t
+  :ensure nil
   :load-path "~/.emacs.d/site-lisp/popweb"
-  ;; :hook ((org-mode tex-mode) . (require 'popweb))
+  :defer t
+  ;; :init
   :config
   ;; Org-Roam ID link and footnote link previewer
   (add-to-list 'load-path "~/.emacs.d/site-lisp/popweb/extension/org-roam")
@@ -300,6 +301,10 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 
   (add-to-list 'load-path "~/.emacs.d/site-lisp/popweb/extension/url-preview")
   (require 'popweb-url)
+  :bind
+  ;; 
+  (("s-4" . popweb-dict-bing-pointer)
+   ("s-5" . popweb-url-preview-pointer))
   :pin manual)
 ;;--------------------------------------------------------------------
 (provide 'init-f-platform)
