@@ -36,7 +36,6 @@
 
 ;;--------------------------------------------------------------------
 (use-package doom-themes
-  :ensure t
   :init
   (load-theme 'doom-one t))
 
@@ -117,7 +116,7 @@ all-the-icons-ibuffer-formats
 ;;--------------------------------------------------------------------
 ;; hightlight-line
 (use-package lin
-  :ensure t
+  :defer t
   :config
   (setq lin-face 'lin-mac))
 
@@ -126,26 +125,26 @@ all-the-icons-ibuffer-formats
 ;; You can use this to live update the face:
 ;; (customize-set-variable 'lin-face 'lin-green)
 
-;; (setq lin-mode-hooks
-;;       '(bongo-mode-hook
-;;         org-mode-hook
-;;         dired-mode-hook
-;;         elfeed-search-mode-hook
-;;         git-rebase-mode-hook
-;;         grep-mode-hook
-;;         ibuffer-mode-hook
-;;         ilist-mode-hook
-;;         ledger-report-mode-hook
-;;         log-view-mode-hook
-;;         magit-log-mode-hook
-;;         mu4e-headers-mode-hook
-;;         notmuch-search-mode-hook
-;;         notmuch-tree-mode-hook
-;;         occur-mode-hook
-;;         org-agenda-mode-hook
-;;         pdf-outline-buffer-mode-hook
-;;         proced-mode-hook
-;;         tabulated-list-mode-hook))
+(setq lin-mode-hooks
+      '(bongo-mode-hook
+        org-mode-hook
+        dired-mode-hook
+        elfeed-search-mode-hook
+        git-rebase-mode-hook
+        grep-mode-hook
+        ibuffer-mode-hook
+        ilist-mode-hook
+        ledger-report-mode-hook
+        log-view-mode-hook
+        magit-log-mode-hook
+        mu4e-headers-mode-hook
+        notmuch-search-mode-hook
+        notmuch-tree-mode-hook
+        occur-mode-hook
+        org-agenda-mode-hook
+        pdf-outline-buffer-mode-hook
+        proced-mode-hook
+        tabulated-list-mode-hook))
 
 ;(lin-global-mode nil)
 ;;--------------------------------------------------------------------

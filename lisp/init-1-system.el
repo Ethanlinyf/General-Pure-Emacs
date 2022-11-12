@@ -44,7 +44,7 @@
 ;; Environment
 (when (or sys/mac-x-p sys/linux-x-p (daemonp))
   (use-package exec-path-from-shell
-    :init (exec-path-from-shell-initialize)))
+    :config (exec-path-from-shell-initialize)))
 
 ;;--------------------------------------------------------------------
 ;; A few more useful configurations...
@@ -111,8 +111,7 @@
 ;;  of functions and macros are at least subsets of the actual
 ;; implementations.  Be sure to read the documentation string to
 ;;  make sure.
-(use-package compat
-  :demand t)
+(use-package compat)
 ;;--------------------------------------------------------------------
 ;; Start server
 (use-package server

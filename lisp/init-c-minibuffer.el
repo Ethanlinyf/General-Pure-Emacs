@@ -13,11 +13,11 @@
 
 ;; Enable vertico
 (use-package vertico
-  :init
-  (vertico-mode)
+  :hook
+  (after-init . vertico-mode)
   ;; Different scroll margin
   ;; (setq vertico-scroll-margin 0)
-
+  :config
   ;; Show more candidates
   (setq vertico-count 12)
 
@@ -44,8 +44,8 @@
 
 ;;--------------------------------------------------------------------
 (use-package corfu
-  :init
-  (global-corfu-mode))
+  :hook
+  (after-init . global-corfu-mode))
 
 ;;--------------------------------------------------------------------
 ;; Optionally use the 'orderless' completion style.
@@ -67,14 +67,19 @@
          ("M-A" . marginalia-cycle))
 
   ;; The :init configuration is always executed (Not lazy!)
-  :init
+  :hook 
 
   ;; Must be in the :init section of use-package such that the mode gets
   ;; enabled right away. Note that this forces loading the package.
-  (marginalia-mode))
+  (after-init . marginalia-mode))
 
 ;;--------------------------------------------------------------------
 ;; Example configuration for Consult
+
+;; (use-package counsel-projectile
+;;   :ensure t)
+
+
 (use-package consult
   ;; Replace bindings. Lazily loaded due by `use-package'.
   :bind (;; C-c bindings (mode-specific-map)
@@ -87,7 +92,7 @@
          ("C-x 4 b" . consult-buffer-other-window) ;; orig. switch-to-buffer-other-window
          ("C-x 5 b" . consult-buffer-other-frame)  ;; orig. switch-to-buffer-other-frame
          ("C-x r b" . consult-bookmark)            ;; orig. bookmark-jump
-         ("C-x p b" . consult-project-buffer)      ;; orig. project-switch-to-buffer
+         ;; ("C-x p b" . consult-project-buffer)      ;; orig. project-switch-to-buffer
          ;; Custom M-# bindings for fast register access
          ("M-#" . consult-register-load)
          ("M-'" . consult-register-store)          ;; orig. abbrev-prefix-mark (unrelated)

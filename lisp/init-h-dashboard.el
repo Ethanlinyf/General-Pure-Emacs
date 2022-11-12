@@ -11,6 +11,14 @@
 ;;--------------------------------------------------------------------
 ;;; Code:
 
+(use-package counsel-projectile
+  :ensure t
+  :hook
+  (after-init . counsel-projectile-mode))
+  ;; (setq dashboard-projects-switch-function 'counsel-projectile-switch-project-action-dired))
+;; (counsel-projectile-mode t)
+;; (setq dashboard-projects-switch-function 'counsel-projectile-switch-project-by-name)
+
 (use-package dashboard
   :ensure t
   :init
@@ -54,8 +62,8 @@
 
 (use-package page-break-lines
   :ensure t
-  :init
-  (page-break-lines-mode 1))
+  :hook
+  (after-init . page-break-lines-mode))
 
 (setq dashboard-page-separator "\n\f\n")
 
@@ -114,14 +122,6 @@
     (insert (propertize dashboard-footer 'face 'font-lock-comment-face))
     (insert "\n")))
 (advice-add #'dashboard-insert-footer :after #'my-dashboard-insert-copyright)
-
-(use-package counsel-projectile
-  :ensure t
-  :init
-  (counsel-projectile-mode t)
-  (setq dashboard-projects-switch-function 'counsel-projectile-switch-project-action-dired))
-;; (counsel-projectile-mode t)
-;; (setq dashboard-projects-switch-function 'counsel-projectile-switch-project-by-name)
 
 
 ;; recentf excludes files: M-x recentf-cleanup

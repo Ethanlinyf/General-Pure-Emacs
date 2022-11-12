@@ -24,7 +24,7 @@
 ;; from Centaur Emacs
 (use-package dired-x
   :ensure nil
-  :demand t
+  ;; :demand t
   :config
   (let ((cmd (cond (sys/mac-x-p "open")
                    (sys/linux-x-p "xdg-open")

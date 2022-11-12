@@ -22,27 +22,28 @@
 
 (setq python-shell-completion-native-enable nil)
 
-;; (use-package python
-;;   :ensure nil
-;;   :hook (inferior-python-mode . (lambda ()
-;;                                   (process-query-on-exit-flag
-;;                                    (get-process "Python"))))
-;;   :init
-;;   ;; Disable readline based native completion
-;;   (setq python-shell-completion-native-enable nil)
-;;   :config
-;;   ;; Default to Python 3. Prefer the versioned Python binaries since some
-;;   ;; systems stupidly make the unversioned one point at Python 2.
-;;   (when (and (executable-find "python")
-;;              (string= python-shell-interpreter "python"))
-;;     (setq python-shell-interpreter "/usr/local/bin/python"))
+(use-package python
+  :ensure nil
+  :hook (inferior-python-mode . (lambda ()
+                                  (process-query-on-exit-flag
+                                   (get-process "Python"))))
+  :init
+  ;; Disable readline based native completion
+  (setq python-shell-completion-native-enable nil)
+  :config
+  ;; Default to Python 3. Prefer the versioned Python binaries since some
+  ;; systems stupidly make the unversioned one point at Python 2.
+  (setq python-indent-offset 4)
+  (when (and (executable-find "python")
+             (string= python-shell-interpreter "python"))
+    (setq python-shell-interpreter "python"))
 
-;;   ;; Env vars
-;;   (with-eval-after-load 'exec-path-from-shell
-;;     (exec-path-from-shell-copy-env "PYTHONPATH"))
+  ;; Env vars
+  (with-eval-after-load 'exec-path-from-shell
+    (exec-path-from-shell-copy-env "PYTHONPATH"))
 
-;;   ;; Live Coding in Python
-;;   (use-package live-py-mode))
+  ;; Live Coding in Python
+  (use-package live-py-mode))
 
 ;;----------------------------------------------------------------------------
 (provide 'init-p-python)

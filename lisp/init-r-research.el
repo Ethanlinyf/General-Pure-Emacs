@@ -13,7 +13,6 @@
 
 (use-package obsidian
   :ensure t
-  :demand t
   :config
   (obsidian-specify-path "~/Documents/Research/Obsidian-Re/")
   (global-obsidian-mode t)

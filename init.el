@@ -85,7 +85,7 @@
 (require 'init-g-interface)
 (require 'init-h-dashboard)
 
-(require 'init-i-i18n) ;; to be improved. 
+(require 'init-i-i18n)
 
 (require 'init-o-org)
 (require 'init-o-roam)
@@ -95,8 +95,8 @@
 (require 'init-p-julia)
 (require 'init-p-ts)
 
-;; (require 'init-r-research)
-;; (require 'init-r-tex)
+(require 'init-r-research)
+(require 'init-r-tex)
 
 ;; for testing purposes
 (require 'init-z-test)
