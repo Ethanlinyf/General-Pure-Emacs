@@ -217,8 +217,8 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 (use-package markdown-mode
   :ensure t)
 
-;; (use-package epc
-;;   :ensure t)
+(use-package epc
+  :ensure t)
 
 ;; (add-to-list 'load-path "~/.emacs.d/site-lisp/lsp-bridge")
 
@@ -303,7 +303,7 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
   (require 'popweb-url)
   :bind
   ;; 
-  (("s-4" . popweb-dict-bing-pointer)
+  (("s-4" . popweb-dict-youdao-pointer)
    ("s-5" . popweb-url-preview-pointer))
   :pin manual)
 ;;--------------------------------------------------------------------

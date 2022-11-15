@@ -83,7 +83,7 @@
 (require 'init-e-enhance)
 (require 'init-f-platform)
 (require 'init-g-interface)
-(require 'init-h-dashboard)
+;; (require 'init-h-dashboard)
 
 (require 'init-i-i18n)
 

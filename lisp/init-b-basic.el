@@ -122,6 +122,14 @@
   (global-set-key (kbd "C-c C-'") 'set-mark-command)  ;; Keybindings for setting mark
   )
 
+;; Visualize TAB, (HARD) SPACE, NEWLINE
+(setq-default show-trailing-whitespace nil) ; Don't show trailing whitespace by default
+(defun enable-trailing-whitespace ()
+  "Show trailing spaces and delete on saving."
+  (setq show-trailing-whitespace t)
+  (add-hook 'before-save-hook #'delete-trailing-whitespace nil t))
+
+
 ;;----------------------- Dired Mode ---------------------------------
 (with-eval-after-load "dired"
   (put 'dired-find-alternate-file 'disabled nil)

@@ -13,6 +13,18 @@
 (use-package pyim
   :ensure t)
 
+(use-package define-word
+  :commands define-word-at-point
+  :ensure t
+  :bind
+  ("s-6" . define-word-at-point))
+
+(use-package powerthesaurus
+  :commands powerthesaurus-lookup-dwim
+  :ensure t
+  :bind
+  ("s-7" . powerthesaurus-lookup-dwim))
+
 ;;--------------------------------------------------------------------
 (provide 'init-i-i18n)
 ;;; init-i-i18n ends here.

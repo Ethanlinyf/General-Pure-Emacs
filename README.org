@@ -11,6 +11,8 @@
 #+exclude_tags: noexport
 #+creator: Emacs 29.0.50 (Org mode 9.5.4)
 #+cite_export:
+#+startup: overview 
+
 
 
 * Introduction
@@ -154,6 +156,22 @@ recommended.
    - Yes for "Need to (re)build the epdfinfo program, do it now ?":
    - You may need to wait for a while to complete downloading the needed packages.
 7. Enjoy General Pure Emacs ~ 
+* Plan
+** Compatible with Windows and Linux 
+** support Hydra for
+- Org-mode and org-roam mode
+- TeX mode
+- Programming, python-mode
+
+This implementation will facilitate the focus become simple and
+pure. 
+** straight for the use-package to be as straight-use-package
+Next-generation, purely functional package manager with use-package.
+** leaf for the configuration to design the keywords for management of the configuration.
+This will be creative to manage the configuration as we wish to by
+adding custmised keywords. ("using macroexpand-1 to see the unfolded
+result if it is not what you intended", which is monitored and plan to
+shift to this package management.)
 * Support/Issue
 Please report any issues about configuration at this repository.
 * License
