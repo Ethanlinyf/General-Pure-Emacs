@@ -93,7 +93,7 @@ learning/teaching, research and project management.
   [[./site-lisp/figure/mode-line.png]]
 
 - Extensible
-  + Multiple threading and asynchronous processing with Python
+  + Multiple threading and asynchronous processing
 
   [[./site-lisp/figure/GPE-Framework_3.png]]
 
