@@ -95,7 +95,7 @@ learning/teaching, research and project management.
 - Extensible
   + Multiple threading and asynchronous processing with Python
 
-  [[./site-lisp/figure/GPE-Framework_2.png]]
+  [[./site-lisp/figure/GPE-Framework_3.png]]
 
   + literate programming \\
 
