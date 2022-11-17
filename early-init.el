@@ -42,6 +42,8 @@
 ;; once.
 (setq package-enable-at-startup nil)
 
+; (add-hook 'after-init-hook (lambda () (load-theme 'doom-one)))
+
 ;; In noninteractive sessions, prioritise non-byte-compiled source
 ;; files to prevent the use of stale byte-code. Otherwise, it saves us
 ;; a little IO time to skip the mtime checks on every *.elc file. 

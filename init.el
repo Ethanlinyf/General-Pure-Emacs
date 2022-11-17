@@ -24,8 +24,8 @@
 ;; set the startup default directory,
 ;; for the generic, it can be set as defaults
 ;; for the specific, you could change to as you want after initiation.
-;(setq default-directory "~/")
-                                        ;(setq user-emacs-directory "~/.emacs.d/")
+;; (setq default-directory "~/")
+;;(setq user-emacs-directory "~/.emacs.d/")
 
 ;; Initialise the major mode for scratch, fundamental-mode or text-mode
 ;; Prevent setting it as a rich mode, such as org-mode, which will
@@ -83,7 +83,7 @@
 (require 'init-e-enhance)
 (require 'init-f-platform)
 (require 'init-g-interface)
-;; (require 'init-h-dashboard)
+(require 'init-h-dashboard)
 
 (require 'init-i-i18n)
 
@@ -98,7 +98,6 @@
 (require 'init-r-research)
 (require 'init-r-tex)
 
-;; for testing purposes
 (require 'init-z-test)
 
 ;;----------------------------------------------------------------------------

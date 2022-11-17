@@ -13,8 +13,6 @@
 #+cite_export:
 #+startup: overview 
 
-
-
 * Introduction
 GPE is a platform based on Gnu Emacs with around 100 packages to facilitate
 learning/teaching, research and project management.
@@ -97,7 +95,7 @@ learning/teaching, research and project management.
 - Extensible
   + Multiple threading and asynchronous processing with Python
 
-  [[./site-lisp/figure/Emacs-framework.png]]
+  [[./site-lisp/figure/GPE-Framework_2.png]]
 
   + literate programming \\
 
@@ -144,34 +142,23 @@ recommended.
    #+begin_src shell
      cd .emacs.d
    #+end_src
-   Then,
+   Then, run the following to in a terminal:
    #+begin_src elisp
      git submodule update --init --recursive
 
      git submodule foreach git reset --hard
+   #+end_src
+   Maybe you need to run "git submodule foreach git checkout
+   master". And to update the submodules, you could use:
 
-     git submodule foreach git checkout master
+   #+begin_src shell
+     git submodule foreach git pull --rebase
    #+end_src
 6. Then, open Emacs(>= 28.2) to install the needed package.
    - Yes for "Need to (re)build the epdfinfo program, do it now ?":
+   - Your root password is required to install a pdf-tool server.
    - You may need to wait for a while to complete downloading the needed packages.
 7. Enjoy General Pure Emacs ~ 
-* Plan
-** Compatible with Windows and Linux 
-** support Hydra for
-- Org-mode and org-roam mode
-- TeX mode
-- Programming, python-mode
-
-This implementation will facilitate the focus become simple and
-pure. 
-** straight for the use-package to be as straight-use-package
-Next-generation, purely functional package manager with use-package.
-** leaf for the configuration to design the keywords for management of the configuration.
-This will be creative to manage the configuration as we wish to by
-adding custmised keywords. ("using macroexpand-1 to see the unfolded
-result if it is not what you intended", which is monitored and plan to
-shift to this package management.)
 * Support/Issue
 Please report any issues about configuration at this repository.
 * License
