@@ -95,7 +95,7 @@ learning/teaching, research and project management.
 - Extensible
   + Multiple threading and asynchronous processing
 
-  [[./site-lisp/figure/GPE-Framework_3.png]]
+  [[./site-lisp/figure/GPE-Framework_4.png]]
 
   + literate programming \\
 
@@ -129,13 +129,19 @@ recommended.
      mv ~/.emacs.d ~/.emacs.d.bak
    #+end_src
 2. Clone this repository
+   You should install Git in your system first, as well as set your
+   usename and email, the same for GitHub. See the [[https://github.com/Ethanlinyf/Git-GitHub-Tutorial][tutorial]] of
+   Git/Github. 
    #+begin_src shell
-     git clone  --depth 1 git@github.com:Ethanlinyf/General-Pure-Emacs.git ~/.emacs.d
+     git clone --depth 1 git@github.com:Ethanlinyf/General-Pure-Emacs.git ~/.emacs.d
    #+end_src
 3. Install the dependencies
+   For MacOS: 
    #+begin_src shell
      brew install autoconf automake texinfo gnutls pkg-config libxml2 --debug --verbose
    #+end_src
+   For Linux: (TBU, to be updated)
+   For Windows: (TBU)
 4. GUI with icons \\
    Run: M-x all-the-icons-install-fonts to install the needed fonts.
 5. To fetch the submodules in General Pure Emacs
@@ -148,8 +154,9 @@ recommended.
 
      git submodule foreach git reset --hard
    #+end_src
+   
    Maybe you need to run "git submodule foreach git checkout
-   master". And to update the submodules, you could use:
+   master/main". And to update the submodules, you could use:
 
    #+begin_src shell
      git submodule foreach git pull --rebase
@@ -159,8 +166,9 @@ recommended.
    - Your root password is required to install a pdf-tool server.
    - You may need to wait for a while to complete downloading the needed packages.
 7. Enjoy General Pure Emacs ~ 
-* Support/Issue
-Please report any issues about configuration at this repository.
+* Support/Feedback
+Please report any issues about configuration at this repository and
+welcome any 
 * License
 This program is free software. You can redistribute and/or modify it
 under [[https://github.com/redguardtoo/emacs.d/blob/master/LICENSE][GNU General Public License]] published by the Free Software

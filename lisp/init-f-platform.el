@@ -283,9 +283,9 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
   :ensure nil
   :load-path "~/.emacs.d/site-lisp/popweb"
   :defer t
-  :init
-  (setq popweb-url-web-window-width-scale 0.3)
-  (setq popweb-url-web-window-height-scale 0.7)
+  ;; :init
+  ;; (setq popweb-url-web-window-width-scale 0.3)
+  ;; (setq popweb-url-web-window-height-scale 0.7)
   :config
   ;; Org-Roam ID link and footnote link previewer
   (add-to-list 'load-path "~/.emacs.d/site-lisp/popweb/extension/org-roam")
