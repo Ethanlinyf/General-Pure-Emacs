@@ -96,8 +96,9 @@ learning/teaching, research and project management.
 
 - Extensible
   + Multiple threading and asynchronous processing
-
-  [[./site-lisp/figure/GPE-Framework_4.png]]
+    - Scheduler for requests
+    - Flexible capacity tray
+    - Focus-oriented
 
   + literate programming \\
 
