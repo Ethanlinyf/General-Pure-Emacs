@@ -27,30 +27,41 @@ learning/teaching, research and project management.
      |-- init.el
      |
      |-- lisp/
-     |   |-- init-engine.el
-     |   |-- init-basic.el
+     |   |-- bridge-engine.el
+     |   |-- init-package
+     |   |-- init-system
+     |   |-- init-core
+     |   |-- init-authentication
+     |   |-- init-basic
      |   |-- init-minibuffer
      |   |-- init-dired
      |   |-- init-enhance
      |   |-- init-platform
      |   |-- init-interface
      |   |-- init-dashboard
+     |   |-- init-i18n
      |   |-- init-org
      |   |-- init-roam
      |   |-- init-LaTeX
-     |   |-- init-Java
+     |   |-- init-research
      |   |-- init-python
+     |   |-- init-java
+     |   |-- init-c/c++
      |   |-- init-lua
      |   |-- init-julia
      |
      |-- site-lisp/
+     |   |-- auto-save
      |   |-- lsp-bridge
      |   |-- aweshell
      |   |-- awesome-tab
+     |   |-- blink-search
+     |   |-- popweb
      |   |-- pure-const
      |   |-- pure-custom
      |   |-- pure-function
      |   |-- pure-macros
+     |   |-- tutorial
      |
      |-- custom.el
      |
@@ -120,7 +131,7 @@ learning/teaching, research and project management.
   [[./site-lisp/figure/creative_emacs.jpg]]
 
 - Instructive \\
-  The [[./tutorial.org][tutorial]] how to build this platform is included in this repository.
+  The [[./site-lisp/tutorial.org][tutorial]] how to build this platform is included in this repository.
 
 See more details at the website [[https://thethingsengine.org][Something Good]] under the ThingsEngine Project.
 * Installation
