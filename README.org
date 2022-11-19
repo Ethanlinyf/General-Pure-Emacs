@@ -17,7 +17,7 @@
 GPE is a platform based on Gnu Emacs with around 100 packages to facilitate
 learning/teaching, research and project management.
 
-[[./site-lisp/figure/General-Pure-Emacs.png]]
+[[./site-lisp/figure/GPE-Framework_4.png]]
 
 * A basic structure of Puremacs
 #+BEGIN_EXAMPLE
@@ -58,6 +58,8 @@ learning/teaching, research and project management.
 #+END_EXAMPLE
 
 * Feature
+- Entrance: a fancy dashboard
+  [[./site-lisp/figure/GPE_dashboard.png]]
 - Integrated
   + Note-taken \\
     Org-mode has useful functionalities to take notes. Quick to open an
