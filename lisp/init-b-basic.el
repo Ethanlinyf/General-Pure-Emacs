@@ -116,7 +116,6 @@
   (setq auto-save-default nil)
   (delete-selection-mode 1)
   (setq tab-width 4)
-
   (fset 'yes-or-no-p 'y-or-n-p)
   (setq-default indent-tabs-mode nil)
   (global-set-key (kbd "C-c C-'") 'set-mark-command)  ;; Keybindings for setting mark
@@ -163,9 +162,10 @@
   :ensure t)
 
 ;;--------------------------------------------------------------------
- (use-package so-long
-   :hook (after-init . global-so-long-mode))
+(use-package so-long
+  :ensure t
+  :hook (after-init . global-so-long-mode))
 
 ;;--------------------------------------------------------------------
 (provide 'init-b-basic)
-;;; init-b-basic.el ends here.
+;;; init-basic.el ends here.

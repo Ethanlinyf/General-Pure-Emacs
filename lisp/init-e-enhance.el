@@ -11,8 +11,6 @@
 ;;--------------------------------------------------------------------
 ;;; Code:
 
-(require 'pure-duplicate-line)
-
 ;; ------------------ Indent Region or Buffer ------------------------
 (defun indent-buffer()
   "To indent the buffer."
@@ -92,12 +90,6 @@
 
 ;; The following could be implemented by counsel
 ;; (global-set-key (kbd "C-x C-r") 'recentf-open-files)
-
-(when (memq window-system '(mac ns))
-  (use-package exec-path-from-shell
-    :ensure t
-    :config
-    (exec-path-from-shell-initialize)))
 
 (use-package saveplace
   :ensure nil
@@ -286,6 +278,13 @@
   (after-init. golden-ratio-mode)
   :config
   (setq golden-ratio-auto-scale t))
+
+;;--------------------------------------------------------------------
+;; undo-tree
+(use-package undo-tree
+  :ensure t
+  :hook
+  (after-init . undo-tree-mode))
 
 ;;--------------------------------------------------------------------
 (provide 'init-e-enhance)

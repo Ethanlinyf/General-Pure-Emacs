@@ -220,10 +220,17 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 (use-package epc
   :ensure t)
 
+;; (require 'epc)
+
 ;; (add-to-list 'load-path "~/.emacs.d/site-lisp/lsp-bridge")
+
+;; (require 'yasnippet)
+;; (yas-global-mode 1)
 
 ;; (require 'lsp-bridge)
 ;; (global-lsp-bridge-mode)
+
+
 
 (use-package lsp-bridge
   :load-path "~/.emacs.d/site-lisp/lsp-bridge"
@@ -231,9 +238,10 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
   ;; ((epc . "pip install epc")
   ;;  (orjson . "pip install orjson")
   ;;  (six . "pip install six"))
+  :commands global-lsp-bridge-mode
   :ensure epc
-  :defer 2
-  :hook (after-init . global-lsp-bridge-mode))
+  :hook 
+  (after-init . global-lsp-bridge-mode))
 
 
 
@@ -313,4 +321,4 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
   :pin manual)
 ;;--------------------------------------------------------------------
 (provide 'init-f-platform)
-;;; init-f-platform.el ends here
+;;; init-platform.el ends here

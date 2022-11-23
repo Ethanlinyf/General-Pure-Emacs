@@ -29,22 +29,20 @@
   ;; Hint: Customize `ns-use-native-fullscreen'
   (global-set-key (kbd "M-s-f") 'toggle-frame-fullscreen))
 
-
-(use-package ns-auto-titlebar
-  :if *is-mac*
-  :hook (after-init . ns-auto-titlebar-mode))
-
 ;;--------------------------------------------------------------------
 (use-package doom-themes
   :init
   (load-theme 'doom-one t))
 
-(setq initial-frame-alist (quote ((fullscreen . maximized))))
-(when *is-mac*
-  (toggle-frame-fullscreen))
 
 ;; (use-package all-the-icons
 ;;   :if (display-graphic-p))
+
+;; (use-package ns-auto-titlebar
+;;   :if *is-mac*
+;;   :differ t
+;;   :config
+;;   (ns-auto-titlebar-mode t)) ;; not use hook for it.
 
 ;; Display minor-mode in the mode line
 (use-package minions
@@ -154,4 +152,4 @@ all-the-icons-ibuffer-formats
 
 ;;--------------------------------------------------------------------
 (provide 'init-g-interface)
-;;; init-g-interface.el ends here
+;;; init-interface.el ends here

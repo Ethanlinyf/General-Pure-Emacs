@@ -14,30 +14,19 @@
 ;; (require 'cl)
 (require 'package)
 
-(when (>= emacs-major-version 26)
+(when (>= emacs-major-version 28)
+  (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/") t)
   (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
+  (add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/") t)
   )
-
 (package-initialize)
 (when (memq window-system '(mac ns x))
   (exec-path-from-shell-initialize))
-
 ;; Add whatever packages you want here
 (defvar puremacs/packages '(
-                            ;; wishlist:
-                            ; avy
-                            oauth2
 			    company
                             ;; company-box
 			    ;; smartparens
-			    exec-path-from-shell
-                            doom-modeline
-                            doom-themes
-                            dashboard
-                            page-break-lines
-                            projectile
-                            counsel-projectile
-                            ;; 0 all-the-icons
                             all-the-icons-completion
 
                             undo-tree

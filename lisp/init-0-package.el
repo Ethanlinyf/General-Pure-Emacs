@@ -1,4 +1,4 @@
-;;; init-0-package.el --- Pligins for Emacs. -*- lexical-binding: t; -*-
+;;; init-package.el --- Pligins for Emacs. -*- lexical-binding: t; -*-
 ;;
 ;; Copyleft (CL) 2022-2032 YF Lin
 ;;
@@ -61,8 +61,6 @@
 
 (setq use-package-compute-statistics t)
 
-
-
 ;; Required by `use-package', as use-package optional dependency
 (use-package diminish)
 (use-package bind-key)
@@ -84,4 +82,4 @@
 
 ;;--------------------------------------------------------------------
 (provide 'init-0-package)
-;;; init-0-package.el ends here.
+;;; init-package.el ends here.

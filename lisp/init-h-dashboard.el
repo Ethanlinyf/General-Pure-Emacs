@@ -15,12 +15,12 @@
   :ensure t
   :hook
   (after-init . counsel-projectile-mode))
-  ;; (setq dashboard-projects-switch-function 'counsel-projectile-switch-project-action-dired))
-;; (counsel-projectile-mode t)
-;; (setq dashboard-projects-switch-function 'counsel-projectile-switch-project-by-name)
 
 (use-package dashboard
+  :diminish dashboard-mode
   :ensure t
+  :requires all-the-icons
+  :custom-face (dashboard-heading ((t (:inherit (font-lock-string-face bold)))))
   :init
   (dashboard-setup-startup-hook)
   :config
@@ -28,7 +28,6 @@
   ;; Set the title
   (setq dashboard-banner-logo-title "Something Good as Indicated by ThingsEngine")
 
-  ;; (dashboard-heading ((t (:inherit (font-lock-string-face bold)))))
   (setq dashboard-projects-switch-function 'counsel-projectile-switch-project-action-dired)
 
   ;; set the number of items for each heading
@@ -47,18 +46,14 @@
                                   (projects  . "briefcase")
                                   (registers . "database")))
 
-  (custom-set-faces '(dashboard-heading ((t (:inherit (font-lock-string-face bold))))))
-                                        ;(use-package dashboard
-                                        ;  :diminish dashboard-mode
-                                        ;  :custom-face (dashboard-heading ((t (:inherit (font-lock-string-face bold))))))
-
   ;; Content is not centered by default. To center the content, set this varable as t
   (setq dashboard-center-content t)
 
   ;; To disable shortcut "jump" indicators for each section, set
   (setq dashboard-show-shortcuts nil)
 
-  (setq dashboard-set-file-icons t))
+  (setq dashboard-set-file-icons t)
+)
 
 (use-package page-break-lines
   :ensure t
@@ -124,11 +119,14 @@
 (advice-add #'dashboard-insert-footer :after #'my-dashboard-insert-copyright)
 
 
-;; recentf excludes files: M-x recentf-cleanup
-;; (add-to-list 'recentf-exclude
-;;              (expand-file-name "~/.emacs.d/company-statistics-cache.el")
-;;              (expand-file-name "~/.emacs.d/elgrep-data.el"))
+(use-package ns-auto-titlebar
+  :if *is-mac*
+  :init
+  (ns-auto-titlebar-mode))
 
+(setq initial-frame-alist (quote ((fullscreen . maximized))))
+(when *is-mac*
+  (toggle-frame-fullscreen))
 ;;--------------------------------------------------------------------
 (provide 'init-h-dashboard)
-;;; init-h-dashboard.el ends here
+;;; init-dashboard.el ends here

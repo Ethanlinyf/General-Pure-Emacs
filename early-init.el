@@ -13,7 +13,7 @@
 ;;; Code:
 
 ;; Debugging for the setting update.
-;; (setq debug-on-error t)
+(setq debug-on-error t)
 
 ;; Puremacs is compatible from the emacs version 27.1.
 (let ((minver "28.1"))

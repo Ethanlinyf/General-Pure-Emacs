@@ -19,7 +19,7 @@
   ;; (setq vertico-scroll-margin 0)
   :config
   ;; Show more candidates
-  (setq vertico-count 12)
+  (setq vertico-count 10)
 
   ;; Grow and shrink the Vertico minibuffer
   ;; (setq vertico-resize t)
