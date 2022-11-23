@@ -168,4 +168,4 @@
 
 ;;--------------------------------------------------------------------
 (provide 'init-b-basic)
-;;; init-basic.el ends here.
+;;; init-b-basic.el ends here.

@@ -16,9 +16,9 @@
 (require 'pure-function)
 (require 'subr-x)
 
+;; use for the installation for the needed software for the host system
 (use-package use-package-ensure-system-package
   :ensure t)
-
 
 ;; set time
 (use-package time
@@ -51,12 +51,6 @@
 ;;--------------------------------------------------------------------
 ;; A few more useful configurations...
 
-
-;;   (use-package exec-path-from-shell
-
-;;     :init
-;;     (exec-path-from-shell-initialize)))
-
 (use-package emacs
   :init
   ;; Add prompt indicator to `completing-read-multiple'.
@@ -77,8 +71,8 @@
 
   ;; Emacs 28: Hide commands in M-x which do not work in the current mode.
   ;; Vertico commands are hidden in normal buffers.
-  ;; (setq read-extended-command-predicate
-  ;;       #'command-completion-default-include-p)
+  (setq read-extended-command-predicate
+        #'command-completion-default-include-p)
 
   ;; Enable recursive minibuffers
   (setq enable-recursive-minibuffers t)
@@ -132,4 +126,4 @@
 
 ;;--------------------------------------------------------------------
 (provide 'init-1-system)
-;;; init-system.el ends here.
+;;; init-1-system.el ends here.
