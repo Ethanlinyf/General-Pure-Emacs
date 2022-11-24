@@ -82,4 +82,4 @@
 
 ;;--------------------------------------------------------------------
 (provide 'init-0-package)
-;;; init-package.el ends here.
+;;; init-0-package.el ends here.

@@ -26,9 +26,7 @@
 ;; (setq gc-cons-threshold most-positive-fixnum)
 ;; (add-hook 'after-init-hook #'(lambda () (setq gc-cons-threshold 800000)))
 (setq gc-cons-threshold most-positive-fixnum)
-(add-hook 'emacs-startup-hook
-          (lambda ()
-            (setq gc-cons-threshold 8000000)))
+
 
 ;; Prevent unwanted runtime compilation for native-comp users
 (setq native-comp-deferred-compilation nil)

@@ -363,8 +363,11 @@ insert the macro by, Type: M-x insert-kbd-macro, which will ask you the name of 
 Give the name with which you have saved already ( in this example it is title-case-macro ), which will insert some lisp code.
 Save, and exit. In all your future session you will be able to access this macro by M-x macroname."
 
-** DONE init.el
+** init.el
 DEADLINE: <2022-07-01 Fri> SCHEDULED: <2022-06-27 Mon>
+- State "NEXT"       from "DONE"       [2022-11-24 Thu 14:06]
+- State "DONE"       from "PROJECT"    [2022-11-24 Thu 14:06]
+- State "PROJECT"    from "DONE"       [2022-11-24 Thu 14:06]
 - State "DONE"       from "NEXT"       [2022-06-25 Sat 14:58]
 What is init File?
 Emacs has a init file, which contains initial configuration emacs loads when it starts up. It is used to initially customize emacs.
@@ -538,6 +541,11 @@ Some basic settings are included in this elisp file, as well as the const and cu
 **** init-const.el
 **** init-custom.el
 *** init-c-package.el
+*** init-c-minibuffer
+**** vertico:
+Some reference for the configuration:
+1. https://kristofferbalintona.me/posts/202202211546/
+
 *** init-d-enhance.el
 *** init-e-dired.el
 *** init-e-tracemacs.el

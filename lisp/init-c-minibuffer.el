@@ -13,19 +13,48 @@
 
 ;; Enable vertico
 (use-package vertico
+  :ensure t
+  :bind (:map vertico-map
+              ("DEL" . vertico-directory-delete-char) ;; could be word
+              ("C-j" . vertico-next)
+              ("C-k" . vertico-previous)
+              ("C-f" . vertico-exit)
+              ("<tab>" . vertico-insert)
+              ("<escape>" . minibuffer-keyboard-quit)
+              ("C-M-n" . vertico-next-group)
+              ("C-M-p" . vertico-previous-group)
+         :map minibuffer-local-map
+              ("M-h" . backward-kill-word)) 
   :hook
   (after-init . vertico-mode)
   ;; Different scroll margin
   ;; (setq vertico-scroll-margin 0)
   :config
   ;; Show more candidates
-  (setq vertico-count 10)
+  (setq vertico-count 12)
 
   ;; Grow and shrink the Vertico minibuffer
-  ;; (setq vertico-resize t)
+  (setq vertico-resize nil)
 
   ;; Optionally enable cycling for `vertico-next' and `vertico-previous'.
-  ;; (setq vertico-cycle t)
+  (setq vertico-cycle t)
+
+  (setq-default completion-in-region-function
+                (lambda (&rest args)
+                  (apply (if vertico-mode
+                             #'consult-completion-in-region
+                           #'completion-in-region)
+                         args)))
+  ;; Clean up the path when changing directories with shadowed paths syntax, such as "~".
+  (add-hook 'rfn-eshadow-update-overlay-hook #'vertico-directory-tidy)
+  (add-hook 'minibuffer-setup-hook #'vertico-repeat-save)
+
+  ;; some commands are problematic and automatically show the "*Completions*" buffer.
+  (advice-add #'tmm-add-prompt :after #'minibuffer-hide-completions) ;; tmm: text mode access to menu-bar
+  (advice-add #'ffap-menu-ask :around (lambda (&rest args)
+                                 (cl-letf (((symbol-function #'minibuffer-completion-help)
+                                            #'ignore))
+                                   (apply args))))
   )
 
 ;;--------------------------------------------------------------------
@@ -227,6 +256,13 @@
   ;; auto-updating embark collect buffer
   :hook
   (embark-collect-mode . consult-preview-at-point-mode))
+
+
+(use-package all-the-icons-completion
+  :after (marginalia all-the-icons)
+  :hook (marginalia-mode . all-the-icons-completion-marginalia-setup)
+  :init
+  (all-the-icons-completion-mode))
 
 ;;--------------------------------------------------------------------
 (provide 'init-c-minibuffer)

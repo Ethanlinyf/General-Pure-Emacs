@@ -19,7 +19,7 @@
 (use-package dashboard
   :diminish dashboard-mode
   :ensure t
-  :requires all-the-icons
+  ;; :requires all-the-icons
   :custom-face (dashboard-heading ((t (:inherit (font-lock-string-face bold)))))
   :init
   (dashboard-setup-startup-hook)
@@ -119,10 +119,10 @@
 (advice-add #'dashboard-insert-footer :after #'my-dashboard-insert-copyright)
 
 
-(use-package ns-auto-titlebar
-  :if *is-mac*
-  :init
-  (ns-auto-titlebar-mode))
+;; (use-package ns-auto-titlebar
+;;   :if *is-mac*
+;;   :init
+;;   (ns-auto-titlebar-mode))
 
 (setq initial-frame-alist (quote ((fullscreen . maximized))))
 (when *is-mac*

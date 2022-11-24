@@ -21,6 +21,10 @@
                                after-init-time before-init-time)))
                      gcs-done)))
 
+(add-hook 'emacs-startup-hook
+          (lambda ()
+            (setq gc-cons-threshold 8000000)))
+
 ;; set the startup default directory,
 ;; for the generic, it can be set as defaults
 ;; for the specific, you could change to as you want after initiation.
@@ -83,7 +87,7 @@
 (require 'init-e-enhance)
 (require 'init-f-platform)
 (require 'init-g-interface)
-(require 'init-h-dashboard)
+;; (require 'init-h-dashboard)
 
 (require 'init-i-i18n)
 

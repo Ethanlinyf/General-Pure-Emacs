@@ -26,8 +26,9 @@
 ;; (add-hook 'org-mode-hook #'linum-mode)
 (use-package display-line-numbers
   :ensure nil
-  :hook ((prog-mode yaml-mode text-mode org-mode conf-mode) . display-line-numbers-mode)
-  :init (setq display-line-numbers-width-start t))
+  :init (setq display-line-numbers-width-start t)
+  :hook ((prog-mode yaml-mode text-mode org-mode conf-mode) . display-line-numbers-mode))
+
 
 ;;--------------------------------------------------------------------
 (defun open-mirror-file ()

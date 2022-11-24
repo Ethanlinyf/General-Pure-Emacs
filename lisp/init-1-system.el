@@ -16,11 +16,11 @@
 (require 'pure-function)
 (require 'subr-x)
 
-;; use for the installation for the needed software for the host system
+;; Use to install the needed software for the host system
 (use-package use-package-ensure-system-package
   :ensure t)
 
-;; set time
+;; Set time
 (use-package time
   :ensure nil
   :config

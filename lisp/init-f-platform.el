@@ -247,13 +247,12 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 
 ;;--------------------------------------------------------------------
 ;; blink-search
-;; (add-to-list 'load-path "~/.emacs.d/site-lisp/blink-search")
-;; (require 'blink-search)
+(add-to-list 'load-path "~/.emacs.d/site-lisp/blink-search")
+(require 'blink-search)
 
-(use-package blink-search
-  :load-path "~/.emacs.d/site-lisp/blink-search"
-  :defer 2
-  :autoload blink-search)
+;; (use-package blink-search
+;;   :load-path "~/.emacs.d/site-lisp/blink-search"
+;;   :autoload blink-search)
 
 ;;--------------------------------------------------------------------
 
