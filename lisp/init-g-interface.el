@@ -88,10 +88,16 @@ all-the-icons-ibuffer-formats
 (setq inhibit-compacting-font-caches t)
 
 ;;--------------------------------------------------------------------
+;; (use-package all-the-icons-completion
+;;   :ensure t
+;;   :hook ((after-init . all-the-icons-completion-mode)
+;;          (marginalia-mode-hook . all-the-icons-completion-marginalia-setup)))
+
 (use-package all-the-icons-completion
-  :ensure t
-  :hook ((after-init . all-the-icons-completion-mode)
-         (marginalia-mode-hook . all-the-icons-completion-marginalia-setup)))
+  :after (marginalia all-the-icons)
+  :hook (marginalia-mode . all-the-icons-completion-marginalia-setup)
+  :init
+  (all-the-icons-completion-mode))
 
 (use-package rainbow-delimiters
   :ensure t
@@ -149,7 +155,19 @@ all-the-icons-ibuffer-formats
 (auto-image-file-mode 1)
 ;; (face-remap-add-relative 'font-lock-keyword-face '(:inherit default))
 ;; (face-remap-add-relative 'font-lock-keyword-face `(:foreground ,(face-foreground 'default)))
-
+;;--------------------------------------------------------------------
+;; (require 'buffer-move)
+;; (global-set-key (kbd "<C-S-up>")     'buf-move-up)
+;; (global-set-key (kbd "<C-S-down>")   'buf-move-down)
+;; (global-set-key (kbd "<C-S-left>")   'buf-move-left)
+;; (global-set-key (kbd "<C-S-right>")  'buf-move-right)
+(use-package buffer-move
+  :ensure t
+  :bind
+  ("<C-S-up>" . buf-move-up)
+  ("<C-S-down>" . buf-move-down)
+  ("<C-S-left>" . buf-move-left)
+  ("<C-S-right>" . buf-move-right))
 ;;--------------------------------------------------------------------
 (provide 'init-g-interface)
-;;; init-interface.el ends here
+;;; init-g-interface.el ends here

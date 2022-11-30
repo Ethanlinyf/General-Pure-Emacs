@@ -18,7 +18,7 @@
   (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/") t)
   (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
   (add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/") t)
-  ;; (add-to-list 'package-archives '("nongnu" . "https://elpa.nongnu.org/nongnu/") t) ;; 
+  (add-to-list 'package-archives '("nongnu" . "https://elpa.nongnu.org/nongnu/") t) ;; 
   )
 
 ;; Initialise packages
@@ -42,9 +42,9 @@
 ;;       (goto-char (point-max))
 ;;       (eval-print-last-sexp)))
 ;;   (load bootstrap-file nil 'nomessage))
+
 ;;--------------------------------------------------------------------
 ;; Setup 'use-package'
-
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package))

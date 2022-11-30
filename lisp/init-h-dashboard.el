@@ -124,9 +124,9 @@
 ;;   :init
 ;;   (ns-auto-titlebar-mode))
 
-(setq initial-frame-alist (quote ((fullscreen . maximized))))
-(when *is-mac*
-  (toggle-frame-fullscreen))
+;; (setq initial-frame-alist (quote ((fullscreen . maximized))))
+;; (when *is-mac*
+;;   (toggle-frame-fullscreen))
 ;;--------------------------------------------------------------------
 (provide 'init-h-dashboard)
 ;;; init-dashboard.el ends here

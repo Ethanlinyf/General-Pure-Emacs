@@ -14,7 +14,7 @@
 #+startup: overview 
 
 * Introduction
-GPE is a platform based on Gnu Emacs with around 100 packages to facilitate
+GPE is a customisable and extenxible platform based on Gnu Emacs with around 100 packages to facilitate
 learning/teaching, research and project management.
 
 [[./site-lisp/figure/GPE-Framework_4.png]]
@@ -181,8 +181,10 @@ recommended.
    - You may need to wait for a while to complete downloading the needed packages.
 7. Enjoy General Pure Emacs ~ 
 * Support/Feedback
-Please report any issues about configuration at this repository and
-welcome any 
+Bug reports are highly welcome and appreciated!
+
+Please feedback any issues about configuration at this repository and
+welcome any suggestions. 
 * License
 This program is free software. You can redistribute and/or modify it
 under [[https://github.com/redguardtoo/emacs.d/blob/master/LICENSE][GNU General Public License]] published by the Free Software
@@ -191,3 +193,5 @@ constributions are shared with the hope that this program will be
 useful, helpful and inspiring, but without any warranty; without even
 the implied warranty of merchantability or fitness for a particular
 purpose.
+
+

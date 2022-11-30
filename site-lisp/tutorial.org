@@ -545,6 +545,18 @@ Some basic settings are included in this elisp file, as well as the const and cu
 **** vertico:
 Some reference for the configuration:
 1. https://kristofferbalintona.me/posts/202202211546/
+Vertico offers the vertico-multiform-mode which allows you to
+configure Vertico per command or per completion category. The
+vertico-buffer-mode enables a Helm-like buffer display, which takes
+more space but also displays more candidates. This verbose display
+mode is useful for commands like consult-imenu or consult-outline
+since the buffer display allows you to get a better overview over the
+entire current buffer. But for other commands you want to keep using
+the default Vertico display. vertico-multiform-mode solves this
+configuration problem.
+https://github.com/minad/vertico#extensions
+
+
 
 *** init-d-enhance.el
 *** init-e-dired.el

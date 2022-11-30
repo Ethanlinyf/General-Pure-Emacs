@@ -285,6 +285,13 @@
   :ensure t
   :hook
   (after-init . undo-tree-mode))
+;;--------------------------------------------------------------------
+;; Elisp API Demos
+;; C-h x command RET (describe-command) displays the documentation of the named command, in a window. 
+(use-package elisp-demos
+  :ensure t
+  :init
+  (advice-add 'describe-function-1 :after #'elisp-demos-advice-describe-function-1))
 
 ;;--------------------------------------------------------------------
 (provide 'init-e-enhance)

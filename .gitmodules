@@ -19,3 +19,6 @@
 [submodule "site-lisp/popweb"]
 	path = site-lisp/popweb
 	url = git@github.com:manateelazycat/popweb.git
+[submodule "site-lisp/markmacro"]
+	path = site-lisp/markmacro
+	url = git@github.com:manateelazycat/markmacro.git

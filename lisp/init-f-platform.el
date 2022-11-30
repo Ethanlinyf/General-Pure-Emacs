@@ -319,5 +319,19 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
    ("s-5" . popweb-url-preview-pointer))
   :pin manual)
 ;;--------------------------------------------------------------------
+(add-to-list 'load-path "~/.emacs.d/site-lisp/markmacro") ; add markmacro to your load-path
+(require 'markmacro)
+
+(global-set-key (kbd "s-/") 'markmacro-mark-words)
+(global-set-key (kbd "s-?") 'markmacro-mark-lines)
+(global-set-key (kbd "s-<") 'markmacro-apply-all)
+(global-set-key (kbd "s->") 'markmacro-apply-all-except-first)
+(global-set-key (kbd "s-M") 'markmacro-rect-set)
+(global-set-key (kbd "s-D") 'markmacro-rect-delete)
+(global-set-key (kbd "s-F") 'markmacro-rect-replace)
+(global-set-key (kbd "s-I") 'markmacro-rect-insert)
+(global-set-key (kbd "s-C") 'markmacro-rect-mark-columns)
+(global-set-key (kbd "s-S") 'markmacro-rect-mark-symbols)
+;;--------------------------------------------------------------------
 (provide 'init-f-platform)
 ;;; init-platform.el ends here

@@ -29,7 +29,6 @@
   :init (setq display-line-numbers-width-start t)
   :hook ((prog-mode yaml-mode text-mode org-mode conf-mode) . display-line-numbers-mode))
 
-
 ;;--------------------------------------------------------------------
 (defun open-mirror-file ()
   "Quickly open index file."
