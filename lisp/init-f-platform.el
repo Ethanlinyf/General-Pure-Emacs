@@ -259,8 +259,8 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 (use-package org-transclusion
   :ensure t)
 
-(use-package ivy
-  :ensure t)
+;; (use-package ivy
+;;   :ensure t)
 
 (use-package dash
   :ensure t)
@@ -289,11 +289,15 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 (use-package popweb
   :ensure nil
   :load-path "~/.emacs.d/site-lisp/popweb"
-  :defer t
   ;; :init
-  ;; (setq popweb-url-web-window-width-scale 0.3)
-  ;; (setq popweb-url-web-window-height-scale 0.7)
+  ;; (setq popweb-url-web-window-width-scale 0.8)
+  ;; (setq popweb-url-web-window-height-scale 0.8)
   :config
+  (setq popweb-url-web-window-size-use-absolute t)
+  (setq popweb-url-web-window-width-absolute 375)
+  (setq popweb-url-web-window-height-absolute 425)
+  ;; (setq popweb-url-web-window-width-scale 0.8)
+  ;; (setq popweb-url-web-window-height-scale 0.8)
   ;; Org-Roam ID link and footnote link previewer
   (add-to-list 'load-path "~/.emacs.d/site-lisp/popweb/extension/org-roam")
   (require 'popweb-org-roam-link)
@@ -311,8 +315,6 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
   (add-to-list 'load-path "~/.emacs.d/site-lisp/popweb/extension/url-preview")
   (require 'popweb-url)
 
-
-  
   :bind
   ;; 
   (("s-4" . popweb-dict-youdao-pointer)
