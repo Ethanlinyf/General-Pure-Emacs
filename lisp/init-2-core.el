@@ -7,9 +7,13 @@
 ;; Under ThingsEngine Project: https://www.thethingsengine.org
 ;;--------------------------------------------------------------------
 ;;; Commentary:
-;; Fundamental settings for General Pure Emacs
+;; This will be used to set the for the Emacs Update from v29.1
+;; for General Pure Emacs
 ;;--------------------------------------------------------------------
 ;;; Code:
+
+;; V29.1
+
 
 ;;--------------------------------------------------------------------
 (provide 'init-2-core)

@@ -1,4 +1,4 @@
-;;; init-package.el --- Pligins for Emacs. -*- lexical-binding: t; -*-
+;;; init-bridge --- To Install Plugins for GPEmacs. -*- lexical-binding: t; -*-
 ;;
 ;; Copyleft (CL) 2022-2032 YF Lin
 ;;
@@ -7,7 +7,7 @@
 ;; Under ThingsEngine Project: https://www.thethingsengine.org
 ;;--------------------------------------------------------------------
 ;;; Commentary:
-;; Add packages as plugins to facilitate Emascs as General Pure Emacs
+;; Add needed plugins to build General Pure Emacs if not using use-package
 ;;--------------------------------------------------------------------
 ;;; Code:
 
@@ -18,13 +18,34 @@
   (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/") t)
   (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
   (add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/") t)
-  (add-to-list 'package-archives '("nongnu" . "https://elpa.nongnu.org/nongnu/") t) ;; 
   )
-
-;; Initialise packages
 (unless (bound-and-true-p package--initialized)
   (package-initialize))
 
+;; Add whatever packages you want here
+(defvar puremacs/packages '(
+                            
+			    use-package
+                            
+                            )  "Default packages.")
+
+(setq package-selected-packages puremacs/packages)
+
+(defun puremacs/packages-installed-p ()
+  "Looping all the packages."
+  (cl-loop for pkg in puremacs/packages
+	   when (not (package-installed-p pkg)) do (cl-return nil)
+	   finally (cl-return t)))
+
+(unless (puremacs/packages-installed-p)
+  (message "%s" "Refreshing package database...")
+  (package-refresh-contents)
+  (dolist (pkg puremacs/packages)
+    (when (not (package-installed-p pkg))
+      (package-install pkg))))
+
+;;--------------------------------------------------------------------
+;; use-package
 ;;--------------------------------------------------------------------
 ;; (setq package-check-signature t
 ;;        load-prefer-newer t)
@@ -45,9 +66,9 @@
 
 ;;--------------------------------------------------------------------
 ;; Setup 'use-package'
-(unless (package-installed-p 'use-package)
-  (package-refresh-contents)
-  (package-install 'use-package))
+;; (unless (package-installed-p 'use-package)
+;;   (package-refresh-contents)
+;;   (package-install 'use-package))
 
 ;; Should set before loading `use-package'
 (eval-and-compile
@@ -81,5 +102,5 @@
 ;;   :bind  (("C-<f2>" . hydra-straight-helper/body)))
 
 ;;--------------------------------------------------------------------
-(provide 'init-0-package)
-;;; init-0-package.el ends here.
+(provide 'bridge-engine)
+;;; bridge-engine.el ends here

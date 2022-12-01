@@ -28,8 +28,7 @@ project management.
      |-- init.el
      |
      |-- lisp/
-     |   |-- bridge-engine.el
-     |   |-- init-package
+     |   |-- init-bridge.el
      |   |-- init-system
      |   |-- init-core
      |   |-- init-authentication
@@ -43,8 +42,8 @@ project management.
      |   |-- init-i18n
      |   |-- init-org
      |   |-- init-roam
-     |   |-- init-LaTeX
      |   |-- init-research
+     |   |-- init-tex
      |   |-- init-python
      |   |-- init-java
      |   |-- init-c/c++
