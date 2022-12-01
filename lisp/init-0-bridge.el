@@ -7,7 +7,7 @@
 ;; Under ThingsEngine Project: https://www.thethingsengine.org
 ;;--------------------------------------------------------------------
 ;;; Commentary:
-;; Add needed plugins to build General Pure Emacs if not using use-package
+;; How to add plugins, add pacakges or by use-package
 ;;--------------------------------------------------------------------
 ;;; Code:
 
@@ -22,27 +22,29 @@
 (unless (bound-and-true-p package--initialized)
   (package-initialize))
 
+;;--------------------------------------------------------------------
 ;; Add whatever packages you want here
-(defvar puremacs/packages '(
+;;--------------------------------------------------------------------
+;; (defvar puremacs/packages '(
                             
-			    use-package
+;; 			    use-package
                             
-                            )  "Default packages.")
+;;                             )  "Default packages.")
 
-(setq package-selected-packages puremacs/packages)
+;; (setq package-selected-packages puremacs/packages)
 
-(defun puremacs/packages-installed-p ()
-  "Looping all the packages."
-  (cl-loop for pkg in puremacs/packages
-	   when (not (package-installed-p pkg)) do (cl-return nil)
-	   finally (cl-return t)))
+;; (defun puremacs/packages-installed-p ()
+;;   "Looping all the packages."
+;;   (cl-loop for pkg in puremacs/packages
+;; 	   when (not (package-installed-p pkg)) do (cl-return nil)
+;; 	   finally (cl-return t)))
 
-(unless (puremacs/packages-installed-p)
-  (message "%s" "Refreshing package database...")
-  (package-refresh-contents)
-  (dolist (pkg puremacs/packages)
-    (when (not (package-installed-p pkg))
-      (package-install pkg))))
+;; (unless (puremacs/packages-installed-p)
+;;   (message "%s" "Refreshing package database...")
+;;   (package-refresh-contents)
+;;   (dolist (pkg puremacs/packages)
+;;     (when (not (package-installed-p pkg))
+;;       (package-install pkg))))
 
 ;;--------------------------------------------------------------------
 ;; use-package
@@ -66,9 +68,9 @@
 
 ;;--------------------------------------------------------------------
 ;; Setup 'use-package'
-;; (unless (package-installed-p 'use-package)
-;;   (package-refresh-contents)
-;;   (package-install 'use-package))
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
 
 ;; Should set before loading `use-package'
 (eval-and-compile
@@ -102,5 +104,5 @@
 ;;   :bind  (("C-<f2>" . hydra-straight-helper/body)))
 
 ;;--------------------------------------------------------------------
-(provide 'bridge-engine)
-;;; bridge-engine.el ends here
+(provide 'init-0-bridge)
+;;; init-0-bridge.el ends here
