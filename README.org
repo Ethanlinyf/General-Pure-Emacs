@@ -14,8 +14,9 @@
 #+startup: overview 
 
 * Introduction
-GPE is a customisable and extenxible platform based on Gnu Emacs with around 100 packages to facilitate
-learning/teaching, research and project management.
+GPE is an integrated and flexible platform based on Gnu Emacs with
+around 100 packages to facilitate learning/teaching, research and
+project management.
 
 [[./site-lisp/figure/GPE-Framework_4.png]]
 
