@@ -19,11 +19,11 @@ around 100 packages to facilitate learning/teaching, research and
 project management.
 
 Why is "G.P.E":
-- G:General :: The operation with all the integrated facilities is generalised.
-- P:Pure :: The entire platform is driven by the pure Turing programming
+- General :: The operation with all the integrated facilities is generalised.
+- Pure :: The entire platform is driven by the pure Turing programming
   language, elisp.
-- E:Extensible :: This interactive platform is extensible for whatever you want
-  to, even *make coffee* with it. 
+- Extensible :: This interactive platform is extensible for whatever you want
+  to, even *brew coffee* with it. 
 
 [[./site-lisp/figure/GPE-Framework_4.png]]
 
