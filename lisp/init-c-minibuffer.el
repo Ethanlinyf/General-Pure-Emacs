@@ -51,8 +51,9 @@
               ("M-h" . backward-kill-word)) 
   :init
   (vertico-mode)
+  (vertico-multiform-mode)
   ;; :hook
-  ;; (after-init . vertico-mode)
+  ;; (after-init . vertico-multiform-mode)
   :config
   ;; Different scroll margin, the default is 2. 
   (setq vertico-scroll-margin 0)
@@ -63,7 +64,17 @@
   ;; Optionally enable cycling for `vertico-next' and `vertico-previous'.
   (setq vertico-cycle nil)
 
-  ;; Use `consult-completion-in-region' if Vertico is enabled.
+  ;; "» ", as an indicator infront of the candidate 
+  (advice-add #'vertico--format-candidate :around
+              (lambda (orig cand prefix suffix index _start)
+                (setq cand (funcall orig cand prefix suffix index _start))
+                (concat
+                 (if (= vertico--index index)
+                     (propertize "» " 'face 'vertico-current)
+                   "  ")
+                 cand)))
+
+  ;; Use `consult-completion-in-region' if consult is enabled.
   ;; Otherwise use the default `completion--in-region' function.
   (setq-default completion-in-region-function
                 (lambda (&rest args)
@@ -83,6 +94,7 @@
                                         (cl-letf (((symbol-function #'minibuffer-completion-help)
                                                    #'ignore))
                                           (apply args))))
+  
   ;; Alternative 1: Use the basic completion style
   (setq org-refile-use-outline-path 'file
         org-outline-path-complete-in-steps t)
@@ -94,17 +106,7 @@
 
   ;; Alternative 2: Complete full paths
   (setq org-refile-use-outline-path 'file
-        org-outline-path-complete-in-steps nil)
-
-  ;; "» ", as an indicator infront of the candidate 
-  (advice-add #'vertico--format-candidate :around
-              (lambda (orig cand prefix suffix index _start)
-                (setq cand (funcall orig cand prefix suffix index _start))
-                (concat
-                 (if (= vertico--index index)
-                     (propertize "» " 'face 'vertico-current)
-                   "  ")
-                 cand))))
+        org-outline-path-complete-in-steps nil))
 
 ;; Configure directory extension.
 (use-package vertico-directory
@@ -116,7 +118,40 @@
               ("DEL" . vertico-directory-delete-char)
               ("M-DEL" . vertico-directory-delete-word))
   ;; Tidy shadowed file names
-  :hook (rfn-eshadow-update-overlay . vertico-directory-tidy))
+  :hook
+  (rfn-eshadow-update-overlay . vertico-directory-tidy))
+
+(use-package vertico-multiform
+  :after vertico
+  :ensure nil
+  :config
+  (setq vertico-multiform-categories
+        '((file grid indexed)
+          (consult-location buffer)
+          (consult-grep buffer)
+          (minor-mode reverse)
+          (imenu buffer)
+          ;; (t unobtrusive)
+          ))
+  (setq vertico-multiform-commands
+        '((consult-dir reverse)
+          (execute-extended-command indexed)
+          (embark-prefix-help-command flat)
+          (completion-at-point reverse)))
+  )
+
+;; When resizing the minibuffer (e.g., via the mouse), adjust the number of visible candidates in Vertico automatically.
+;; (defun vertico-resize--minibuffer ()
+;;   (add-hook 'window-size-change-functions
+;;             (lambda (win)
+;;               (let ((height (window-height win)))
+;;                 (when (/= (1- height) vertico-count)
+;;                   (setq-local vertico-count (1- height))
+;;                   (vertico--exhibit))))
+;;             t t))
+
+;; (advice-add #'vertico--setup :before #'vertico-resize--minibuffer)
+
 ;;--------------------------------------------------------------------
 ;; Persist history over Emacs restarts. Vertico sorts by history position.
 (use-package savehist
