@@ -25,7 +25,7 @@
 ;; Enable vertico
 (use-package vertico
   :ensure t
-  :bind (("M-P" . vertico-repeat) ;; effective in the specific mode
+  :bind (("M-P" . vertico-repeat)
          :map vertico-map
          ("<tab>" . vertico-insert)
          ("<escape>" . minibuffer-keyboard-quit)
@@ -40,13 +40,15 @@
   :hook
   (minibuffer-setup . vertico-repeat-save)
   :custom
-  (vertico-scroll-margin 0)  
-  (vertico-count 10)   
-  (vertico-resize t)  
-  (vertico-cycle nil) 
-  (vertico-grid-separator "   |    ")
+  (vertico-scroll-margin 0)  ;; Different scroll margin, the default is 2.
+  (vertico-count 10)   ;; Show more candidates
+  (vertico-resize t)  ;; Grow and shrink the Vertico minibuffer
+  (vertico-cycle nil)  ;; Optionally enable cycling for `vertico-next' and `vertico-previous'.
+  (vertico-grid-separator "       ")
   (vertico-grid-lookahead 50)
+  (vertico-buffer-display-action '(display-buffer-reuse-window))
   :config
+  ;; (global-set-key "\M-R" #'vertico-repeat)
   ;; "» ", as an indicator infront of the candidate 
   (advice-add #'vertico--format-candidate :around
               (lambda (orig cand prefix suffix index _start)
@@ -55,7 +57,46 @@
                  (if (= vertico--index index)
                      (propertize "» " 'face 'vertico-current)
                    "  ")
-                 cand))))
+                 cand)))
+
+  ;; Use `consult-completion-in-region' if consult is enabled.
+  ;; Otherwise use the default `completion--in-region' function.
+  ;; (setq-default completion-in-region-function
+  ;;               (lambda (&rest args)
+  ;;                 (apply (if vertico-mode
+  ;;                            #'consult-completion-in-region
+  ;;                          #'completion-in-region)
+  ;;                        args)))
+  
+  ;; Clean up the path when changing directories with shadowed paths syntax, such as "~".
+  ;; This works with `file-name-shadow-mode'.  
+  ;; (add-hook 'rfn-eshadow-update-overlay-hook #'vertico-directory-tidy)
+  ;; (add-hook 'minibuffer-setup-hook #'vertico-repeat-save)
+
+  ;; some commands are problematic and automatically show the "*Completions*" buffer.
+  ;; (advice-add #'tmm-add-prompt :after #'minibuffer-hide-completions) ;; tmm: text mode access to menu-bar
+  ;; (advice-add #'ffap-menu-ask :around (lambda (&rest args)
+  ;;                                       (cl-letf (((symbol-function #'minibuffer-completion-help)
+  ;;                                                  #'ignore))
+  ;;                                         (apply args))))
+  
+  ;; Alternative 1: Use the basic completion style
+  ;; (setq org-refile-use-outline-path 'file
+  ;;       org-outline-path-complete-in-steps t)
+  ;; (advice-add #'org-olpath-completing-read :around
+  ;;             (lambda (&rest args)
+  ;;               (minibuffer-with-setup-hook
+  ;;                   (lambda () (setq-local completion-styles '(basic)))
+  ;;                 (apply args))))
+
+  ;; Alternative 2: Complete full paths
+  ;; (setq org-refile-use-outline-path 'file
+  ;;       org-outline-path-complete-in-steps nil)
+
+  ;; some key bindings
+  ;; ("C-w" . vertico-directory-delete-word)
+  ;; ("C-<backspace>" . vertico-directory-delete-word)
+  )
 
 ;; Configure directory extension with more convenient directory navigation commands
 (use-package vertico-directory
@@ -107,6 +148,18 @@
               ("C-o" . vertico-quick-exit) ;; excute
               ))
 
+;; When resizing the minibuffer (e.g., via the mouse), adjust the number of visible candidates in Vertico automatically.
+;; (defun vertico-resize--minibuffer ()
+;;   (add-hook 'window-size-change-functions
+;;             (lambda (win)
+;;               (let ((height (window-height win)))
+;;                 (when (/= (1- height) vertico-count)
+;;                   (setq-local vertico-count (1- height))
+;;                   (vertico--exhibit))))
+;;             t t))
+
+;; (advice-add #'vertico--setup :before #'vertico-resize--minibuffer)
+
 ;;--------------------------------------------------------------------
 ;; Persist history over Emacs restarts. Vertico sorts by history position.
 (use-package savehist
@@ -121,6 +174,11 @@
                                               extended-command-history
                                               vertico-repeat-history)
               savehist-autosave-interval 300))
+
+;;--------------------------------------------------------------------
+;; (use-package corfu
+;;   :hook
+;;   (after-init . global-corfu-mode))
 
 ;;--------------------------------------------------------------------
 ;; Optionally use the 'orderless' completion style.

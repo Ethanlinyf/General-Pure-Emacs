@@ -86,7 +86,7 @@
 (require 'init-e-enhance)
 (require 'init-f-platform)
 (require 'init-g-interface)
-;; (require 'init-h-dashboard)
+(require 'init-h-dashboard)
 
 (require 'init-i-i18n)
 
@@ -101,7 +101,7 @@
 (require 'init-r-research)
 (require 'init-r-tex)
 
-;; (require 'init-z-test)
+;; (require 'init-z-test) ;; for debugging purposes
 
 ;;----------------------------------------------------------------------------
 ;;; init.el ends here

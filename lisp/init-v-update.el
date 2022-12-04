@@ -1,4 +1,4 @@
-;;; init-core.el --- Foundamental settings for Emacs. -*- lexical-binding: t; -*-
+;;; init-update.el --- Foundamental settings for Emacs. -*- lexical-binding: t; -*-
 ;;
 ;; Copyleft (CL) 2022-2032 YF Lin
 ;;
@@ -7,8 +7,7 @@
 ;; Under ThingsEngine Project: https://www.thethingsengine.org
 ;;--------------------------------------------------------------------
 ;;; Commentary:
-;; This will be used to set the for the Emacs Update from v29.1
-;; for General Pure Emacs
+;; This will be used for the Emacs update from V29.1 for GPE
 ;;--------------------------------------------------------------------
 ;;; Code:
 
@@ -16,5 +15,5 @@
 
 
 ;;--------------------------------------------------------------------
-(provide 'init-2-core)
-;;; init-core.el ends here.
+(provide 'init-v-update)
+;;; init-v-update.el ends here
