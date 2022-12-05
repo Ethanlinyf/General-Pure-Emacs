@@ -27,7 +27,8 @@ Why is "G.P.E":
 
 [[./site-lisp/figure/GPE-Framework_4.png]]
 
-* A basic structure of Puremacs
+* A basic structure of configuration
+(init 0 1) --> GPE: 
 #+BEGIN_EXAMPLE
   .emacs.d/
      |
@@ -37,7 +38,6 @@ Why is "G.P.E":
      |-- lisp/
      |   |-- init-bridge.el
      |   |-- init-system
-     |   |-- init-core
      |   |-- init-authentication
      |   |-- init-basic
      |   |-- init-minibuffer
@@ -56,6 +56,7 @@ Why is "G.P.E":
      |   |-- init-c/c++
      |   |-- init-lua
      |   |-- init-julia
+     |   |-- init-update
      |
      |-- site-lisp/
      |   |-- auto-save
