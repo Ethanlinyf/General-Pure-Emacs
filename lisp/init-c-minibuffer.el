@@ -10,19 +10,23 @@
 ;; Minibufer enhancement, M-x
 ;; 1. Vertico
 ;; 1.1 vertico-directory
-;; 1.2 Savehist
-;; 2. Orderless
-;; 3. Marginalia
-;; 4. Embark
-;; 5. Consult
-;; 6. Embark-Consult and Wgrep
-;; 7. Fine tune Vertico with extensions. 
+;; 1.2 vertico-multiform
+;; 1.3 vertico-quick
+;; 2.1 Savehist
+;; 2.2 precient-vertico: sorting
+;; 3. Orderless
+;; 4. Marginalia
+;; 5. Embark
+;; 6. Consult
+;; 7. Embark-Consult and Wgrep
+;; 8. Fine tune Vertico with extensions.
+;; 9. all-the-icons-completion
 ;;--------------------------------------------------------------------
 ;;; Code:
 
 (require 'cl-lib)
 
-;; Enable vertico
+;; vertico -- completion UI framework
 (use-package vertico
   :ensure t
   :bind (("M-P" . vertico-repeat) ;; effective in the specific mode
@@ -43,9 +47,8 @@
   (vertico-scroll-margin 0)  
   (vertico-count 10)   
   (vertico-resize t)  
-  (vertico-cycle nil) 
-  (vertico-grid-separator "   |    ")
-  (vertico-grid-lookahead 50)
+  (vertico-cycle nil)
+  (vertico-buffer-display-action '(display-buffer-reuse-window)) ;; need to be clear
   :config
   ;; "» ", as an indicator infront of the candidate 
   (advice-add #'vertico--format-candidate :around
@@ -55,7 +58,33 @@
                  (if (= vertico--index index)
                      (propertize "» " 'face 'vertico-current)
                    "  ")
-                 cand))))
+                 cand)))
+
+  ;; Problematic completion commands:
+
+  ;; org-refile
+  ;; Alternative 1: Use the basic completion style
+  (setq org-refile-use-outline-path 'file
+        org-outline-path-complete-in-steps t)
+  (advice-add #'org-olpath-completing-read :around
+              (lambda (&rest args)
+                (minibuffer-with-setup-hook
+                    (lambda () (setq-local completion-styles '(basic)))
+                  (apply args))))
+  
+  ;; Alternative 2: Complete full paths
+  (setq org-refile-use-outline-path 'file
+        org-outline-path-complete-in-steps nil)
+
+  ;; tmm-menubar
+  (advice-add #'tmm-add-prompt :after #'minibuffer-hide-completions)
+
+  ;; ffap-menu:
+  (advice-add #'ffap-menu-ask :around (lambda (&rest args)
+                                        (cl-letf (((symbol-function #'minibuffer-completion-help)
+                                                   #'ignore))
+                                          (apply args))))
+  )
 
 ;; Configure directory extension with more convenient directory navigation commands
 (use-package vertico-directory
@@ -64,7 +93,8 @@
   :bind (:map vertico-map
               ("RET" . vertico-directory-enter)
               ("DEL" . vertico-directory-delete-char)
-              ("M-DEL" . vertico-directory-delete-word))
+              ("M-DEL" . vertico-directory-delete-word) ;; Mac Keyboard
+              ("C-<backspace>" . vertico-directory-delete-word)) ;; for different keyboard (c-w for all)
   :hook
   (rfn-eshadow-update-overlay . vertico-directory-tidy)) ;; to tidy shadowed file names
 
@@ -76,28 +106,33 @@
               ("M-F" . vertico-multiform-flat)
               ("M-R" . vertico-multiform-reverse)
               ("M-U" . vertico-multiform-unobtrusive))
+
+  :custom
+  (vertico-grid-separator "   |    ")
+  (vertico-grid-lookahead 50)
+
+  (vertico-multiform-categories
+   '(;; (file) ;; Defaul vertico display
+     (file) ;;grid indexed)
+     (consult-location buffer)
+     (consult-grep buffer)
+     (minor-mode reverse)
+     (library reverse indexed)
+     (imenu buffer)
+     (org-roam-node reverse indexed)
+     (t reverse) ;; unobtrusive
+     ))
+  (vertico-multiform-commands
+   '((consult-dir reverse)
+     ("flyspell-correct-*" grid reverse)
+     (execute-extended-command indexed)
+     (org-refile grid reverse indexed)
+     (embark-prefix-help-command flat)
+     (consult-yank-pop indexed)
+     (consult-flycheck)
+     (completion-at-point reverse)))
   :init
-  (vertico-multiform-mode)
-  :config
-  (setq vertico-multiform-categories
-        '((file grid indexed)
-          (consult-location buffer)
-          (consult-grep buffer)
-          (minor-mode reverse)
-          (library reverse indexed)
-          (imenu buffer)
-          (org-roam-node reverse indexed)
-          (t unobtrusive)
-          ))
-  (setq vertico-multiform-commands
-        '((consult-dir reverse)
-          ("flyspell-correct-*" grid reverse)
-          (execute-extended-command indexed)
-          (org-refile grid reverse indexed)
-          (embark-prefix-help-command flat)
-          (consult-yank-pop indexed)
-          (consult-flycheck)
-          (completion-at-point reverse))))
+  (vertico-multiform-mode))
 
 (use-package vertico-quick
   :after vertico
@@ -125,16 +160,9 @@
 ;;--------------------------------------------------------------------
 ;; Optionally use the 'orderless' completion style.
 (use-package orderless
+  :ensure t
   :demand t ;; it is better to be loaded immediately
   :config
-  ;;   (advice-add +vertico--company-capf--candidates-a (&rest args)
-  ;;     "Highlight company matches correctly, and try default completion styles before
-  ;; orderless."
-  ;;     :around #'company-capf--candidates
-  ;;     (let ((orderless-match-faces [completions-common-part])
-  ;;           (completion-styles +vertico-company-completion-styles))
-  ;;       (apply args)))
-  
   (defun +vertico-orderless-dispatch (pattern _index _total)
     (cond
      ;; Ensure $ works with Consult commands, which add disambiguation suffixes
@@ -156,56 +184,61 @@
      ;; Flex matching
      ((string-prefix-p "~" pattern) `(orderless-flex . ,(substring pattern 1)))
      ((string-suffix-p "~" pattern) `(orderless-flex . ,(substring pattern 0 -1)))))
-
-  ;;;autoload
-  (defun +vertico-basic-remote-try-completion (string table pred point)
+  
+  ;; only for remote files:
+  (defun basic-remote-try-completion (string table pred point)
     (and (vertico--remote-p string)
          (completion-basic-try-completion string table pred point)))
-
-  ;;;autoload
-  (defun +vertico-basic-remote-all-completions (string table pred point)
+  (defun basic-remote-all-completions (string table pred point)
     (and (vertico--remote-p string)
          (completion-basic-all-completions string table pred point)))
-  
   (add-to-list
    'completion-styles-alist
-   '(+vertico-basic-remote
-     +vertico-basic-remote-try-completion
-     +vertico-basic-remote-all-completions
-     "Use basic completion on remote files only"))
+   '(basic-remote basic-remote-try-completion basic-remote-all-completions nil))
+
+  (orderless-define-completion-style orderless+initialism
+    (orderless-matching-styles '(orderless-initialism
+                                 orderless-literal
+                                 orderless-regexp)))
   
   (setq completion-styles '(orderless basic)
         completion-category-defaults nil
-        ;; note that despite override in the name orderless can still be used in
-        ;; find-file etc.
-        completion-category-overrides '((file (styles +vertico-basic-remote orderless partial-completion)))
+        completion-category-overrides
+        '((file (styles basic-remote orderless partial-completion)) 
+          (command (styles orderless+initialism)) 
+          (symbol (styles orderless+initialism))  
+          (variable (styles orderless+initialism)))
+        
         orderless-style-dispatchers '(+vertico-orderless-dispatch)
         orderless-component-separator "[ &]")
-  
-  ;; ...otherwise find-file gets different highlighting than other commands
+
+  ;; highlighting
   (set-face-attribute 'completions-first-difference nil :inherit nil))
 
 ;;--------------------------------------------------------------------
 ;; Enable richer annotations using the Marginalia package
 (use-package marginalia
   ;; Either bind `marginalia-cycle` globally or only in the minibuffer
-  :bind (("M-A" . marginalia-cycle) ; for globally
-         :map minibuffer-local-map
-         ("M-A" . marginalia-cycle)); for locally
-
-  ;; The :init configuration is always executed (Not lazy!)
+  :ensure t
+  :bind (:map minibuffer-local-map
+              ("M-A" . marginalia-cycle)); for locally
   :hook 
-  ;; Must be in the :init section of use-package such that the mode gets
-  ;; enabled right away. Note that this forces loading the package.
   (after-init . marginalia-mode)
   (marginalia . all-the-icons-completion-marginalia-setup)
   :custom
   (marginalia-max-relative-age 0)
   (marginalia-align 'center)
   :config
+  ;; (setq marginalia-max-relative-age 0)
+  ;; (setq marginalia-align 'center)
   (advice-add #'marginalia--project-root :override #'projectile-project-root)
-  (cl-pushnew '(projectile-recentf . project-file) marginalia-command-categories) ;; The cl-pushnew does not work, but it could use with the custom.el
-  )
+  
+  (cl-pushnew '(flycheck-error-list-set-filter . builtin) marginalia-command-categories)
+  (add-to-list 'marginalia-command-categories '(projectile-switch-to-buffer . buffer))
+  (add-to-list 'marginalia-command-categories '(projectile-find-file . project-file))
+  (add-to-list 'marginalia-command-categories '(projectile-recentf . project-file))
+  (add-to-list 'marginalia-command-categories '(projectile-switch-project . project-file)))
+
 ;;--------------------------------------------------------------------
 (use-package embark
   :ensure t
@@ -230,9 +263,6 @@
 
 ;;--------------------------------------------------------------------
 ;; Example configuration for Consult
-
-;; (use-package counsel-projectile
-;;   :ensure t)
 
 (use-package consult
   ;; Replace bindings. Lazily loaded due by `use-package'.
@@ -349,8 +379,6 @@
   ;;;; 4. locate-dominating-file
   ;; (setq consult-project-function (lambda (_) (locate-dominating-file "." ".git")))
   )
-
-
 
 ;; Consult users will also want the emConsultbark-consult package.
 (use-package embark-consult
