@@ -156,15 +156,11 @@ all-the-icons-ibuffer-formats
 ;; (face-remap-add-relative 'font-lock-keyword-face '(:inherit default))
 ;; (face-remap-add-relative 'font-lock-keyword-face `(:foreground ,(face-foreground 'default)))
 ;;--------------------------------------------------------------------
-;; (require 'buffer-move)
-;; (global-set-key (kbd "<C-S-up>")     'buf-move-up)
-;; (global-set-key (kbd "<C-S-down>")   'buf-move-down)
-;; (global-set-key (kbd "<C-S-left>")   'buf-move-left)
-;; (global-set-key (kbd "<C-S-right>")  'buf-move-right)
+
 (use-package buffer-move
   :ensure t
   :bind
-  ("<C-S-up>" . buf-move-up)
+  ("<C-S-up>" . buf-move-up)  ;; (global-set-key (kbd "<C-S-up>")     'buf-move-up)
   ("<C-S-down>" . buf-move-down)
   ("<C-S-left>" . buf-move-left)
   ("<C-S-right>" . buf-move-right))

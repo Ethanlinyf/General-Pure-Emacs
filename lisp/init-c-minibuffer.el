@@ -241,26 +241,54 @@
 
 ;;--------------------------------------------------------------------
 (use-package embark
-  :ensure t
-
+  :demand t
   :bind
-  (("C-." . embark-act)         ;; pick some comfortable binding
-   ("C-;" . embark-dwim)        ;; good alternative: M-.
+  (("s-." . embark-act)         ;; pick some comfortable binding
+   ("s-;" . embark-dwim)        ;; good alternative: M-.
    ("C-h B" . embark-bindings)) ;; alternative for `describe-bindings'
-
   :init
-
   ;; Optionally replace the key help with a completing-read interface
   (setq prefix-help-command #'embark-prefix-help-command)
-
   :config
-
   ;; Hide the mode line of the Embark live/completions buffers
   (add-to-list 'display-buffer-alist
                '("\\`\\*Embark Collect \\(Live\\|Completions\\)\\*"
                  nil
                  (window-parameters (mode-line-format . none)))))
 
+
+(eval-when-compile
+  (defmacro my/embark-ace-action (fn)
+    `(defun ,(intern (concat "my/embark-ace-" (symbol-name fn))) ()
+       (interactive)
+       (with-demoted-errors "%s"
+         (require 'ace-window)
+         (let ((aw-dispatch-always t))
+           (aw-switch-to-window (aw-select nil))
+           (call-interactively (symbol-function ',fn)))))))
+
+(define-key embark-file-map     (kbd "o") (my/embark-ace-action find-file))
+(define-key embark-buffer-map   (kbd "o") (my/embark-ace-action switch-to-buffer))
+(define-key embark-bookmark-map (kbd "o") (my/embark-ace-action bookmark-jump))
+
+(eval-when-compile
+  (defmacro my/embark-split-action (fn split-type)
+    `(defun ,(intern (concat "my/embark-"
+                             (symbol-name fn)
+                             "-"
+                             (car (last  (split-string
+                                          (symbol-name split-type) "-"))))) ()
+       (interactive)
+       (funcall #',split-type)
+       (call-interactively #',fn))))
+
+(define-key embark-file-map     (kbd "2") (my/embark-split-action find-file split-window-below))
+(define-key embark-buffer-map   (kbd "2") (my/embark-split-action switch-to-buffer split-window-below))
+(define-key embark-bookmark-map (kbd "2") (my/embark-split-action bookmark-jump split-window-below))
+
+(define-key embark-file-map     (kbd "3") (my/embark-split-action find-file split-window-right))
+(define-key embark-buffer-map   (kbd "3") (my/embark-split-action switch-to-buffer split-window-right))
+(define-key embark-bookmark-map (kbd "3") (my/embark-split-action bookmark-jump split-window-right))
 ;;--------------------------------------------------------------------
 ;; Example configuration for Consult
 
@@ -393,7 +421,8 @@
 
 (use-package all-the-icons-completion
   :after (marginalia all-the-icons)
-  :hook (marginalia-mode . all-the-icons-completion-marginalia-setup)
+  :hook
+  (marginalia-mode . all-the-icons-completion-marginalia-setup)
   :init
   (all-the-icons-completion-mode))
 
@@ -413,6 +442,15 @@
   :config
   (add-hook 'doom-after-reload-hook #'posframe-delete-all))
 
+(use-package consult-dir
+  :ensure t
+  :bind (("C-x C-d" . consult-dir)
+         :map minibuffer-local-completion-map
+         ("C-x C-d" . consult-dir)
+         ("C-x C-j" . consult-dir-jump-file)))
+
+(use-package 0x0
+  :ensure t)
 
 ;;--------------------------------------------------------------------
 (provide 'init-c-minibuffer)

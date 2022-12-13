@@ -275,7 +275,7 @@
   :ensure t
   :defer t
   :hook
-  (after-init. golden-ratio-mode)
+  (after-init . golden-ratio-mode)
   :config
   (setq golden-ratio-auto-scale t))
 
@@ -293,6 +293,12 @@
   :init
   (advice-add 'describe-function-1 :after #'elisp-demos-advice-describe-function-1))
 
+(use-package ace-window
+  :ensure t
+  :hook
+  (emacs-startup . ace-window-display-mode)
+  :bind
+  ([remap other-window] . ace-window))
 ;;--------------------------------------------------------------------
 (provide 'init-e-enhance)
 ;;; init-e-enhance.el ends here
