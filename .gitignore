@@ -90,3 +90,4 @@ zull.el
 /straight
 blink-search.db
 update_emacs.org
+/mini-init.el
