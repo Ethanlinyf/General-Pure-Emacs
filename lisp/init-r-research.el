@@ -33,5 +33,11 @@
   (org-mode . org-zotxt-mode))
 
 ;;--------------------------------------------------------------------
+;; Emacs for Overleaf
+(require 'atomic-chrome)
+(atomic-chrome-start-server)
+
+
+;;--------------------------------------------------------------------
 (provide 'init-r-research)
 ;;; init-research ends here.

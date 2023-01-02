@@ -26,7 +26,7 @@
   :config
   (setq system-time-locale "C"
         display-time-24hr-format t
-        ;display-time-day-and-date t
+                                        ;display-time-day-and-date t
         display-time t
         ))
 
@@ -46,7 +46,8 @@
 (when (or sys/mac-x-p sys/linux-x-p (daemonp)) ;; (when (memq window-system '(mac ns))
   (use-package exec-path-from-shell
     :ensure t
-    :init (exec-path-from-shell-initialize)))
+    :custom (exec-path-from-shell-arguments '("-l"))
+    :config (exec-path-from-shell-initialize)))
 
 ;;--------------------------------------------------------------------
 ;; A few more useful configurations...

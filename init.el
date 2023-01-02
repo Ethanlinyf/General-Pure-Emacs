@@ -79,17 +79,17 @@
 
 (require 'init-0-bridge)
 (require 'init-1-system)
+
 (require 'init-a-authentication)
 (require 'init-b-basic)
 (require 'init-c-minibuffer)
 (require 'init-d-dired)
+
 (require 'init-e-enhance)
 (require 'init-f-platform)
 (require 'init-g-interface)
-(require 'init-h-dashboard)
-
+;; (require 'init-h-dashboard)
 (require 'init-i-i18n)
-
 (require 'init-o-org)
 (require 'init-o-roam)
 
@@ -101,7 +101,7 @@
 (require 'init-r-research)
 (require 'init-r-tex)
 
-;; (require 'init-z-test) ;; for debugging purposes
+(require 'init-z-test) ;; for debugging purposes
 
 ;;----------------------------------------------------------------------------
 ;;; init.el ends here
