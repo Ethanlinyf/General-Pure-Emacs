@@ -16,7 +16,7 @@
 (setq debug-on-error t)
 
 ;; Puremacs is compatible from the emacs version 27.1.
-(let ((minver "28.1"))
+(let ((minver "27.1"))
 (when (version< emacs-version minver)
   (error "Puremacs requires V%s or higher versions" minver)))
 

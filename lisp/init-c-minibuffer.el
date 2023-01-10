@@ -27,7 +27,6 @@
 
 (require 'cl-lib)
 
-;; vertico -- completion UI framework
 (use-package vertico
   :ensure t
   :bind (("M-P" . vertico-repeat) ;; effective in the specific mode
@@ -132,7 +131,8 @@
      (consult-flycheck)
      (completion-at-point reverse)))
   :init
-  (vertico-multiform-mode))
+  (vertico-multiform-mode)
+  )
 
 (use-package vertico-quick
   :after vertico

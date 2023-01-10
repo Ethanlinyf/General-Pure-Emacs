@@ -88,7 +88,7 @@
 (require 'init-e-enhance)
 (require 'init-f-platform)
 (require 'init-g-interface)
-;; (require 'init-h-dashboard)
+(require 'init-h-dashboard)
 (require 'init-i-i18n)
 (require 'init-o-org)
 (require 'init-o-roam)
