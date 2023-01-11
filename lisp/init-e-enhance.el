@@ -273,7 +273,7 @@
 ;; golden-ratio
 (use-package golden-ratio
   :ensure t
-  :hook
+  ;:hook
   ;(after-init . golden-ratio-mode)
   :config
   (setq golden-ratio-auto-scale t))

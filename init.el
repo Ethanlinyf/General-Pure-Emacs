@@ -101,7 +101,7 @@
 (require 'init-r-research)
 (require 'init-r-tex)
 
-(require 'init-z-test) ;; for debugging purposes
+;; (require 'init-z-test) ;; for debugging purposes
 
 ;;----------------------------------------------------------------------------
 ;;; init.el ends here
