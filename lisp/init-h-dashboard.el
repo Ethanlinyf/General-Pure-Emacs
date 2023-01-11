@@ -97,7 +97,7 @@
        (require 'all-the-icons nil t)))
 
 (setq dashboard-set-footer t)
-(setq dashboard-footer (format "Powered by ThingsEngine, %s" (format-time-string "%Y")))
+(setq dashboard-footer (format "\nPowered by ThingsEngine, %s" (format-time-string "%Y")))
 ;; (setq dashboard-footer-messages '("Powered by ThingsEngine"))
 (setq dashboard-footer-icon (cond ((icons-displayable-p)
                              (all-the-icons-faicon "heart"
@@ -107,15 +107,11 @@
                             ((char-displayable-p ?🧡) "🧡 ")
                             (t (propertize ">" 'face 'dashboard-footer))))
 
-;; FIXME: Insert copyright
-;; @see https://github.com/emacs-dashboard/emacs-dashboard/issues/219
 (defun my-dashboard-insert-copyright ()
-  "Insert copyright in the footer."
-  (when dashboard-footer
-    (insert "\n  ")
-    (dashboard-center-line dashboard-footer)
-    (insert (propertize dashboard-footer 'face 'font-lock-comment-face))
-    (insert "\n")))
+      "Insert copyright in the footer."
+      (when dashboard-set-footer
+        (dashboard-insert-center
+         (propertize dashboard-footer 'face 'font-lock-comment-face))))
 (advice-add #'dashboard-insert-footer :after #'my-dashboard-insert-copyright)
 
 
