@@ -114,15 +114,6 @@
          (propertize dashboard-footer 'face 'font-lock-comment-face))))
 (advice-add #'dashboard-insert-footer :after #'my-dashboard-insert-copyright)
 
-
-;; (use-package ns-auto-titlebar
-;;   :if *is-mac*
-;;   :init
-;;   (ns-auto-titlebar-mode))
-
-;; (setq initial-frame-alist (quote ((fullscreen . maximized))))
-;; (when *is-mac*
-;;   (toggle-frame-fullscreen))
 ;;--------------------------------------------------------------------
 (provide 'init-h-dashboard)
 ;;; init-dashboard.el ends here
