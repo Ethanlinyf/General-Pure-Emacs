@@ -167,5 +167,18 @@
   :hook (after-init . global-so-long-mode))
 
 ;;--------------------------------------------------------------------
+(use-package projectile
+  :ensure t
+  :bind (("C-S-c p" . projectile-command-map)) ; The binding should be verified.
+  :config
+  (setq projectile-mode-line "Projectile")
+  (setq projectile-track-known-projects-automatically nil))
+
+(use-package counsel-projectile
+  :ensure t
+  :after (projectile)
+  :init (counsel-projectile-mode))
+
+;;--------------------------------------------------------------------
 (provide 'init-b-basic)
 ;;; init-b-basic.el ends here.

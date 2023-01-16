@@ -14,7 +14,7 @@
 ;; (require 'cl)
 (require 'package)
 
-(when (>= emacs-major-version 27)
+(when (>= emacs-major-version 26)
   (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/") t)
   (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
   (add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/") t)
@@ -23,7 +23,7 @@
   (package-initialize))
 
 ;;--------------------------------------------------------------------
-;; Add whatever packages you want here
+;; Another way to manage packages 
 ;;--------------------------------------------------------------------
 ;; (defvar puremacs/packages '(
                             
@@ -47,7 +47,7 @@
 ;;       (package-install pkg))))
 
 ;;--------------------------------------------------------------------
-;; use-package
+;; use-package with straight
 ;;--------------------------------------------------------------------
 ;; (setq package-check-signature t
 ;;        load-prefer-newer t)
@@ -96,6 +96,13 @@
   :ensure nil
   :init
   (message "Something Good as Indicated"))
+
+(use-package hydra
+  :ensure t)
+
+(use-package use-package-hydra
+  :ensure t
+  :after hydra) 
 
 ;;--------------------------------------------------------------------
 ;;  (straight-use-package 'use-package

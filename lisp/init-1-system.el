@@ -25,9 +25,8 @@
   :ensure nil
   :config
   (setq system-time-locale "C"
-        display-time-24hr-format t
-                                        ;display-time-day-and-date t
-        display-time t
+        display-time-24hr-format t                  
+        display-time t ;display-time-day-and-date t
         ))
 
 ;; Set UTF-8 as the default coding system

@@ -45,6 +45,14 @@
   ;; Live Coding in Python
   (use-package live-py-mode))
 
+
+;; (use-package pyvenv
+;;   :ensure t
+;;   :config
+;;   (setenv "WORKON_HOME" "~/miniconda3/envs")
+;;   (setq python-shell-interpreter "python3")
+;;   (pyvenv-mode t))
+
 ;;----------------------------------------------------------------------------
 (provide 'init-p-python)
 ;;; init-python ends here

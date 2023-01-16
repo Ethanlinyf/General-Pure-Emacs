@@ -334,6 +334,16 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 (global-set-key (kbd "s-I") 'markmacro-rect-insert)
 (global-set-key (kbd "s-C") 'markmacro-rect-mark-columns)
 (global-set-key (kbd "s-S") 'markmacro-rect-mark-symbols)
+
+;;--------------------------------------------------------------------
+(use-package mwim
+  :ensure t
+  :bind
+  ("C-a" . mwim-beginning-of-code-or-line)
+  ("C-e" . mwim-end-of-code-or-line))
+;;----------------
+;; (use-package dap-mode
+;;   :ensure t)
 ;;--------------------------------------------------------------------
 (provide 'init-f-platform)
 ;;; init-platform.el ends here

@@ -16,17 +16,19 @@
 (setq debug-on-error nil)
 
 ;; Puremacs is compatible from the emacs version 27.1.
-(let ((minver "27.1"))
+(let ((minver "26.1"))
 (when (version< emacs-version minver)
   (error "Puremacs requires V%s or higher versions" minver)))
 
-;; Garbage collection in the startup process -TE
+(when (version< emacs-version "27.1")
+  (message "Your Emacs is old, and some functionality in this config will be disabled. Please upgrade to 28.2 at least if possible."))
+
+;; Garbage collection in the startup process
 ;; (setq gc-cons-threshold most-positive-fixnum
 ;;       gc-cons-percentage 0.5)
 ;; (setq gc-cons-threshold most-positive-fixnum)
 ;; (add-hook 'after-init-hook #'(lambda () (setq gc-cons-threshold 800000)))
 (setq gc-cons-threshold most-positive-fixnum)
-
 
 ;; Prevent unwanted runtime compilation for native-comp users
 (setq native-comp-deferred-compilation nil)

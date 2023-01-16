@@ -91,3 +91,4 @@ zull.el
 blink-search.db
 update_emacs.org
 /mini-init.el
+*.~undo-tree~

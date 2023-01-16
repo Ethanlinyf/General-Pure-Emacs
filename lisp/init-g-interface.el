@@ -164,6 +164,11 @@ all-the-icons-ibuffer-formats
   ("<C-S-down>" . buf-move-down)
   ("<C-S-left>" . buf-move-left)
   ("<C-S-right>" . buf-move-right))
+
+(use-package good-scroll
+  :ensure t
+  :if window-system          
+  :init (good-scroll-mode))
 ;;--------------------------------------------------------------------
 (provide 'init-g-interface)
 ;;; init-g-interface.el ends here

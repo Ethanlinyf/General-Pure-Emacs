@@ -22,6 +22,7 @@
 ;; 8. Fine tune Vertico with extensions.
 ;; 9. all-the-icons-completion
 ;; 10. popper
+;; 11 avy and with Embark
 ;;--------------------------------------------------------------------
 ;;; Code:
 
@@ -60,8 +61,8 @@
                    "  ")
                  cand)))
 
-  ;; Problematic completion commands:
-  ;; org-refile
+  ;; Problematic completion commands: org-refile
+  
   ;; Alternative 1: Use the basic completion style
   (setq org-refile-use-outline-path 'file
         org-outline-path-complete-in-steps t)
@@ -286,6 +287,7 @@
   (define-key embark-file-map     (kbd "3") (my/embark-split-action find-file split-window-right))
   (define-key embark-buffer-map   (kbd "3") (my/embark-split-action switch-to-buffer split-window-right))
   (define-key embark-bookmark-map (kbd "3") (my/embark-split-action bookmark-jump split-window-right)))
+
 ;;--------------------------------------------------------------------
 ;; Example configuration for Consult
 (use-package consult
@@ -453,6 +455,23 @@
           compilation-mode))
   (popper-mode +1)
   (popper-echo-mode +1))                ; For echo area hints
+
+(global-set-key (kbd "M-j") nil)
+
+(use-package avy
+  :ensure t
+  :config
+  (defun avy-action-embark (pt)
+	(unwind-protect
+		(save-excursion
+          (goto-char pt)
+          (embark-act))
+      (select-window
+       (cdr (ring-ref avy-ring 0))))
+	t)
+  (setf (alist-get ?e avy-dispatch-alist) 'avy-action-embark)
+  :bind
+  (("M-j C-SPC" . avy-goto-char-timer)))
 
 ;;--------------------------------------------------------------------
 (provide 'init-c-minibuffer)
