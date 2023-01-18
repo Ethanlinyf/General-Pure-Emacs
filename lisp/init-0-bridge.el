@@ -23,7 +23,7 @@
   (package-initialize))
 
 ;;--------------------------------------------------------------------
-;; Another way to manage packages 
+;; Another way to manage packages
 ;;--------------------------------------------------------------------
 ;; (defvar puremacs/packages '(
                             
@@ -102,7 +102,7 @@
 
 (use-package use-package-hydra
   :ensure t
-  :after hydra) 
+  :after hydra)
 
 ;;--------------------------------------------------------------------
 ;;  (straight-use-package 'use-package

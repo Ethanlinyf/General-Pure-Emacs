@@ -64,7 +64,6 @@ Emacs:~$ (init 0 1) --> G.P.E
      |   |-- init-update
      |
      |-- site-lisp/
-     |   |-- auto-save
      |   |-- lsp-bridge
      |   |-- aweshell
      |   |-- awesome-tab

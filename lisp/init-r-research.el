@@ -34,8 +34,12 @@
 
 ;;--------------------------------------------------------------------
 ;; Emacs for Overleaf
-(require 'atomic-chrome)
-(atomic-chrome-start-server)
+(use-package atomic-chrome
+  :ensure t
+  :init
+  (atomic-chrome-start-server))
+;; (require 'atomic-chrome)
+;; (atomic-chrome-start-server)
 
 
 ;;--------------------------------------------------------------------

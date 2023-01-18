@@ -45,13 +45,13 @@
   :hook
   (minibuffer-setup . vertico-repeat-save)
   :custom
-  (vertico-scroll-margin 0)  
-  (vertico-count 10)   
-  (vertico-resize t)  
+  (vertico-scroll-margin 0)
+  (vertico-count 10)
+  (vertico-resize t)
   (vertico-cycle nil)
   (vertico-buffer-display-action '(display-buffer-reuse-window)) ;; need to be clear
   :config
-  ;; "» ", as an indicator infront of the candidate 
+  ;; "» ", as an indicator infront of the candidate
   (advice-add #'vertico--format-candidate :around
               (lambda (orig cand prefix suffix index _start)
                 (setq cand (funcall orig cand prefix suffix index _start))
