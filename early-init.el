@@ -46,7 +46,7 @@
 
 ;; In noninteractive sessions, prioritise non-byte-compiled source
 ;; files to prevent the use of stale byte-code. Otherwise, it saves us
-;; a little IO time to skip the mtime checks on every *.elc file. 
+;; a little IO time to skip the mtime checks on every *.elc file.
 ;; from Doom Emacs
 (setq load-prefer-newer noninteractive)
 
@@ -75,4 +75,4 @@
 ;; Turn off the startup help screen
 (setq inhibit-splash-screen 1)
 ;;----------------------------------------------------------------------
-;;; early-init.el ends here
+;;; early-init.el ends here.

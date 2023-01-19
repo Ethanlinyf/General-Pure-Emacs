@@ -6,7 +6,7 @@
 ;; URL: https://github.com/Ethanlinyf/General-Pure-Emacs
 ;; Under ThingsEngine Project: https://www.thethingsengine.org/
 ;;--------------------------------------------------------------------
-;; Commentary:
+;;; Commentary:
 ;; Configurations for research
 ;;--------------------------------------------------------------------
 ;;; Code:
@@ -38,10 +38,7 @@
   :ensure t
   :init
   (atomic-chrome-start-server))
-;; (require 'atomic-chrome)
-;; (atomic-chrome-start-server)
-
 
 ;;--------------------------------------------------------------------
 (provide 'init-r-research)
-;;; init-research ends here.
+;;; init-r-research.el ends here

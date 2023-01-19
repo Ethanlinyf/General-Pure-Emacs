@@ -65,12 +65,12 @@
 
 ;; Add to list to load the el files in a specific folder;
 (defun update-load-path (&rest _)
-  "To update 'load-path'"
+  "To update 'load-path'."
   (dolist (path '("lisp" "site-lisp"))
     (push (expand-file-name path user-emacs-directory) load-path)))
 
 (defun add-extradirs-to-load-path (&rest _)
-  "Include extra dirs to 'load-path'"
+  "Include extra dirs to 'load-path'."
   (let ((default-directory (expand-file-name "site-lisp" user-emacs-directory)))
     (normal-top-level-add-subdirs-to-load-path)))
 
@@ -106,4 +106,4 @@
 ;; (require 'init-z-test) ;; for debugging purposes
 
 ;;----------------------------------------------------------------------------
-;;; init.el ends here
+;;; init.el ends here.

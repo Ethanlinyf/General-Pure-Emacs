@@ -105,7 +105,7 @@ Emacs:~$ (init 0 1) --> G.P.E
 
   + Plan and schedule
 
-    [[./site-lisp/figure/normal_task_states.png]]
+    [[./site-lisp/figure/TaskManagement.png]]
 
   + Management for research purposes as an example below:
 
