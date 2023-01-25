@@ -123,7 +123,7 @@ Emacs:~$ (init 0 1) --> G.P.E
     - Flexible capacity tray
     - Focus-oriented
 
-  + literate programming \\
+  + literate programming[fn:1] \\
 
     [[./site-lisp/figure/literate-programming.png]]
 
@@ -133,12 +133,12 @@ Emacs:~$ (init 0 1) --> G.P.E
 
     * How to import and visualize your roam research, obsidian and
       zettelkasten markdown format notes, a graphical frontend for
-      your org-roam Zettelkasten:
+      your org-roam Zettelkasten, org-roam-ui[fn:2]:
 
       [[./site-lisp/figure/roam-research-ui.png]]
 
 - Creative and Inovative \\
-  Push at the boundary of knowledge with GPE:
+  Push at the boundary of knowledge with GPE [fn:3]:
 
   [[./site-lisp/figure/creative_emacs.jpg]]
 
@@ -207,3 +207,8 @@ the implied warranty of merchantability or fitness for a particular
 purpose.
 
 
+
+
+[fn:1]: [[http://www.jstatsoft.org/v46/i03/][A Multi-Language Computing Environment for Literate Programming and Reproducible Research]]
+[fn:2]: [[https://github.com/org-roam/org-roam-ui][org-roam-ui]]
+[fn:3]: [[http://academiclifehistories.weebly.com/blog/phd-pitfalls-part-i-the-reality-of-your-contribution][PhD pitfalls: The reality of your contribution]]
