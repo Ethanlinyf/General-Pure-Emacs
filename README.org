@@ -209,10 +209,7 @@ purpose.
 * Reference
 
 [fn:1]: [[https://lucidmanager.org/data-science/visualise-org-roam/][Visualise Org-Roam Networks With igraph and R]]\\
-
 [fn:2]: [[http://www.jstatsoft.org/v46/i03/][A Multi-Language Computing Environment for Literate
 Programming and Reproducible Research]]\\
-
 [fn:3]: [[https://github.com/org-roam/org-roam-ui][org-roam-ui]]\\
-
 [fn:4]: [[http://academiclifehistories.weebly.com/blog/phd-pitfalls-part-i-the-reality-of-your-contribution][PhD pitfalls: The reality of your contribution]]\\
