@@ -6,7 +6,7 @@
 ;; URL: https://github.com/Ethanlinyf/General-Pure-Emacs
 ;; Under ThingsEngine Project: https://www.thethingsengine.org/
 ;;--------------------------------------------------------------------
-;; Commentary:
+;;; Commentary:
 ;; Configurations for Python programming
 ;;--------------------------------------------------------------------
 ;;; Code:
@@ -45,7 +45,6 @@
   ;; Live Coding in Python
   (use-package live-py-mode))
 
-
 ;; (use-package pyvenv
 ;;   :ensure t
 ;;   :config
@@ -55,4 +54,4 @@
 
 ;;----------------------------------------------------------------------------
 (provide 'init-p-python)
-;;; init-python ends here
+;;; init-p-python.el ends here

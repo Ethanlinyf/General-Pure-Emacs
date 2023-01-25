@@ -56,19 +56,16 @@
 ;; (add-hook 'LaTeX-mode-hook 'turn-on-cdlatex)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;LaTex-mode settings;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(use-package pdf-tools ;; need to manually download from nongnu
-  ;; :pin manual
+(use-package pdf-tools
   :ensure t
-  :defer t
+  :custom
+  (pdf-view-display-size 'fit-width)
+  (pdf-annot-activate-created-annotations t "automatically annotate highlights")
   :config
   (pdf-tools-install)
-  (setq-default pdf-view-display-size 'fit-width)
   (define-key pdf-view-mode-map (kbd "C-s") 'isearch-forward)
-  :custom
-  (pdf-annot-activate-created-annotations t "automatically annotate highlights"))
-
-;; (use-package pdf-tools
-;;  :ensure t)
+  :hook
+  (pdf-view-mode . (lambda (display-line-numbers-mode nil))))
 
 (add-hook 'LaTeX-mode-hook (lambda ()
                              (require 'tex-site)
@@ -259,4 +256,4 @@
 
 ;;--------------------------------------------------------------------
 (provide 'init-r-tex)
-;;; init-tex ends here
+;;; init-r-tex.el ends here

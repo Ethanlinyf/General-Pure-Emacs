@@ -6,7 +6,7 @@
 ;; URL: https://github.com/Ethanlinyf/General-Pure-Emacs
 ;; Under ThingsEngine Project: https://www.thethingsengine.org/
 ;;--------------------------------------------------------------------
-;; Commentary:
+;;; Commentary:
 ;; Configurations for Julia programming
 ;;--------------------------------------------------------------------
 ;;; Code:
@@ -20,4 +20,4 @@
 
 ;;----------------------------------------------------------------------------
 (provide 'init-p-julia)
-;;; init.el ends here.
+;;; init-p-julia.el ends here.

@@ -39,6 +39,9 @@
   :init
   (atomic-chrome-start-server))
 
+(use-package ess
+  :ensure t)
+
 ;;--------------------------------------------------------------------
 (provide 'init-r-research)
 ;;; init-r-research.el ends here

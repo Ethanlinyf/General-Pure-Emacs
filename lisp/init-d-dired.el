@@ -46,7 +46,6 @@
   (setq dired-omit-files
         (concat dired-omit-files                "\\|^.DS_Store$\\|^.projectile$\\|^.git*\\|^.svn$\\|^.vscode$\\|\\.js\\.meta$\\|\\.meta$\\|\\.elc$\\|^.emacs.*")))
 
-
 ;; Colourful dired
 (use-package diredfl
   :ensure t
@@ -57,8 +56,7 @@
 (use-package dired-git-info
   :bind (:map dired-mode-map
               (")" . dired-git-info-mode)))
-;; (require 'all-the-icons)
-;; (setq all-the-icons-color-icons t)
+
 (use-package all-the-icons
   :ensure t
   :init

@@ -89,7 +89,7 @@
         ;; ("⚑" nil "Show flags" (lambda (&rest _) (message "flag")) error))
         ))
 
-(setq thingsengine-icon t)   
+(setq thingsengine-icon t)
 (defun icons-displayable-p ()
   "Return non-nil if `all-the-icons' is displayable."
   (and thingsengine-icon
@@ -116,4 +116,4 @@
 
 ;;--------------------------------------------------------------------
 (provide 'init-h-dashboard)
-;;; init-dashboard.el ends here
+;;; init-h-dashboard.el ends here

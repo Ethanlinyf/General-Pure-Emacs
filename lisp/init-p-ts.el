@@ -6,7 +6,7 @@
 ;; URL: https://github.com/Ethanlinyf/General-Pure-Emacs
 ;; Under ThingsEngine Project: https://www.thethingsengine.org/
 ;;--------------------------------------------------------------------
-;; Commentary:
+;;; Commentary:
 ;; Configurations for TypeScript programming
 ;;--------------------------------------------------------------------
 ;;; Code:
@@ -16,4 +16,4 @@
 
 ;;--------------------------------------------------------------------
 (provide 'init-p-ts)
-;;; init-ts.el ends here
+;;; init-p-ts.el ends here
