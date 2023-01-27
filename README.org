@@ -205,7 +205,7 @@ useful, helpful and inspiring, but without any warranty; without even
 the implied warranty of merchantability or fitness for a particular
 purpose.
 
-* Reference
+* Footnote
 [fn:1] [[https://lucidmanager.org/data-science/visualise-org-roam/][Visualise Org-Roam Networks With igraph and R]]
 
 [fn:2] [[http://www.jstatsoft.org/v46/i03/][A Multi-Language Computing Environment for Literate
