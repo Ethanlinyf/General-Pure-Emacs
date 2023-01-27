@@ -196,8 +196,6 @@ Bug reports are highly welcome and appreciated!
 
 Please feedback any issues about configuration at this repository and
 welcome any suggestions.
-
-Please note GPE is only just an integrated tool and we should not be obsessed with it. 
 * License
 This program is free software. You can redistribute and/or modify it
 under [[https://github.com/redguardtoo/emacs.d/blob/master/LICENSE][GNU General Public License]] published by the Free Software
