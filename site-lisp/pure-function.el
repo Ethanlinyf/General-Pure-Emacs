@@ -288,6 +288,7 @@ If mark is activate, duplicate region lines below."
       (setq end (line-end-position)))
     (save-excursion
       (comment-or-uncomment-region beg end))))
+
 ;;--------------------------------------------------------------------
 (provide 'pure-function)
 ;;; pure-function.el ends here

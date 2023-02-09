@@ -36,7 +36,7 @@
 ;; Emacs for Overleaf
 (use-package atomic-chrome
   :ensure t
-  :init
+  :config ;; :init
   (atomic-chrome-start-server))
 
 (use-package ess

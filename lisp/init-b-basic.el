@@ -179,6 +179,18 @@
   :after (projectile)
   :init (counsel-projectile-mode))
 
+;; This package will be used in minibuffer.el, dired.el, platerform.el,
+;; interface.el and dashboard.el
+(use-package all-the-icons
+  :ensure t
+  :init
+  (setq all-the-icons-color-icons t)
+  :config
+  (defun icon-displayable-p ()
+    "Return non-nil if the icons are displayable."
+    (and (display-graphic-p)
+         (require 'all-the-icons nil t))))
+
 ;;--------------------------------------------------------------------
 (provide 'init-b-basic)
 ;;; init-b-basic.el ends here.

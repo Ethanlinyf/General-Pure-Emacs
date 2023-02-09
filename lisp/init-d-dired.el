@@ -11,20 +11,33 @@
 ;;--------------------------------------------------------------------
 ;;; Code:
 
-;; Loading later
-(with-eval-after-load 'dired
-  (define-key dired-mode-map (kbd "RET") 'dired-find-alternate-file)
-  ;; (setq dired-recursive-deletes 'always)
-  (setq dired-recursive-deletes 'top)
-  (setq dired-recursive-copies 'always)
-  (put 'dired-find-alternate-file 'disabled nil)
-  ;; Show directory first
-  (setq dired-listing-switches "-alh --group-directories-first"))
-
-;; from Centaur Emacs
-(use-package dired-x
+(use-package dired
   :ensure nil
-  ;; :demand t
+  :bind (:map dired-mode-map
+              ("RET" . dired-find-alternate-file)
+              ;; allow to edit the names of files within a dired buffer under wdired-mode
+              ("C-c C-p" . wdired-change-to-wdired-mode)
+              )
+  :config
+  (setq dired-recursive-deletes 'always
+        dired-recursive-copies 'always)
+  (put 'dired-find-alternate-file 'disabled nil)
+
+  (when sys/macp
+    (setq dired-use-ls-dired nil)
+    
+    (when (executable-find "gls")
+      (setq insert-directory-program "gls"
+            dired-use-ls-dired t)))
+  
+  (when (or (and sys/macp (executable-find "gls"))
+            (and (or sys/linuxp sys/cygwinp) (executable-find "ls")))
+    (setq ls-lisp-use-insert-directory-program t)
+    (setq dired-listing-switches "-alh --group-directories-first")))
+
+;; From Centaur Emacs
+(use-package dired-plus
+  :ensure nil
   :config
   (let ((cmd (cond (sys/mac-x-p "open")
                    (sys/linux-x-p "xdg-open")
@@ -44,47 +57,40 @@
             ("\\.md\\'" ,cmd))))
 
   (setq dired-omit-files
-        (concat dired-omit-files                "\\|^.DS_Store$\\|^.projectile$\\|^.git*\\|^.svn$\\|^.vscode$\\|\\.js\\.meta$\\|\\.meta$\\|\\.elc$\\|^.emacs.*")))
+        (concat dired-omit-files "\\|^.DS_Store$\\|^.projectile$\\|^.git*\\|^.svn$\\|^.vscode$\\|\\.js\\.meta$\\|\\.meta$\\|\\.elc$\\|^.emacs.*")))
 
-;; Colourful dired
+
+;; Colourful dired-mode
 (use-package diredfl
   :ensure t
-  :hook
-  (dired-mode . diredfl-global-mode))
+  :hook (dired-mode . diredfl-mode))
 
-;; Show git info in dired
+
+;; Show git informatio in dired mode
 (use-package dired-git-info
   :bind (:map dired-mode-map
               (")" . dired-git-info-mode)))
 
-(use-package all-the-icons
-  :ensure t
-  :init
-  (setq all-the-icons-color-icons t))
 
+;; make icons available in dired mode
 (use-package all-the-icons-dired
+  :after all-the-icons
   :ensure t
-  :hook (dired-mode . all-the-icons-dired-mode)
-  :config
-  (setq all-the-icons-dired-monochrome nil)) ;; nil means it is colourful in dired-mode
+  :hook (dired-mode . (lambda ()
+                          (when (icon-displayable-p)
+                            (all-the-icons-dired-mode))))
+  :config (setq all-the-icons-dired-monochrome nil)) ;; nil means it is colourful in dired-mode
 
-;; move this part to basic
-;; (with-eval-after-load "dired"
-;;   (put 'dired-find-alternate-file 'disabled nil)
-;;   (define-key dired-mode-map (kbd "RET") 'dired-find-alternate-file)
-;;   (define-key dired-mode-map (kbd "<mouse-2>") 'dired-find-alternate-file)
-;;   )
 
 (use-package all-the-icons-ibuffer
   :ensure t
   :hook (ibuffer-mode . all-the-icons-ibuffer-mode)
-  :config
-  (setq all-the-icons-ibuffer-color-icon t))
+  :config (setq all-the-icons-ibuffer-color-icon t))
 
-;; add when is-a-mac
-(when *is-mac*
-  (setq insert-directory-program "gls" dired-use-ls-dired t)
-  (setq dired-listing-switches "-al --group-directories-first"))
+
+(when (executable-find "fd")
+  (use-package fd-dired
+    :ensure t))
 
 ;;----------------------------------------------------------------------------
 (provide 'init-d-dired)
