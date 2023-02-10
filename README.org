@@ -82,11 +82,11 @@ Emacs:~$ (init 0 1) --> G.P.E
 To follow the principles of this platform, general, pure and
 extensible, the configuration will be generated with the following
 considerations:
-- Easy to debug
+- Easy to integrate and debug
 - Lower coupling and higer cohersion
 - More aggegation and less inheritance
 
-[[./site-lisp/figure/Configuration_Metodology.png]]
+[[./site-lisp/figure/Configuration_Metodology_2.png]]
 * Feature
 - Entrance: a fancy dashboard
   [[./site-lisp/figure/GPE_dashboard.png]]
