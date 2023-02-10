@@ -74,77 +74,6 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 
   (when (display-graphic-p)
     (setq awesome-tab-display-icon t)))
-
-;;----------To be deleted in March 2023----------------------------------------------------------
-;; awesome-tab 
-
-;; (add-to-list 'load-path (expand-file-name "~/.emacs.d/site-lisp/awesome-tab"))
-;; (require 'awesome-tab)
-;; (awesome-tab-mode t)
-
-
-;; (defun awesome-tab-buffer-groups ()
-;;   "`awesome-tab-buffer-groups' control buffers' group rules.
-;; Group awesome-tab with mode if buffer is derived from `eshell-mode' `emacs-lisp-mode' `dired-mode' `org-mode' `magit-mode'.
-;; All buffer name start with * will group to \"Emacs\".
-;; Other buffer group by `awesome-tab-get-group-name' with project name."
-;;   (list
-;;    (cond
-;;     ((or (string-equal "*" (substring (buffer-name) 0 1))
-;;          (memq major-mode '(magit-process-mode
-;;                             magit-status-mode
-;;                             magit-diff-mode
-;;                             magit-log-mode
-;;                             magit-file-mode
-;;                             magit-blob-mode
-;;                             magit-blame-mode
-;;                             )))
-;;      "Emacs")
-;;     ((derived-mode-p 'eshell-mode)
-;;      "EShell")
-;;     ((derived-mode-p 'emacs-lisp-mode)
-;;      "Elisp")
-;;     ((derived-mode-p 'dired-mode)
-;;      "Dired")
-;;     ((memq major-mode '(org-mode org-agenda-mode diary-mode))
-;;      "OrgMode")
-;;     (t
-;;      (awesome-tab-get-group-name (current-buffer))))))
-
-;; (defun awesome-tab-hide-tab (x)
-;;   (let ((name (format "%s" x)))
-;;     (or
-;;      (string-prefix-p "*epc" name)
-;;      (string-prefix-p "*helm" name)
-;;      (string-prefix-p "*Compile-Log*" name)
-;;      (string-prefix-p "*lsp" name)
-;;      (string-prefix-p "Aweshell" name)
-;;      (string-prefix-p "*shell*" name)
-;;      (string-prefix-p "*shell" name)
-;;      (string-prefix-p "*dashboard*" name)
-;;      (string-prefix-p "*info*" name)
-;;      (string-prefix-p "*scratch*" name)
-;;      (string-prefix-p "*Messages*" name)
-;;      (and (string-prefix-p "magit" name)
-;;           (not (file-name-extension name)))
-;;      )))
-
-;; (when (display-graphic-p)
-;;   (setq awesome-tab-display-icon t))
-
-;;--------To be deleted -----------------------------------------------
-;; (require 'winum)
-;; (use-package winum
-;;   :ensure t
-;;   :hook
-;;   (after-init . winum-mode))
-;; :init
-;; (with-eval-after-load 'winum
-;;   (define-key winum-keymap (kbd "M-0") #'treemacs-select-window))
-
-;; (use-package treemacs-icons-dired
-;;   :hook (dired-mode . treemacs-icons-dired-enable-once)
-;;   :ensure t)
 ;;--------------------------------------------------------------------
 
 ;; treemacs
@@ -269,7 +198,6 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
   :bind ("s-1" . aweshell-dedicated-toggle))
 ;;--------------------------------------------------------------------
 
-
 ;; lsp-bridge
 (use-package markdown-mode
   :ensure t)
@@ -290,12 +218,13 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 ;;--------------------------------------------------------------------
 
 ;; blink-search
-(add-to-list 'load-path "~/.emacs.d/site-lisp/blink-search")
-(require 'blink-search)
-
-;; (use-package blink-search
-;;   :load-path "~/.emacs.d/site-lisp/blink-search"
-;;   :autoload blink-search)
+;; (add-to-list 'load-path "~/.emacs.d/site-lisp/blink-search")
+;; (require 'blink-search)
+(use-package blink-search
+  :ensure nil
+  :load-path "~/.emacs.d/site-lisp/blink-search"
+  :commands blink-search
+  )
 ;;--------------------------------------------------------------------
 
 (use-package org-transclusion
@@ -307,28 +236,26 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 (use-package popweb
   :ensure nil
   :load-path "~/.emacs.d/site-lisp/popweb"
-  ;; :init
-  ;; (setq popweb-url-web-window-width-scale 0.8)
-  ;; (setq popweb-url-web-window-height-scale 0.8)
   :config
   (setq popweb-url-web-window-size-use-absolute t)
   (setq popweb-url-web-window-width-absolute 375)
-  (setq popweb-url-web-window-height-absolute 425)
-  ;; (setq popweb-url-web-window-width-scale 0.8)
-  ;; (setq popweb-url-web-window-height-scale 0.8)
+  (setq popweb-url-web-window-height-absolute 625)
+  (setq popweb-url-web-window-width-scale 0.8)
+  (setq popweb-url-web-window-height-scale 0.8)
+  
   ;; Org-Roam ID link and footnote link previewer
-  (add-to-list 'load-path "~/.emacs.d/site-lisp/popweb/extension/org-roam")
-  (require 'popweb-org-roam-link)
+  ;; (add-to-list 'load-path "~/.emacs.d/site-lisp/popweb/extension/org-roam")
+  ;; (require 'popweb-org-roam-link)
 
   ;; LaTeX preview functionality
-  (add-to-list 'load-path "~/.emacs.d/site-lisp/popweb/extension/latex")
-  (require 'popweb-latex)
-  (add-hook 'latex-mode-hook #'popweb-latex-mode)
+  ;; (add-to-list 'load-path "~/.emacs.d/site-lisp/popweb/extension/latex")
+  ;; (require 'popweb-latex)
+  ;; (add-hook 'latex-mode-hook #'popweb-latex-mode)
 
   ;; Chinese-English translation popup
   (add-to-list 'load-path "~/.emacs.d/site-lisp/popweb/extension/dict") ;
-  (require 'popweb-dict-bing) ; Translation using Bing
-  (require 'popweb-dict-youdao) ; Translation using Youdao
+  (require 'popweb-dict) 
+
 
   (add-to-list 'load-path "~/.emacs.d/site-lisp/popweb/extension/url-preview")
   (require 'popweb-url)
@@ -336,24 +263,24 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
   :bind
   ;; 
   (("s-4" . popweb-dict-youdao-pointer)
-   ("s-5" . popweb-url-preview-pointer))
-  :pin manual)
+   ("s-5" . popweb-url-preview-pointer)))
+  ;; :pin manual)
 ;;--------------------------------------------------------------------
 
 ;; Markmacro
-(add-to-list 'load-path "~/.emacs.d/site-lisp/markmacro") ; add markmacro to your load-path
-(require 'markmacro)
-
-(global-set-key (kbd "s-/") 'markmacro-mark-words)
-(global-set-key (kbd "s-?") 'markmacro-mark-lines)
-(global-set-key (kbd "s-<") 'markmacro-apply-all)
-(global-set-key (kbd "s->") 'markmacro-apply-all-except-first)
-(global-set-key (kbd "s-M") 'markmacro-rect-set)
-(global-set-key (kbd "s-D") 'markmacro-rect-delete)
-(global-set-key (kbd "s-F") 'markmacro-rect-replace)
-(global-set-key (kbd "s-I") 'markmacro-rect-insert)
-(global-set-key (kbd "s-C") 'markmacro-rect-mark-columns)
-(global-set-key (kbd "s-S") 'markmacro-rect-mark-symbols)
+(use-package markmacro
+  :ensure nil
+  :load-path "~/.emacs.d/site-lisp/markmacro"
+  :bind (("s-/" . markmacro-mark-words)
+         ("s-?" . markmacro-mark-lines)
+         ("s-<" . 'markmacro-apply-all)
+         ("s->" . markmacro-apply-all-except-first)
+         ("s-M" . markmacro-rect-set)
+         ("s-D" . markmacro-rect-delete)
+         ("s-F" . markmacro-rect-replace)
+         ("s-I" . markmacro-rect-insert)
+         ("s-C" . markmacro-rect-mark-columns)
+         ("s-S" . markmacro-rect-mark-symbols)))
 
 ;;--------------------------------------------------------------------
 (use-package mwim

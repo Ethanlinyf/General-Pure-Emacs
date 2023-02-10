@@ -66,12 +66,10 @@
   :ensure t
   :hook (dired-mode . diredfl-mode))
 
-
 ;; Show git informatio in dired mode
 (use-package dired-git-info
   :bind (:map dired-mode-map
               (")" . dired-git-info-mode)))
-
 
 ;; make icons available in dired mode
 (use-package all-the-icons-dired
@@ -81,13 +79,6 @@
                           (when (icon-displayable-p)
                             (all-the-icons-dired-mode))))
   :config (setq all-the-icons-dired-monochrome nil)) ;; nil means it is colourful in dired-mode
-
-
-(use-package all-the-icons-ibuffer
-  :ensure t
-  :hook (ibuffer-mode . all-the-icons-ibuffer-mode)
-  :config (setq all-the-icons-ibuffer-color-icon t))
-
 
 (when (executable-find "fd")
   (use-package fd-dired

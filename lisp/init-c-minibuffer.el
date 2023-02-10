@@ -224,7 +224,7 @@
               ("M-A" . marginalia-cycle)); for locally
   :hook 
   (after-init . marginalia-mode)
-  (marginalia . all-the-icons-completion-marginalia-setup)
+  ;; (marginalia-mode . all-the-icons-completion-marginalia-setup)
   :custom
   (marginalia-max-relative-age 0)
   (marginalia-align 'center)

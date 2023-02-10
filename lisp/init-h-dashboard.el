@@ -90,16 +90,11 @@
         ))
 
 (setq thingsengine-icon t)
-(defun icons-displayable-p ()
-  "Return non-nil if `all-the-icons' is displayable."
-  (and thingsengine-icon
-       (display-graphic-p)
-       (require 'all-the-icons nil t)))
 
 (setq dashboard-set-footer t)
 (setq dashboard-footer (format "\nPowered by ThingsEngine, %s" (format-time-string "%Y")))
 ;; (setq dashboard-footer-messages '("Powered by ThingsEngine"))
-(setq dashboard-footer-icon (cond ((icons-displayable-p)
+(setq dashboard-footer-icon (cond ((icon-displayable-p)
                              (all-the-icons-faicon "heart"
                                                    :height 1.1
                                                    :v-adjust -0.05

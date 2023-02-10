@@ -28,21 +28,30 @@
   ;; Command-Option-f to toggle fullscreen mode
   ;; Hint: Customize `ns-use-native-fullscreen'
   (global-set-key (kbd "M-s-f") 'toggle-frame-fullscreen))
-
 ;;--------------------------------------------------------------------
+
 (use-package doom-themes
+  :ensure t
+  :init (load-theme 'doom-one t)
+  :config
+  ;; Global settings (defaults)
+  (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
+        doom-themes-enable-italic t) ; if nil, italics is universally disabled
+
+  ;; Enable flashing mode-line on errors
+  (doom-themes-visual-bell-config)
+
+  (setq doom-themes-treemacs-theme "doom-colors") ; use the colorful treemacs theme
+  (doom-themes-treemacs-config)
+
+  ;; Corrects (and improves) org-mode's native fontification.
+  (doom-themes-org-config))
+
+(use-package ns-auto-titlebar
+  :if *is-mac*
+  :ensure t
   :init
-  (load-theme 'doom-one t))
-
-
-;; (use-package all-the-icons
-;;   :if (display-graphic-p))
-
-;; (use-package ns-auto-titlebar
-;;   :if *is-mac*
-;;   :differ t
-;;   :config
-;;   (ns-auto-titlebar-mode t)) ;; not use hook for it.
+  (ns-auto-titlebar-mode t)) ;; not use hook for it.
 
 ;; Display minor-mode in the mode line
 (use-package minions
@@ -50,48 +59,47 @@
   :hook (after-init . minions-mode)
   :init
   (setq doom-modeline-minor-modes t))
-
 ;;--------------------------------------------------------------------
 ;; (use-package all-the-icons-ibuffer
 ;;   :ensure t
 ;;   :hook (ibuffer-mode . all-the-icons-ibuffer-mode))
 
-;; (setq all-the-icons-color-icons t)
-;; (setq all-the-icons-ibuffer-color-icon t)
-;; (setq all-the-icons-dired-monochrome nil) ;; nil means it is colourful in dired-mode
+(use-package all-the-icons-ibuffer
+  :ensure t
+  :hook (ibuffer-mode . all-the-icons-ibuffer-mode)
+  :config
 
-(all-the-icons-ibuffer-mode t)
+  ;; (setq all-the-icons-color-icons t)
+  ;; (setq all-the-icons-ibuffer-color-icon t)
+  ;; (setq all-the-icons-dired-monochrome nil) ;; nil means it is colourful in dired-mode
 
-;; Whether display the icons.
-(setq all-the-icons-ibuffer-icon t)
+  (all-the-icons-ibuffer-mode t)
 
-;; Whether display the colorful icons.
-;; It respects `all-the-icons-color-icons'.
-(setq all-the-icons-ibuffer-color-icon t)
+  ;; Whether display the icons.
+  (setq all-the-icons-ibuffer-icon t)
 
-;; The default icon size in ibuffer.
-(setq all-the-icons-ibuffer-icon-size 1.0)
+  ;; Whether display the colorful icons.
+  ;; It respects `all-the-icons-color-icons'.
+  (setq all-the-icons-ibuffer-color-icon t)
 
-;; The default vertical adjustment of the icon in ibuffer.
-(setq all-the-icons-ibuffer-icon-v-adjust 0.0)
+  ;; The default icon size in ibuffer.
+  (setq all-the-icons-ibuffer-icon-size 1.0)
 
-;; Use human readable file size in ibuffer.
-(setq  all-the-icons-ibuffer-human-readable-size t)
+  ;; The default vertical adjustment of the icon in ibuffer.
+  (setq all-the-icons-ibuffer-icon-v-adjust 0.0)
 
-;; A list of ways to display buffer lines with `all-the-icons'.
-;; See `ibuffer-formats' for details.
-all-the-icons-ibuffer-formats
+  ;; Use human readable file size in ibuffer.
+  (setq  all-the-icons-ibuffer-human-readable-size t)
+
+  ;; A list of ways to display buffer lines with `all-the-icons'.
+  ;; See `ibuffer-formats' for details.
+  all-the-icons-ibuffer-formats)
 
 ;; Slow Rendering
 ;; If you experience a slow down in performance when rendering multiple icons simultaneously,
 ;; you can try setting the following variable
 (setq inhibit-compacting-font-caches t)
-
 ;;--------------------------------------------------------------------
-;; (use-package all-the-icons-completion
-;;   :ensure t
-;;   :hook ((after-init . all-the-icons-completion-mode)
-;;          (marginalia-mode-hook . all-the-icons-completion-marginalia-setup)))
 
 (use-package all-the-icons-completion
   :after (marginalia all-the-icons)
@@ -106,55 +114,17 @@ all-the-icons-ibuffer-formats
   (prog-mode . rainbow-delimiters-mode))
 
 ;; osx-lib
-;; manually install the package osx-lib
-;; M-x package-list-packages [enter]
-;; osx-lib [install]
-
 (use-package osx-lib
   :if *is-mac*)
 
 (use-package popwin
   :ensure t
   :hook (after-init . popwin-mode))
-
 ;;--------------------------------------------------------------------
-;; hightlight-line
-(use-package lin
-  :defer t
-  :config
-  (setq lin-face 'lin-mac))
 
- ; check doc string for alternative styles
-
-;; You can use this to live update the face:
-;; (customize-set-variable 'lin-face 'lin-green)
-
-(setq lin-mode-hooks
-      '(bongo-mode-hook
-        org-mode-hook
-        dired-mode-hook
-        elfeed-search-mode-hook
-        git-rebase-mode-hook
-        grep-mode-hook
-        ibuffer-mode-hook
-        ilist-mode-hook
-        ledger-report-mode-hook
-        log-view-mode-hook
-        magit-log-mode-hook
-        mu4e-headers-mode-hook
-        notmuch-search-mode-hook
-        notmuch-tree-mode-hook
-        occur-mode-hook
-        org-agenda-mode-hook
-        pdf-outline-buffer-mode-hook
-        proced-mode-hook
-        tabulated-list-mode-hook))
-
-;(lin-global-mode nil)
-;;--------------------------------------------------------------------
 (auto-image-file-mode 1)
-;; (face-remap-add-relative 'font-lock-keyword-face '(:inherit default))
-;; (face-remap-add-relative 'font-lock-keyword-face `(:foreground ,(face-foreground 'default)))
+(face-remap-add-relative 'font-lock-keyword-face '(:inherit default))
+(face-remap-add-relative 'font-lock-keyword-face `(:foreground ,(face-foreground 'default)))
 ;;--------------------------------------------------------------------
 
 (use-package buffer-move

@@ -7,17 +7,15 @@
 ;; Under ThingsEngine Project: https://www.thethingsengine.org/
 ;;--------------------------------------------------------------------
 ;;; Commentary:
-;; Configurations for lua programming language
+;; Configurations for lua programming language for Neovim settings
 ;;--------------------------------------------------------------------
 ;;; Code:
 
 (use-package lua-mode
-  :ensure t)
-
-(autoload 'lua-mode "lua-mode" "Lua editing mode." t)
-(add-to-list 'auto-mode-alist '("\\.lua$" . lua-mode))
-(add-to-list 'interpreter-mode-alist '("lua" . lua-mode))
-
+  :ensure t
+  :magic ("\\.lua$" . lua-mode)
+  :config
+  (add-to-list 'interpreter-mode-alist '("lua" . lua-mode)))
 
 ;;--------------------------------------------------------------------
 (provide 'init-p-lua)
