@@ -7,13 +7,19 @@
 ;; Under ThingsEngine Project: https://www.thethingsengine.org/
 ;;--------------------------------------------------------------------
 ;;; Commentary:
-;; Configurations for TypeScript programming
+;; Configurations for Web programming
 ;;--------------------------------------------------------------------
 ;;; Code:
 
 (use-package typescript-mode
-  :ensure t)
+  :ensure t
+  :mode ("\\.ts[x]\\'" . typescript-mode))
+
+;; Tide, TypeScript Interactive Development Environment for Emacs: https://github.com/ananthakumaran/tide/
+;; ts-comint, a Typescript REPL in Emacs: https://github.com/emacs-typescript/typescript.el
+
+
 
 ;;--------------------------------------------------------------------
-(provide 'init-p-ts)
-;;; init-p-ts.el ends here
+(provide 'init-p-web)
+;;; init-p-web.el ends here

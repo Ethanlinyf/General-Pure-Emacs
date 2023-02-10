@@ -45,6 +45,7 @@
   ;; Live Coding in Python
   (use-package live-py-mode))
 
+;; set it for your Python environment
 ;; (use-package pyvenv
 ;;   :ensure t
 ;;   :config
