@@ -34,6 +34,7 @@
           (indent-buffer)
           (message "Indent buffer."))))))
 ;;--------------------------------------------------------------------
+
 ;; abbrev settings
 (use-package GPE-abbrev
   :ensure nil
@@ -41,7 +42,9 @@
   (setq-default abbrev-mode t)
   (setq save-abbrevs nil)
   (setq abbrev-file-name "~/.emacs.d/abbrev_defs"))
+;;--------------------------------------------------------------------
 
+;; Further Enhancement
 (use-package GPE-enhancement
   :ensure nil
   :init
@@ -62,6 +65,7 @@
                (ignore-errors (backward-up-list))
                (funcall fn))))))
 ;;--------------------------------------------------------------------
+
 ;;happie-expand
 (use-package GPE-hippie-expand
   :ensure nil
@@ -80,6 +84,7 @@
  					  try-complete-lisp-symbol)))
 
 ;;--------------------------------------------------------------------
+
 ;; from centaur emacs
 (use-package recentf
   :ensure nil
@@ -152,10 +157,11 @@
    ))
 
 ;;--------------------------------------------------------------------
-(setq ispell-program-name "hunspell")
-(setq ispell-local-dictionary "de_DE")
-(setq ispell-local-dictionary-alist
-      '(("de_DE" "[[:alpha:]]" "[^[:alpha:]]" "[']" nil nil nil utf-8)))
+;; to be deleted
+;; (setq ispell-program-name "hunspell")
+;; (setq ispell-local-dictionary "de_DE")
+;; (setq ispell-local-dictionary-alist
+;;       '(("de_DE" "[[:alpha:]]" "[^[:alpha:]]" "[']" nil nil nil utf-8)))
 
 ;;--------------------------------------------------------------------
 ;; Add extensions
@@ -203,21 +209,41 @@
   (prog-mode . flycheck-mode))
 
 ;;--------------------------------------------------------------------
-(setq ispell-program-name "hunspell")
-;; you could set `ispell-dictionary` instead but `ispell-local-dictionary' has higher priority
-(setq ispell-local-dictionary "en_US")
-(setq ispell-local-dictionary-alist '(("en_US" "[[:alpha:]]" "[^[:alpha:]]" "[']" nil ("-d" "en_US,en_US-med") nil utf-8)))
-;; new variable `ispell-hunspell-dictionary-alist' is defined in Emacs
-;; If it's nil, Emacs tries to automatically set up the dictionaries.
-(when (boundp 'ispell-hunspell-dictionary-alist)
-  (setq ispell-hunspell-dictionary-alist ispell-local-dictionary-alist))
+(use-package GPE-flyspell
+  :ensure nil
+  :hook ((text-mode . flyspell-mode)
+         (prog-mode . flyspell-prog-mode))
+  :bind (("C-c f s" . flyspell-mode)
+         ("C-c f c" . flyspell-correct-word-before-point)
+         :map flyspell-mouse-map
+         ([down-mouse-3] . flyspell-correct-word))
+  :config
+  (if (executable-find "hunspell")
+      (setq ispell-program-name "hunspell")
+    (setq ispell-program-name "aspell"))
+  
+  (setq ispell-local-dictionary "en_US")
+  (setq ispell-local-dictionary-alist '(("en_US" "[[:alpha:]]" "[^[:alpha:]]" "[']" nil ("-d" "en_US,en_US-med") nil utf-8)))
+  ;; new variable `ispell-hunspell-dictionary-alist' is defined in Emacs
+  ;; If it's nil, Emacs tries to automatically set up the dictionaries.
+  (when (boundp 'ispell-hunspell-dictionary-alist)
+    (setq ispell-hunspell-dictionary-alist ispell-local-dictionary-alist)))
+  
+;; (setq ispell-program-name "hunspell")
+;; ;; you could set `ispell-dictionary` instead but `ispell-local-dictionary' has higher priority
+;; (setq ispell-local-dictionary "en_US")
+;; (setq ispell-local-dictionary-alist '(("en_US" "[[:alpha:]]" "[^[:alpha:]]" "[']" nil ("-d" "en_US,en_US-med") nil utf-8)))
+;; ;; new variable `ispell-hunspell-dictionary-alist' is defined in Emacs
+;; ;; If it's nil, Emacs tries to automatically set up the dictionaries.
+;; (when (boundp 'ispell-hunspell-dictionary-alist)
+;;   (setq ispell-hunspell-dictionary-alist ispell-local-dictionary-alist))
 
-(eval-after-load "flyspell"
-  '(progn
-     (define-key flyspell-mouse-map [down-mouse-3] #'flyspell-correct-word)
-     (define-key flyspell-mouse-map [mouse-3] #'undefined)
-     (define-key flyspell-mouse-map [down-mouse-2] nil)
-     (define-key flyspell-mouse-map [mouse-2] nil)))
+;; (eval-after-load "flyspell"
+;;   '(progn
+;;      (define-key flyspell-mouse-map [down-mouse-3] #'flyspell-correct-word)
+;;      (define-key flyspell-mouse-map [mouse-3] #'undefined)
+;;      (define-key flyspell-mouse-map [down-mouse-2] nil)
+;;      (define-key flyspell-mouse-map [mouse-2] nil)))
 
 ;;--------------------------------------------------------------------
 ;; An intuitive and efficient solution for single-buffer text search
@@ -370,8 +396,8 @@
   :ensure t
   :init (highlight-symbol-mode)
   :bind ("<f3>" . highlight-symbol))
-
 ;;--------------------------------------------------------------------
+
 (use-package helpful
   :ensure t
   :commands (helpful-callable helpful-variable helpful-command helpful-key helpful-mode)
@@ -384,7 +410,6 @@
          ("C-h F" . describe-face)
          ([remap describe-key] . helpful-key))
   )
-
 ;;--------------------------------------------------------------------
 (provide 'init-e-enhance)
 ;;; init-e-enhance.el ends here
