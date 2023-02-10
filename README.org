@@ -86,7 +86,7 @@ considerations:
 - Lower coupling and higer cohersion
 - More aggegation and less inheritance
 
-[[./site-lisp/figure/Configuration_Metodology.jpf]]
+[[./site-lisp/figure/Configuration_Metodology.png]]
 * Feature
 - Entrance: a fancy dashboard
   [[./site-lisp/figure/GPE_dashboard.png]]
