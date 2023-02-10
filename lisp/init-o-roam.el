@@ -39,4 +39,4 @@
 
 ;;----------------------------------------------------------------------------
 (provide 'init-o-roam)
-;;; init-roam ends here.
+;;; init-o-roam.el ends here.

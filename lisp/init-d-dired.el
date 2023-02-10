@@ -20,7 +20,8 @@
               )
   :config
   (setq dired-recursive-deletes 'always
-        dired-recursive-copies 'always)
+        dired-recursive-copies 'always
+        dirvish-override-dired-mode t)
   (put 'dired-find-alternate-file 'disabled nil)
 
   (when sys/macp

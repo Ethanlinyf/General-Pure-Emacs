@@ -240,7 +240,7 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
   ;;  (six . "pip install six"))
   :commands global-lsp-bridge-mode
   :ensure epc
-  :hook 
+  :hook
   (after-init . global-lsp-bridge-mode))
 
 

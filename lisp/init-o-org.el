@@ -155,4 +155,4 @@
 ; (setq org-ellipsis 0xE2)
 ;;------------------------------------------------------------------------------
 (provide 'init-o-org)
-;;; init-org.el ends here.
+;;; init-o-org.el ends here.
