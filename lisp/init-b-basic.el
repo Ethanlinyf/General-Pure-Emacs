@@ -192,11 +192,50 @@
   :ensure t
   :init
   (setq all-the-icons-color-icons t)
-  :config
+  ;; :config
   (defun icon-displayable-p ()
     "Return non-nil if the icons are displayable."
     (and (display-graphic-p)
          (require 'all-the-icons nil t))))
+
+(use-package hydra
+  :ensure t
+  :init
+  (require 'hydra))
+
+
+;; From Centaur Emacs
+(use-package pretty-hydra
+  :ensure t
+  ;; :bind ("<f7>" . toggles-hydra/body)
+  :hook (emacs-lisp-mode . (lambda ()
+                             (add-to-list
+                              'imenu-generic-expression
+                              '("Hydras"
+                                "^.*(\\(pretty-hydra-define\\) \\([a-zA-Z-]+\\)"
+                                2))))
+  :init
+  (require 'pretty-hydra)
+  (cl-defun pretty-hydra-title (title &optional icon-type icon-name
+                                      &key face height v-adjust)
+    "Add an icon in the hydra title."
+    (let ((face (or face `(:foreground ,(face-background 'highlight))))
+          (height (or height 1.0))
+          (v-adjust (or v-adjust 0.0)))
+      (concat
+       (when (and (icon-displayable-p) icon-type icon-name)
+         (let ((f (intern (format "all-the-icons-%s" icon-type))))
+           (when (fboundp f)
+             (concat
+              (apply f (list icon-name :face face :height height :v-adjust v-adjust))
+              " "))))
+       (propertize title 'face face)))))
+
+(use-package use-package-hydra
+  :ensure t
+  :after hydra
+  :init
+  (require 'use-package-hydra))
 
 ;;--------------------------------------------------------------------
 (provide 'init-b-basic)

@@ -135,7 +135,6 @@
   (push '(js-json-mode . json-ts-mode) major-mode-remap-alist)
   (push '(python-mode . python-ts-mode) major-mode-remap-alist))
 
-
 ;;--------------------------------------------------------------------
 (provide 'init-1-system)
 ;;; init-1-system.el ends here.

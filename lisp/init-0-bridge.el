@@ -97,13 +97,6 @@
   :init
   (message "Something Good as Indicated"))
 
-(use-package hydra
-  :ensure t)
-
-(use-package use-package-hydra
-  :ensure t
-  :after hydra)
-
 ;;--------------------------------------------------------------------
 ;;  (straight-use-package 'use-package
 ;;  (use-package straight

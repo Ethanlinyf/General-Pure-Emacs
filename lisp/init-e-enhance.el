@@ -351,43 +351,83 @@
   ([remap other-window] . ace-window))
 
 ;;--------------------------------------------------------------------
-(use-package multiple-cursors
-  :bind
-  ("C-S-<mouse-1>" . mc/toggle-cursor-on-click))
+;; (use-package multiple-cursors
+;;   :bind
+;;   ("C-s-<mouse-1>" . mc/toggle-cursor-on-click))
+
 
 ;; To be enhanced as follows:
-;; (use-package multiple-cursors
-;;   :ensure t
-;;   :after hydra
-;;   :bind
-;;   (("C-x C-h m" . hydra-multiple-cursors/body)
-;;    ("C-S-<mouse-1>" . mc/toggle-cursor-on-click))
-;;   :hydra (hydra-multiple-cursors
-;; 		  (:hint nil)
-;; 		  "
-;; Up^^             Down^^           Miscellaneous           % 2(mc/num-cursors) cursor%s(if (> (mc/num-cursors) 1) \"s\" \"\")
-;; ------------------------------------------------------------------
-;;  [_p_]   Prev     [_n_]   Next     [_l_] Edit lines  [_0_] Insert numbers
-;;  [_P_]   Skip     [_N_]   Skip     [_a_] Mark all    [_A_] Insert letters
-;;  [_M-p_] Unmark   [_M-n_] Unmark   [_s_] Search      [_q_] Quit
-;;  [_|_] Align with input CHAR       [Click] Cursor at point"
-;; 		  ("l" mc/edit-lines :exit t)
-;; 		  ("a" mc/mark-all-like-this :exit t)
-;; 		  ("n" mc/mark-next-like-this)
-;; 		  ("N" mc/skip-to-next-like-this)
-;; 		  ("M-n" mc/unmark-next-like-this)
-;; 		  ("p" mc/mark-previous-like-this)
-;; 		  ("P" mc/skip-to-previous-like-this)
-;; 		  ("M-p" mc/unmark-previous-like-this)
-;; 		  ("|" mc/vertical-align)
-;; 		  ("s" mc/mark-all-in-region-regexp :exit t)
-;; 		  ("0" mc/insert-numbers :exit t)
-;; 		  ("A" mc/insert-letters :exit t)
-;; 		  ("<mouse-1>" mc/add-cursor-on-click)
-;; 		  ;; Help with click recognition in this hydra
-;; 		  ("<down-mouse-1>" ignore)
-;; 		  ("<drag-mouse-1>" ignore)
-;; 		  ("q" nil)))
+(use-package multiple-cursors
+  :ensure t
+  :after hydra
+  :bind
+  (("C-x C-h m" . hydra-multiple-cursors/body)
+   ("C-S-<mouse-1>" . mc/toggle-cursor-on-click))
+  :hydra (hydra-multiple-cursors
+		  (:hint nil)
+		  "
+Up^^             Down^^           Miscellaneous           % 2(mc/num-cursors) cursor%s(if (> (mc/num-cursors) 1) \"s\" \"\")
+------------------------------------------------------------------
+ [_p_]   Prev     [_n_]   Next     [_l_] Edit lines  [_0_] Insert numbers
+ [_P_]   Skip     [_N_]   Skip     [_a_] Mark all    [_A_] Insert letters
+ [_M-p_] Unmark   [_M-n_] Unmark   [_s_] Search      [_q_] Quit
+ [_|_] Align with input CHAR       [Click] Cursor at point"
+		  ("l" mc/edit-lines :exit t)
+		  ("a" mc/mark-all-like-this :exit t)
+		  ("n" mc/mark-next-like-this)
+		  ("N" mc/skip-to-next-like-this)
+		  ("M-n" mc/unmark-next-like-this)
+		  ("p" mc/mark-previous-like-this)
+		  ("P" mc/skip-to-previous-like-this)
+		  ("M-p" mc/unmark-previous-like-this)
+		  ("|" mc/vertical-align)
+		  ("s" mc/mark-all-in-region-regexp :exit t)
+		  ("0" mc/insert-numbers :exit t)
+		  ("A" mc/insert-letters :exit t)
+		  ("<mouse-1>" mc/add-cursor-on-click)
+		  ;; Help with click recognition in this hydra
+		  ("<down-mouse-1>" ignore)
+		  ("<drag-mouse-1>" ignore)
+		  ("q" nil)))
+
+;;--------------------------------------------------------------------
+ ;; Rectangle from Centaur Emacs
+(use-package rect
+  :ensure nil
+  :bind (:map text-mode-map
+         ("<C-return>" . rect-hydra/body)
+         :map prog-mode-map
+         ("<C-return>" . rect-hydra/body))
+  :init
+  (with-eval-after-load 'org
+    (bind-key "<s-return>" #'rect-hydra/body org-mode-map))
+  (with-eval-after-load 'wgrep
+    (bind-key "<C-return>" #'rect-hydra/body wgrep-mode-map))
+  (with-eval-after-load 'wdired
+    (bind-key "<C-return>" #'rect-hydra/body wdired-mode-map))
+  :pretty-hydra
+  ((:title (pretty-hydra-title "Rectangle" 'material "border_all" :height 1.2 :v-adjust -0.225)
+    :color amaranth :body-pre (rectangle-mark-mode) :post (deactivate-mark) :quit-key ("q" "C-g"))
+   ("Move"
+    (("h" backward-char "←")
+     ("j" next-line "↓")
+     ("k" previous-line "↑")
+     ("l" forward-char "→"))
+    "Action"
+    (("w" copy-rectangle-as-kill "copy") ; C-x r M-w
+     ("y" yank-rectangle "yank")         ; C-x r y
+     ("t" string-rectangle "string")     ; C-x r t
+     ("d" kill-rectangle "kill")         ; C-x r d
+     ("c" clear-rectangle "clear")       ; C-x r c
+     ("o" open-rectangle "open"))        ; C-x r o
+    "Misc"
+    (("N" rectangle-number-lines "number lines")        ; C-x r N
+     ("e" rectangle-exchange-point-and-mark "exchange") ; C-x C-x
+     ("u" undo "undo")
+     ("r" (if (region-active-p)
+              (deactivate-mark)
+            (rectangle-mark-mode 1))
+      "reset")))))
 ;;--------------------------------------------------------------------
 ;; tiny to be added.
 ;;--------------------------------------------------------------------
