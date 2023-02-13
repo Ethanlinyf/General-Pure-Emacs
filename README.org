@@ -89,7 +89,7 @@ considerations:
 [[./site-lisp/figure/Configuration_Metodology_5.png]]
 * Feature
 - Entrance: a fancy dashboard
-  [[./site-lisp/figure/GPE_dashboard.png]]
+  [[./site-lisp/figure/GPE-dashboard.jpeg]]
 - Integrated
   + Note-taken \\
     Org-mode has useful functionalities to take notes. Quick to open an
