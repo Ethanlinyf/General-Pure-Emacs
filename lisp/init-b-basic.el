@@ -174,10 +174,17 @@
   (setq projectile-mode-line "Projectile")
   (setq projectile-track-known-projects-automatically nil))
 
-(use-package counsel-projectile
+;; (use-package counsel-projectile
+;;   :ensure t
+;;   :after (projectile)
+;;   :init (counsel-projectile-mode))
+
+(use-package consult-projectile
   :ensure t
   :after (projectile)
-  :init (counsel-projectile-mode))
+  :init
+  (setq projectile-switch-project-action 'projectile-dired) ;; open directory in dired-mode from dashboard
+  )
 
 ;; This package will be used in minibuffer.el, dired.el, platerform.el,
 ;; interface.el and dashboard.el

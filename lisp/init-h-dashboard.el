@@ -11,10 +11,10 @@
 ;;--------------------------------------------------------------------
 ;;; Code:
 
-(use-package counsel-projectile
-  :ensure t
-  :hook
-  (after-init . counsel-projectile-mode))
+;; (use-package counsel-projectile
+;;   :ensure t
+;;   :hook
+;;   (after-init . counsel-projectile-mode))
 
 (use-package dashboard
   :diminish dashboard-mode
@@ -28,7 +28,7 @@
   ;; Set the title
   (setq dashboard-banner-logo-title "Something Good as Indicated by ThingsEngine")
 
-  (setq dashboard-projects-switch-function 'counsel-projectile-switch-project-action-dired)
+  ;; (setq dashboard-projects-switch-function 'counsel-projectile-switch-project-action-dired)
 
   ;; set the number of items for each heading
   (setq dashboard-items '((recents  . 8)

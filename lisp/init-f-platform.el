@@ -227,8 +227,8 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
   )
 ;;--------------------------------------------------------------------
 
-(use-package org-transclusion
-  :ensure t)
+;; (use-package org-transclusion
+;;   :ensure t)
 
 (use-package dash
   :ensure t)
