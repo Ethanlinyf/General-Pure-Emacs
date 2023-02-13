@@ -6,8 +6,8 @@
 ;; URL: https://github.com/Ethanlinyf/General-Pure-Emacs
 ;; Under ThingsEngine Project: https://www.thethingsengine.org/
 ;;--------------------------------------------------------------------
-;; Commentary:
-;; Configurations for the tex system
+;;; Commentary:
+;; Configurations for the TeX system
 ;;--------------------------------------------------------------------
 ;;; Code:
 

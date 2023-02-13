@@ -139,6 +139,7 @@
 ;;   :ensure t
 ;;   :if window-system
 ;;   :init (good-scroll-mode))
+
 ;;--------------------------------------------------------------------
 (provide 'init-g-interface)
 ;;; init-g-interface.el ends here

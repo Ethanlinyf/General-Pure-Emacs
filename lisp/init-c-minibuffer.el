@@ -163,7 +163,7 @@
 (use-package orderless
   :demand t ;; it is better to be loaded immediately
   :config
-  (defun +vertico-orderless-dispatch (pattern _index _total)
+  (defun +vertico-orderless-dispatch (pattern _index _total) ;; from doomemacs
     (cond
      ;; Ensure $ works with Consult commands, which add disambiguation suffixes
      ((string-suffix-p "$" pattern)
