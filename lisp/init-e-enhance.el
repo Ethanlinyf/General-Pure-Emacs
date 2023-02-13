@@ -14,7 +14,7 @@
 ;; Indent Region or Buffer
 (use-package GPE-indent
   :ensure nil
-  :command (indent-region-or-buffer)
+  :commands (indent-region-or-buffer)
   :bind (("C-M-\\" . indent-region-or-buffer))
   :config
   (defun indent-buffer()
@@ -69,7 +69,7 @@
 ;;happie-expand
 (use-package GPE-hippie-expand
   :ensure nil
-  :command (hippie-expand)
+  :commands (hippie-expand)
   :bind ("M-/" . hippie-expand)
   :init
   (setq hippie-expand-try-function-list '(try-expand-debbrev
