@@ -173,8 +173,6 @@ recommended.
    #+begin_src shell
      brew install autoconf automake texinfo gnutls pkg-config libxml2 --debug --verbose
    #+end_src
-   For Linux: (TBU, to be updated)
-   For Windows: (TBU)
 4. GUI with icons \\
    Run: M-x all-the-icons-install-fonts to install the needed fonts.
 5. To fetch the submodules in General Pure Emacs
