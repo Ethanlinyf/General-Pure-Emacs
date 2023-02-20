@@ -24,6 +24,9 @@
 (use-package org-noter-pdftools
   :ensure t)
 
+;; (setq org-src-fontify-natively t)
+
+
 ;;(require 'org-bullets)
 ;;(add-hook 'org-mode-hook #'org-bullets-mode)
 ;; (require 'org-superstar)

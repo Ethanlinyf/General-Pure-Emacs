@@ -11,26 +11,17 @@
 ;;--------------------------------------------------------------------
 ;;; Code:
 
-(use-package tex
-  :ensure auctex
-  :hook
-  (LaTeX-mode . lsp-bridge-mode))
+(add-hook 'LaTeX-mode-hook 'lsp-bridge-mode)
 
-;; ;; enables mixing variable-pitch and fixed-pitch fonts in the same buffer
-;; (use-package mixed-pitch
-;;   :diminish)
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;AUCTex Initiating;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-;;(setq TeX-source-correlate-method 'synctex)
+;;--------------------------------------------------------------------
+;; AUCTEX Settings
 (load "auctex.el" nil t t)
-;; (require 'company-auctex)
-;; (load "preview-latex.el" nil t t)
 (setq TeX-auto-save t)
 (setq TeX-parse-self t)
 (setq-default TeX-master nil)
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;RefTex;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;--------------------------------------------------------------------
+;; REFTEX Settings
 (require 'reftex)
 (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
 (setq reftex-plug-into-AUCTeX t)
@@ -44,50 +35,39 @@
 (autoload 'reftex-citation "reftex-cite" "Make citation" nil)
 (autoload 'reftex-index-phrase-mode "reftex-index" "Phrase mode" t)
 
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;CDLaTeX;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;--------------------------------------------------------------------
+;; CDLATEX Settings
 (use-package cdlatex
   :ensure t
   :hook
-  (LaTeX-mode . turn-on-cdlatex)
-  :config
-  (autoload 'cdlatex-mode "cdlatex" "CDLaTeX Mode" t)
-  (autoload 'turn-on-cdlatex "cdlatex" "CDLaTeX Mode" nil))
-;; (add-hook 'LaTeX-mode-hook 'turn-on-cdlatex)
+  (LaTeX-mode . turn-on-cdlatex))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;LaTex-mode settings;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;--------------------------------------------------------------------
+;; pdf-tools
 (use-package pdf-tools
   :ensure t
   :custom
   (pdf-view-display-size 'fit-width)
   (pdf-annot-activate-created-annotations t "automatically annotate highlights")
   :config
-  (pdf-tools-install)
   (define-key pdf-view-mode-map (kbd "C-s") 'isearch-forward)
   :hook
-  (pdf-view-mode . (lambda (display-line-numbers-mode nil))))
+  (pdf-view-mode . (lambda() (setq display-line-numbers-mode nil))))
 
+;;--------------------------------------------------------------------
 (add-hook 'LaTeX-mode-hook (lambda ()
+                             (pdf-tools-install)
                              (require 'tex-site)
-                             ;; (require 'company-auctex)
-                             ;; (company-auctex-init)
                              (setq pdf-view-use-scaling t)
-                                        ;(require 'init-auto-complete)
-                             ;;(require 'init-g-yasnippet)
 		             (TeX-fold-mode 1)
 		             (auto-fill-mode 1)
-                             ;; (latex-preview-pane-enable)
 
-		  ;;;;;;;;;;;;;;;; flyspell settings
 		             (flyspell-mode 1)
 		             (setq flyspell-sort-corrections nil)
 		             (setq flyspell-doublon-as-error-flag nil)
+                             
                              (setq split-width-threshold 80) ;; pdf-tool to open a pdf in the right side
-
-
 		             (turn-on-auto-fill)              ;;LaTeX mode，turn off auto fold
-		             ;; (linum-mode 1)
-		             ;;(auto-complete-mode 1)
 		             (latex-math-mode 1)
 		             (outline-minor-mode 1)
   		             (imenu-add-menubar-index)
@@ -100,14 +80,14 @@
 
                              (setq font-latex-fontify-script t)
 		             (define-key LaTeX-mode-map (kbd "TAB") 'TeX-complete-symbol)
-		             (setq TeX-electric-escape t)      ;; press \ then, jump to mini-buffer to input commands
-                                        ;(setq TeX-view-program-list '(("Evince" "evince %o"))) ;;
-                                        ;(setq TeX-view-program-selection '((output-pdf "Evince")))
+		             ;;(setq TeX-electric-escape t)      ;; press \ then, jump to mini-buffer to input commands
+                             ;;(setq TeX-view-program-list '(("Evince" "evince %o"))) ;;
+                             ;;(setq TeX-view-program-selection '((output-pdf "Evince")))
                              (setq TeX-view-program-selection '((output-pdf "PDF Tools"))
                                    TeX-view-program-list '(("PDF Tools" TeX-pdf-tools-sync-view))
                                    TeX-source-correlate-start-server t)
-                                        ;(add-to-list 'TeX-command-list '("XeLaTeX" "%`xelatex%(mode)%' %t" TeX-run-TeX nil t))
-                                        ;(setq TeX-command-default "XeLaTeX")
+                             ;;(add-to-list 'TeX-command-list '("XeLaTeX" "%`xelatex%(mode)%' %t" TeX-run-TeX nil t))
+                             ;;(setq TeX-command-default "XeLaTeX")
 		             (add-to-list 'TeX-command-list '("LaTeX" "%`pdflatex -shell-escape --synctex=1%(mode)%' %t" TeX-run-TeX nil t))
 		             (setq TeX-command-default "LaTeX")
                              ;;(setq TeX-command-default "pdflatex --synctex=1")
@@ -116,15 +96,7 @@
 
 
 		             (define-key LaTeX-mode-map (kbd "C-c C-p") 'reftex-parse-all)
-                             ;;(with-eval-after-load 'latex
                              (define-key LaTeX-mode-map (kbd "C-c C-g") #'pdf-sync-forward-search)
-
-                  ;;;;;;deeper directory;;;;;;;;;;;;;
-                                        ;(setq reftex-section-levels
-                                        ;     '(("part" . 0) ("chapter" . 1) ("section" . 2) ("subsection" . 3)
-                                        ;       ("frametitle" . 4) ("subsubsection" . 4) ("paragraph" . 5)
-                                        ;       ("subparagraph" . 6) ("addchap" . -1) ("addsec" . -2)))
-                             (pdf-tools-install)
 
                              (setq LaTeX-section-hook
                                    '(LaTeX-section-heading
@@ -144,115 +116,7 @@
                              (add-hook 'TeX-after-compilation-finished-functions
 		                       #'TeX-revert-document-buffer) ;
                              (add-hook 'pdf-view-mode-hook (lambda() (display-line-numbers-mode -1)))
-                             ));;
-
-
-
-
-
-;; (add-hook 'TeX-after-compilation-finished-functions
-;;           #'TeX-revert-document-buffer)
-
-
-
-;;'(LaTeX-command "latex --shell-escape --synctex=1")
-
-;; (with-eval-after-load 'tex
-;;   (add-to-list 'safe-local-variable-values
-;;                '(TeX-command-extra-options . "-synctex=1")))
-
-;; (add-hook 'TeX-after-compilation-finished-functions #'TeX-revert-document-buffer)
-
-  ;;;; SyncTeX
-;; (setq pdf-sync-backward-display-action t
-;;       pdf-sync-forward-display-action t
-;;       TeX-source-correlate-mode t
-;;       TeX-source-correlate-method '(
-;;                                     (dvi . source-specials)
-;;                                     (pdf . synctex))
-;;       TeX-source-correlate-start-server t  ;; [C-c C-g] to switch between source code and PDF
-;;       reftex-plug-into-AUCTeX t)
-;; (add-hook 'TeX-after-compilation-finished-functions
-;;       	        #'TeX-revert-document-buffer) ; reload pdf buffer
-
-
-;; (setq-default TeX-master nil
-;;               TeX-command  "pdflatex -shell-escape -synctex=1") ;; Set default command to compile with SyncTeX
-
-
-  ;;;; LaTeX-preview-pane variables
-(use-package latex-preview-pane
-  :ensure t
-  :hook
-  (LaTeX-mode . latex-preview-pane-enable))
-;; (latex-preview-pane-mode .  (setq pdf-latex-command "pdflatex"
-;;                                   synctex-number "1"
-;;                                   shell-escape-mode "-shell-escape"
-;;                                   auto-update-latex-preview-pane 'off)))
-(add-hook 'latex-preview-pane-mode-hook
-          (setq pdf-latex-command "pdflatex"
-                synctex-number "1"
-                shell-escape-mode "-shell-escape"
-                auto-update-latex-preview-pane 'off))
-
-;;;; Keybindings for LaTeX-preview-pane mode
-(defun display-pdflatex-result ()
-  (interactive)
-  (unless (equal "*pdflatex-buffer*" (buffer-name (window-buffer)))
-    (display-buffer "*pdflatex-buffer*" (if (one-window-p)
-                                            'display-buffer-pop-up-window
-                                          'display-buffer-reuse-window))))
-
-;; (add-hook 'latex-preview-pane-mode-hook
-;;           (lambda ()
-;;             (define-key LaTeX-mode-map (kbd "<f5>")
-;;               '(lambda ()
-;;                  (interactive)
-;;                  (save-excursion
-;;                    (save-buffer)
-;;                    (latex-preview-pane-update))))
-;;             (local-set-key (kbd "<f6>") #'TeX-view)
-;;             (local-set-key (kbd "<f12>") #'display-pdflatex-result)))
-
-  ;;;; SyncTeX
-;;   (setq pdf-sync-backward-display-action t
-;;         pdf-sync-forward-display-action t
-;;         TeX-source-correlate-mode t
-
-;;         ;; TeX-source-correlate-method '(
-;;         ;;                               (dvi . source-specials)
-;;         ;;                               (pdf . synctex))
-;;         TeX-source-correlate-start-server t
-;;         reftex-plug-into-AUCTeX t)
-;; (setq TeX-source-correlate-method 'synctex)
-;;   (add-hook 'TeX-after-compilation-finished-functions
-;; 		        #'TeX-revert-document-buffer)
-
-;;--------------------------------------------------------------------
-
-(defun ddd ()
-  "Insert a dollar sign with a space in front."
-  (interactive)
-  (insert "\\"))
-
-
-(eval-after-load "latex"
-  '(define-key LaTeX-mode-map (kbd "\\") #'ddd))
-
-;;--------------------------------------------------------------------
-;; https://github.com/haji-ali/procress
-;; (add-to-list 'load-path "~/.emacs.d/site-lisp/procress")
-;; (require 'procress)
-;; (procress-load-default-svg-images)
-;; (add-hook 'LaTeX-mode-hook #'procress-auctex-mode)
-
-;; (use-package procress
-;;   ;; :straight (:host github :repo "haji-ali/procress")
-;;   :commands procress-auctex-mode
-;;   :init
-;;   (add-hook 'LaTeX-mode-hook #'procress-auctex-mode)
-;;   :config
-;;   (procress-load-default-svg-images))
+                             ))
 
 ;;--------------------------------------------------------------------
 (provide 'init-r-tex)

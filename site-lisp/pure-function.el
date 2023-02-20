@@ -290,5 +290,11 @@ If mark is activate, duplicate region lines below."
       (comment-or-uncomment-region beg end))))
 
 ;;--------------------------------------------------------------------
+ 
+(defun kill-new-line ()
+  "Push current line into the kill ring."
+  (interactive)
+  (kill-new (thing-at-point 'line)))
+;;--------------------------------------------------------------------
 (provide 'pure-function)
 ;;; pure-function.el ends here

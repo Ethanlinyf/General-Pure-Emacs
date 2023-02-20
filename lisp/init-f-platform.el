@@ -1,6 +1,6 @@
 ;;; init-f-platform.el --- IDE -*- lexical-binding: t; -*-
 ;;
-                                        ; Copyleft (CL) 2022-2032 YF Lin
+;; Copyleft (CL) 2022-2032 YF Lin
 ;;
 ;; Something good as indicated, by Dr YF Lin <e.yflin@gmail.com>
 ;; URL: https://github.com/Ethanlinyf/General-Pure-Emacs
@@ -211,8 +211,10 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
   ;; ((epc . "pip install epc")
   ;;  (orjson . "pip install orjson")
   ;;  (six . "pip install six"))
-  :commands global-lsp-bridge-mode
-  :ensure epc
+  :commands lsp-bridge-mode
+  :ensure nil
+  :init
+  (setq lsp-bridge-enable-search-words t)
   :hook
   (after-init . global-lsp-bridge-mode))
 ;;--------------------------------------------------------------------

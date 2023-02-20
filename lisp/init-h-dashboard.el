@@ -78,7 +78,7 @@
          ;;  "Linkedin"
          ;;  ""
          ;;  (lambda (&rest _) (browse-url "homepage")))
-         ("★" "Star" "Visit Emacs Forum" (lambda (&rest _) (browse-url "https://emacs-china.org/")))
+         ("★" "Star" "Visit Emacs Forum" (lambda (&rest _) (browse-url "https://thethingsengine.org/ship/")))
          ("⚑" nil "Show flags" (lambda (&rest _) (message "flag")) error)
         ("?" "" "?/h" #'show-help nil "<" ">"))
          ;; line 2

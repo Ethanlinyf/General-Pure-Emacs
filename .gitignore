@@ -93,3 +93,4 @@ update_emacs.org
 /mini-init.el
 *.~undo-tree~
 /GPE-Configuration.org
+/popweb
