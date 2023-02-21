@@ -52,6 +52,7 @@
 ;; A few more useful configurations...
 
 (use-package emacs
+  :ensure nil
   :init
   ;; Add prompt indicator to `completing-read-multiple'.
   ;; We display [CRM<separator>], e.g., [CRM,] if the separator is a comma.
@@ -114,7 +115,8 @@
 ;;  of functions and macros are at least subsets of the actual
 ;; implementations.  Be sure to read the documentation string to
 ;;  make sure.
-(use-package compat)
+(use-package compat
+  :ensure t)
 ;;--------------------------------------------------------------------
 ;; Start server
 (use-package server
@@ -123,17 +125,6 @@
   :hook (after-init . server-mode))
 ;; kill processes when quit or exit, live-webserver
 (setq confirm-kill-processes nil)
-
-
-;;------------------ Emacs@29 ---------------------------------------
-;; (when emacs/>=29p
-;;   (push '(sh-mode . bash-ts-mode) major-mode-remap-alist)
-;;   (push '(c-mode . c-ts-mode) major-mode-remap-alist)
-;;   (push '(c++-mode . c++-ts-mode) major-mode-remap-alist)
-;;   (push '(css-mode . css-ts-mode) major-mode-remap-alist)
-;;   (push '(javascript-mode . js-ts-mode) major-mode-remap-alist)
-;;   (push '(js-json-mode . json-ts-mode) major-mode-remap-alist)
-;;   (push '(python-mode . python-ts-mode) major-mode-remap-alist))
 
 ;;--------------------------------------------------------------------
 (provide 'init-1-system)

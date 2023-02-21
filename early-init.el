@@ -21,7 +21,7 @@
   (error "Puremacs requires V%s or higher versions" minver)))
 
 (when (version< emacs-version "27.1")
-  (message "Your Emacs is old, and some functionality in this config will be disabled. Please upgrade to 28.2 at least if possible."))
+  (message "Your Emacs is old, and some functionality in this configuration will be disabled. Please upgrade to 28.2 at least if possible."))
 
 ;; Garbage collection in the startup process
 ;; (setq gc-cons-threshold most-positive-fixnum
@@ -31,18 +31,20 @@
 (setq gc-cons-threshold most-positive-fixnum)
 
 ;; Prevent unwanted runtime compilation for native-comp users
-(setq native-comp-deferred-compilation nil)
+(if (version< emacs-version "29.1")
+    (setq native-comp-deferred-compilation nil)
+  (setq inhibit-automatic-native-compilation nil))
 
 ;; Suppress a second case-insensitive search through the auto-mode-alist
 (setq auto-mode-case-fold nil)
 
 ;; After early-init-file to initialise 'package'. Make initialization
 ;; slightly faster See the (package-initialize) in the file
-;; init-a-engine.el, which make the initiation will be executed just
+;; init-0-bridge.el, which make the initiation will be executed just
 ;; once.
 (setq package-enable-at-startup nil)
-
-; (add-hook 'after-init-hook (lambda () (load-theme 'doom-one)))
+;; Prevent loading from the package cache (same reason).
+(setq package-quickstart nil)
 
 ;; In noninteractive sessions, prioritise non-byte-compiled source
 ;; files to prevent the use of stale byte-code. Otherwise, it saves us
@@ -66,6 +68,8 @@
 (setq byte-compile-warnings '(cl-functions))
 
 ;; Default settings for the frame before initialisation
+;; To prevent the glimpse of un-styled Emacs by disabling the following UI elements early.
+(setq use-file-dialog nil)
 (push '(menu-bar-lines . 0) default-frame-alist)
 (push '(tool-bar-lines . 0) default-frame-alist)
 (push '(vertical-scroll-bars) default-frame-alist)
@@ -73,6 +77,7 @@
   (push '(ns-transparent-titlebar . t) default-frame-alist))
 
 ;; Turn off the startup help screen
-(setq inhibit-splash-screen 1)
+(setq inhibit-splash-screen t)
+
 ;;----------------------------------------------------------------------
 ;;; early-init.el ends here.

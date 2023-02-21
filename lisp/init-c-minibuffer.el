@@ -430,7 +430,9 @@
 
 (use-package wgrep
   :commands wgrep-change-to-wgrep-mode
-  :config (setq wgrep-auto-save-buffer t))
+  :init
+  (setq wgrep-auto-save-buffer t)
+  (setq wgrep-change-readonly-file t))
 
 (use-package vertico-posframe
   :ensure t

@@ -94,3 +94,4 @@ update_emacs.org
 *.~undo-tree~
 /GPE-Configuration.org
 /popweb
+site-lisp/tutorial.org
