@@ -21,9 +21,6 @@
  truncate-lines nil
  word-wrap t)
 
-;; (add-hook 'text-mode-hook #'linum-mode)
-;; (add-hook 'prog-mode-hook #'linum-mode)
-;; (add-hook 'org-mode-hook #'linum-mode)
 (use-package display-line-numbers
   :ensure nil
   :init (setq display-line-numbers-width-start t)
@@ -88,26 +85,14 @@
                ([(super q)] . save-buffers-kill-emacs)
                ([(super s)] . save-buffer)
                ([(super v)] . yank)
-                                        ;([(super w)] . delete-frame)
+               ;;([(super w)] . delete-frame)
                ([(super z)] . undo)))
    (sys/win32p
     ;; make PC keyboard's Win key or other to type Super or Hyper
     ;; (setq w32-pass-lwindow-to-system nil)
     (setq w32-lwindow-modifier 'super     ; Left Windows key
           w32-apps-modifier 'hyper)       ; Menu/App key
-    (w32-register-hot-key [s-t]))
-   (sys/mac-port-p
-    ;; Compatible with Emacs Mac port
-    (setq mac-option-modifier 'meta
-          mac-command-modifier 'super)
-    (bind-keys ([(super a)] . mark-whole-buffer)
-               ([(super c)] . kill-ring-save)
-               ([(super l)] . goto-line)
-               ([(super q)] . save-buffers-kill-emacs)
-               ([(super s)] . save-buffer)
-               ([(super v)] . yank)
-               ([(super w)] . delete-frame)
-               ([(super z)] . undo)))))
+    (w32-register-hot-key [s-t]))))
 
 ;;--------------------------------------------------------------------
 ;; manage by git and disable make-backup-files and auto-save-default

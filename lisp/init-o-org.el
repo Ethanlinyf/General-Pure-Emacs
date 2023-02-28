@@ -26,7 +26,14 @@
 
 ;; (setq org-src-fontify-natively t)
 
-
+(setq org-babel-load-languages
+      '((js . t)
+        (java . t)
+        (python . t)
+        (sqlite . t)
+        (emacs-lisp . t)
+        (shell . t)
+        (ditaa . t)))
 ;;(require 'org-bullets)
 ;;(add-hook 'org-mode-hook #'org-bullets-mode)
 ;; (require 'org-superstar)

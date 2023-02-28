@@ -67,12 +67,13 @@
 ;;   (load bootstrap-file nil 'nomessage))
 
 ;;--------------------------------------------------------------------
-;; Setup 'use-package'
-(unless (package-installed-p 'use-package)
-  (package-refresh-contents)
-  (package-install 'use-package))
+;; ;; Setup 'use-package'
+(when (version< emacs-version "29.0")
+  (unless (package-installed-p 'use-package)
+    (package-refresh-contents)
+    (package-install 'use-package)))
 
-;; Should set before loading `use-package'
+;; ;; Should set before loading `use-package'
 (eval-and-compile
   (setq use-package-always-ensure t)
   (setq use-package-always-defer t)

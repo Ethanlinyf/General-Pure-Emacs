@@ -95,6 +95,8 @@
               ("DEL" . vertico-directory-delete-char)
               ("M-DEL" . vertico-directory-delete-word) ;; Mac Keyboard
               ("C-<backspace>" . vertico-directory-delete-word)) ;; for different keyboard (c-w for all)
+  ;; :init
+  ;; (add-hook 'rfn-eshadow-update-overlay-hook 'vertico-directory-tidy))
   :hook
   (rfn-eshadow-update-overlay . vertico-directory-tidy)) ;; to tidy shadowed file names
 

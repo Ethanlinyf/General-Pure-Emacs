@@ -11,6 +11,8 @@
 ;;--------------------------------------------------------------------
 ;;; Code:
 
+(require 'cl-lib)
+
 ;; Startup time
 (add-hook 'emacs-startup-hook
           (lambda ()
@@ -39,7 +41,7 @@
 (setq initial-major-mode 'text-mode);
       ;package--init-file-ensured t)
 
-;; Load the settings recorded through emacs
+;; Load the settings recorded through Emacs
 (defconst custom-file (expand-file-name "custom.el" user-emacs-directory))
 (unless (file-exists-p custom-file)
   (shell-command (concat "touch " custom-file)))
@@ -48,6 +50,19 @@
 ;; (load custom-file t), or
 (when (file-exists-p custom-file)
   (load custom-file))
+
+(unless (or (daemonp) noninteractive init-file-debug)
+  ;; Suppress file handlers operations at startup (from Centaur Emacs).
+  ;; `file-name-handler-alist' is consulted on each call to `require' and `load'
+  (let ((old-value file-name-handler-alist))
+    (setq file-name-handler-alist nil)
+    (set-default-toplevel-value 'file-name-handler-alist file-name-handler-alist)
+    (add-hook 'emacs-startup-hook
+              (lambda ()
+                "Recover file name handlers."
+                (setq file-name-handler-alist
+                      (delete-dups (append file-name-handler-alist old-value))))
+              101)))
 
 ;; Define a file to record emacs macros.
 (defvar pure-macro (expand-file-name "site-lisp/pure-macros.el" user-emacs-directory)
@@ -69,13 +84,13 @@
   (dolist (path '("lisp" "site-lisp"))
     (push (expand-file-name path user-emacs-directory) load-path)))
 
-(defun add-extradirs-to-load-path (&rest _)
-  "Include extra dirs to 'load-path'."
-  (let ((default-directory (expand-file-name "site-lisp" user-emacs-directory)))
-    (normal-top-level-add-subdirs-to-load-path)))
+;; (defun add-extradirs-to-load-path (&rest _)
+;;   "Include extra dirs to 'load-path'."
+;;   (let ((default-directory (expand-file-name "site-lisp" user-emacs-directory)))
+;;     (normal-top-level-add-subdirs-to-load-path)))
 
 (advice-add #'package-initialize :after #'update-load-path)
-(advice-add #'package-initialize :after #'add-extradirs-to-load-path)
+;; (advice-add #'package-initialize :after #'add-extradirs-to-load-path)
 
 (update-load-path)
 

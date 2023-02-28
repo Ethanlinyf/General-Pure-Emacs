@@ -145,12 +145,16 @@ considerations:
       [[./site-lisp/figure/roam-research-ui.png]]
 
 - Creative and Inovative \\
+  + A creative workshop in this platform is established to publish org
+    files to XHTML files with customised theme file (css and js) to be
+    hosted as a website ([[https://www.thethingsengine.org/index.html][Something-Good]]) in Github:
+    [[./site-lisp/figure/org2xhtml.png]]
   Push at the boundary of knowledge with GPE [fn:4]:
 
   [[./site-lisp/figure/creative_emacs.jpg]]
 
 - Instructive \\
-  The tutorial how to build this platform is illustrated at the website [[https://thethingsengine.org][Something Good]] under the ThingsEngine Project.
+  The tutorial how to build this platform will be illustrated at the website [[https://thethingsengine.org][Something-Good]] under the ThingsEngine Project.
 * Installation
 To enhance the default Emacs experience, the latest stable release (28.2) is
 recommended.
