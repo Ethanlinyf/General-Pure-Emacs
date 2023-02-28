@@ -4,9 +4,6 @@
 [submodule "site-lisp/lsp-bridge"]
 	path = site-lisp/lsp-bridge
 	url = https://github.com/manateelazycat/lsp-bridge.git
-[submodule "site-lisp/blink-search"]
-	path = site-lisp/blink-search
-	url = git@github.com:manateelazycat/blink-search.git
 [submodule "site-lisp/deno-bridge"]
 	path = site-lisp/deno-bridge
 	url = git@github.com:manateelazycat/deno-bridge.git
