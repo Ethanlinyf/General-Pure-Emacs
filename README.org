@@ -14,7 +14,7 @@
 #+startup: overview 
 
 #+begin_quote
-The GPE is, not GPE, but named GPE. 
+The GPE is not GPE, but named GPE. 
 #+end_quote
 
 * Introduction
