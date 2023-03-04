@@ -139,22 +139,22 @@
               '(minibuffer-mode help-modeminibuffer-inactive-mode calc-mode)))
 ;;--------------------------------------------------------------------
 
-;; Mouse wheel scroll behavior
-(use-package GPE-mouse-wheel-scroll
-  :ensure nil
-  :init
-  (setq
-   ;; mouse-wheel-scroll-amount '(1 ((shift) . 1))
-   mouse-wheel-progressive-speed nil
-   mouse-wheel-follow-mouse t
-   next-line-add-newlines nil
-   read-process-output-max (* 64 1024)
-   scroll-step 1
-   scroll-conservatively 10000
-   scroll-preserve-screen-position t
-   scroll-up-aggressively 0.01
-   scroll-down-aggressively 0.01
-   ))
+;; ;; Mouse wheel scroll behavior
+;; (use-package GPE-mouse-wheel-scroll
+;;   :ensure nil
+;;   :init
+;;   (setq
+;;    ;; mouse-wheel-scroll-amount '(1 ((shift) . 1))
+;;    mouse-wheel-progressive-speed nil
+;;    mouse-wheel-follow-mouse t
+;;    next-line-add-newlines nil
+;;    read-process-output-max (* 64 1024)
+;;    scroll-step 1
+;;    scroll-conservatively 10000
+;;    scroll-preserve-screen-position t
+;;    scroll-up-aggressively 0.01
+;;    scroll-down-aggressively 0.01
+;;    ))
 
 ;;--------------------------------------------------------------------
 ;; to be deleted

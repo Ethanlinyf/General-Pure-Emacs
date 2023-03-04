@@ -94,13 +94,25 @@
 
 (update-load-path)
 
+;; ignore byte-compile warnings
+(setq byte-compile-warnings '(not nresolved
+                                  free-vars
+                                  callargs
+                                  redefine
+                                  obsolete
+                                  noruntime
+                                  cl-functions
+                                  interactive-only
+                                  ))
+
+
 (require 'init-0-bridge)
 (require 'init-1-system)
 
 (require 'init-a-authentication)
 (require 'init-b-basic)
 (require 'init-c-minibuffer)
-(require 'init-d-dired)
+;; (require 'init-d-dired)
 
 (require 'init-e-enhance)
 (require 'init-f-platform)

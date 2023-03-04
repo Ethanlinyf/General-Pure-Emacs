@@ -161,6 +161,13 @@
   (advice-add #'org-noter-insert-note
               :after #'eli/org-noter-set-highlight)
 
+;;--------------------------------------------------------------------
+;; pandoc
+(use-package ox-pandoc
+  :ensure t
+  :init
+  (with-eval-after-load 'ox
+    (require 'ox-pandoc)))
 
 ; (setq org-ellipsis 0xE2)
 ;;------------------------------------------------------------------------------

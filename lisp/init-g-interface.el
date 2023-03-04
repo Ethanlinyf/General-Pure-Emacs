@@ -39,7 +39,7 @@
         doom-themes-enable-italic t) ; if nil, italics is universally disabled
 
   ;; Enable flashing mode-line on errors
-  (doom-themes-visual-bell-config)
+  ;;(doom-themes-visual-bell-config)
 
   (setq doom-themes-treemacs-theme "doom-colors") ; use the colorful treemacs theme
   (doom-themes-treemacs-config)

@@ -18,8 +18,8 @@
 
 ;; Puremacs is compatible from the emacs version 27.1.
 (let ((minver "26.1"))
-(when (version< emacs-version minver)
-  (error "Puremacs requires V%s or higher versions" minver)))
+  (when (version< emacs-version minver)
+    (error "Puremacs requires V%s or higher versions" minver)))
 
 (when (version< emacs-version "27.1")
   (message "Your Emacs is old, and some functionality in this configuration will be disabled. Please upgrade to at least 28.2 if possible."))
@@ -33,7 +33,7 @@
 
 ;; Prevent unwanted run-time compilation for native-comp users
 (when (>= emacs-major-version 29)
-    (setq inhibit-automatic-native-compilation nil))
+  (setq inhibit-automatic-native-compilation nil))
 
 ;; Suppress a second case-insensitive search through the auto-mode-alist
 (setq auto-mode-case-fold nil)
@@ -65,7 +65,15 @@
             (redisplay)))
 
 ;; Remove some warnings
-(setq byte-compile-warnings '(cl-functions))
+(setq byte-compile-warnings '(not cl-functions
+                                  nresolved
+                                  free-vars
+                                  callargs
+                                  redefine
+                                  obsolete
+                                  noruntime
+                                  interactive-only
+                                  ))
 
 ;; Default settings for the frame before initialisation
 ;; To prevent the glimpse of un-styled Emacs by disabling the following UI elements early.

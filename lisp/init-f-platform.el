@@ -119,7 +119,6 @@ Other buffer group by `centaur-tabs-get-group-name' with project name."
        )))
   
   :hook
-  ;; (after-init . centaur-tabs-mode)
   (term-mode . centaur-tabs-local-mode)
   (calendar-mode . centaur-tabs-local-mode)
   (org-agenda-mode . centaur-tabs-local-mode)
@@ -250,7 +249,6 @@ Other buffer group by `centaur-tabs-get-group-name' with project name."
 (use-package aweshell
   :load-path "~/.emacs.d/site-lisp/aweshell"
   :ensure company
-  :defer t
   :bind ("s-1" . aweshell-dedicated-toggle))
 ;;--------------------------------------------------------------------
 
@@ -293,7 +291,7 @@ Other buffer group by `centaur-tabs-get-group-name' with project name."
   :config
   (setq popweb-url-web-window-size-use-absolute t)
   (setq popweb-url-web-window-width-absolute 375)
-  (setq popweb-url-web-window-height-absolute 625)
+  (setq popweb-url-web-window-height-absolute 677)
   (setq popweb-url-web-window-width-scale 0.8)
   (setq popweb-url-web-window-height-scale 0.8)
   
@@ -327,7 +325,7 @@ Other buffer group by `centaur-tabs-get-group-name' with project name."
   :load-path "~/.emacs.d/site-lisp/markmacro"
   :bind (("s-/" . markmacro-mark-words)
          ("s-?" . markmacro-mark-lines)
-         ("s-<" . 'markmacro-apply-all)
+         ("s-<" . markmacro-apply-all)
          ("s->" . markmacro-apply-all-except-first)
          ("s-M" . markmacro-rect-set)
          ("s-D" . markmacro-rect-delete)

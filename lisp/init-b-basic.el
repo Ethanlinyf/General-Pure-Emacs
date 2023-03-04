@@ -102,7 +102,7 @@
   (delete-selection-mode 1)
   (setq tab-width 4)
   (fset 'yes-or-no-p 'y-or-n-p)
-  (setq-default indent-tabs-mode nil)
+  (setq-default indent-tabs-mode nil) ;; avoid to mixture the tabs and spaces in code
   (global-set-key (kbd "C-c C-'") 'set-mark-command)  ;; Keybindings for setting mark
   )
 
@@ -112,7 +112,7 @@
   "Show trailing spaces and delete on saving."
   (setq show-trailing-whitespace t)
   (add-hook 'before-save-hook #'delete-trailing-whitespace nil t))
-
+(add-hook 'prog-mode #'enable-trailing-whitespace)
 
 ;;----------------------- Dired Mode ---------------------------------
 (with-eval-after-load "dired"
@@ -159,17 +159,11 @@
   (setq projectile-mode-line "Projectile")
   (setq projectile-track-known-projects-automatically nil))
 
-;; (use-package counsel-projectile
-;;   :ensure t
-;;   :after (projectile)
-;;   :init (counsel-projectile-mode))
-
 (use-package consult-projectile
   :ensure t
   :after (projectile)
   :init
-  (setq projectile-switch-project-action 'projectile-dired) ;; open directory in dired-mode from dashboard
-  )
+  (setq projectile-switch-project-action 'projectile-dired)) ;; open directory in dired-mode from dashboard
 
 ;; This package will be used in minibuffer.el, dired.el, platerform.el,
 ;; interface.el and dashboard.el
@@ -177,7 +171,6 @@
   :ensure t
   :init
   (setq all-the-icons-color-icons t)
-  ;; :config
   (defun icon-displayable-p ()
     "Return non-nil if the icons are displayable."
     (and (display-graphic-p)
@@ -185,14 +178,14 @@
 
 (use-package hydra
   :ensure t
+  :hook (emacs-lisp-mode . hydra-add-imenu)
   :init
   (require 'hydra))
-
 
 ;; From Centaur Emacs
 (use-package pretty-hydra
   :ensure t
-  ;; :bind ("<f7>" . toggles-hydra/body)
+  ;; :bind ("<f8>" . toggles-hydra/body)
   :hook (emacs-lisp-mode . (lambda ()
                              (add-to-list
                               'imenu-generic-expression
@@ -201,6 +194,7 @@
                                 2))))
   :init
   (require 'pretty-hydra)
+  :config
   (cl-defun pretty-hydra-title (title &optional icon-type icon-name
                                       &key face height v-adjust)
     "Add an icon in the hydra title."

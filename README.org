@@ -83,8 +83,9 @@ To follow the principles of this platform, general, pure and
 extensible, the configuration will be generated with the following
 considerations:
 - Easy to integrate and debug
-- Lower coupling and higer cohersion
+- Lower coupling and higer cohesion
 - More aggegation and less inheritance
+- To precipitate the common into the bottom layers, and make flexible on the top:
 
 [[./site-lisp/figure/Configuration_Metodology_5.png]]
 * Feature
