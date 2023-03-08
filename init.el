@@ -49,7 +49,7 @@
 ;; Load the custom file if it exists
 ;; (load custom-file t), or
 (when (file-exists-p custom-file)
-  (load custom-file))
+  (load custom-file :noerror :nomessage))
 
 (unless (or (daemonp) noninteractive init-file-debug)
   ;; Suppress file handlers operations at startup (from Centaur Emacs).
@@ -69,14 +69,14 @@
   "A file to record Emacs macros.")
 ;; Load the macro file if it exists
 (when (file-exists-p pure-macro)
-  (load pure-macro))
+  (load pure-macro :noerror :nomessage))
 
 ;; Personal settings for GPE.
 (defvar pure-individual (expand-file-name "init-individual.el" user-emacs-directory)
   "A file to record Emacs macros.")
 ;; Load the personal setting file if it exists
 (when (file-exists-p pure-individual)
-  (load pure-individual))
+  (load pure-individual :noerror :nomessage))
 
 ;; Add to list to load the el files in a specific folder;
 (defun update-load-path (&rest _)
@@ -94,25 +94,13 @@
 
 (update-load-path)
 
-;; ignore byte-compile warnings
-(setq byte-compile-warnings '(not nresolved
-                                  free-vars
-                                  callargs
-                                  redefine
-                                  obsolete
-                                  noruntime
-                                  cl-functions
-                                  interactive-only
-                                  ))
-
-
 (require 'init-0-bridge)
 (require 'init-1-system)
 
 (require 'init-a-authentication)
 (require 'init-b-basic)
 (require 'init-c-minibuffer)
-;; (require 'init-d-dired)
+(require 'init-d-dired)
 
 (require 'init-e-enhance)
 (require 'init-f-platform)
@@ -120,11 +108,11 @@
 (require 'init-h-dashboard)
 (require 'init-i-i18n)
 (require 'init-o-org)
-(require 'init-o-roam)
+;; (require 'init-o-roam)
 
 (require 'init-p-python)
 (require 'init-p-lua)
-(require 'init-p-julia)
+;; (require 'init-p-julia)
 (require 'init-p-web)
 
 (require 'init-r-research)
