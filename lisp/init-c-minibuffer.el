@@ -40,10 +40,8 @@
          ("M-TAB" . minibuffer-complete)
          :map minibuffer-local-map
          ("M-h" . backward-kill-word))
-  :init
-  (vertico-mode)
-  :hook
-  (minibuffer-setup . vertico-repeat-save)
+  :init (vertico-mode)
+  :hook (minibuffer-setup .vertico-repeat-save)
   :custom
   (vertico-scroll-margin 0)
   (vertico-count 10)
