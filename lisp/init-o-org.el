@@ -163,13 +163,14 @@
 
 ;;--------------------------------------------------------------------
 ;; pandoc
-(use-package ox-pandoc
-  :ensure t
-  :init
-  (with-eval-after-load 'ox
-    (require 'ox-pandoc)))
+;; (use-package ox-pandoc
+;;   :ensure t
+;;   :init
+;;   (with-eval-after-load 'ox
+;;     (require 'ox-pandoc)))
 
-; (setq org-ellipsis 0xE2)
+;; (setq org-ellipsis 0xE2)
+
 ;;------------------------------------------------------------------------------
 (provide 'init-o-org)
 ;;; init-o-org.el ends here.
