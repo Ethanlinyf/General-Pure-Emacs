@@ -24,7 +24,7 @@
 (use-package display-line-numbers
   :ensure nil
   :init (setq display-line-numbers-width-start t)
-  :hook ((prog-mode yaml-mode text-mode org-mode conf-mode) . display-line-numbers-mode))
+  :hook ((prog-mode) . display-line-numbers-mode)) ;; yaml-mode text-mode org-mode conf-mode
 
 ;;--------------------------------------------------------------------
 (defun open-mirror-file ()
@@ -176,45 +176,48 @@
     (and (display-graphic-p)
          (require 'all-the-icons nil t))))
 
-(use-package hydra
-  :ensure t
-  :hook (emacs-lisp-mode . hydra-add-imenu)
-  :init
-  (require 'hydra))
+;;--------------------------------------------------------------------
+;; hydra
+;; (use-package hydra
+;;   :ensure t
+;;   :hook (emacs-lisp-mode . hydra-add-imenu)
+;;   :init
+;;   (require 'hydra))
 
-;; From Centaur Emacs
-(use-package pretty-hydra
-  :ensure t
-  ;; :bind ("<f8>" . toggles-hydra/body)
-  :hook (emacs-lisp-mode . (lambda ()
-                             (add-to-list
-                              'imenu-generic-expression
-                              '("Hydras"
-                                "^.*(\\(pretty-hydra-define\\) \\([a-zA-Z-]+\\)"
-                                2))))
-  :init
-  (require 'pretty-hydra)
-  :config
-  (cl-defun pretty-hydra-title (title &optional icon-type icon-name
-                                      &key face height v-adjust)
-    "Add an icon in the hydra title."
-    (let ((face (or face `(:foreground ,(face-background 'highlight))))
-          (height (or height 1.0))
-          (v-adjust (or v-adjust 0.0)))
-      (concat
-       (when (and (icon-displayable-p) icon-type icon-name)
-         (let ((f (intern (format "all-the-icons-%s" icon-type))))
-           (when (fboundp f)
-             (concat
-              (apply f (list icon-name :face face :height height :v-adjust v-adjust))
-              " "))))
-       (propertize title 'face face)))))
+;; ;; From Centaur Emacs
+;; (use-package pretty-hydra
+;;   :ensure
+;;   :after hydra
+;;   ;; :bind ("<f8>" . toggles-hydra/body)
+;;   :hook (emacs-lisp-mode . (lambda ()
+;;                              (add-to-list
+;;                               'imenu-generic-expression
+;;                               '("Hydras"
+;;                                 "^.*(\\(pretty-hydra-define\\) \\([a-zA-Z-]+\\)"
+;;                                 2))))
+;;   :init
+;;   (require 'pretty-hydra)
+;;   :config
+;;   (cl-defun pretty-hydra-title (title &optional icon-type icon-name
+;;                                       &key face height v-adjust)
+;;     "Add an icon in the hydra title."
+;;     (let ((face (or face `(:foreground ,(face-background 'highlight))))
+;;           (height (or height 1.0))
+;;           (v-adjust (or v-adjust 0.0)))
+;;       (concat
+;;        (when (and (icon-displayable-p) icon-type icon-name)
+;;          (let ((f (intern (format "all-the-icons-%s" icon-type))))
+;;            (when (fboundp f)
+;;              (concat
+;;               (apply f (list icon-name :face face :height height :v-adjust v-adjust))
+;;               " "))))
+;;        (propertize title 'face face)))))
 
-(use-package use-package-hydra
-  :ensure t
-  :after hydra
-  :init
-  (require 'use-package-hydra))
+;; (use-package use-package-hydra
+;;   :ensure t
+;;   :after use-package hydra
+;;   :init
+;;   (require 'use-package-hydra))
 
 ;;--------------------------------------------------------------------
 (provide 'init-b-basic)
