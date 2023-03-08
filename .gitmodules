@@ -10,3 +10,6 @@
 [submodule "site-lisp/markmacro"]
 	path = site-lisp/markmacro
 	url = git@github.com:manateelazycat/markmacro.git
+[submodule "site-lisp/blink-search"]
+	path = site-lisp/blink-search
+	url = git@github.com:manateelazycat/blink-search.git

@@ -336,6 +336,11 @@ Other buffer group by `centaur-tabs-get-group-name' with project name."
 ;; (add-to-list 'load-path "~/.emacs.d/site-lisp/blink-search")
 ;; (require 'blink-search)
 
+  (use-package blink-search
+  :ensure nil
+  :load-path "~/.emacs.d/site-lisp/blink-search"
+  :commands blink-search
+  )
 ;;--------------------------------------------------------------------
 
 ;; (use-package org-transclusion
