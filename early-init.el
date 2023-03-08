@@ -17,12 +17,15 @@
 (setq debug-on-error nil)
 
 ;; Puremacs is compatible from the emacs version 27.1.
-(let ((minver "26.1"))
+(let ((minver "27.1"))
   (when (version< emacs-version minver)
-    (error "Puremacs requires V%s or higher versions" minver)))
+    (error "The GPE requires V%s or higher versions" minver)))
 
-(when (version< emacs-version "27.1")
+(when (version< emacs-version "28.1")
   (message "Your Emacs is old, and some functionality in this configuration will be disabled. Please upgrade to at least 28.2 if possible."))
+
+(when (version< emacs-version "29.0")
+  (message "This configuration of GPE has been optimised based on the version 29.0. Suggest update to Emacs 29."))
 
 ;; Garbage collection in the startup process
 ;; (setq gc-cons-threshold most-positive-fixnum
