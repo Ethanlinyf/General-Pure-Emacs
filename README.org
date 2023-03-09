@@ -14,7 +14,7 @@
 #+startup: overview 
 
 #+begin_quote
-The GPE is not GPE, but named GPE. 
+The GPE is, not GPE, but named GPE. 
 #+end_quote
 
 * Introduction
@@ -115,7 +115,7 @@ considerations:
 
     [[./site-lisp/figure/TaskManagement.png]]
 
-  + Management for research purposes as an example below:
+  + [[https://www.thethingsengine.org/git-for-research.html][Management for research purposes]] as below:
 
     [[./site-lisp/figure/Git-for-research-project.png]]
 
@@ -145,9 +145,9 @@ considerations:
 
       [[./site-lisp/figure/roam-research-ui.png]]
 
-- Creative and Inovative \\
-  + A creative workshop in this platform is established to publish org
-    files to XHTML files with customised theme file (css and js) to be
+- Creative and Innovative \\
+  + A creative workshop in this platform is established to publish [[https://www.thethingsengine.org/org2xhtml.html][org
+    files to XHTML]] files with customised theme file (css and js) to be
     hosted as a website ([[https://www.thethingsengine.org/index.html][Something-Good]]) in Github:
     [[./site-lisp/figure/org2xhtml.png]]
   Push at the boundary of knowledge with GPE [fn:4]:
