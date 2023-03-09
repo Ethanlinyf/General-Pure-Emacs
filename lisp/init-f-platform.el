@@ -340,7 +340,7 @@ Other buffer group by `centaur-tabs-get-group-name' with project name."
   :ensure nil
   :load-path "~/.emacs.d/site-lisp/blink-search"
   :commands blink-search
-  )
+  :bind ("s-8" . blink-search))
 ;;--------------------------------------------------------------------
 
 ;; (use-package org-transclusion
@@ -407,6 +407,10 @@ Other buffer group by `centaur-tabs-get-group-name' with project name."
 ;;----------------
 ;; (use-package dap-mode
 ;;   :ensure t)
+
+;;--------------------------------------------------------------------
+(add-to-list 'load-path "~/.emacs.d/site-lisp/mind-wave")
+(require 'mind-wave)
 ;;--------------------------------------------------------------------
 (provide 'init-f-platform)
 ;;; init-f-platform.el ends here

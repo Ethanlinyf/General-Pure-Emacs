@@ -13,3 +13,6 @@
 [submodule "site-lisp/blink-search"]
 	path = site-lisp/blink-search
 	url = git@github.com:manateelazycat/blink-search.git
+[submodule "site-lisp/mind-wave"]
+	path = site-lisp/mind-wave
+	url = git@github.com:manateelazycat/mind-wave.git
