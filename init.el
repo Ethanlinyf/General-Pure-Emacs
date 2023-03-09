@@ -108,11 +108,11 @@
 (require 'init-h-dashboard)
 (require 'init-i-i18n)
 (require 'init-o-org)
-;; (require 'init-o-roam)
+(require 'init-o-roam)
 
 (require 'init-p-python)
 (require 'init-p-lua)
-;; (require 'init-p-julia)
+(require 'init-p-julia)
 (require 'init-p-web)
 
 (require 'init-r-research)
