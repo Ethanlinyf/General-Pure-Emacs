@@ -449,6 +449,12 @@
          ("C-x C-d" . consult-dir)
          ("C-x C-j" . consult-dir-jump-file)))
 
+(use-package consult-projectile
+  :ensure t
+  :after (projectile)
+  :init
+  (setq projectile-switch-project-action 'projectile-dired)) ; open directory in dired-mode from dashboard
+
 (use-package 0x0
   :ensure t)
 

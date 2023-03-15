@@ -306,7 +306,7 @@ Other buffer group by `centaur-tabs-get-group-name' with project name."
 
 ;; aweshell
 (use-package aweshell
-  :load-path "./site-lisp/aweshell"
+  :load-path "site-lisp/aweshell"
   :ensure company
   :bind ("s-1" . aweshell-dedicated-toggle))
 ;;--------------------------------------------------------------------
@@ -319,7 +319,7 @@ Other buffer group by `centaur-tabs-get-group-name' with project name."
   :ensure t)
 
 (use-package lsp-bridge
-  :load-path "./site-lisp/lsp-bridge"
+  :load-path "site-lisp/lsp-bridge"
   ;; :ensure-system-package
   ;; ((epc . "pip install epc")
   ;;  (orjson . "pip install orjson")
@@ -338,7 +338,7 @@ Other buffer group by `centaur-tabs-get-group-name' with project name."
 
   (use-package blink-search
   :ensure nil
-  :load-path "./site-lisp/blink-search"
+  :load-path "site-lisp/blink-search"
   :commands blink-search
   :bind ("s-8" . blink-search))
 ;;--------------------------------------------------------------------
@@ -351,7 +351,7 @@ Other buffer group by `centaur-tabs-get-group-name' with project name."
 
 (use-package popweb
   :ensure nil
-  :load-path "./site-lisp/popweb"
+  :load-path "site-lisp/popweb"
   :config
   (setq popweb-url-web-window-size-use-absolute t)
   (setq popweb-url-web-window-width-absolute 375)
@@ -369,11 +369,11 @@ Other buffer group by `centaur-tabs-get-group-name' with project name."
   ;; (add-hook 'latex-mode-hook #'popweb-latex-mode)
 
   ;; Chinese-English translation popup
-  (add-to-list 'load-path "./site-lisp/popweb/extension/dict") ;
+  (add-to-list 'load-path "site-lisp/popweb/extension/dict") ;
   (require 'popweb-dict) 
 
 
-  (add-to-list 'load-path "./site-lisp/popweb/extension/url-preview")
+  (add-to-list 'load-path "site-lisp/popweb/extension/url-preview")
   (require 'popweb-url)
 
   :bind
@@ -386,7 +386,7 @@ Other buffer group by `centaur-tabs-get-group-name' with project name."
 ;; Markmacro
 (use-package markmacro
   :ensure nil
-  :load-path "./site-lisp/markmacro"
+  :load-path "site-lisp/markmacro"
   :bind (("s-/" . markmacro-mark-words)
          ("s-?" . markmacro-mark-lines)
          ("s-<" . markmacro-apply-all)
@@ -414,7 +414,7 @@ Other buffer group by `centaur-tabs-get-group-name' with project name."
 
 (use-package mind-wave
   :ensure nil
-  :load-path "./site-lisp/mind-wave"
+  :load-path "site-lisp/mind-wave"
   :commands mind-wave-chat-ask
   :bind ("s-`" . mind-wave-chat-ask))
 ;;--------------------------------------------------------------------

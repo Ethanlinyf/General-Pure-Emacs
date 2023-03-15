@@ -41,9 +41,13 @@
   :init
   (setq-default abbrev-mode t)
   (setq save-abbrevs nil)
-  (setq abbrev-file-name "~/.emacs.d/abbrev_defs"))
-;;--------------------------------------------------------------------
+  
+  (defconst abbrev-file (expand-file-name "abbrev_defs" user-emacs-directory))
+  (unless (file-exists-p abbrev-file)
+    (shell-command (concat "touch " abbrev-file)))
+  (setq abbrev-file-name abbrev-file))
 
+;;--------------------------------------------------------------------
 ;; Further Enhancement
 (use-package GPE-enhancement
   :ensure nil
@@ -99,11 +103,11 @@
           "^/tmp/" "^/var/folders/.+$" "^/ssh:" "/persp-confs/"
           (lambda (file) (file-in-directory-p file package-user-dir))))
 
-  (push "~/.emacs.d/elgrep-data.el" recentf-exclude)
+  (push (expand-file-name "elgrep-data.el" user-emacs-directory) recentf-exclude)
   (add-to-list 'recentf-filename-handlers #'abbreviate-file-name)
   (add-to-list 'recentf-exclude
-               (expand-file-name "~/.emacs.d/company-statistics-cache.el")
-               (expand-file-name "~/.emacs.d/elgrep-data.el"))
+               (expand-file-name "company-statistics-cache.el" user-emacs-directory)
+               (expand-file-name "elgrep-data.el" user-emacs-directory))
   
   (when sys/macp
     (global-set-key (kbd "s-3") 'recentf-open-files)))
@@ -435,7 +439,7 @@
 (use-package highlight-symbol
   :ensure t
   :init (highlight-symbol-mode)
-  :bind ("<f3>" . highlight-symbol))
+  :bind ("<f7>" . highlight-symbol))
 ;;--------------------------------------------------------------------
 
 (use-package helpful

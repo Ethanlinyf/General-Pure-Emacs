@@ -1,4 +1,4 @@
-;; init-roam.el -*- lexical-binding: t; -*-
+;;; init-o-roam.el -- Setting for roam -*- lexical-binding: t; -*-
 ;;
 ;; Copyleft (CL) 2022-2032 Dr YF Lin
 ;;
@@ -6,17 +6,18 @@
 ;; URL: https://github.com/Ethanlinyf/General-Pure-Emacs
 ;; Under ThingsEngine Project: https://www.thethingsengine.org/
 ;;--------------------------------------------------------------------
-;; Commentary:
+;;; Commentary:
 ;; Configurations for roam research
 ;;--------------------------------------------------------------------
 ;;; Code:
 (use-package org-roam
   :ensure t
   :init
-  (unless (file-exists-p "~/org-roam/")
-    (make-directory "~/org-roam/"))
+  (defvar GPE-roam (expand-file-name "GPE-Org/roam/" user-emacs-directory))
+  (unless (file-exists-p GPE-roam)
+    (make-directory GPE-roam))
   :custom
-  (org-roam-directory (file-truename "~/org-roam"))
+  (org-roam-directory (file-truename GPE-roam))
   :bind (("C-c n l" . org-roam-buffer-toggle)
          ("C-c n f" . org-roam-node-find)
          ("C-c n g" . org-roam-graph)

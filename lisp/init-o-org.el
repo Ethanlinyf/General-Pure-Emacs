@@ -13,6 +13,10 @@
 
 ;; (setq org-directory "~/Documents/Org")
 
+(defvar org-directory (expand-file-name "GPE-Org/" user-emacs-directory))
+(unless (file-exists-p org-directory)
+  (make-directory org-directory))
+
 (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
 
 (use-package tablist
@@ -39,7 +43,7 @@
 ;; (require 'org-superstar)
 ;; (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1)
 ;;                                     (org-indent-mode 1))
-                                    ;;(auto-save-and-publish-file-mode -1)
+;;(auto-save-and-publish-file-mode -1)
 ;; )
 
 (setq org-pretty-entities t
@@ -59,10 +63,10 @@
               ("PROJECT" :inherit font-lock-string-face))))
 
 
-;; (setq org-default-notes-file (concat org-directory "/note.org"))
+(setq org-default-notes-file (concat org-directory "/note.org"))
 
 (add-hook 'org-mode-hook #'auto-fill-mode)
-;(setq-default fill-column 70)
+                                        ;(setq-default fill-column 70)
 (setq visual-line-mode t)
 
 (with-eval-after-load 'org
@@ -100,12 +104,12 @@
   :hook
   (org-mode . pangu-spacing-mode)
   (org-mode . (lambda ()
-            (set (make-local-variable 'pangu-spacing-real-insert-separtor) t))))
+                (set (make-local-variable 'pangu-spacing-real-insert-separtor) t))))
 
 ;; Pangu-spacing support: real insert separator
- ;; (add-hook 'org-mode-hook
- ;;           (lambda ()
- ;;            (set (make-local-variable 'pangu-spacing-real-insert-separtor) t)))
+;; (add-hook 'org-mode-hook
+;;           (lambda ()
+;;            (set (make-local-variable 'pangu-spacing-real-insert-separtor) t)))
 
 ;; (add-hook 'org-mode-hook #'awesome-tab-mode)
 ;;(require 'org-tempo)
@@ -137,29 +141,29 @@
   (dired-mode . org-download-enable))
 
 ;; Drag-and-drop to `dired`
-; (add-hook 'dired-mode-hook 'org-download-enable)
+                                        ; (add-hook 'dired-mode-hook 'org-download-enable)
 
 
 
 
 (defun eli/org-noter-set-highlight (&rest _arg)
-    "Highlight current org-noter note."
-    (save-excursion
-      (with-current-buffer (org-noter--session-notes-buffer org-noter--session)
-        (remove-overlays (point-min) (point-max) 'org-noter-current-hl t)
-        (goto-char (org-entry-beginning-position))
-        (let* ((hl (org-element-context))
-               (hl-begin (plist-get  (plist-get hl 'headline) :begin))
-               (hl-end (1- (plist-get  (plist-get hl 'headline) :contents-begin)))
-               (hl-ov (make-overlay hl-begin hl-end)))
-          (overlay-put hl-ov 'face 'mindre-keyword)
-          (overlay-put hl-ov 'org-noter-current-hl t))
-        (org-cycle-hide-drawers 'all))))
+  "Highlight current org-noter note."
+  (save-excursion
+    (with-current-buffer (org-noter--session-notes-buffer org-noter--session)
+      (remove-overlays (point-min) (point-max) 'org-noter-current-hl t)
+      (goto-char (org-entry-beginning-position))
+      (let* ((hl (org-element-context))
+             (hl-begin (plist-get  (plist-get hl 'headline) :begin))
+             (hl-end (1- (plist-get  (plist-get hl 'headline) :contents-begin)))
+             (hl-ov (make-overlay hl-begin hl-end)))
+        (overlay-put hl-ov 'face 'mindre-keyword)
+        (overlay-put hl-ov 'org-noter-current-hl t))
+      (org-cycle-hide-drawers 'all))))
 
-  (advice-add #'org-noter--focus-notes-region
-              :after #'eli/org-noter-set-highlight)
-  (advice-add #'org-noter-insert-note
-              :after #'eli/org-noter-set-highlight)
+(advice-add #'org-noter--focus-notes-region
+            :after #'eli/org-noter-set-highlight)
+(advice-add #'org-noter-insert-note
+            :after #'eli/org-noter-set-highlight)
 
 ;;--------------------------------------------------------------------
 ;; pandoc
