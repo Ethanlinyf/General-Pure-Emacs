@@ -155,7 +155,11 @@ considerations:
   [[./site-lisp/figure/creative_emacs.jpg]]
 
 - Instructive \\
-  The tutorial how to build this platform will be illustrated at the website [[https://thethingsengine.org][Something-Good]] under the ThingsEngine Project.
+  The tutorial how to build this platform will be illustrated at the
+  website [[https://thethingsengine.org][Something-Good]] under the
+  ThingsEngine Project.
+
+- 
 * Installation
 To enhance the default Emacs experience, the latest stable release (28.2) is
 recommended.
@@ -223,3 +227,6 @@ Programming and Reproducible Research]]
 [fn:3] [[org-roam-ui]]
 
 [fn:4] [[http://academiclifehistories.weebly.com/blog/phd-pitfalls-part-i-the-reality-of-your-contribution][PhD pitfalls: The reality of your contribution]]
+
+
+

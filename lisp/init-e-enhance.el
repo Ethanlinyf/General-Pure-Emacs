@@ -48,7 +48,7 @@
 (use-package GPE-enhancement
   :ensure nil
   :init
-  (setq delete-by-moving-to-trash t)  ;; disable delete directly
+  (setq delete-by-moving-to-trash t)  ; disable delete directly
   ;; (add-hook 'after-init-hook 'ido-mode)
   (add-hook 'after-init-hook 'electric-pair-mode)
   (add-hook 'after-init-hook 'winner-mode)

@@ -78,7 +78,7 @@
   :hook (dired-mode . (lambda ()
                           (when (icon-displayable-p)
                             (all-the-icons-dired-mode))))
-  :config (setq all-the-icons-dired-monochrome nil)) ;; nil means it is colourful in dired-mode
+  :config (setq all-the-icons-dired-monochrome nil)) ; nil means it is colourful in dired-mode
 
 (when (executable-find "fd")
   (use-package fd-dired

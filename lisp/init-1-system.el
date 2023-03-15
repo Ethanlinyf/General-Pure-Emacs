@@ -42,7 +42,7 @@
   (set-selection-coding-system 'utf-8))
 
 ;; Environment
-(when (or sys/mac-x-p sys/linux-x-p (daemonp)) ;; (when (memq window-system '(mac ns))
+(when (or sys/mac-x-p sys/linux-x-p (daemonp)) ; (when (memq window-system '(mac ns))
   (use-package exec-path-from-shell
     :ensure t
     :custom (exec-path-from-shell-arguments '("-l"))
@@ -50,7 +50,6 @@
 
 ;;--------------------------------------------------------------------
 ;; A few more useful configurations...
-
 (use-package emacs
   :ensure nil
   :init

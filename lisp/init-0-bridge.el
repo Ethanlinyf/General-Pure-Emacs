@@ -51,7 +51,7 @@
 ;;--------------------------------------------------------------------
 ;; (setq package-check-signature t
 ;;        load-prefer-newer t)
-
+;;
 ;; ;; Install straight.el
 ;; (defvar bootstrap-version)
 ;; (let ((bootstrap-file
@@ -67,7 +67,7 @@
 ;;   (load bootstrap-file nil 'nomessage))
 
 ;;--------------------------------------------------------------------
-;; ;; Setup 'use-package'
+;; Setup 'use-package'
 (when (version< emacs-version "29.0")
   (unless (package-installed-p 'use-package)
     (package-refresh-contents)
@@ -81,9 +81,8 @@
   (setq use-package-enable-imenu-support t))
 
 (eval-when-compile
-  (require 'use-package))
-
-(setq use-package-compute-statistics t)
+  (require 'use-package)
+  (setq use-package-compute-statistics t))
 
 ;; Required by `use-package', as use-package optional dependency
 (use-package diminish)

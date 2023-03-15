@@ -25,12 +25,11 @@
 ;; 11 avy and with Embark
 ;;--------------------------------------------------------------------
 ;;; Code:
-
 (require 'cl-lib)
 
 (use-package vertico
   :ensure t
-  :bind (("M-P" . vertico-repeat) ;; effective in the specific mode
+  :bind (("M-P" . vertico-repeat) ; effective in the specific mode
          :map vertico-map
          ("<tab>" . vertico-insert)
          ("<escape>" . minibuffer-keyboard-quit)
@@ -49,7 +48,7 @@
   (vertico-count 10)
   (vertico-resize t)
   (vertico-cycle nil)
-  (vertico-buffer-display-action '(display-buffer-reuse-window)) ;; need to be clear
+  (vertico-buffer-display-action '(display-buffer-reuse-window)) ; need to be clear
   :config
   ;; "» ", as an indicator infront of the candidate
   (advice-add #'vertico--format-candidate :around
@@ -93,12 +92,12 @@
   :bind (:map vertico-map
               ("RET" . vertico-directory-enter)
               ("DEL" . vertico-directory-delete-char)
-              ("M-DEL" . vertico-directory-delete-word) ;; Mac Keyboard
+              ("M-DEL" . vertico-directory-delete-word) ; Mac Keyboard
               ("C-<backspace>" . vertico-directory-delete-word)) ;; for different keyboard (c-w for all)
   ;; :init
   ;; (add-hook 'rfn-eshadow-update-overlay-hook 'vertico-directory-tidy))
   :hook
-  (rfn-eshadow-update-overlay . vertico-directory-tidy)) ;; to tidy shadowed file names
+  (rfn-eshadow-update-overlay . vertico-directory-tidy)) ; to tidy shadowed file names
 
 (use-package vertico-multiform
   :after vertico
@@ -141,8 +140,8 @@
   :after vertico
   :ensure nil
   :bind (:map vertico-map
-              ("C-i" . vertico-quick-insert) ;; insert to excute
-              ("C-o" . vertico-quick-exit) ;; excute
+              ("C-i" . vertico-quick-insert) ; insert to excute
+              ("C-o" . vertico-quick-exit) ; excute
               ))
 
 ;;--------------------------------------------------------------------
@@ -165,7 +164,7 @@
 (use-package orderless
   :demand t ;; it is better to be loaded immediately
   :config
-  (defun +vertico-orderless-dispatch (pattern _index _total) ;; from doomemacs
+  (defun +vertico-orderless-dispatch (pattern _index _total) ; from doomemacs
     (cond
      ;; Ensure $ works with Consult commands, which add disambiguation suffixes
      ((string-suffix-p "$" pattern)
@@ -206,9 +205,9 @@
   (setq completion-styles '(orderless basic)
         completion-category-defaults nil
         completion-category-overrides
-        '((file (styles basic-remote orderless partial-completion)) 
-          (command (styles orderless+initialism)) 
-          (symbol (styles orderless+initialism))  
+        '((file (styles basic-remote orderless partial-completion))
+          (command (styles orderless+initialism))
+          (symbol (styles orderless+initialism))
           (variable (styles orderless+initialism)))
         
         orderless-style-dispatchers '(+vertico-orderless-dispatch)
@@ -224,7 +223,7 @@
   :ensure t
   :bind (:map minibuffer-local-map
               ("M-A" . marginalia-cycle)); for locally
-  :hook 
+  :hook
   (after-init . marginalia-mode)
   ;; (marginalia-mode . all-the-icons-completion-marginalia-setup)
   :custom
@@ -243,9 +242,9 @@
 (use-package embark
   :ensure t
   :bind
-  (("s-." . embark-act)         ;; pick some comfortable binding
-   ("s-;" . embark-dwim)        ;; good alternative: M-.
-   ("C-h B" . embark-bindings)) ;; alternative for `describe-bindings'
+  (("s-." . embark-act)         ; pick some comfortable binding
+   ("s-;" . embark-dwim)        ; good alternative: M-.
+   ("C-h B" . embark-bindings)) ; alternative for `describe-bindings'
   :init
   ;; Optionally replace the key help with a completing-read interface
   (setq which-key-use-C-h-commands nil
@@ -299,25 +298,25 @@
          ("C-c m" . consult-mode-command)
          ("C-c k" . consult-kmacro)
          ;; C-x bindings (ctl-x-map)
-         ("C-x M-:" . consult-complex-command)     ;; orig. repeat-complex-command
-         ("C-x b" . consult-buffer)                ;; orig. switch-to-buffer
-         ("C-x 4 b" . consult-buffer-other-window) ;; orig. switch-to-buffer-other-window
-         ("C-x 5 b" . consult-buffer-other-frame)  ;; orig. switch-to-buffer-other-frame
-         ("C-x r b" . consult-bookmark)            ;; orig. bookmark-jump
-         ("C-x p b" . consult-project-buffer)      ;; orig. project-switch-to-buffer
+         ("C-x M-:" . consult-complex-command)     ; orig. repeat-complex-command
+         ("C-x b" . consult-buffer)                ; orig. switch-to-buffer
+         ("C-x 4 b" . consult-buffer-other-window) ; orig. switch-to-buffer-other-window
+         ("C-x 5 b" . consult-buffer-other-frame)  ; orig. switch-to-buffer-other-frame
+         ("C-x r b" . consult-bookmark)            ; orig. bookmark-jump
+         ("C-x p b" . consult-project-buffer)      ; orig. project-switch-to-buffer
          ;; Custom M-# bindings for fast register access
          ("M-#" . consult-register-load)
-         ("M-'" . consult-register-store)          ;; orig. abbrev-prefix-mark (unrelated)
+         ("M-'" . consult-register-store)          ; orig. abbrev-prefix-mark (unrelated)
          ("C-M-#" . consult-register)
          ;; Other custom bindings
-         ("M-y" . consult-yank-pop)                ;; orig. yank-pop
-         ("<help> a" . consult-apropos)            ;; orig. apropos-command
+         ("M-y" . consult-yank-pop)                ; orig. yank-pop
+         ("<help> a" . consult-apropos)            ; orig. apropos-command
          ;; M-g bindings (goto-map)
          ("M-g e" . consult-compile-error)
-         ("M-g f" . consult-flymake)               ;; Alternative: consult-flycheck
-         ("M-g g" . consult-goto-line)             ;; orig. goto-line
-         ("M-g M-g" . consult-goto-line)           ;; orig. goto-line
-         ("M-g o" . consult-outline)               ;; Alternative: consult-org-heading
+         ("M-g f" . consult-flymake)               ; Alternative: consult-flycheck
+         ("M-g g" . consult-goto-line)             ; orig. goto-line
+         ("M-g M-g" . consult-goto-line)           ; orig. goto-line
+         ("M-g o" . consult-outline)               ; Alternative: consult-org-heading
          ("M-g m" . consult-mark)
          ("M-g k" . consult-global-mark)
          ("M-g i" . consult-imenu)
@@ -336,14 +335,14 @@
          ;; Isearch integration
          ("M-s e" . consult-isearch-history)
          :map isearch-mode-map
-         ("M-e" . consult-isearch-history)         ;; orig. isearch-edit-string
-         ("M-s e" . consult-isearch-history)       ;; orig. isearch-edit-string
-         ("M-s l" . consult-line)                  ;; needed by consult-line to detect isearch
-         ("M-s L" . consult-line-multi)            ;; needed by consult-line to detect isearch
+         ("M-e" . consult-isearch-history)         ; orig. isearch-edit-string
+         ("M-s e" . consult-isearch-history)       ; orig. isearch-edit-string
+         ("M-s l" . consult-line)                  ; needed by consult-line to detect isearch
+         ("M-s L" . consult-line-multi)            ; needed by consult-line to detect isearch
          ;; Minibuffer history
          :map minibuffer-local-map
-         ("M-s" . consult-history)                 ;; orig. next-matching-history-element
-         ("M-r" . consult-history))                ;; orig. previous-matching-history-element
+         ("M-s" . consult-history)                 ; orig. next-matching-history-element
+         ("M-r" . consult-history))                ; orig. previous-matching-history-element
 
   ;; Enable automatic preview at point in the *Completions* buffer. This is
   ;; relevant when you use the default completion UI.
@@ -436,11 +435,12 @@
   (setq wgrep-auto-save-buffer t)
   (setq wgrep-change-readonly-file t))
 
-(use-package vertico-posframe
-  :ensure t
-  :hook (vertico-mode . vertico-posframe-mode)
-  :config
-  (add-hook 'doom-after-reload-hook #'posframe-delete-all))
+;; if you like postframe, you could make it available
+;; (use-package vertico-posframe
+;;   :ensure t
+;;   :hook (vertico-mode . vertico-posframe-mode)
+;;   :config
+;;   (add-hook 'doom-after-reload-hook #'posframe-delete-all))
 
 (use-package consult-dir
   :ensure t
@@ -486,4 +486,4 @@
 
 ;;--------------------------------------------------------------------
 (provide 'init-c-minibuffer)
-;;; init-c-minibuffer.el ends here. 
+;;; init-c-minibuffer.el ends here.

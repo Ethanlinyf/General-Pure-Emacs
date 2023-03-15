@@ -24,51 +24,52 @@
 (use-package display-line-numbers
   :ensure nil
   :init (setq display-line-numbers-width-start t)
-  :hook ((prog-mode) . display-line-numbers-mode)) ;; yaml-mode text-mode org-mode conf-mode
+  :hook ((prog-mode) . display-line-numbers-mode)) ; yaml-mode text-mode org-mode conf-mode
 
 ;;--------------------------------------------------------------------
-(defun open-mirror-file ()
-  "Quickly open index file."
-  (interactive)
-  (find-file "~/Documents/Org/mirror.org"))
-(global-set-key (kbd "<f1>") 'open-mirror-file)
+;; use the settings below as you like
+;; (defun open-mirror-file ()
+;;   "Quickly open index file."
+;;   (interactive)
+;;   (find-file "~/Documents/Org/mirror.org"))
+;; (global-set-key (kbd "<f1>") 'open-mirror-file)
 
-(defun open-gtd-file ()
-  "Quickly open index file."
-  (interactive)
-  (find-file "~/Documents/Org/gtd.org"))
-(global-set-key (kbd "<f2>") 'open-gtd-file)
+;; (defun open-gtd-file ()
+;;   "Quickly open index file."
+;;   (interactive)
+;;   (find-file "~/Documents/Org/gtd.org"))
+;; (global-set-key (kbd "<f2>") 'open-gtd-file)
 
-(defun open-note-file ()
-  "Quickly open index file."
-  (interactive)
-  (find-file "~/Documents/Org/note.org"))
-(global-set-key (kbd "<f3>") 'open-note-file)
+;; (defun open-note-file ()
+;;   "Quickly open index file."
+;;   (interactive)
+;;   (find-file "~/Documents/Org/note.org"))
+;; (global-set-key (kbd "<f3>") 'open-note-file)
 
-(defun open-meeting-file ()
-  "Quickly open index file."
-  (interactive)
-  (find-file "~/Documents/Org/meeting.org"))
-(global-set-key (kbd "<f4>") 'open-meeting-file)
+;; (defun open-meeting-file ()
+;;   "Quickly open index file."
+;;   (interactive)
+;;   (find-file "~/Documents/Org/meeting.org"))
+;; (global-set-key (kbd "<f4>") 'open-meeting-file)
 
-(defun open-journal-file ()
-  "Quickly open index file."
-  (interactive)
-  (find-file "~/Documents/Org/journal.org"))
-(global-set-key (kbd "<f5>") 'open-journal-file)
+;; (defun open-journal-file ()
+;;   "Quickly open index file."
+;;   (interactive)
+;;   (find-file "~/Documents/Org/journal.org"))
+;; (global-set-key (kbd "<f5>") 'open-journal-file)
 
-(defun open-plan-file ()
-  "Quickly open index file."
-  (interactive)
-  (find-file "~/Documents/Org/plan.org"))
-(global-set-key (kbd "<f6>") 'open-plan-file)
+;; (defun open-plan-file ()
+;;   "Quickly open index file."
+;;   (interactive)
+;;   (find-file "~/Documents/Org/plan.org"))
+;; (global-set-key (kbd "<f6>") 'open-plan-file)
 
 ;;--------------------------------------------------------------------
 (with-no-warnings
-  (line-number-mode 1)    ;; Turn on line number and the column-number-mode
-  (column-number-mode 1)  ;; Change the cursor type
-  (global-hl-line-mode 1) ;; Enable hightline globally
-  ;; (setq-default cursor-type 'bar) ;; Change the type of cursor
+  (line-number-mode 1)    ; Turn on line number and the column-number-mode
+  (column-number-mode 1)  ; Change the cursor type
+  (global-hl-line-mode 1) ; Enable hightline globally
+  ;; (setq-default cursor-type 'bar) ; Change the type of cursor
   )
 
 ;;--------------------------------------------------------------------
@@ -102,8 +103,8 @@
   (delete-selection-mode 1)
   (setq tab-width 4)
   (fset 'yes-or-no-p 'y-or-n-p)
-  (setq-default indent-tabs-mode nil) ;; avoid to mixture the tabs and spaces in code
-  (global-set-key (kbd "C-c C-'") 'set-mark-command)  ;; Keybindings for setting mark
+  (setq-default indent-tabs-mode nil) ; avoid to mixture the tabs and spaces in code
+  (global-set-key (kbd "C-c C-'") 'set-mark-command)  ; keybindings for setting mark
   )
 
 ;; Visualize TAB, (HARD) SPACE, NEWLINE
@@ -163,7 +164,7 @@
   :ensure t
   :after (projectile)
   :init
-  (setq projectile-switch-project-action 'projectile-dired)) ;; open directory in dired-mode from dashboard
+  (setq projectile-switch-project-action 'projectile-dired)) ; open directory in dired-mode from dashboard
 
 ;; This package will be used in minibuffer.el, dired.el, platerform.el,
 ;; interface.el and dashboard.el

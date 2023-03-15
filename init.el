@@ -105,7 +105,7 @@
 (require 'init-e-enhance)
 (require 'init-f-platform)
 (require 'init-g-interface)
-(require 'init-h-dashboard)
+;; (require 'init-h-dashboard)
 (require 'init-i-i18n)
 (require 'init-o-org)
 (require 'init-o-roam)
@@ -120,7 +120,8 @@
 
 (require 'init-u-update)
 
-;; (require 'init-z-test) ;; for debugging purposes
+;; (if (featurep 'init-z-test)          ; for debugging purposes
+;;     (require 'init-z-test))
 
 ;;----------------------------------------------------------------------------
 ;;; init.el ends here.

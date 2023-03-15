@@ -51,7 +51,7 @@
   :if *is-mac*
   :ensure t
   :init
-  (ns-auto-titlebar-mode t)) ;; not use hook for it.
+  (ns-auto-titlebar-mode t)) ; not use hook for it.
 
 ;; Display minor-mode in the mode line
 (use-package minions
@@ -71,7 +71,7 @@
 
   ;; (setq all-the-icons-color-icons t)
   ;; (setq all-the-icons-ibuffer-color-icon t)
-  ;; (setq all-the-icons-dired-monochrome nil) ;; nil means it is colourful in dired-mode
+  ;; (setq all-the-icons-dired-monochrome nil) ; nil means it is colourful in dired-mode
 
   (all-the-icons-ibuffer-mode t)
 
@@ -130,7 +130,7 @@
 (use-package buffer-move
   :ensure t
   :bind
-  ("<C-S-up>" . buf-move-up)  ;; (global-set-key (kbd "<C-S-up>")     'buf-move-up)
+  ("<C-S-up>" . buf-move-up)  ; (global-set-key (kbd "<C-S-up>") 'buf-move-up)
   ("<C-S-down>" . buf-move-down)
   ("<C-S-left>" . buf-move-left)
   ("<C-S-right>" . buf-move-right))

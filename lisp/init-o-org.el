@@ -11,7 +11,7 @@
 ;;--------------------------------------------------------------------
 ;;; Code:
 
-(setq org-directory "~/Documents/Org")
+;; (setq org-directory "~/Documents/Org")
 
 (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
 
@@ -59,7 +59,7 @@
               ("PROJECT" :inherit font-lock-string-face))))
 
 
-(setq org-default-notes-file (concat org-directory "/note.org"))
+;; (setq org-default-notes-file (concat org-directory "/note.org"))
 
 (add-hook 'org-mode-hook #'auto-fill-mode)
 ;(setq-default fill-column 70)
