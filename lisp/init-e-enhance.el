@@ -438,7 +438,7 @@
 
 (use-package highlight-symbol
   :ensure t
-  :init (highlight-symbol-mode)
+  ;; :init (highlight-symbol-mode)
   :bind ("<f7>" . highlight-symbol))
 ;;--------------------------------------------------------------------
 

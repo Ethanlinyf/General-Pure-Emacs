@@ -112,6 +112,7 @@ Other buffer group by `centaur-tabs-get-group-name' with project name."
        (string-prefix-p "*scratch*" name)
        (string-prefix-p "*Messages*" name)
        (string-prefix-p "*Shell Command Output*" name)
+       (string-prefix-p "*use-package statistics*" name)
        
 
        ;; Is not magit buffer.
