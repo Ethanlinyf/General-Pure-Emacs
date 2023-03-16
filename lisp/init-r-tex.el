@@ -13,12 +13,19 @@
 
 (add-hook 'LaTeX-mode-hook 'lsp-bridge-mode)
 
+(use-package auctex
+  :ensure t
+  :init
+  (require 'auctex-autoloads)
+  :config
+  (setq TeX-auto-save t)
+  (setq TeX-parse-self t)
+  (setq-default TeX-master nil))
+
 ;;--------------------------------------------------------------------
 ;; AUCTEX Settings
-(load "auctex.el" nil t t)
-(setq TeX-auto-save t)
-(setq TeX-parse-self t)
-(setq-default TeX-master nil)
+;; (load "auctex.el" nil t t)
+
 
 ;;--------------------------------------------------------------------
 ;; REFTEX Settings
