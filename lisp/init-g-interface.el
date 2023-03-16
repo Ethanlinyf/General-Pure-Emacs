@@ -30,23 +30,34 @@
   (global-set-key (kbd "M-s-f") 'toggle-frame-fullscreen))
 ;;--------------------------------------------------------------------
 
+;; (use-package doom-themes
+;;   :ensure t
+;;   :init (load-theme 'doom-one t)
+;;   :config
+;;   ;; Global settings (defaults)
+;;   (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
+;;         doom-themes-enable-italic t) ; if nil, italics is universally disabled
+
+;;   ;; Enable flashing mode-line on errors
+;;   ;;(doom-themes-visual-bell-config)
+
+;;   (setq doom-themes-treemacs-theme "doom-colors") ; use the colorful treemacs theme
+;;   (doom-themes-treemacs-config)
+
+;;   ;; Corrects (and improves) org-mode's native fontification.
+;;   (doom-themes-org-config))
+
+;;--------------------------------------------------------------------
+;; ef-themes
+;; (use-package ef-themes
+;;   :ensure t
+;;   :init (load-theme 'ef-night))
+
 (use-package doom-themes
   :ensure t
-  :init (load-theme 'doom-one t)
-  :config
-  ;; Global settings (defaults)
-  (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
-        doom-themes-enable-italic t) ; if nil, italics is universally disabled
+  :init (load-theme 'doom-one t))
 
-  ;; Enable flashing mode-line on errors
-  ;;(doom-themes-visual-bell-config)
-
-  (setq doom-themes-treemacs-theme "doom-colors") ; use the colorful treemacs theme
-  (doom-themes-treemacs-config)
-
-  ;; Corrects (and improves) org-mode's native fontification.
-  (doom-themes-org-config))
-
+;;--------------------------------------------------------------------
 (use-package ns-auto-titlebar
   :if *is-mac*
   :ensure t
