@@ -170,7 +170,7 @@ recommended.
    #+end_src
 2. Clone this repository
    You should install Git in your system first, as well as set your
-   usename and email, the same for GitHub. See the [[https://github.com/Ethanlinyf/Git-GitHub-Tutorial][tutorial]] of
+   usename and email, the same for GitHub with SSH public key. See the [[https://github.com/Ethanlinyf/Git-GitHub-Tutorial][tutorial]] of
    Git/Github. 
    #+begin_src shell
      git clone --depth 1 git@github.com:Ethanlinyf/General-Pure-Emacs.git ~/.emacs.d
@@ -180,9 +180,8 @@ recommended.
    #+begin_src shell
      brew install autoconf automake texinfo gnutls pkg-config libxml2 --debug --verbose
    #+end_src
-4. GUI with icons \\
-   Run: M-x all-the-icons-install-fonts to install the needed fonts.
-5. To fetch the submodules in General Pure Emacs
+
+4. To fetch the submodules in General Pure Emacs
    #+begin_src shell
      cd .emacs.d
    #+end_src
@@ -199,10 +198,15 @@ recommended.
    #+begin_src shell
      git submodule foreach git pull --rebase
    #+end_src
-6. Then, open Emacs(>= 28.2) to install the needed package.
+
+5. Then, open Emacs(>= 28.2) to install the needed package.
    - Yes for "Need to (re)build the epdfinfo program, do it now ?":
    - Your root password is required to install a pdf-tool server.
-   - You may need to wait for a while to complete downloading the needed packages.
+   - You may need to wait for a while to complete downloading the
+     needed packages.
+
+6. GUI with icons \\
+   Run: M-x all-the-icons-install-fonts to install the needed fonts.
 7. Enjoy General Pure Emacs ~ 
 * Support/Feedback
 Bug reports are highly welcome and appreciated!
