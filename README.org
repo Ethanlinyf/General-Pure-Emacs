@@ -159,7 +159,6 @@ considerations:
   website [[https://thethingsengine.org][Something-Good]] under the
   ThingsEngine Project.
 
-- 
 * Installation
 To enhance the default Emacs experience, the latest stable release (28.2) is
 recommended.
