@@ -53,32 +53,21 @@
 ;;   :ensure t
 ;;   :init (load-theme 'ef-night))
 
+;; see the PR: https://github.com/doomemacs/themes/pull/779
 (use-package doom-themes
-  :ensure t
-  :init
-  (load-theme 'doom-one t)
+  :custom
+  (doom-themes-enable-bold t)   ; if nil, bold is universally disabled
+  (doom-themes-enable-italic t) ; if nil, italics is universally disabled
   :config
-  (face-remap-add-relative 'font-lock-keyword-face '(:foreground nil))
-
   ;; Enable flashing mode-line on errors
   (doom-themes-visual-bell-config)
-  ;; WORKAROUND: Visual bell on 29
-  ;; @see https://github.com/doomemacs/themes/issues/733
-  (with-no-warnings
-    (defun my-doom-themes-visual-bell-fn ()
-      "Blink the mode-line red briefly. Set `ring-bell-function' to this to use it."
-      (let* ((buf (current-buffer))
-             (cookies `(,(face-remap-add-relative 'mode-line-active
-                                                  'doom-themes-visual-bell)
-                        ,(face-remap-add-relative 'mode-line
-                                                  'doom-themes-visual-bell))))
-        (force-mode-line-update)
-        (run-with-timer 0.15 nil
-                        (lambda ()
-                          (with-current-buffer buf
-                            (mapc #'face-remap-remove-relative cookies)
-                            (force-mode-line-update))))))
-    (advice-add #'doom-themes-visual-bell-fn :override #'my-doom-themes-visual-bell-fn)))
+  ;; Corrects (and improves) org-mode's native fontification.
+  (setq doom-themes-treemacs-theme "doom-atom") ; use "doom-colors" for less minimal icon theme
+  (doom-themes-treemacs-config)
+  (doom-themes-org-config)
+  :init
+  ;; Global settings (defaults)
+  (load-theme 'doom-one t))
 
 ;;--------------------------------------------------------------------
 (use-package ns-auto-titlebar
