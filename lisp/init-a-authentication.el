@@ -7,16 +7,9 @@
 ;; Under ThingsEngine Project: https://www.thethingsengine.org
 ;;--------------------------------------------------------------------
 ;;; Commentary:
-;; init file for General Pure Emacs
+;; reserve for authentication
 ;;--------------------------------------------------------------------
 ;;; Code:
-
-;; (defun add-subdirs-to-load-path (dir)
-;;   "Recursive add directories to `load-path'."
-;;   (let ((default-directory (file-name-as-directory dir)))
-;;     (add-to-list 'load-path dir)
-;;     (normal-top-level-add-subdirs-to-load-path)))
-;; (add-subdirs-to-load-path "~/org-roam")
 
 
 ;;--------------------------------------------------------------------
