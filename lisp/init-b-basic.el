@@ -27,42 +27,12 @@
   :hook ((prog-mode) . display-line-numbers-mode)) ; yaml-mode text-mode org-mode conf-mode
 
 ;;--------------------------------------------------------------------
-;; use the settings below as you like
-;; (defun open-mirror-file ()
-;;   "Quickly open index file."
+;; quick access to a file
+;; (defun open-GPE-file ()
+;;   "Quickly open a gpe file."
 ;;   (interactive)
-;;   (find-file "~/Documents/Org/mirror.org"))
-;; (global-set-key (kbd "<f1>") 'open-mirror-file)
-
-;; (defun open-gtd-file ()
-;;   "Quickly open index file."
-;;   (interactive)
-;;   (find-file "~/Documents/Org/gtd.org"))
-;; (global-set-key (kbd "<f2>") 'open-gtd-file)
-
-;; (defun open-note-file ()
-;;   "Quickly open index file."
-;;   (interactive)
-;;   (find-file "~/Documents/Org/note.org"))
-;; (global-set-key (kbd "<f3>") 'open-note-file)
-
-;; (defun open-meeting-file ()
-;;   "Quickly open index file."
-;;   (interactive)
-;;   (find-file "~/Documents/Org/meeting.org"))
-;; (global-set-key (kbd "<f4>") 'open-meeting-file)
-
-;; (defun open-journal-file ()
-;;   "Quickly open index file."
-;;   (interactive)
-;;   (find-file "~/Documents/Org/journal.org"))
-;; (global-set-key (kbd "<f5>") 'open-journal-file)
-
-;; (defun open-plan-file ()
-;;   "Quickly open index file."
-;;   (interactive)
-;;   (find-file "~/Documents/Org/plan.org"))
-;; (global-set-key (kbd "<f6>") 'open-plan-file)
+;;   (find-file "~/GPE-Org/gpe.org"))
+;; (global-set-key (kbd "<f1>") 'open-GPE-file)
 
 ;;--------------------------------------------------------------------
 (with-no-warnings
@@ -113,7 +83,7 @@
   "Show trailing spaces and delete on saving."
   (setq show-trailing-whitespace t)
   (add-hook 'before-save-hook #'delete-trailing-whitespace nil t))
-(add-hook 'prog-mode #'enable-trailing-whitespace)
+;; (add-hook 'prog-mode #'enable-trailing-whitespace)
 
 ;;----------------------- Dired Mode ---------------------------------
 (with-eval-after-load "dired"
