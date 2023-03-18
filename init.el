@@ -23,11 +23,25 @@
                                after-init-time before-init-time)))
                      gcs-done)))
 
-(let ((normal-gc-cons-threshold (* 20 1024 1024))
-      (init-gc-cons-threshold (* 128 1024 1024)))
-  (setq gc-cons-threshold init-gc-cons-threshold)
-  (add-hook 'emacs-startup-hook
-            (lambda () (setq gc-cons-threshold normal-gc-cons-threshold))))
+;; (let ((normal-gc-cons-threshold (* 20 1024 1024))
+;;       (init-gc-cons-threshold (* 128 1024 1024)))
+;;   (setq gc-cons-threshold init-gc-cons-threshold)
+;;   (add-hook 'emacs-startup-hook
+;;             (lambda () (setq gc-cons-threshold normal-gc-cons-threshold))))
+(add-hook 'after-init-hook #'(lambda () (setq gc-cons-threshold 800000)))
+
+(unless (or (daemonp) noninteractive init-file-debug)
+  ;; Prevent flashing of messages at startup
+(when (display-graphic-p)
+  (setq-default inhibit-redisplay t
+                inhibit-message t)
+  (defun reset-inhibit-vars ()
+    (setq-default inhibit-redisplay nil
+                  inhibit-message nil)
+    (redraw-frame))
+  (add-hook 'window-setup-hook #'reset-inhibit-vars)
+  (define-advice startup--load-user-init-file (:after (&rest _) reset-inhibit-vars)
+    (and init-file-had-error (reset-inhibit-vars)))))
 
 ;; set the startup default directory,
 ;; for the generic, it can be set as defaults
@@ -39,7 +53,8 @@
 ;; Prevent setting it as a rich mode, such as org-mode, which will
 ;; slow down the sartup speed.
 (setq initial-major-mode 'text-mode);
-      ;package--init-file-ensured t)
+
+;; package--init-file-ensured t)
 
 ;; Load the settings recorded through Emacs
 (defconst custom-file (expand-file-name "custom.el" user-emacs-directory))
