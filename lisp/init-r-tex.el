@@ -16,7 +16,7 @@
 (use-package auctex
   :ensure t
   :init
-  (require 'auctex-autoloads)
+  (load "auctex.el" nil t t)
   :config
   (setq TeX-auto-save t)
   (setq TeX-parse-self t)
