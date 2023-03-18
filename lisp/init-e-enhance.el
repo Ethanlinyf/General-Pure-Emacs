@@ -326,6 +326,14 @@
 ;; undo-tree
 (use-package undo-tree
   :ensure t
+  :config
+  (setq undo-tree-auto-save-history t)
+  (setq undo-tree-history-directory-alist '(("." . "undo-tree/" )))
+  (defun my-undo-tree-save-history (undo-tree-save-history &rest args)
+    (let ((message-log-max nil)
+          (inhibit-message t))
+      (apply undo-tree-save-history args)))
+  (advice-add 'undo-tree-save-history :around 'my-undo-tree-save-history)
   :init (global-undo-tree-mode))
 ;; :after hydra
 ;; :bind ("C-x C-h u" . hydra-undo-tree/body)
