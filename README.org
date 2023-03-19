@@ -42,39 +42,44 @@ Emacs:~$ (init 0 1) --> G.P.E
      |-- lisp/
      |   |-- init-bridge.el
      |   |-- init-system
+     |   |
      |   |-- init-authentication
      |   |-- init-basic
-     |   |-- init-minibuffer
-     |   |-- init-dired
+     |   |-- init-i18n
+     |   |-- init-update
+     |   |
      |   |-- init-enhance
-     |   |-- init-platform
+     |   |-- init-dired
      |   |-- init-interface
      |   |-- init-dashboard
-     |   |-- init-i18n
+     |   |-- init-minibuffer
+     |   |-- init-platform
      |   |-- init-org
      |   |-- init-roam
-     |   |-- init-research
-     |   |-- init-tex
+     |   |
      |   |-- init-python
      |   |-- init-java
      |   |-- init-c/c++
      |   |-- init-lua
      |   |-- init-julia
-     |   |-- init-update
+     |   |-- init-research
+     |   |-- init-tex
      |
      |-- site-lisp/
      |   |-- lsp-bridge
      |   |-- aweshell
-     |   |-- awesome-tab
      |   |-- blink-search
      |   |-- popweb
      |   |-- pure-const
      |   |-- pure-custom
      |   |-- pure-function
      |   |-- pure-macros
-     |   |-- tutorial
      |
      |-- custom.el
+     |-- README.org
+     |
+     |-- .gitignore
+     |-- .gitmodules
      |
      |-- ...
 #+END_EXAMPLE
