@@ -7,7 +7,7 @@
 *.elc
 CVS
 .svn
-*~
+.*~
 .cvsignore
 .*.lock
 /tramp
@@ -98,4 +98,5 @@ site-lisp/tutorial.org
 /mind-wave
 mind-wave/chatgpt_api_key.txt
 /GPE-Org
-/undo-tree
+/undo-tree-dir
+undo-tree-dir

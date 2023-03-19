@@ -30,8 +30,7 @@
 ;;             (lambda () (setq gc-cons-threshold normal-gc-cons-threshold))))
 (add-hook 'after-init-hook #'(lambda () (setq gc-cons-threshold 800000)))
 
-(unless (or (daemonp) noninteractive init-file-debug)
-  ;; Prevent flashing of messages at startup
+
 (when (display-graphic-p)
   (setq-default inhibit-redisplay t
                 inhibit-message t)
@@ -41,7 +40,7 @@
     (redraw-frame))
   (add-hook 'window-setup-hook #'reset-inhibit-vars)
   (define-advice startup--load-user-init-file (:after (&rest _) reset-inhibit-vars)
-    (and init-file-had-error (reset-inhibit-vars)))))
+    (and init-file-had-error (reset-inhibit-vars))))
 
 ;; set the startup default directory,
 ;; for the generic, it can be set as defaults
@@ -114,16 +113,17 @@
 
 (require 'init-a-authentication)
 (require 'init-b-basic)
-(require 'init-c-minibuffer)
-(require 'init-d-dired)
+(require 'init-c-i18n)
+(require 'init-d-update)
 
 (require 'init-e-enhance)
-(require 'init-f-platform)
+(require 'init-f-dired)
 (require 'init-g-interface)
 (require 'init-h-dashboard)
-(require 'init-i-i18n)
-(require 'init-o-org)
-(require 'init-o-roam)
+(require 'init-i-minibuffer)
+(require 'init-j-platform)
+(require 'init-k-org)
+(require 'init-l-roam)
 
 (require 'init-p-python)
 (require 'init-p-lua)
@@ -133,10 +133,8 @@
 (require 'init-r-research)
 (require 'init-r-tex)
 
-(require 'init-u-update)
-
-;; (if (featurep 'init-z-test)          ; for debugging purposes
-;;     (require 'init-z-test))
+(if (featurep 'init-z-test)          ; for debugging purposes
+    (require 'init-z-test))
 
 ;;----------------------------------------------------------------------------
 ;;; init.el ends here.

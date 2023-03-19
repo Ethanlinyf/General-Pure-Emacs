@@ -38,6 +38,8 @@
 ;; Suppress a second case-insensitive search through the auto-mode-alist
 (setq auto-mode-case-fold nil)
 
+(setq use-file-dialog nil)
+
 ;; After early-init-file to initialise 'package'. Make initialization
 ;; slightly faster See the (package-initialize) in the file
 ;; init-0-bridge.el, which make the initiation will be executed just
@@ -60,7 +62,6 @@
 
 ;; Default settings for the frame before initialisation
 ;; To prevent the glimpse of un-styled Emacs by disabling the following UI elements early.
-(setq use-file-dialog nil)
 (push '(menu-bar-lines . 0) default-frame-alist)
 (push '(tool-bar-lines . 0) default-frame-alist)
 (push '(vertical-scroll-bars) default-frame-alist)

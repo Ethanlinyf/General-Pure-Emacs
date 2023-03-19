@@ -1,4 +1,4 @@
-;;; init-f-platform.el --- IDE -*- lexical-binding: t; -*-
+;;; init-platform.el --- IDE -*- lexical-binding: t; -*-
 ;;
 ;; Copyleft (CL) 2022-2032 YF Lin
 ;;
@@ -17,12 +17,13 @@
   :bind (("C-x g" . magit-status))
   :init
   (setq magit-diff-refine-hunk t))
+
 ;;------------------------------------------------------------------
 ;; centaur-tabs
 (use-package centaur-tabs
   :init
   (setq centaur-tabs-enable-key-bindings t)
-  ;; (centaur-tabs-mode t)
+  (centaur-tabs-mode t)
   :config
   (setq centaur-tabs-style "bar"
         ;; centaur-tabs-height 32
@@ -34,7 +35,7 @@
         centaur-tabs-show-count nil
         ;; centaur-tabs-label-fixed-length 15
         ;; centaur-tabs-gray-out-icons 'buffer
-        ;; centaur-tabs-plain-icons t
+        centaur-tabs-plain-icons t
         x-underline-at-descent-line t
         centaur-tabs-left-edge-margin nil)
   ;; (centaur-tabs-change-fonts (face-attribute 'default :font) 110)
@@ -114,7 +115,6 @@ Other buffer group by `centaur-tabs-get-group-name' with project name."
        (string-prefix-p "*Shell Command Output*" name)
        (string-prefix-p "*use-package statistics*" name)
        
-
        ;; Is not magit buffer.
        (and (string-prefix-p "magit" name)
             (not (file-name-extension name)))
@@ -124,8 +124,8 @@ Other buffer group by `centaur-tabs-get-group-name' with project name."
   (term-mode . centaur-tabs-local-mode)
   (calendar-mode . centaur-tabs-local-mode)
   (org-agenda-mode . centaur-tabs-local-mode)
-  (aweshell-dedicated-open . centaur-tabs-local-mode)
-  (after-init . centaur-tabs-mode)
+  ;; (aweshell-dedicated-open . centaur-tabs-local-mode)
+  ;; (after-init . centaur-tabs-mode)
   ;; :bind
   ;; ("C-<prior>" . centaur-tabs-backward)
   ;; ("C-<next>" . centaur-tabs-forward)
@@ -136,60 +136,60 @@ Other buffer group by `centaur-tabs-get-group-name' with project name."
 ;;--------------------------------------------------------------------
 ;; awesome-tab
   ;;;; add tabs for the open files
-  ;; (use-package awesome-tab
-  ;;   :ensure nil
-  ;;   :load-path "~/.emacs.d/site-lisp/awesome-tab"
-  ;;   :hook
-  ;;   (after-init . awesome-tab-mode)
-  ;;   :config
-  ;;   (defun awesome-tab-buffer-groups ()
-  ;;     "`awesome-tab-buffer-groups' control buffers' group rules.
-  ;; Group awesome-tab with mode if buffer is derived from `eshell-mode' `emacs-lisp-mode' `dired-mode' `org-mode' `magit-mode'.
-  ;; All buffer name start with * will group to \"Emacs\".
-  ;; Other buffer group by `awesome-tab-get-group-name' with project name."
-  ;;     (list
-  ;;      (cond
-  ;;       ((or (string-equal "*" (substring (buffer-name) 0 1))
-  ;;            (memq major-mode '(magit-process-mode
-  ;;                               magit-status-mode
-  ;;                               magit-diff-mode
-  ;;                               magit-log-mode
-  ;;                               magit-file-mode
-  ;;                               magit-blob-mode
-  ;;                               magit-blame-mode
-  ;;                               )))
-  ;;        "Emacs")
-  ;;       ((derived-mode-p 'eshell-mode)
-  ;;        "EShell")
-  ;;       ((derived-mode-p 'emacs-lisp-mode)
-  ;;        "Elisp")
-  ;;       ((derived-mode-p 'dired-mode)
-  ;;        "Dired")
-  ;;       ((memq major-mode '(org-mode org-agenda-mode diary-mode))
-  ;;        "OrgMode")
-  ;;       (t
-  ;;        (awesome-tab-get-group-name (current-buffer))))))
+;; (use-package awesome-tab
+;;   :ensure nil
+;;   :load-path "~/.emacs.d/site-lisp/awesome-tab"
+;;   :hook
+;;   (after-init . awesome-tab-mode)
+;;   :config
+;;   (defun awesome-tab-buffer-groups ()
+;;     "`awesome-tab-buffer-groups' control buffers' group rules.
+;; Group awesome-tab with mode if buffer is derived from `eshell-mode' `emacs-lisp-mode' `dired-mode' `org-mode' `magit-mode'.
+;; All buffer name start with * will group to \"Emacs\".
+;; Other buffer group by `awesome-tab-get-group-name' with project name."
+;;     (list
+;;      (cond
+;;       ((or (string-equal "*" (substring (buffer-name) 0 1))
+;;            (memq major-mode '(magit-process-mode
+;;                               magit-status-mode
+;;                               magit-diff-mode
+;;                               magit-log-mode
+;;                               magit-file-mode
+;;                               magit-blob-mode
+;;                               magit-blame-mode
+;;                               )))
+;;        "Emacs")
+;;       ((derived-mode-p 'eshell-mode)
+;;        "EShell")
+;;       ((derived-mode-p 'emacs-lisp-mode)
+;;        "Elisp")
+;;       ((derived-mode-p 'dired-mode)
+;;        "Dired")
+;;       ((memq major-mode '(org-mode org-agenda-mode diary-mode))
+;;        "OrgMode")
+;;       (t
+;;        (awesome-tab-get-group-name (current-buffer))))))
 
-  ;;   (defun awesome-tab-hide-tab (x)
-  ;;     (let ((name (format "%s" x)))
-  ;;       (or
-  ;;        (string-prefix-p "*epc" name)
-  ;;        (string-prefix-p "*helm" name)
-  ;;        (string-prefix-p "*Compile-Log*" name)
-  ;;        (string-prefix-p "*lsp" name)
-  ;;        (string-prefix-p "Aweshell" name)
-  ;;        (string-prefix-p "*shell*" name)
-  ;;        (string-prefix-p "*shell" name)
-  ;;        (string-prefix-p "*dashboard*" name)
-  ;;        (string-prefix-p "*info*" name)
-  ;;        (string-prefix-p "*scratch*" name)
-  ;;        (string-prefix-p "*Messages*" name)
-  ;;        (and (string-prefix-p "magit" name)
-  ;;             (not (file-name-extension name)))
-  ;;        )))
+;;   (defun awesome-tab-hide-tab (x)
+;;     (let ((name (format "%s" x)))
+;;       (or
+;;        (string-prefix-p "*epc" name)
+;;        (string-prefix-p "*helm" name)
+;;        (string-prefix-p "*Compile-Log*" name)
+;;        (string-prefix-p "*lsp" name)
+;;        (string-prefix-p "Aweshell" name)
+;;        (string-prefix-p "*shell*" name)
+;;        (string-prefix-p "*shell" name)
+;;        (string-prefix-p "*dashboard*" name)
+;;        (string-prefix-p "*info*" name)
+;;        (string-prefix-p "*scratch*" name)
+;;        (string-prefix-p "*Messages*" name)
+;;        (and (string-prefix-p "magit" name)
+;;             (not (file-name-extension name)))
+;;        )))
 
-  ;;   (when (display-graphic-p)
-  ;;     (setq awesome-tab-display-icon t)))
+;;   (when (display-graphic-p)
+;;     (setq awesome-tab-display-icon t)))
 
 ;;--------------------------------------------------------------------
 ;; treemacs
@@ -212,7 +212,7 @@ Other buffer group by `centaur-tabs-get-group-name' with project name."
           treemacs-find-workspace-method           'find-for-file-or-pick-first
           treemacs-git-command-pipe                ""
           treemacs-goto-tag-strategy               'refetch-index
-          ;; treemacs-header-scroll-indicators        '(nil . "^^^^^^")'
+          ;; treemacs-header-scroll-indicators        '(nil . "^^^^^^")
           treemacs-indentation                     2
           treemacs-indentation-string              " "
           treemacs-indent-guide-style              'line
@@ -268,7 +268,7 @@ Other buffer group by `centaur-tabs-get-group-name' with project name."
 
     (treemacs-hide-gitignored-files-mode nil))
   :bind (:map global-map
-              ("C-M-0"       . treemacs-select-window)
+              ("C-M-0"     . treemacs-select-window)
               ("C-x t 1"   . treemacs-delete-other-windows)
               ("C-x t t"   . treemacs)
               ("s-2"       . treemacs)
@@ -286,13 +286,13 @@ Other buffer group by `centaur-tabs-get-group-name' with project name."
   :ensure t)
 
 ;;treemacs-perspective if you use perspective.el vs. persp-mode
-(use-package treemacs-persp 
+(use-package treemacs-persp
   :after (treemacs persp-mode) ;;or perspective vs. persp-mode
   :ensure t
   :config (treemacs-set-scope-type 'Perspectives))
 
 ;;treemacs-tab-bar if you use tab-bar-mode
-(use-package treemacs-tab-bar 
+(use-package treemacs-tab-bar
   :after (treemacs)
   :ensure t
   :config (treemacs-set-scope-type 'Tabs))
@@ -309,7 +309,10 @@ Other buffer group by `centaur-tabs-get-group-name' with project name."
 (use-package aweshell
   :load-path "site-lisp/aweshell"
   :ensure company
-  :bind ("s-1" . aweshell-dedicated-toggle))
+  :bind ("s-1" . aweshell-dedicated-toggle)
+  :hook
+  (aweshell-dedicated-open . (lambda()(centaur-tabs-local-mode)))
+  )
 ;;--------------------------------------------------------------------
 
 ;; lsp-bridge
@@ -331,19 +334,16 @@ Other buffer group by `centaur-tabs-get-group-name' with project name."
   (setq lsp-bridge-enable-search-words t)
   :hook
   (after-init . global-lsp-bridge-mode))
+
 ;;--------------------------------------------------------------------
-
 ;; blink-search
-;; (add-to-list 'load-path "~/.emacs.d/site-lisp/blink-search")
-;; (require 'blink-search)
-
-  (use-package blink-search
+(use-package blink-search
   :ensure nil
   :load-path "site-lisp/blink-search"
   :commands blink-search
   :bind ("s-8" . blink-search))
-;;--------------------------------------------------------------------
 
+;;--------------------------------------------------------------------
 ;; (use-package org-transclusion
 ;;   :ensure t)
 
@@ -361,17 +361,17 @@ Other buffer group by `centaur-tabs-get-group-name' with project name."
   (setq popweb-url-web-window-height-scale 0.8)
   
   ;; Org-Roam ID link and footnote link previewer
-  ;; (add-to-list 'load-path "~/.emacs.d/site-lisp/popweb/extension/org-roam")
+  ;; (add-to-list 'load-path "site-lisp/popweb/extension/org-roam")
   ;; (require 'popweb-org-roam-link)
 
   ;; LaTeX preview functionality
-  ;; (add-to-list 'load-path "~/.emacs.d/site-lisp/popweb/extension/latex")
+  ;; (add-to-list 'load-path "site-lisp/popweb/extension/latex")
   ;; (require 'popweb-latex)
   ;; (add-hook 'latex-mode-hook #'popweb-latex-mode)
 
   ;; Chinese-English translation popup
   (add-to-list 'load-path "site-lisp/popweb/extension/dict") ;
-  (require 'popweb-dict) 
+  (require 'popweb-dict)
 
 
   (add-to-list 'load-path "site-lisp/popweb/extension/url-preview")
@@ -382,42 +382,19 @@ Other buffer group by `centaur-tabs-get-group-name' with project name."
   (("s-4" . popweb-dict-youdao-pointer)
    ("s-5" . popweb-url-preview-pointer)))
 ;; :pin manual)
-;;--------------------------------------------------------------------
-
-;; Markmacro
-(use-package markmacro
-  :ensure nil
-  :load-path "site-lisp/markmacro"
-  :bind (("s-/" . markmacro-mark-words)
-         ("s-?" . markmacro-mark-lines)
-         ("s-<" . markmacro-apply-all)
-         ("s->" . markmacro-apply-all-except-first)
-         ("s-M" . markmacro-rect-set)
-         ("s-D" . markmacro-rect-delete)
-         ("s-F" . markmacro-rect-replace)
-         ("s-I" . markmacro-rect-insert)
-         ("s-C" . markmacro-rect-mark-columns)
-         ("s-S" . markmacro-rect-mark-symbols)))
 
 ;;--------------------------------------------------------------------
-(use-package mwim
-  :ensure t
-  :bind
-  ("C-a" . mwim-beginning-of-code-or-line)
-  ("C-e" . mwim-end-of-code-or-line))
-;;----------------
 ;; (use-package dap-mode
 ;;   :ensure t)
 
 ;;--------------------------------------------------------------------
-;; (add-to-list 'load-path "~/.emacs.d/site-lisp/mind-wave")
-;; (require 'mind-wave)
-
+;; ChatGPT
 (use-package mind-wave
   :ensure nil
   :load-path "site-lisp/mind-wave"
   :commands mind-wave-chat-ask
   :bind ("s-`" . mind-wave-chat-ask))
+
 ;;--------------------------------------------------------------------
-(provide 'init-f-platform)
-;;; init-f-platform.el ends here
+(provide 'init-j-platform)
+;;; init-j-platform.el ends here

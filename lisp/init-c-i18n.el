@@ -1,4 +1,4 @@
-;; init-i-i18n.el -- Settings for Internationalisation . -*- lexical-binding: t; -*-
+;; init-c-i18n.el -- Settings for Internationalisation . -*- lexical-binding: t; -*-
 ;;
 ;; Copyleft (CL) 2022-2032 YF Lin
 ;;
@@ -27,5 +27,5 @@
   ("s-7" . powerthesaurus-lookup-dwim))
 
 ;;--------------------------------------------------------------------
-(provide 'init-i-i18n)
-;;; init-i-i18n.el ends here
+(provide 'init-c-i18n)
+;;; init-c-i18n.el ends here

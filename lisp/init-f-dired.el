@@ -1,4 +1,4 @@
-;;; init-d-dired.el --- Settings for dired-mode -*- lexical-binding: t; -*-
+;;; init-f-dired.el --- Settings for dired-mode -*- lexical-binding: t; -*-
 ;;
 ;; Copyleft (CL) 2022-2032 Dr YF Lin
 ;;
@@ -85,5 +85,5 @@
     :ensure t))
 
 ;;----------------------------------------------------------------------------
-(provide 'init-d-dired)
-;;; init-d-dired.el ends here
+(provide 'init-f-dired)
+;;; init-f-dired.el ends here

@@ -266,7 +266,8 @@
   :ensure t
   :config
   (setq undo-tree-auto-save-history t)
-  (setq undo-tree-history-directory-alist '(("." . "undo-tree/" )))
+  ;; (defvar undo-dir (expand-file-name "undo-dir/" user-emacs-directory)
+  (setq undo-tree-history-directory-alist '(("." . "undo-tree-dir/"))) ;; to be improved
   (defun my-undo-tree-save-history (undo-tree-save-history &rest args)
     (let ((message-log-max nil)
           (inhibit-message t))
@@ -403,6 +404,30 @@
          ("C-h F" . describe-face)
          ([remap describe-key] . helpful-key))
   )
+
+;;--------------------------------------------------------------------
+(use-package mwim
+  :ensure t
+  :bind
+  ("C-a" . mwim-beginning-of-code-or-line)
+  ("C-e" . mwim-end-of-code-or-line))
+
+;;--------------------------------------------------------------------
+;; Markmacro
+(use-package markmacro
+  :ensure nil
+  :load-path "site-lisp/markmacro"
+  :bind (("s-/" . markmacro-mark-words)
+         ("s-?" . markmacro-mark-lines)
+         ("s-<" . markmacro-apply-all)
+         ("s->" . markmacro-apply-all-except-first)
+         ("s-M" . markmacro-rect-set)
+         ("s-D" . markmacro-rect-delete)
+         ("s-F" . markmacro-rect-replace)
+         ("s-I" . markmacro-rect-insert)
+         ("s-C" . markmacro-rect-mark-columns)
+         ("s-S" . markmacro-rect-mark-symbols)))
+
 ;;--------------------------------------------------------------------
 (provide 'init-e-enhance)
 ;;; init-e-enhance.el ends here

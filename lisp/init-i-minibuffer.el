@@ -1,4 +1,4 @@
-;;; init-t-minibuffer.el --- minibuffer -*- lexical-binding: t; -*-
+;;; init-minibuffer.el --- minibuffer -*- lexical-binding: t; -*-
 ;;
 ;; Copyleft (CL) 2022-2032 YF Lin
 ;;
@@ -491,5 +491,5 @@
   (("M-j C-SPC" . avy-goto-char-timer)))
 
 ;;--------------------------------------------------------------------
-(provide 'init-c-minibuffer)
-;;; init-c-minibuffer.el ends here.
+(provide 'init-i-minibuffer)
+;;; init-i-minibuffer.el ends here
