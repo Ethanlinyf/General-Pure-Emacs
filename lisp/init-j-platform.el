@@ -7,10 +7,11 @@
 ;; Under ThingsEngine Project: https://www.thethingsengine.org
 ;;--------------------------------------------------------------------
 ;;; Commentary:
-;; Integrated Development Enviroment
+;; Integrated Development Environment
 ;;--------------------------------------------------------------------
 ;;; Code:
 
+;;--------------------------------------------------------------------
 ;; magit for git/GitHub
 (use-package magit
   :ensure t
@@ -18,13 +19,13 @@
   :init
   (setq magit-diff-refine-hunk t))
 
-;;------------------------------------------------------------------
+;;--------------------------------------------------------------------
 ;; centaur-tabs
 (use-package centaur-tabs
-  :init
-  (setq centaur-tabs-enable-key-bindings t)
-  (centaur-tabs-mode t)
+  ;; :init
+  ;; (centaur-tabs-mode t)
   :config
+  (setq centaur-tabs-enable-key-bindings t)
   (setq centaur-tabs-style "bar"
         ;; centaur-tabs-height 32
         ;; centaur-tabs-set-icons t
@@ -39,7 +40,7 @@
         x-underline-at-descent-line t
         centaur-tabs-left-edge-margin nil)
   ;; (centaur-tabs-change-fonts (face-attribute 'default :font) 110)
-  ;; (centaur-tabs-headline-match)
+  (centaur-tabs-headline-match)
   ;; (centaur-tabs-enable-buffer-alphabetical-reordering)
   ;; (setq centaur-tabs-adjust-buffer-order t)
   
@@ -125,71 +126,13 @@ Other buffer group by `centaur-tabs-get-group-name' with project name."
   (calendar-mode . centaur-tabs-local-mode)
   (org-agenda-mode . centaur-tabs-local-mode)
   ;; (aweshell-dedicated-open . centaur-tabs-local-mode)
-  ;; (after-init . centaur-tabs-mode)
+  (after-init . centaur-tabs-mode)
   ;; :bind
   ;; ("C-<prior>" . centaur-tabs-backward)
   ;; ("C-<next>" . centaur-tabs-forward)
   ;; ("C-S-<prior>" . centaur-tabs-move-current-tab-to-left)
   ;; ("C-S-<next>" . centaur-tabs-move-current-tab-to-right)
   )
-
-;;--------------------------------------------------------------------
-;; awesome-tab
-  ;;;; add tabs for the open files
-;; (use-package awesome-tab
-;;   :ensure nil
-;;   :load-path "~/.emacs.d/site-lisp/awesome-tab"
-;;   :hook
-;;   (after-init . awesome-tab-mode)
-;;   :config
-;;   (defun awesome-tab-buffer-groups ()
-;;     "`awesome-tab-buffer-groups' control buffers' group rules.
-;; Group awesome-tab with mode if buffer is derived from `eshell-mode' `emacs-lisp-mode' `dired-mode' `org-mode' `magit-mode'.
-;; All buffer name start with * will group to \"Emacs\".
-;; Other buffer group by `awesome-tab-get-group-name' with project name."
-;;     (list
-;;      (cond
-;;       ((or (string-equal "*" (substring (buffer-name) 0 1))
-;;            (memq major-mode '(magit-process-mode
-;;                               magit-status-mode
-;;                               magit-diff-mode
-;;                               magit-log-mode
-;;                               magit-file-mode
-;;                               magit-blob-mode
-;;                               magit-blame-mode
-;;                               )))
-;;        "Emacs")
-;;       ((derived-mode-p 'eshell-mode)
-;;        "EShell")
-;;       ((derived-mode-p 'emacs-lisp-mode)
-;;        "Elisp")
-;;       ((derived-mode-p 'dired-mode)
-;;        "Dired")
-;;       ((memq major-mode '(org-mode org-agenda-mode diary-mode))
-;;        "OrgMode")
-;;       (t
-;;        (awesome-tab-get-group-name (current-buffer))))))
-
-;;   (defun awesome-tab-hide-tab (x)
-;;     (let ((name (format "%s" x)))
-;;       (or
-;;        (string-prefix-p "*epc" name)
-;;        (string-prefix-p "*helm" name)
-;;        (string-prefix-p "*Compile-Log*" name)
-;;        (string-prefix-p "*lsp" name)
-;;        (string-prefix-p "Aweshell" name)
-;;        (string-prefix-p "*shell*" name)
-;;        (string-prefix-p "*shell" name)
-;;        (string-prefix-p "*dashboard*" name)
-;;        (string-prefix-p "*info*" name)
-;;        (string-prefix-p "*scratch*" name)
-;;        (string-prefix-p "*Messages*" name)
-;;        (and (string-prefix-p "magit" name)
-;;             (not (file-name-extension name)))
-;;        )))
-
-;;   (when (display-graphic-p)
-;;     (setq awesome-tab-display-icon t)))
 
 ;;--------------------------------------------------------------------
 ;; treemacs
@@ -303,18 +246,27 @@ Other buffer group by `centaur-tabs-get-group-name' with project name."
   :init
   (require 'treemacs-all-the-icons)
   (treemacs-load-theme "all-the-icons"))
-;;--------------------------------------------------------------------
 
+;;--------------------------------------------------------------------
 ;; aweshell
+;; (use-package company
+;;   :ensure t)
+
+;; (use-package company-shell
+;;   :ensure t
+;;   :config
+;;   (add-to-list 'company-backends '(company-shell company-shell-env company-fish-shell)))
+
 (use-package aweshell
   :load-path "site-lisp/aweshell"
-  :ensure company
+  ;; :ensure company
+  :ensure nil
   :bind ("s-1" . aweshell-dedicated-toggle)
-  :hook
-  (aweshell-dedicated-open . (lambda()(centaur-tabs-local-mode)))
-  )
-;;--------------------------------------------------------------------
+  :init
+  (setq aweshell-auto-suggestion-p nil)
+  (add-hook 'aweshell-dedicated-open-hook #'centaur-tabs-local-mode))
 
+;;--------------------------------------------------------------------
 ;; lsp-bridge
 (use-package markdown-mode
   :ensure t)
@@ -353,7 +305,7 @@ Other buffer group by `centaur-tabs-get-group-name' with project name."
 (use-package popweb
   :ensure nil
   :load-path "site-lisp/popweb"
-  :config
+  :init
   (setq popweb-url-web-window-size-use-absolute t)
   (setq popweb-url-web-window-width-absolute 375)
   (setq popweb-url-web-window-height-absolute 677)
@@ -370,22 +322,17 @@ Other buffer group by `centaur-tabs-get-group-name' with project name."
   ;; (add-hook 'latex-mode-hook #'popweb-latex-mode)
 
   ;; Chinese-English translation popup
-  (add-to-list 'load-path "site-lisp/popweb/extension/dict") ;
+  (add-to-list 'load-path (expand-file-name "site-lisp/popweb/extension/dict" user-emacs-directory)) ;
   (require 'popweb-dict)
 
 
-  (add-to-list 'load-path "site-lisp/popweb/extension/url-preview")
+  (add-to-list 'load-path (expand-file-name "site-lisp/popweb/extension/url-preview" user-emacs-directory))
   (require 'popweb-url)
 
   :bind
   ;; 
   (("s-4" . popweb-dict-youdao-pointer)
    ("s-5" . popweb-url-preview-pointer)))
-;; :pin manual)
-
-;;--------------------------------------------------------------------
-;; (use-package dap-mode
-;;   :ensure t)
 
 ;;--------------------------------------------------------------------
 ;; ChatGPT
