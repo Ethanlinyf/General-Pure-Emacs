@@ -11,13 +11,28 @@
 ;;--------------------------------------------------------------------
 ;;; Code:
 
-;;--------------------------------------------------------------------
 ;; magit for git/GitHub
 (use-package magit
   :ensure t
   :bind (("C-x g" . magit-status))
   :init
   (setq magit-diff-refine-hunk t))
+
+(require 'git-gutter)
+
+(defun git-gutter-reset-to-head-parent()
+  (interactive)
+  (let (parent (filename (buffer-file-name)))
+    (if (eq git-gutter:vcs-type 'svn)
+        (setq parent "PREV")
+      (setq parent (if filename (concat (shell-command-to-string (concat "git --no-pager log --oneline -n1 --pretty=\"format:%H\" " filename)) "^") "HEAD^")))
+    (git-gutter:set-start-revision parent)
+    (message "git-gutter:set-start-revision HEAD^")))
+
+(defun git-gutter-reset-to-default ()
+  (interactive)
+  (git-gutter:set-start-revision nil)
+  (message "git-gutter reset"))
 
 ;;--------------------------------------------------------------------
 ;; centaur-tabs
@@ -102,7 +117,6 @@ Other buffer group by `centaur-tabs-get-group-name' with project name."
        (string-prefix-p "*lsp" name)
        (string-prefix-p "*company" name)
        (string-prefix-p "*Flycheck" name)
-       ;; (string-prefix-p "Aweshell" name)
        (string-prefix-p "*tramp" name)
        (string-prefix-p " *Mini" name)
        (string-prefix-p "*help" name)
@@ -115,6 +129,7 @@ Other buffer group by `centaur-tabs-get-group-name' with project name."
        (string-prefix-p "*Messages*" name)
        (string-prefix-p "*Shell Command Output*" name)
        (string-prefix-p "*use-package statistics*" name)
+       (string-prefix-p "*MULTI-TERM-DEDICATED*" name)
        
        ;; Is not magit buffer.
        (and (string-prefix-p "magit" name)
@@ -248,14 +263,14 @@ Other buffer group by `centaur-tabs-get-group-name' with project name."
   (treemacs-load-theme "all-the-icons"))
 
 ;;--------------------------------------------------------------------
-;; aweshell
-;; (use-package company
-;;   :ensure t)
+;; aweshell with company and company-shell
+(use-package company
+  :ensure t)
 
-;; (use-package company-shell
-;;   :ensure t
-;;   :config
-;;   (add-to-list 'company-backends '(company-shell company-shell-env company-fish-shell)))
+(use-package company-shell
+  :ensure t
+  :config
+  (add-to-list 'company-backends '(company-shell company-shell-env company-fish-shell)))
 
 (use-package aweshell
   :load-path "site-lisp/aweshell"
@@ -263,8 +278,14 @@ Other buffer group by `centaur-tabs-get-group-name' with project name."
   :ensure nil
   :bind ("s-1" . aweshell-dedicated-toggle)
   :init
-  (setq aweshell-auto-suggestion-p nil)
+  (setq aweshell-auto-suggestion-p t)
   (add-hook 'aweshell-dedicated-open-hook #'centaur-tabs-local-mode))
+
+;; (use-package multi-term
+;;   :ensure nil
+;;   :load-path "site-lisp/multi-term"
+;;   :bind ("s-1" . multi-term-dedicated-toggle)
+;;   )
 
 ;;--------------------------------------------------------------------
 ;; lsp-bridge
