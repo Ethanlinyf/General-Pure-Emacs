@@ -52,13 +52,11 @@
 (use-package GPE-enhancement
   :ensure nil
   :init
-  (setq delete-by-moving-to-trash t)  ; disable delete directly
-  ;; (add-hook 'after-init-hook 'ido-mode)
+  (setq delete-by-moving-to-trash t) ; disable delete directly
   (add-hook 'after-init-hook 'electric-pair-mode)
   (add-hook 'after-init-hook 'winner-mode)
   (add-hook 'after-init-hook 'global-auto-revert-mode)
-  ;; (add-hook 'after-init-hook 'electric-indent-mode')
-
+  (add-hook 'after-init-hook 'electric-indent-mode)
   (add-hook 'prog-mode-hook (lambda() (setq split-width-threshold 80)))
 
   (add-hook 'after-init-hook 'show-paren-mode)
@@ -68,8 +66,8 @@
           (t (save-excursion
                (ignore-errors (backward-up-list))
                (funcall fn))))))
-;;--------------------------------------------------------------------
 
+;;--------------------------------------------------------------------
 ;;happie-expand
 (use-package GPE-hippie-expand
   :ensure nil
@@ -124,7 +122,7 @@
   :diminish
   :bind ("C-h M-m" . which-key-show-major-mode)
   :hook (after-init . which-key-mode)
-  :init
+  :config
   (setq which-key-max-description-length 30
         which-key-show-remaining-keys t))
 ;;--------------------------------------------------------------------
