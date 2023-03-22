@@ -14,7 +14,7 @@
 ;;; Code:
 
 ;; Debugging for the setting update.
-(setq debug-on-error nil)
+(setq debug-on-error t)
 (when init-file-debug
   (profiler-start 'cpu)
   (add-hook 'window-setup-hook #'profiler-stop 0))
