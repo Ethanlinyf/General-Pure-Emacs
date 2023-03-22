@@ -33,8 +33,8 @@
         (progn
           (indent-buffer)
           (message "Indent buffer."))))))
-;;--------------------------------------------------------------------
 
+;;--------------------------------------------------------------------
 ;; abbrev settings
 (use-package GPE-abbrev
   :ensure nil
@@ -86,7 +86,6 @@
  					  try-complete-lisp-symbol)))
 
 ;;--------------------------------------------------------------------
-
 ;; from centaur emacs
 (use-package recentf
   :ensure nil
@@ -125,13 +124,8 @@
   :config
   (setq which-key-max-description-length 30
         which-key-show-remaining-keys t))
-;;--------------------------------------------------------------------
-;; displeay keystrok and commands on modeline
-;; (require 'keycast)
-;; (add-to-list 'global-mode-string '("" keycast-mode-line))
-;; (keycast-mode t)
-;;--------------------------------------------------------------------
 
+;;--------------------------------------------------------------------
 ;; Hungry deletion
 (use-package hungry-delete
   :diminish
@@ -139,24 +133,6 @@
   :init (setq hungry-delete-chars-to-skip " \t\f\v"
               hungry-delete-except-modes
               '(minibuffer-mode help-modeminibuffer-inactive-mode calc-mode)))
-;;--------------------------------------------------------------------
-
-;; ;; Mouse wheel scroll behavior
-;; (use-package GPE-mouse-wheel-scroll
-;;   :ensure nil
-;;   :init
-;;   (setq
-;;    ;; mouse-wheel-scroll-amount '(1 ((shift) . 1))
-;;    mouse-wheel-progressive-speed nil
-;;    mouse-wheel-follow-mouse t
-;;    next-line-add-newlines nil
-;;    read-process-output-max (* 64 1024)
-;;    scroll-step 1
-;;    scroll-conservatively 10000
-;;    scroll-preserve-screen-position t
-;;    scroll-up-aggressively 0.01
-;;    scroll-down-aggressively 0.01
-;;    ))
 
 ;;--------------------------------------------------------------------
 ;; Flycheck
@@ -167,6 +143,7 @@
   (prog-mode . flycheck-mode))
 
 ;;--------------------------------------------------------------------
+;; flyspell
 (use-package GPE-flyspell
   :ensure nil
   :hook ((text-mode . flyspell-mode)
@@ -193,56 +170,6 @@
   :ensure t
   :init
   (ctrlf-mode +1))
-;;--------------------------------------------------------------------
-;; session save and restore
-
-;; (setq desktop-load-locked-desktop t) ; don't popup dialog ask user, load anyway
-;; (setq desktop-restore-frames nil)    ; don't restore any frame
-
-;; (defun emacs-session-restore ()
-;;   "Restore emacs session."
-;;   (interactive)
-;;   (ignore-errors
-;;     ;; Kill other windows.
-;;     (delete-other-windows)
-;;     ;; Kill unused buffers.
-;;     (kill-unused-buffers)
-;;     ;; Restore session.
-;;     (desktop-read "~/.emacs.d/")
-;;     ))
-
-;; (defun emacs-session-save (&optional arg)
-;;   "Save emacs session."
-;;   (interactive "p")
-;;   (ignore-errors
-;;     (if (equal arg 4)
-;;         ;; Kill all buffers if with prefix argument.
-;;         (mapc 'kill-buffer (buffer-list))
-;;       ;; Kill unused buffers.
-;;       (kill-unused-buffers)
-;;       ;; Save all buffers before exit.
-;;       (auto-save-buffers))
-;;     ;; Save session.
-;;     (make-directory "~/.emacs.d/" t)
-;;     (desktop-save "~/.emacs.d/")
-;;     ;; Exit emacs.
-;;     (kill-emacs)))
-;;--------------------------------------------------------------------
-;; ;; auto-save
-;; (add-to-list 'load-path (expand-file-name "~/.emacs.d/site-lisp/auto-save")) ; add auto-save to your load-path
-;; (require 'auto-save)
-;; (auto-save-enable)
-
-;; (setq auto-save-silent t)   ; quietly save
-;; (setq auto-save-delete-trailing-whitespace t)  ; automatically delete spaces at the end of the line when saving
-
-;; ;;; custom predicates if you don't want auto save.
-;; ;;; disable auto save mode when current filetype is an gpg file.
-;; (setq auto-save-disable-predicates
-;;       '((lambda ()
-;;           (string-suffix-p
-;;            "gpg"
-;;            (file-name-extension (buffer-name)) t))))
 
 ;;--------------------------------------------------------------------
 ;; goto-line-preview
@@ -386,10 +313,9 @@
 
 (use-package highlight-symbol
   :ensure t
-  ;; :init (highlight-symbol-mode)
   :bind ("<f7>" . highlight-symbol))
-;;--------------------------------------------------------------------
 
+;;--------------------------------------------------------------------
 (use-package helpful
   :ensure t
   :commands (helpful-callable helpful-variable helpful-command helpful-key helpful-mode)
