@@ -11,6 +11,7 @@
 ;;--------------------------------------------------------------------
 ;;; Code:
 
+;; dired-mode
 (use-package dired
   :ensure nil
   :bind (:map dired-mode-map
@@ -59,7 +60,6 @@
 
   (setq dired-omit-files
         (concat dired-omit-files "\\|^.DS_Store$\\|^.projectile$\\|^.git*\\|^.svn$\\|^.vscode$\\|\\.js\\.meta$\\|\\.meta$\\|\\.elc$\\|^.emacs.*")))
-
 
 ;; Colourful dired-mode
 (use-package diredfl
