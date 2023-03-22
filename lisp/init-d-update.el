@@ -27,4 +27,4 @@
 
 ;;--------------------------------------------------------------------
 (provide 'init-d-update)
-;;; init-u-update.el ends here
+;;; init-d-update.el ends here
