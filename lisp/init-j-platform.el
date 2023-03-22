@@ -37,27 +37,19 @@
 ;;--------------------------------------------------------------------
 ;; centaur-tabs
 (use-package centaur-tabs
-  ;; :init
-  ;; (centaur-tabs-mode t)
   :config
   (setq centaur-tabs-enable-key-bindings t)
   (setq centaur-tabs-style "bar"
-        ;; centaur-tabs-height 32
-        ;; centaur-tabs-set-icons t
         centaur-tabs-show-new-tab-button t
         centaur-tabs-set-modified-marker t
         centaur-tabs-show-navigation-buttons t
         centaur-tabs-set-bar 'left
         centaur-tabs-show-count nil
-        ;; centaur-tabs-label-fixed-length 15
-        ;; centaur-tabs-gray-out-icons 'buffer
         centaur-tabs-plain-icons t
         x-underline-at-descent-line t
         centaur-tabs-left-edge-margin nil)
-  ;; (centaur-tabs-change-fonts (face-attribute 'default :font) 110)
+
   (centaur-tabs-headline-match)
-  ;; (centaur-tabs-enable-buffer-alphabetical-reordering)
-  ;; (setq centaur-tabs-adjust-buffer-order t)
   
   (setq uniquify-separator "/")
   (setq uniquify-buffer-name-style 'forward)
@@ -69,8 +61,8 @@ All buffer name start with * will group to \"Emacs\".
 Other buffer group by `centaur-tabs-get-group-name' with project name."
     (list
      (cond
-      ;; ((not (eq (file-remote-p (buffer-file-name)) nil))
-      ;; "Remote")
+      ((not (eq (file-remote-p (buffer-file-name)) nil))
+       "Remote")
       ((or (string-equal "*" (substring (buffer-name) 0 1))
            (memq major-mode '(magit-process-mode
                               magit-status-mode
@@ -140,14 +132,13 @@ Other buffer group by `centaur-tabs-get-group-name' with project name."
   (term-mode . centaur-tabs-local-mode)
   (calendar-mode . centaur-tabs-local-mode)
   (org-agenda-mode . centaur-tabs-local-mode)
-  ;; (aweshell-dedicated-open . centaur-tabs-local-mode)
+  (aweshell-dedicated-open . centaur-tabs-local-mode)
   (after-init . centaur-tabs-mode)
-  ;; :bind
-  ;; ("C-<prior>" . centaur-tabs-backward)
-  ;; ("C-<next>" . centaur-tabs-forward)
-  ;; ("C-S-<prior>" . centaur-tabs-move-current-tab-to-left)
-  ;; ("C-S-<next>" . centaur-tabs-move-current-tab-to-right)
-  )
+  :bind
+  ("C-<prior>" . centaur-tabs-backward)
+  ("C-<next>" . centaur-tabs-forward)
+  ("C-S-<prior>" . centaur-tabs-move-current-tab-to-left)
+  ("C-S-<next>" . centaur-tabs-move-current-tab-to-right))
 
 ;;--------------------------------------------------------------------
 ;; treemacs
@@ -317,46 +308,37 @@ Other buffer group by `centaur-tabs-get-group-name' with project name."
   :bind ("s-8" . blink-search))
 
 ;;--------------------------------------------------------------------
-;; (use-package org-transclusion
-;;   :ensure t)
+;; popweb
 
 (use-package dash
   :ensure t)
 
 (use-package popweb
   :ensure nil
-  :load-path "site-lisp/popweb"
-  :init
+  :load-path "site-lisp/popweb")
+
+(use-package popweb-dict
+  :ensure nil
+  :load-path "site-lisp/popweb/extension/dict"
+  :config
+  (require 'popweb-dict)
+  :bind ("s-4" . popweb-dict-youdao-pointer))
+
+(use-package popweb-url
+  :ensure nil
+  :load-path "site-lisp/popweb/extension/url-preview"
+  :custom
   (setq popweb-url-web-window-size-use-absolute t)
   (setq popweb-url-web-window-width-absolute 375)
   (setq popweb-url-web-window-height-absolute 677)
   (setq popweb-url-web-window-width-scale 0.8)
   (setq popweb-url-web-window-height-scale 0.8)
-  
-  ;; Org-Roam ID link and footnote link previewer
-  ;; (add-to-list 'load-path "site-lisp/popweb/extension/org-roam")
-  ;; (require 'popweb-org-roam-link)
-
-  ;; LaTeX preview functionality
-  ;; (add-to-list 'load-path "site-lisp/popweb/extension/latex")
-  ;; (require 'popweb-latex)
-  ;; (add-hook 'latex-mode-hook #'popweb-latex-mode)
-
-  ;; Chinese-English translation popup
-  (add-to-list 'load-path (expand-file-name "site-lisp/popweb/extension/dict" user-emacs-directory)) ;
-  (require 'popweb-dict)
-
-
-  (add-to-list 'load-path (expand-file-name "site-lisp/popweb/extension/url-preview" user-emacs-directory))
+  :config
   (require 'popweb-url)
+  :bind ("s-5" . popweb-url-preview-pointer))
 
-  :bind
-  ;; 
-  (("s-4" . popweb-dict-youdao-pointer)
-   ("s-5" . popweb-url-preview-pointer)))
-
-;;--------------------------------------------------------------------
-;; ChatGPT
+;; ;;--------------------------------------------------------------------
+;; ;; ChatGPT
 (use-package mind-wave
   :ensure nil
   :load-path "site-lisp/mind-wave"
