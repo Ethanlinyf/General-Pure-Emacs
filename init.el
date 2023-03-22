@@ -30,7 +30,7 @@
 ;;             (lambda () (setq gc-cons-threshold normal-gc-cons-threshold))))
 (add-hook 'after-init-hook #'(lambda () (setq gc-cons-threshold 800000)))
 
-
+;; Enhance the smoothness of Emacs startup
 (when (display-graphic-p)
   (setq-default inhibit-redisplay t
                 inhibit-message t)
@@ -42,7 +42,7 @@
   (define-advice startup--load-user-init-file (:after (&rest _) reset-inhibit-vars)
     (and init-file-had-error (reset-inhibit-vars))))
 
-;; set the startup default directory,
+;; Set the startup default directory,
 ;; for the generic, it can be set as defaults
 ;; for the specific, you could change to as you want after initiation.
 ;; (setq default-directory "~/")
@@ -59,21 +59,21 @@
 (defconst custom-file (expand-file-name "custom.el" user-emacs-directory))
 (unless (file-exists-p custom-file)
   (shell-command (concat "touch " custom-file)))
-;; (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
+(setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 ;; Load the custom file if it exists
 ;; (load custom-file t), or
 (when (file-exists-p custom-file)
   (load custom-file :noerror :nomessage))
 
 (unless (or (daemonp) noninteractive init-file-debug)
-  ;; Suppress file handlers operations at startup (from Centaur Emacs).
+  ;; Optimise the file handlers operations at startup (from Centaur Emacs).
   ;; `file-name-handler-alist' is consulted on each call to `require' and `load'
   (let ((old-value file-name-handler-alist))
     (setq file-name-handler-alist nil)
     (set-default-toplevel-value 'file-name-handler-alist file-name-handler-alist)
     (add-hook 'emacs-startup-hook
               (lambda ()
-                "Recover file name handlers."
+                "To recover file name handlers."
                 (setq file-name-handler-alist
                       (delete-dups (append file-name-handler-alist old-value))))
               101)))
@@ -85,12 +85,12 @@
 (when (file-exists-p pure-macro)
   (load pure-macro :noerror :nomessage))
 
-;; Personal settings for GPE.
-(defvar pure-individual (expand-file-name "init-individual.el" user-emacs-directory)
-  "A file to record Emacs macros.")
+;; Personal settings.
+(defvar pure-p-setting (expand-file-name "init-p-setting.el" user-emacs-directory)
+  "A file with personal settings.")
 ;; Load the personal setting file if it exists
-(when (file-exists-p pure-individual)
-  (load pure-individual :noerror :nomessage))
+(when (file-exists-p pure-p-setting)
+  (load pure-p-setting :noerror :nomessage))
 
 ;; Add to list to load the el files in a specific folder;
 (defun update-load-path (&rest _)
@@ -133,8 +133,8 @@
 (require 'init-r-research)
 (require 'init-r-tex)
 
-(if (featurep 'init-z-test)          ; for debugging purposes
-    (require 'init-z-test))
+;; (if (featurep 'init-z-test)          ; for testing purposes
+;;     (require 'init-z-test))
 
 ;;----------------------------------------------------------------------------
 ;;; init.el ends here.

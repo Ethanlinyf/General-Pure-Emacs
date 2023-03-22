@@ -38,9 +38,10 @@
 ;; Suppress a second case-insensitive search through the auto-mode-alist
 (setq auto-mode-case-fold nil)
 
+;; access through mini-buffer
 (setq use-file-dialog nil)
 
-;; After early-init-file to initialise 'package'. Make initialization
+;; After early-init-file to initialise 'package'. Make initialisation
 ;; slightly faster See the (package-initialize) in the file
 ;; init-0-bridge.el, which make the initiation will be executed just
 ;; once.
