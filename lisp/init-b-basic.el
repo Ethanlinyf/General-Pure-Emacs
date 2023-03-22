@@ -27,14 +27,6 @@
   :hook ((prog-mode) . display-line-numbers-mode)) ; yaml-mode text-mode org-mode conf-mode
 
 ;;--------------------------------------------------------------------
-;; quick access to a file
-;; (defun open-GPE-file ()
-;;   "Quickly open a gpe file."
-;;   (interactive)
-;;   (find-file "~/GPE-Org/gpe.org"))
-;; (global-set-key (kbd "<f1>") 'open-GPE-file)
-
-;;--------------------------------------------------------------------
 (with-no-warnings
   (line-number-mode 1)    ; Turn on line number and the column-number-mode
   (column-number-mode 1)  ; Change the cursor type
@@ -83,7 +75,7 @@
   "Show trailing spaces and delete on saving."
   (setq show-trailing-whitespace t)
   (add-hook 'before-save-hook #'delete-trailing-whitespace nil t))
-;; (add-hook 'prog-mode #'enable-trailing-whitespace)
+(add-hook 'prog-mode #'enable-trailing-whitespace)
 
 ;;----------------------- Dired Mode ---------------------------------
 (with-eval-after-load "dired"
@@ -98,9 +90,8 @@
 ;;----------------- For org mode ------------------------------------
 (use-package org-superstar
   :ensure t
-  :hook (org-mode . (lambda ()
-                      (org-superstar-mode 1)
-                      (org-indent-mode 1))))
+  :hook
+  (org-mode . (lambda () (org-superstar-mode 1) (org-indent-mode 1))))
 
 ;;------------------------ User Interface ----------------------------
 (use-package doom-modeline
@@ -143,46 +134,46 @@
 
 ;;--------------------------------------------------------------------
 ;; hydra
-;; (use-package hydra
-;;   :ensure t
-;;   :hook (emacs-lisp-mode . hydra-add-imenu)
-;;   :init
-;;   (require 'hydra))
+(use-package hydra
+  :ensure t
+  :hook (emacs-lisp-mode . hydra-add-imenu)
+  :init
+  (require 'hydra))
 
-;; ;; From Centaur Emacs
-;; (use-package pretty-hydra
-;;   :ensure
-;;   :after hydra
-;;   ;; :bind ("<f8>" . toggles-hydra/body)
-;;   :hook (emacs-lisp-mode . (lambda ()
-;;                              (add-to-list
-;;                               'imenu-generic-expression
-;;                               '("Hydras"
-;;                                 "^.*(\\(pretty-hydra-define\\) \\([a-zA-Z-]+\\)"
-;;                                 2))))
-;;   :init
-;;   (require 'pretty-hydra)
-;;   :config
-;;   (cl-defun pretty-hydra-title (title &optional icon-type icon-name
-;;                                       &key face height v-adjust)
-;;     "Add an icon in the hydra title."
-;;     (let ((face (or face `(:foreground ,(face-background 'highlight))))
-;;           (height (or height 1.0))
-;;           (v-adjust (or v-adjust 0.0)))
-;;       (concat
-;;        (when (and (icon-displayable-p) icon-type icon-name)
-;;          (let ((f (intern (format "all-the-icons-%s" icon-type))))
-;;            (when (fboundp f)
-;;              (concat
-;;               (apply f (list icon-name :face face :height height :v-adjust v-adjust))
-;;               " "))))
-;;        (propertize title 'face face)))))
+;; From Centaur Emacs
+(use-package pretty-hydra
+  :ensure
+  :after hydra
+  ;; :bind ("<f8>" . toggles-hydra/body)
+  :hook (emacs-lisp-mode . (lambda ()
+                             (add-to-list
+                              'imenu-generic-expression
+                              '("Hydras"
+                                "^.*(\\(pretty-hydra-define\\) \\([a-zA-Z-]+\\)"
+                                2))))
+  :init
+  (require 'pretty-hydra)
+  :config
+  (cl-defun pretty-hydra-title (title &optional icon-type icon-name
+                                      &key face height v-adjust)
+    "Add an icon in the hydra title."
+    (let ((face (or face `(:foreground ,(face-background 'highlight))))
+          (height (or height 1.0))
+          (v-adjust (or v-adjust 0.0)))
+      (concat
+       (when (and (icon-displayable-p) icon-type icon-name)
+         (let ((f (intern (format "all-the-icons-%s" icon-type))))
+           (when (fboundp f)
+             (concat
+              (apply f (list icon-name :face face :height height :v-adjust v-adjust))
+              " "))))
+       (propertize title 'face face)))))
 
-;; (use-package use-package-hydra
-;;   :ensure t
-;;   :after use-package hydra
-;;   :init
-;;   (require 'use-package-hydra))
+(use-package use-package-hydra
+  :ensure t
+  :after use-package hydra
+  :init
+  (require 'use-package-hydra))
 
 ;;--------------------------------------------------------------------
 (provide 'init-b-basic)
