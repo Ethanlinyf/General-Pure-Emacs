@@ -23,11 +23,6 @@
   (setq-default TeX-master nil))
 
 ;;--------------------------------------------------------------------
-;; AUCTEX Settings
-;; (load "auctex.el" nil t t)
-
-
-;;--------------------------------------------------------------------
 ;; REFTEX Settings
 (require 'reftex)
 (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
