@@ -11,6 +11,7 @@
 ;;--------------------------------------------------------------------
 ;;; Code:
 
+;; set a title for the active frame
 (setq frame-title-format
       '("Puremacs"  ": "
         (:eval (if (buffer-file-name)
@@ -28,31 +29,9 @@
   ;; Command-Option-f to toggle fullscreen mode
   ;; Hint: Customize `ns-use-native-fullscreen'
   (global-set-key (kbd "M-s-f") 'toggle-frame-fullscreen))
-;;--------------------------------------------------------------------
-
-;; (use-package doom-themes
-;;   :ensure t
-;;   :init (load-theme 'doom-one t)
-;;   :config
-;;   ;; Global settings (defaults)
-;;   (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
-;;         doom-themes-enable-italic t) ; if nil, italics is universally disabled
-
-;;   ;; Enable flashing mode-line on errors
-;;   ;;(doom-themes-visual-bell-config)
-
-;;   (setq doom-themes-treemacs-theme "doom-colors") ; use the colorful treemacs theme
-;;   (doom-themes-treemacs-config)
-
-;;   ;; Corrects (and improves) org-mode's native fontification.
-;;   (doom-themes-org-config))
 
 ;;--------------------------------------------------------------------
-;; ef-themes
-;; (use-package ef-themes
-;;   :ensure t
-;;   :init (load-theme 'ef-night))
-
+;; theme doom-one
 ;; see the PR: https://github.com/doomemacs/themes/pull/779
 (use-package doom-themes
   :custom
@@ -61,12 +40,13 @@
   :config
   ;; Enable flashing mode-line on errors
   (doom-themes-visual-bell-config)
+  
   ;; Corrects (and improves) org-mode's native fontification.
   (setq doom-themes-treemacs-theme "doom-atom") ; use "doom-colors" for less minimal icon theme
   (doom-themes-treemacs-config)
   (doom-themes-org-config)
+  
   :init
-  ;; Global settings (defaults)
   (load-theme 'doom-one t))
 
 ;;--------------------------------------------------------------------
@@ -74,26 +54,24 @@
   :if *is-mac*
   :ensure t
   :init
-  (ns-auto-titlebar-mode t)) ; not use hook for it.
+  (ns-auto-titlebar-mode t))
 
+;;--------------------------------------------------------------------
 ;; Display minor-mode in the mode line
 (use-package minions
   :ensure t
   :hook (after-init . minions-mode)
   :init
   (setq doom-modeline-minor-modes t))
-;;--------------------------------------------------------------------
-;; (use-package all-the-icons-ibuffer
-;;   :ensure t
-;;   :hook (ibuffer-mode . all-the-icons-ibuffer-mode))
 
+;;--------------------------------------------------------------------
+;; all-the-icons-ibuffer
 (use-package all-the-icons-ibuffer
   :ensure t
   :hook (ibuffer-mode . all-the-icons-ibuffer-mode)
   :config
 
   ;; (setq all-the-icons-color-icons t)
-  ;; (setq all-the-icons-ibuffer-color-icon t)
   ;; (setq all-the-icons-dired-monochrome nil) ; nil means it is colourful in dired-mode
 
   (all-the-icons-ibuffer-mode t)
@@ -118,12 +96,14 @@
   ;; See `ibuffer-formats' for details.
   all-the-icons-ibuffer-formats)
 
+;;--------------------------------------------------------------------
 ;; Slow Rendering
 ;; If you experience a slow down in performance when rendering multiple icons simultaneously,
 ;; you can try setting the following variable
 (setq inhibit-compacting-font-caches t)
-;;--------------------------------------------------------------------
 
+;;--------------------------------------------------------------------
+;; all-the-icons for completion
 (use-package all-the-icons-completion
   :after (marginalia all-the-icons)
   :hook (marginalia-mode . all-the-icons-completion-marginalia-setup)
@@ -143,13 +123,13 @@
 (use-package popwin
   :ensure t
   :hook (after-init . popwin-mode))
-;;--------------------------------------------------------------------
 
+;;--------------------------------------------------------------------
 (auto-image-file-mode 1)
 (face-remap-add-relative 'font-lock-keyword-face '(:inherit default))
 (face-remap-add-relative 'font-lock-keyword-face `(:foreground ,(face-foreground 'default)))
-;;--------------------------------------------------------------------
 
+;;--------------------------------------------------------------------
 (use-package buffer-move
   :ensure t
   :bind
@@ -157,11 +137,6 @@
   ("<C-S-down>" . buf-move-down)
   ("<C-S-left>" . buf-move-left)
   ("<C-S-right>" . buf-move-right))
-
-;; (use-package good-scroll
-;;   :ensure t
-;;   :if window-system
-;;   :init (good-scroll-mode))
 
 ;;--------------------------------------------------------------------
 (provide 'init-g-interface)
