@@ -30,6 +30,7 @@
                 ("C-c C-b" . obsidian-backlink-jump)
                 ;; If you prefer you can use `obsidian-insert-link'
                 ("C-c C-l" . obsidian-insert-wikilink))))
+
 ;;--------------------------------------------------------------------
 (use-package zotxt
   :ensure t
