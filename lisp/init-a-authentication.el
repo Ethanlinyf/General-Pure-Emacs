@@ -11,6 +11,9 @@
 ;;--------------------------------------------------------------------
 ;;; Code:
 
+;;; ChatGPT applications:
+;; Obtain OpenAI API Key, and save the API Key to the ~/.emacs.d/mind-wave/chatgpt_api_key.txt file
+;; (Or set the environment variable OPENAI_API_KEY in init-p-setting.el.).
 
 ;;--------------------------------------------------------------------
 (provide 'init-a-authentication)
