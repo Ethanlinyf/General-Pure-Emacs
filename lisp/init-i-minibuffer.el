@@ -25,8 +25,11 @@
 ;; 11 avy and with Embark
 ;;--------------------------------------------------------------------
 ;;; Code:
+
 (require 'cl-lib)
 
+;;--------------------------------------------------------------------
+;; completion by vertico
 (use-package vertico
   :ensure t
   :bind (("M-P" . vertico-repeat) ; effective in the specific mode
@@ -61,7 +64,6 @@
                  cand)))
 
   ;; Problematic completion commands: org-refile
-  
   ;; Alternative 1: Use the basic completion style
   (setq org-refile-use-outline-path 'file
         org-outline-path-complete-in-steps t)
@@ -82,8 +84,7 @@
   (advice-add #'ffap-menu-ask :around (lambda (&rest args)
                                         (cl-letf (((symbol-function #'minibuffer-completion-help)
                                                    #'ignore))
-                                          (apply args))))
-  )
+                                          (apply args)))))
 
 ;; Configure directory extension with more convenient directory navigation commands
 (use-package vertico-directory
@@ -94,8 +95,6 @@
               ("DEL" . vertico-directory-delete-char)
               ("M-DEL" . vertico-directory-delete-word) ; Mac Keyboard
               ("C-<backspace>" . vertico-directory-delete-word)) ;; for different keyboard (c-w for all)
-  ;; :init
-  ;; (add-hook 'rfn-eshadow-update-overlay-hook 'vertico-directory-tidy))
   :hook
   (rfn-eshadow-update-overlay . vertico-directory-tidy)) ; to tidy shadowed file names
 
@@ -113,8 +112,7 @@
   (vertico-grid-lookahead 50)
 
   (vertico-multiform-categories
-   '((file) ;; Defaul vertico display
-     ;; (file grid indexed)
+   '((file) ;; Defaul vertico display, (file grid indexed)
      (consult-location buffer)
      (consult-grep buffer)
      (minor-mode reverse)
@@ -160,11 +158,11 @@
               savehist-autosave-interval 300))
 
 ;;--------------------------------------------------------------------
-;; Optionally use the 'orderless' completion style.
+;; Optionally use the orderless' completion style.
 (use-package orderless
-  :demand t ;; it is better to be loaded immediately
+  :demand t ;; it is better to be loaded immediately to enable the macro: orderless-define-completion-style
   :config
-  (defun +vertico-orderless-dispatch (pattern _index _total) ; from doomemacs
+  (defun +vertico-orderless-dispatch (pattern _index _total) ; from doom-emacs
     (cond
      ;; Ensure $ works with Consult commands, which add disambiguation suffixes
      ((string-suffix-p "$" pattern)
@@ -219,13 +217,11 @@
 ;;--------------------------------------------------------------------
 ;; Enable richer annotations using the Marginalia package
 (use-package marginalia
-  ;; Either bind `marginalia-cycle` globally or only in the minibuffer
   :ensure t
   :bind (:map minibuffer-local-map
-              ("M-A" . marginalia-cycle)); for locally
+              ("M-A" . marginalia-cycle))
   :hook
   (after-init . marginalia-mode)
-  ;; (marginalia-mode . all-the-icons-completion-marginalia-setup)
   :custom
   (marginalia-max-relative-age 0)
   (marginalia-align 'center)
@@ -347,7 +343,6 @@
   ;; Enable automatic preview at point in the *Completions* buffer. This is
   ;; relevant when you use the default completion UI.
   :hook (completion-list-mode . consult-preview-at-point-mode)
-
   :init
   ;; Optionally configure the register formatting. This improves the register
   ;; preview for `consult-register', `consult-register-load',
@@ -398,7 +393,7 @@
   ;; Optionally configure a different project root function.
   ;; There are multiple reasonable alternatives to chose from.
   ;;;; 1. project.el (project-roots)
-    (setq consult-project-root-function
+  (setq consult-project-root-function
         (lambda ()
           (when-let (project (project-current))
             (car (project-roots project)))))
@@ -412,15 +407,13 @@
   ;; (setq consult-project-function (lambda (_) (locate-dominating-file "." ".git")))
   )
 
-;; Consult users will also want the emConsultbark-consult package.
+;; Consult users will also want the emConsultbark package.
 (use-package embark-consult
   :after (embark consult)
   :demand t ; only necessary if you have the hook below
-  ;; if you want to have consult previews as you move around an
-  ;; auto-updating embark collect buffer
+  ;; if you want to have consult previews as you move around an auto-updating embark collect buffer
   :hook
   (embark-collect-mode . consult-preview-at-point-mode))
-
 
 (use-package all-the-icons-completion
   :after (marginalia all-the-icons)
@@ -459,7 +452,7 @@
   :ensure t)
 
 (use-package popper
-  :ensure t ; or :straight t
+  :ensure t
   :bind (("C-`"   . popper-toggle-latest)
          ("M-`"   . popper-cycle)
          ("C-M-`" . popper-toggle-type))
@@ -471,7 +464,7 @@
           help-mode
           compilation-mode))
   (popper-mode +1)
-  (popper-echo-mode +1))                ; For echo area hints
+  (popper-echo-mode +1)) ; for echo area hints
 
 (global-set-key (kbd "M-j") nil)
 
@@ -479,13 +472,13 @@
   :ensure t
   :config
   (defun avy-action-embark (pt)
-	(unwind-protect
-		(save-excursion
+    (unwind-protect
+	(save-excursion
           (goto-char pt)
           (embark-act))
       (select-window
        (cdr (ring-ref avy-ring 0))))
-	t)
+    t)
   (setf (alist-get ?e avy-dispatch-alist) 'avy-action-embark)
   :bind
   (("M-j C-SPC" . avy-goto-char-timer)))
