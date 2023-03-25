@@ -17,52 +17,22 @@
   :bind (("C-x g" . magit-status))
   :init
   (setq magit-diff-refine-hunk t))
-
-;; (require 'git-gutter)
-
-;; (defun git-gutter-reset-to-head-parent()
-;;   (interactive)
-;;   (let (parent (filename (buffer-file-name)))
-;;     (if (eq git-gutter:vcs-type 'svn)
-;;         (setq parent "PREV")
-;;       (setq parent (if filename (concat (shell-command-to-string (concat "git --no-pager log --oneline -n1 --pretty=\"format:%H\" " filename)) "^") "HEAD^")))
-;;     (git-gutter:set-start-revision parent)
-;;     (message "git-gutter:set-start-revision HEAD^")))
-
-;; (defun git-gutter-reset-to-default ()
-;;   (interactive)
-;;   (git-gutter:set-start-revision nil)
-;;   (message "git-gutter reset"))
-
 ;;--------------------------------------------------------------------
-;; centaur-tabs
-(use-package centaur-tabs
+;; add tabs for the open files
+(use-package awesome-tab
+  :ensure nil
+  :load-path "~/.emacs.d/site-lisp/awesome-tab"
+  ;; :hook
+  ;; (after-init . awesome-tab-mode)
+  :bind ("s-9" . awesome-tab-mode)
   :config
-  (setq centaur-tabs-enable-key-bindings t)
-  (setq centaur-tabs-style "bar"
-        centaur-tabs-show-new-tab-button t
-        centaur-tabs-set-modified-marker t
-        centaur-tabs-show-navigation-buttons t
-        centaur-tabs-set-bar 'left
-        centaur-tabs-show-count nil
-        centaur-tabs-plain-icons t
-        x-underline-at-descent-line t
-        centaur-tabs-left-edge-margin nil)
-
-  (centaur-tabs-headline-match)
-  
-  (setq uniquify-separator "/")
-  (setq uniquify-buffer-name-style 'forward)
-  (defun centaur-tabs-buffer-groups ()
-    "`centaur-tabs-buffer-groups' control buffers' group rules.
-
-Group centaur-tabs with mode if buffer is derived from `eshell-mode' `emacs-lisp-mode' `dired-mode' `org-mode' `magit-mode'.
-All buffer name start with * will group to \"Emacs\".
-Other buffer group by `centaur-tabs-get-group-name' with project name."
+  (defun awesome-tab-buffer-groups ()
+    "`awesome-tab-buffer-groups' control buffers' group rules.
+  Group awesome-tab with mode if buffer is derived from `eshell-mode' `emacs-lisp-mode' `dired-mode' `org-mode' `magit-mode'.
+  All buffer name start with * will group to \"Emacs\".
+  Other buffer group by `awesome-tab-get-group-name' with project name."
     (list
      (cond
-      ((not (eq (file-remote-p (buffer-file-name)) nil))
-       "Remote")
       ((or (string-equal "*" (substring (buffer-name) 0 1))
            (memq major-mode '(magit-process-mode
                               magit-status-mode
@@ -73,72 +43,37 @@ Other buffer group by `centaur-tabs-get-group-name' with project name."
                               magit-blame-mode
                               )))
        "Emacs")
-      ((derived-mode-p 'prog-mode)
-       "Editing")
+      ((derived-mode-p 'eshell-mode)
+       "EShell")
+      ((derived-mode-p 'emacs-lisp-mode)
+       "Elisp")
       ((derived-mode-p 'dired-mode)
        "Dired")
-      ((memq major-mode '(helpful-mode
-                          help-mode))
-       "Help")
-      ((memq major-mode '(org-mode
-                          org-agenda-clockreport-mode
-                          org-src-mode
-                          org-agenda-mode
-                          org-beamer-mode
-                          org-indent-mode
-                          org-bullets-mode
-                          org-cdlatex-mode
-                          org-agenda-log-mode
-                          diary-mode))
+      ((memq major-mode '(org-mode org-agenda-mode diary-mode))
        "OrgMode")
       (t
-       (centaur-tabs-get-group-name (current-buffer))))))
+       (awesome-tab-get-group-name (current-buffer))))))
 
-  (defun centaur-tabs-hide-tab (x)
-    "Do no to show buffer X in tabs."
+  (defun awesome-tab-hide-tab (x)
     (let ((name (format "%s" x)))
       (or
-       ;; Current window is not dedicated window.
-       (window-dedicated-p (selected-window))
-
-       ;; Buffer name not match below blacklist.
        (string-prefix-p "*epc" name)
        (string-prefix-p "*helm" name)
-       (string-prefix-p "*Helm" name)
        (string-prefix-p "*Compile-Log*" name)
        (string-prefix-p "*lsp" name)
-       (string-prefix-p "*company" name)
-       (string-prefix-p "*Flycheck" name)
-       (string-prefix-p "*tramp" name)
-       (string-prefix-p " *Mini" name)
-       (string-prefix-p "*help" name)
-       (string-prefix-p "*straight" name)
-       (string-prefix-p " *temp" name)
-       (string-prefix-p "*Help" name)
-       (string-prefix-p "*mybuf" name)
+       ;; (string-prefix-p "Aweshell" name)
+       (string-prefix-p "*shell*" name)
+       (string-prefix-p "*shell" name)
        (string-prefix-p "*dashboard*" name)
+       (string-prefix-p "*info*" name)
        (string-prefix-p "*scratch*" name)
        (string-prefix-p "*Messages*" name)
-       (string-prefix-p "*Shell Command Output*" name)
-       (string-prefix-p "*use-package statistics*" name)
-       (string-prefix-p "*MULTI-TERM-DEDICATED*" name)
-       
-       ;; Is not magit buffer.
        (and (string-prefix-p "magit" name)
             (not (file-name-extension name)))
        )))
-  
-  :hook
-  (term-mode . centaur-tabs-local-mode)
-  (calendar-mode . centaur-tabs-local-mode)
-  (org-agenda-mode . centaur-tabs-local-mode)
-  (aweshell-dedicated-open . centaur-tabs-local-mode)
-  (after-init . centaur-tabs-mode)
-  :bind
-  ("C-<prior>" . centaur-tabs-backward)
-  ("C-<next>" . centaur-tabs-forward)
-  ("C-S-<prior>" . centaur-tabs-move-current-tab-to-left)
-  ("C-S-<next>" . centaur-tabs-move-current-tab-to-right))
+
+  (when (display-graphic-p)
+    (setq awesome-tab-display-icon t)))
 
 ;;--------------------------------------------------------------------
 ;; treemacs
@@ -268,15 +203,7 @@ Other buffer group by `centaur-tabs-get-group-name' with project name."
   ;; :ensure company
   :ensure nil
   :bind ("s-1" . aweshell-dedicated-toggle)
-  :init
-  (setq aweshell-auto-suggestion-p t)
-  (add-hook 'aweshell-dedicated-open-hook #'centaur-tabs-local-mode))
-
-;; (use-package multi-term
-;;   :ensure nil
-;;   :load-path "site-lisp/multi-term"
-;;   :bind ("s-1" . multi-term-dedicated-toggle)
-;;   )
+  :init (setq aweshell-auto-suggestion-p t))
 
 ;;--------------------------------------------------------------------
 ;; lsp-bridge
@@ -309,7 +236,6 @@ Other buffer group by `centaur-tabs-get-group-name' with project name."
 
 ;;--------------------------------------------------------------------
 ;; popweb
-
 (use-package dash
   :ensure t)
 

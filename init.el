@@ -28,7 +28,7 @@
 ;;   (setq gc-cons-threshold init-gc-cons-threshold)
 ;;   (add-hook 'emacs-startup-hook
 ;;             (lambda () (setq gc-cons-threshold normal-gc-cons-threshold))))
-(add-hook 'after-init-hook #'(lambda () (setq gc-cons-threshold 800000)))
+(add-hook 'after-init-hook #'(lambda () (setq gc-cons-threshold (* 20 1024 1024))))
 
 ;; Enhance the smoothness of Emacs startup
 (when (display-graphic-p)

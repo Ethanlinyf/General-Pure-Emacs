@@ -16,3 +16,6 @@
 [submodule "site-lisp/mind-wave"]
 	path = site-lisp/mind-wave
 	url = git@github.com:manateelazycat/mind-wave.git
+[submodule "site-lisp/awesome-tab"]
+	path = site-lisp/awesome-tab
+	url = git@github.com:manateelazycat/awesome-tab.git

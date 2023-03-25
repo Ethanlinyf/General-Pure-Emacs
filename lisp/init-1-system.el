@@ -107,6 +107,7 @@
 ;;  make sure.
 (use-package compat
   :ensure t)
+
 ;;--------------------------------------------------------------------
 ;; Start server
 (use-package server
