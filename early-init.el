@@ -69,6 +69,14 @@
 (when (featurep 'ns)
   (push '(ns-transparent-titlebar . t) default-frame-alist))
 
+;; turn off the following modes:
+(menu-bar-mode -1)
+(tool-bar-mode -1)
+(scroll-bar-mode -1)
+
+;; not compile on this stage
+(setq comp-deferred-compilation nil)
+
 ;; Turn off the startup help screen
 (setq inhibit-splash-screen t)
 
