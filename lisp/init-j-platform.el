@@ -61,7 +61,7 @@
        (string-prefix-p "*helm" name)
        (string-prefix-p "*Compile-Log*" name)
        (string-prefix-p "*lsp" name)
-       ;; (string-prefix-p "Aweshell" name)
+       (string-prefix-p "*Treemacs-" name)
        (string-prefix-p "*shell*" name)
        (string-prefix-p "*shell" name)
        (string-prefix-p "*dashboard*" name)
