@@ -23,11 +23,7 @@
                                after-init-time before-init-time)))
                      gcs-done)))
 
-;; (let ((normal-gc-cons-threshold (* 20 1024 1024))
-;;       (init-gc-cons-threshold (* 128 1024 1024)))
-;;   (setq gc-cons-threshold init-gc-cons-threshold)
-;;   (add-hook 'emacs-startup-hook
-;;             (lambda () (setq gc-cons-threshold normal-gc-cons-threshold))))
+;; set gc-threshold after init
 (add-hook 'after-init-hook #'(lambda () (setq gc-cons-threshold (* 20 1024 1024))))
 
 ;; Enhance the smoothness of Emacs startup
@@ -42,18 +38,12 @@
   (define-advice startup--load-user-init-file (:after (&rest _) reset-inhibit-vars)
     (and init-file-had-error (reset-inhibit-vars))))
 
-;; Set the startup default directory,
-;; for the generic, it can be set as defaults
-;; for the specific, you could change to as you want after initiation.
-;; (setq default-directory "~/")
-;; (setq user-emacs-directory "~/.emacs.d/")
-
 ;; Initialise the major mode for scratch, fundamental-mode or text-mode
 ;; Prevent setting it as a rich mode, such as org-mode, which will
 ;; slow down the sartup speed.
 (setq initial-major-mode 'text-mode);
 
-;; package--init-file-ensured t)
+;; (package--init-file-ensured t)
 
 ;; Load the settings recorded through Emacs
 (defconst custom-file (expand-file-name "custom.el" user-emacs-directory))
