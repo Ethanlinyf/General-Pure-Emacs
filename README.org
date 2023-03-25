@@ -32,7 +32,7 @@ What is "G.P.E":
 [[./site-lisp/figure/GPE-Framework_4.png]]
 
 * A basic structure of configuration
-Emacs:~$ (init 0 1) --> G.P.E
+Emacs:~$ (init 0 1) --AI--> G.P.E
 #+BEGIN_EXAMPLE
   .emacs.d/
      |
