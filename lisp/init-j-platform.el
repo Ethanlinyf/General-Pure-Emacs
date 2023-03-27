@@ -17,6 +17,7 @@
   :bind (("C-x g" . magit-status))
   :init
   (setq magit-diff-refine-hunk t))
+
 ;;--------------------------------------------------------------------
 ;; add tabs for the open files
 (use-package awesome-tab
@@ -221,8 +222,9 @@
   ;;  (six . "pip install six"))
   :commands lsp-bridge-mode
   :ensure nil
-  :init
+  :config
   (setq lsp-bridge-enable-search-words t)
+  ;; (setq lsp-bridge-enable-org-babel t) ; error popping up, need to be checked.
   :hook
   (after-init . global-lsp-bridge-mode))
 
