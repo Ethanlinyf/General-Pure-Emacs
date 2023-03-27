@@ -18,9 +18,9 @@ The GPE is, not GPE, but named GPE.
 #+end_quote
 
 * Introduction
-GPE is an integrated and flexible platform based on Gnu Emacs with
-around 100 packages to facilitate learning/teaching, research and
-project management.
+GPE is an integrated and flexible platform based on Gnu Emacs and
+artificial intelligence (AI) with around 100 packages to facilitate
+learning, teaching, research and project management.
 
 What is "G.P.E": 
 - General :: The operation with all the integrated facilities is generalised.
