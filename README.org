@@ -88,8 +88,8 @@ To follow the principles of this platform, general, pure and
 extensible, the configuration will be generated with the following
 considerations:
 - Easy to integrate and debug
-- Lower coupling and higer cohesion
-- More aggegation and less inheritance
+- Lower coupling and higher cohesion
+- More aggregation and less inheritance
 - To precipitate the common into the bottom layers, and make flexible on the top:
 
 [[./site-lisp/figure/Configuration_Metodology_7.jpg]]
@@ -146,7 +146,7 @@ considerations:
   + roam-network
 
     * How to import and visualize your roam research, obsidian and
-      zettelkasten markdown format notes, a graphical frontend for
+      zettelkasten markdown format notes, a graphical front-end for
       your org-roam Zettelkasten, org-roam-ui[fn:3]:
 
       [[./site-lisp/figure/roam-research-ui.png]]
@@ -154,7 +154,7 @@ considerations:
 - Creative and Innovative \\
   + A creative workshop in this platform is established to publish [[https://www.thethingsengine.org/org2xhtml.html][org
     files to XHTML]] files with customised theme file (css and js) to be
-    hosted as a website ([[https://www.thethingsengine.org/index.html][Something-Good]]) in Github:
+    hosted as a website ([[https://www.thethingsengine.org/index.html][Something-Good]]) in GitHub:
     [[./site-lisp/figure/org2xhtml.png]]
   Push at the boundary of knowledge with GPE [fn:4]:
 
@@ -175,8 +175,8 @@ recommended.
    #+end_src
 2. Clone this repository
    You should install Git in your system first, as well as set your
-   usename and email, the same for GitHub with SSH public key. See the [[https://github.com/Ethanlinyf/Git-GitHub-Tutorial][tutorial]] of
-   Git/Github. 
+   username and email, the same for GitHub with SSH public key. See the [[https://github.com/Ethanlinyf/Git-GitHub-Tutorial][tutorial]] of
+   Git/GitHub. 
    #+begin_src shell
      git clone --depth 1 git@github.com:Ethanlinyf/General-Pure-Emacs.git ~/.emacs.d
    #+end_src
@@ -241,7 +241,7 @@ welcome any suggestions.
 This program is free software. You can redistribute and/or modify it
 under [[https://github.com/redguardtoo/emacs.d/blob/master/LICENSE][GNU General Public License]] published by the Free Software
 Foundation, as well as Copyleft under [[https://thethingsengine.org][ThingsEngine]] project. The
-constributions are shared with the hope that this program will be
+contributions are shared with the hope that this program will be
 useful, helpful and inspiring, but without any warranty; without even
 the implied warranty of merchantability or fitness for a particular
 purpose.
