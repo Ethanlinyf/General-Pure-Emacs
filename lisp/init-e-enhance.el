@@ -143,26 +143,39 @@
   (prog-mode . flycheck-mode))
 
 ;;--------------------------------------------------------------------
-;; flyspell
-(use-package GPE-flyspell
-  :ensure nil
-  :hook ((text-mode . flyspell-mode)
-         (prog-mode . flyspell-prog-mode))
-  :bind (("C-c f s" . flyspell-mode)
-         ("C-c f c" . flyspell-correct-word-before-point)
-         :map flyspell-mouse-map
-         ([down-mouse-3] . flyspell-correct-word))
-  :config
-  (if (executable-find "hunspell")
-      (setq ispell-program-name "hunspell")
-    (setq ispell-program-name "aspell"))
+;; ;; flyspell
+;; (use-package GPE-flyspell
+;;   :ensure nil
+;;   :hook ((text-mode . flyspell-mode)
+;;          (prog-mode . flyspell-prog-mode))
+;;   :bind (("C-c f s" . flyspell-mode)
+;;          ("C-c f c" . flyspell-correct-word-before-point)
+;;          :map flyspell-mouse-map
+;;          ([down-mouse-3] . flyspell-correct-word))
+;;   :config
+;;   (if (executable-find "hunspell")
+;;       (setq ispell-program-name "hunspell")
+;;     (setq ispell-program-name "aspell"))
   
-  (setq ispell-local-dictionary "en_US")
-  (setq ispell-local-dictionary-alist '(("en_US" "[[:alpha:]]" "[^[:alpha:]]" "[']" nil ("-d" "en_US,en_US-med") nil utf-8)))
-  ;; new variable `ispell-hunspell-dictionary-alist' is defined in Emacs
-  ;; If it's nil, Emacs tries to automatically set up the dictionaries.
-  (when (boundp 'ispell-hunspell-dictionary-alist)
-    (setq ispell-hunspell-dictionary-alist ispell-local-dictionary-alist)))
+;;   (setq ispell-local-dictionary "en_US")
+;;   (setq ispell-local-dictionary-alist '(("en_US" "[[:alpha:]]" "[^[:alpha:]]" "[']" nil ("-d" "en_US,en_US-med") nil utf-8)))
+;;   ;; new variable `ispell-hunspell-dictionary-alist' is defined in Emacs
+;;   ;; If it's nil, Emacs tries to automatically set up the dictionaries.
+;;   (when (boundp 'ispell-hunspell-dictionary-alist)
+;;     (setq ispell-hunspell-dictionary-alist ispell-local-dictionary-alist)))
+
+(use-package jinx
+  :ensure t
+  :hook
+  (tex-mode . jinx-mode)
+  (org-mode . jinx-mode)
+  (conf-mode . jinx-mode)
+  )
+
+;; (add-hook 'emacs-startup-hook #'global-jinx-mode)
+
+;; (dolist (hook '(text-mode-hook prog-mode-hook conf-mode-hook))
+;;   (add-hook hook #'jinx-mode))
 
 ;;--------------------------------------------------------------------
 ;; An intuitive and efficient solution for single-buffer text search
