@@ -135,47 +135,16 @@
               '(minibuffer-mode help-modeminibuffer-inactive-mode calc-mode)))
 
 ;;--------------------------------------------------------------------
-;; Flycheck
-(use-package flycheck
-  :ensure t
-  :init (setq global-flycheck-mode nil)
-  :hook
-  (prog-mode . flycheck-mode))
-
-;;--------------------------------------------------------------------
-;; ;; flyspell
-;; (use-package GPE-flyspell
-;;   :ensure nil
-;;   :hook ((text-mode . flyspell-mode)
-;;          (prog-mode . flyspell-prog-mode))
-;;   :bind (("C-c f s" . flyspell-mode)
-;;          ("C-c f c" . flyspell-correct-word-before-point)
-;;          :map flyspell-mouse-map
-;;          ([down-mouse-3] . flyspell-correct-word))
-;;   :config
-;;   (if (executable-find "hunspell")
-;;       (setq ispell-program-name "hunspell")
-;;     (setq ispell-program-name "aspell"))
-  
-;;   (setq ispell-local-dictionary "en_US")
-;;   (setq ispell-local-dictionary-alist '(("en_US" "[[:alpha:]]" "[^[:alpha:]]" "[']" nil ("-d" "en_US,en_US-med") nil utf-8)))
-;;   ;; new variable `ispell-hunspell-dictionary-alist' is defined in Emacs
-;;   ;; If it's nil, Emacs tries to automatically set up the dictionaries.
-;;   (when (boundp 'ispell-hunspell-dictionary-alist)
-;;     (setq ispell-hunspell-dictionary-alist ispell-local-dictionary-alist)))
-
+;; spell checking
 (use-package jinx
   :ensure t
-  :hook
-  (tex-mode . jinx-mode)
-  (org-mode . jinx-mode)
-  (conf-mode . jinx-mode)
+  ;; :hook
+  ;; (tex-mode . jinx-mode)
+  ;; (org-mode . jinx-mode)
+  ;; (conf-mode . jinx-mode)
+  ;; :hook
+  ;; (emacs-startup . global-jinx-mode)
   )
-
-;; (add-hook 'emacs-startup-hook #'global-jinx-mode)
-
-;; (dolist (hook '(text-mode-hook prog-mode-hook conf-mode-hook))
-;;   (add-hook hook #'jinx-mode))
 
 ;;--------------------------------------------------------------------
 ;; An intuitive and efficient solution for single-buffer text search
@@ -201,28 +170,12 @@
 ;;--------------------------------------------------------------------
 ;; undo-tree
 (use-package undo-tree
-  :ensure t
-  :config
-  (setq undo-tree-auto-save-history t)
-  ;; (defvar undo-dir (expand-file-name "undo-dir/" user-emacs-directory)
-  (setq undo-tree-history-directory-alist '(("." . "undo-tree-dir/"))) ;; to be improved
-  (defun my-undo-tree-save-history (undo-tree-save-history &rest args)
-    (let ((message-log-max nil)
-          (inhibit-message t))
-      (apply undo-tree-save-history args)))
-  (advice-add 'undo-tree-save-history :around 'my-undo-tree-save-history)
-  :init (global-undo-tree-mode)
-  :after hydra
-  :bind ("C-x C-h u" . hydra-undo-tree/body)
-  :hydra (hydra-undo-tree (:hint nil)
-                          "  _p_: undo  _n_: redo _s_: save _l_: load   "
-                          ("p"   undo-tree-undo)
-                          ("n"   undo-tree-redo)
-                          ("s"   undo-tree-save-history)
-                          ("l"   undo-tree-load-history)
-                          ("u"   undo-tree-visualize "visualize" :color blue)
-                          ("q"   nil "quit" :color blue)))
-
+  :diminish
+  :hook (after-init . global-undo-tree-mode)
+  :init (setq undo-tree-visualizer-timestamps t
+              undo-tree-visualizer-diff t
+              undo-tree-enable-undo-in-region nil
+              undo-tree-auto-save-history nil))
 ;;--------------------------------------------------------------------
 ;; Elisp API Demos
 ;; C-h x command RET (describe-command) displays the documentation of the named command, in a window.
@@ -231,6 +184,8 @@
   :init
   (advice-add 'describe-function-1 :after #'elisp-demos-advice-describe-function-1))
 
+;;--------------------------------------------------------------------
+;; ace-window
 (use-package ace-window
   :ensure t
   :hook
@@ -323,6 +278,7 @@ Up^^             Down^^           Miscellaneous           % 2(mc/num-cursors) cu
   :bind ("<f7>" . highlight-symbol))
 
 ;;--------------------------------------------------------------------
+;; enhance the helpful
 (use-package helpful
   :ensure t
   :commands (helpful-callable helpful-variable helpful-command helpful-key helpful-mode)
