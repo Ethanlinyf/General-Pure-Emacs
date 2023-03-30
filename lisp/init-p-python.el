@@ -39,19 +39,14 @@
     (setq python-shell-interpreter "python"))
 
   ;; Env vars
-  (with-eval-after-load 'exec-path-from-shell
-    (exec-path-from-shell-copy-env "PYTHONPATH"))
+  (when (or sys/mac-x-p sys/linux-x-p (daemonp))
+    (with-eval-after-load 'exec-path-from-shell
+      (exec-path-from-shell-copy-env "~/.pyenv/shims/"))))
 
-  ;; Live Coding in Python
-  (use-package live-py-mode))
-
-;; set it for your Python environment
-;; (use-package pyvenv
-;;   :ensure t
-;;   :config
-;;   (setenv "WORKON_HOME" "~/miniconda3/envs")
-;;   (setq python-shell-interpreter "python3")
-;;   (pyvenv-mode t))
+;; Live Coding in Python
+(use-package live-py-mode
+  :ensure t
+  :hook (python-mode . live-py-mode))
 
 ;;----------------------------------------------------------------------------
 (provide 'init-p-python)
