@@ -64,6 +64,7 @@ Emacs:~$ (init 0 1) --AI--> G.P.E
      |   |-- init-julia
      |   |-- init-research
      |   |-- init-tex
+     |   |-- init-test
      |
      |-- site-lisp/
      |   |-- lsp-bridge
