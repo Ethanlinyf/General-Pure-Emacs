@@ -33,6 +33,8 @@
 (when (or sys/mac-x-p sys/linux-x-p (daemonp))
   (use-package exec-path-from-shell
     :ensure t
+    :config
+    (setq exec-path-from-shell-arguments '("-l"))
     :hook
     (after-init . exec-path-from-shell-initialize)))
 
