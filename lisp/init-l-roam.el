@@ -14,7 +14,7 @@
   :ensure t
   :init
   (defvar GPE-roam (expand-file-name "GPE-Org/roam/" user-emacs-directory))
-  (unless (file-exists-p GPE-roam)
+  (unless (file-directory-p GPE-roam)
     (make-directory GPE-roam))
   :custom
   (org-roam-directory (file-truename GPE-roam))
