@@ -71,9 +71,6 @@
   :hook (ibuffer-mode . all-the-icons-ibuffer-mode)
   :config
 
-  ;; (setq all-the-icons-color-icons t)
-  ;; (setq all-the-icons-dired-monochrome nil) ; nil means it is colourful in dired-mode
-
   (all-the-icons-ibuffer-mode t)
 
   ;; Whether display the icons.

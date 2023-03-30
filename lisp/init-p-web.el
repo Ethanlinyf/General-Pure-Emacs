@@ -11,16 +11,14 @@
 ;;--------------------------------------------------------------------
 ;;; Code:
 
+;; Tide, TypeScript Interactive Development Environment for Emacs: https://github.com/ananthakumaran/tide/
+;; ts-comint, a Typescript REPL in Emacs: https://github.com/emacs-typescript/typescript.el
 (use-package typescript-mode
   :ensure t
   :mode ("\\.ts[x]\\'" . typescript-mode))
 
-;; Tide, TypeScript Interactive Development Environment for Emacs: https://github.com/ananthakumaran/tide/
-;; ts-comint, a Typescript REPL in Emacs: https://github.com/emacs-typescript/typescript.el
-
 (use-package json-mode
   :ensure t)
-
 
 ;;--------------------------------------------------------------------
 (provide 'init-p-web)
