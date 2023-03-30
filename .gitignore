@@ -85,7 +85,6 @@ zull.el
 /packages.txt
 /custom.el
 /blink-search.db
-**/init-z-test.el
 **/tobe.el
 /straight
 blink-search.db

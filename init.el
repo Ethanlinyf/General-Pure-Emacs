@@ -123,8 +123,7 @@
 (require 'init-r-research)
 (require 'init-r-tex)
 
-;; (if (featurep 'init-z-test)          ; for testing purposes
-;;     (require 'init-z-test))
+(require 'init-z-test) ; for testing purposes
 
 ;;----------------------------------------------------------------------------
 ;;; init.el ends here.
