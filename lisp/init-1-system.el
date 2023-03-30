@@ -29,24 +29,10 @@
         display-time t ;display-time-day-and-date t
         ))
 
-;; Set UTF-8 as the default coding system
-(when (fboundp 'set-charset-priority)
-  (set-charset-priority 'unicode))
-
-(setq locale-coding-system 'utf-8)
-(set-language-environment 'utf-8)
-(set-default-coding-systems 'utf-8)
-(prefer-coding-system 'utf-8)
-
-(unless sys/win32p
-  (set-selection-coding-system 'utf-8))
-
-;; Environment
-(when (or sys/mac-x-p sys/linux-x-p (daemonp)) ; (when (memq window-system '(mac ns))
+;; Environment: the same as in the your shell
+(when (or sys/mac-x-p sys/linux-x-p (daemonp))
   (use-package exec-path-from-shell
-    :ensure t
-    :custom (exec-path-from-shell-arguments '("-l"))
-    :config (exec-path-from-shell-initialize)))
+    :init (exec-path-from-shell-initialize)))
 
 ;;--------------------------------------------------------------------
 ;; A few more useful configurations...
