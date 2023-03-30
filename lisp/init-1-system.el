@@ -29,11 +29,11 @@
         display-time t ;display-time-day-and-date t
         ))
 
-;; Environment: the same as in the your shell
+;; Environment: the same path as in your shell, bash or zsh
 (when (or sys/macp sys/linuxp (daemonp))
   (use-package exec-path-from-shell
-    :hook
-    (after-init . exec-path-from-shell-initialize)))
+    :config (setq exec-path-from-shell-check-startup-files nil)
+    :hook (after-init . exec-path-from-shell-initialize)))
 
 ;;--------------------------------------------------------------------
 ;; A few more useful configurations...
