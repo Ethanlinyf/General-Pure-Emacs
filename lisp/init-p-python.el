@@ -38,15 +38,15 @@
              (string= python-shell-interpreter "python"))
     (setq python-shell-interpreter "python"))
 
+  (defvar GPE-pyenv (expand-file-name ".pyenv/shims/" default-directory))
   ;; Env vars
   (when (or sys/mac-x-p sys/linux-x-p (daemonp))
     (with-eval-after-load 'exec-path-from-shell
-      (exec-path-from-shell-copy-env "~/.pyenv/shims/"))))
+      (exec-path-from-shell-copy-env GPE-pyenv))))
 
 ;; Live Coding in Python
 (use-package live-py-mode
-  :ensure t
-  :hook (python-mode . live-py-mode))
+  :ensure t)
 
 ;;----------------------------------------------------------------------------
 (provide 'init-p-python)
