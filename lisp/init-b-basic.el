@@ -102,6 +102,8 @@
 ;; Yet another snippet extension
 (use-package yasnippet
   :diminish yas-minor-mode
+  :config
+  (setq yas-verbosity 0) ; 1 or higher to show Yasnippet messages again
   :hook (after-init . yas-global-mode))
 
 ;; Collection of yasnippet snippets
