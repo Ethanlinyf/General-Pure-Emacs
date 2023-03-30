@@ -186,7 +186,7 @@ recommended.
      brew install autoconf automake texinfo gnutls pkg-config libxml2 --debug --verbose
      pip3 install epc openai sexpdata six orjson requests
      pip3 install PyQt6 PyQt6-Qt6 PyQt6-sip PyQt6-WebEngine PyQt6-WebEngine-Qt6
-     pip3 install browser_cookie3 enchant
+     pip3 install browser_cookie3 enchant ruff-lsp
      
    #+end_src
 
