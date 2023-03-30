@@ -32,7 +32,9 @@
 ;; Environment: the same as in the your shell
 (when (or sys/mac-x-p sys/linux-x-p (daemonp))
   (use-package exec-path-from-shell
-    :init (exec-path-from-shell-initialize)))
+    :ensure t
+    :hook
+    (after-init . exec-path-from-shell-initialize)))
 
 ;;--------------------------------------------------------------------
 ;; A few more useful configurations...
