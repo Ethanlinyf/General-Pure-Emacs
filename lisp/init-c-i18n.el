@@ -11,6 +11,18 @@
 ;;--------------------------------------------------------------------
 ;;; Code:
 
+;; Set UTF-8 as the default coding system
+(when (fboundp 'set-charset-priority)
+  (set-charset-priority 'unicode))
+
+(setq locale-coding-system 'utf-8)
+(set-language-environment 'utf-8)
+(set-default-coding-systems 'utf-8)
+(prefer-coding-system 'utf-8)
+
+(unless sys/win32p
+  (set-selection-coding-system 'utf-8))
+
 (use-package pyim
   :ensure t)
 
