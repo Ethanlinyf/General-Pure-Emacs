@@ -1,4 +1,4 @@
-;;; init-bridge --- To Install Plugins for GPEmacs. -*- lexical-binding: t; -*-
+;;; init-bridge --- To Install Plugins for GPE. -*- lexical-binding: t; -*-
 ;;
 ;; Copyleft (CL) 2022-2032 YF Lin
 ;;
@@ -11,7 +11,6 @@
 ;;--------------------------------------------------------------------
 ;;; Code:
 
-;; (require 'cl)
 (require 'package)
 
 (when (>= emacs-major-version 27)
@@ -23,7 +22,7 @@
   (package-initialize))
 
 ;;--------------------------------------------------------------------
-;; Another way to manage packages
+;; another way to manage packages
 ;;--------------------------------------------------------------------
 ;; (defvar puremacs/packages '(
                             
@@ -91,6 +90,15 @@
 ;; Update GPG keyring for GNU ELPA
 (use-package gnu-elpa-keyring-update
   :ensure t)
+
+;; interactive macro expansion
+(use-package macrostep
+  :custom-face
+  (macrostep-expansion-highlight-face ((t (:inherit tooltip :extend t))))
+  :bind (:map emacs-lisp-mode-map
+         ("C-c e" . macrostep-expand)
+         :map lisp-interaction-mode-map
+         ("C-c e" . macrostep-expand)))
 
 (use-package things-engine
   :ensure nil
