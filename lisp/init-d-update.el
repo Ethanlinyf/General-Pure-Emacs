@@ -11,9 +11,8 @@
 ;;--------------------------------------------------------------------
 ;;; Code:
 
-;; Settings for the update of Emacs 29.1
-
-;;------------------ Emacs@29 ---------------------------------------
+;; Emacs@29 
+;;--------------------------------------------------------------------
 ;; (when emacs/>=29p
 ;;   (push '(sh-mode . bash-ts-mode) major-mode-remap-alist)
 ;;   (push '(c-mode . c-ts-mode) major-mode-remap-alist)

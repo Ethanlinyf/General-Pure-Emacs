@@ -101,6 +101,7 @@
   :ensure nil
   :if nil ;; to be integrated with thethingsengine.org
   :hook (after-init . server-mode))
+
 ;; kill processes when quit or exit, live-webserver
 (setq confirm-kill-processes nil)
 

@@ -1,4 +1,4 @@
-;;; init-z-test.el --- minibuffer -*- lexical-binding: t; -*-
+;;; init-test.el --- for testing purposes  -*- lexical-binding: t; -*-
 ;;
 ;; Copyleft (CL) 2022-2032 YF Lin
 ;;
@@ -7,7 +7,7 @@
 ;; Under ThingsEngine Project: https://www.thethingsengine.org
 ;;--------------------------------------------------------------------
 ;;; Commentary:
-;; Debugg and testing purposes
+;; For debugging and testing purposes
 ;;--------------------------------------------------------------------
 ;;; Code:
 
