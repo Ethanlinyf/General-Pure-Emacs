@@ -240,7 +240,7 @@ Please feedback any issues about configuration at this repository and
 welcome any suggestions.
 * License
 This program is free software. You can redistribute and/or modify it
-under [[https://github.com/redguardtoo/emacs.d/blob/master/LICENSE][GNU General Public License]] published by the Free Software
+under [[https://www.gnu.org/licenses/gpl-3.0.en.html][GNU General Public License]] published by the Free Software
 Foundation, as well as Copyleft under [[https://thethingsengine.org][ThingsEngine]] project. The
 contributions are shared with the hope that this program will be
 useful, helpful and inspiring, but without any warranty; without even
