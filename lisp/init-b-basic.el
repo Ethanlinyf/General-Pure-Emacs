@@ -99,16 +99,36 @@
   :hook (after-init . doom-modeline-mode))
 
 ;;--------------------------------------------------------------------
+;; (use-package auto-save
+;;   :ensure nil
+;;   :load-path "site-lisp/auto-save"
+;;   :hook (find-file-hook . auto-save-enable)
+;;   :custom
+;;   (auto-save-idle 1)
+;;   (auto-save-silent t)
+;;   (auto-save-delete-trailing-whitespace t))
+
+;;--------------------------------------------------------------------
 ;; Yet another snippet extension
 (use-package yasnippet
   :diminish yas-minor-mode
-  :config
+  :hook
+  (after-init . yas-global-mode)
+  :init
   (setq yas-verbosity 0) ; 1 or higher to show Yasnippet messages again
-  :hook (after-init . yas-global-mode))
+  :config
+  (yas-reload-all)
+  ;; unbind <TAB> completion
+  (define-key yas-minor-mode-map [(tab)]        nil)
+  (define-key yas-minor-mode-map (kbd "TAB")    nil)
+  (define-key yas-minor-mode-map (kbd "<tab>")  nil)
+  :bind
+  (:map yas-minor-mode-map ("S-<tab>" . yas-expand)))
 
 ;; Collection of yasnippet snippets
 (use-package yasnippet-snippets
-  :ensure t)
+  :ensure t
+  :after yasnippet)
 
 ;;--------------------------------------------------------------------
 (use-package so-long
