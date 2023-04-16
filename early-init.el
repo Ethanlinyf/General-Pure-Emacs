@@ -75,7 +75,7 @@
 (scroll-bar-mode -1)
 
 ;; not compile on this stage
-(setq comp-deferred-compilation nil)
+;; (setq comp-deferred-compilation nil)
 
 ;; Turn off the startup help screen
 (setq inhibit-splash-screen t)
