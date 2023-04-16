@@ -136,15 +136,14 @@
 
 ;;--------------------------------------------------------------------
 ;; spell checking
-(use-package jinx
-  :ensure t
-  ;; :hook
-  ;; (tex-mode . jinx-mode)
-  ;; (org-mode . jinx-mode)
-  ;; (conf-mode . jinx-mode)
-  ;; :hook
-  ;; (emacs-startup . global-jinx-mode)
-  )
+;; (use-package jinx
+;;  :ensure t
+;;  :hook
+;;  (tex-mode . jinx-mode)
+;;  (org-mode . jinx-mode)
+;;  (conf-mode . jinx-mode)
+;;  :hook
+;;  (emacs-startup . global-jinx-mode))
 
 ;;--------------------------------------------------------------------
 ;; An intuitive and efficient solution for single-buffer text search
