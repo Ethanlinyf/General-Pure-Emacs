@@ -255,12 +255,12 @@
 (use-package popweb-url
   :ensure nil
   :load-path "site-lisp/popweb/extension/url-preview"
-  :custom
-  (setq popweb-url-web-window-size-use-absolute t)
-  (setq popweb-url-web-window-width-absolute 375)
-  (setq popweb-url-web-window-height-absolute 677)
-  (setq popweb-url-web-window-width-scale 0.8)
-  (setq popweb-url-web-window-height-scale 0.8)
+  ;; :custom
+  ;; (setq popweb-url-web-window-size-use-absolute t)
+  ;; (setq popweb-url-web-window-width-absolute 375)
+  ;; (setq popweb-url-web-window-height-absolute 677)
+  ;; (setq popweb-url-web-window-width-scale 0.8)
+  ;; (setq popweb-url-web-window-height-scale 0.8)
   :config
   (require 'popweb-url)
   :bind ("s-5" . popweb-url-preview-pointer))
