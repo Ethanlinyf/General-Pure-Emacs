@@ -32,6 +32,7 @@
 ;; Environment: the same path as in your shell, bash or zsh
 (when (or sys/macp sys/linuxp (daemonp))
   (use-package exec-path-from-shell
+    ;; :demand t
     :config (setq exec-path-from-shell-check-startup-files nil)
     :hook (after-init . exec-path-from-shell-initialize)))
 
