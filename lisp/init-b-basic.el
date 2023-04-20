@@ -99,14 +99,14 @@
   :hook (after-init . doom-modeline-mode))
 
 ;;--------------------------------------------------------------------
-;; (use-package auto-save
-;;   :ensure nil
-;;   :load-path "site-lisp/auto-save"
-;;   :hook (find-file-hook . auto-save-enable)
-;;   :custom
-;;   (auto-save-idle 1)
-;;   (auto-save-silent t)
-;;   (auto-save-delete-trailing-whitespace t))
+(use-package auto-save
+  :ensure nil
+  :load-path "site-lisp/auto-save"
+  :hook (find-file-hook . auto-save-enable)
+  :config
+  (auto-save-idle 1)
+  (auto-save-silent t)
+  (auto-save-delete-trailing-whitespace t))
 
 ;;--------------------------------------------------------------------
 ;; Yet another snippet extension
