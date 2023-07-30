@@ -182,12 +182,19 @@
   :ensure t
   :config (treemacs-set-scope-type 'Tabs))
 
-(use-package treemacs-all-the-icons
-  :after (treemacs all-the-icons)
+(use-package treemacs-nerd-icons
+  :after (treemacs nerd-icons)
   :ensure t
   :init
-  (require 'treemacs-all-the-icons)
-  (treemacs-load-theme "all-the-icons"))
+  (require 'treemacs-nerd-icons)
+  (treemacs-load-theme "nerd-icons"))
+
+;; (use-package treemacs-all-the-icons
+;;   :after (treemacs all-the-icons)
+;;   :ensure t
+;;   :init
+;;   (require 'treemacs-all-the-icons)
+;;   (treemacs-load-theme "all-the-icons"))
 
 ;;--------------------------------------------------------------------
 ;; aweshell with company and company-shell
