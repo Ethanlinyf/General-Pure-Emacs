@@ -33,21 +33,22 @@
                           ;;(registers . 5)
                           ))
 
+  (setq dashboard-display-icons-p t)
+  (setq dashboard-icon-type 'nerd-icons)
   ;; set the headings's icon
-  (setq dashboard-set-heading-icons nil)
-  
-  (setq dashboard-heading-icons '((recents   . "file-text")
-                                  (bookmarks . "bookmark")
-                                  (agenda    . "calendar")
-                                  (projects  . "briefcase")
-                                  (registers . "database")))
+  (setq dashboard-set-heading-icons t)
+  (setq dashboard-heading-icons '((recents   . "nf-oct-history")
+                                    (bookmarks . "nf-oct-bookmark")
+                                    (agenda    . "nf-oct-calendar")
+                                    (projects  . "nf-oct-briefcase")
+                                    (registers . "nf-oct-database")))
 
   ;; Content is not centered by default. To center the content, set this varable as t
   (setq dashboard-center-content t)
 
   ;; To disable shortcut "jump" indicators for each section, set
   (setq dashboard-show-shortcuts t)
-  (setq dashboard-set-file-icons nil))
+  (setq dashboard-set-file-icons t))
 
 (use-package page-break-lines
   :ensure t
@@ -84,8 +85,6 @@
         ))
 
 (setq thingsengine-icon t)
-;; (setq dashboard-set-file-icons t)
-;; (setq dashboard-set-heading-icons t)
 
 (setq dashboard-set-footer t)
 (setq dashboard-footer (format "\nPowered by ThingsEngine, %s" (format-time-string "%Y")))
