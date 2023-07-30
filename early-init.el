@@ -14,7 +14,7 @@
 ;;; Code:
 
 ;; Debugging for the setting update.
-(setq debug-on-error nil)
+(setq debug-on-error t)
 (when init-file-debug
   (profiler-start 'cpu)
   (add-hook 'window-setup-hook #'profiler-stop 0))
@@ -68,11 +68,6 @@
 (push '(vertical-scroll-bars) default-frame-alist)
 (when (featurep 'ns)
   (push '(ns-transparent-titlebar . t) default-frame-alist))
-
-;; turn off the following modes:
-(menu-bar-mode -1)
-(tool-bar-mode -1)
-(scroll-bar-mode -1)
 
 ;; not compile on this stage
 ;; (setq comp-deferred-compilation nil)

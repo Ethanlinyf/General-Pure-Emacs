@@ -143,6 +143,16 @@
   (setq projectile-mode-line "Projectile")
   (setq projectile-track-known-projects-automatically nil))
 
+
+
+(use-package nerd-icons
+  :demand t
+  ;; :custom
+  ;; The Nerd Font you want to use in GUI
+  ;; "Symbols Nerd Font Mono" is the default and is recommended
+  ;; but you can use any other Nerd Font if you want
+  ;; (nerd-icons-font-family "Symbols Nerd Font Mono")
+  )
 ;; This package will be used in minibuffer.el, dired.el, platerform.el,
 ;; interface.el and dashboard.el
 (use-package all-the-icons
@@ -167,7 +177,7 @@
   :ensure
   :after hydra
   ;; :bind ("<f8>" . toggles-hydra/body)
-  :hook (emacs-lisp-mode . (lambda ()
+  :hook (emacs-lisp-mode . (lambda()
                              (add-to-list
                               'imenu-generic-expression
                               '("Hydras"

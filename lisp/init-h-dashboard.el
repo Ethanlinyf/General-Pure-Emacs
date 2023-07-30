@@ -13,6 +13,8 @@
 
 (use-package dashboard
   :diminish dashboard-mode
+    :functions (nerd-icons-faicon
+                nerd-icons-mdicon)  
   :ensure t
   ;; :requires all-the-icons
   :custom-face (dashboard-heading ((t (:inherit (font-lock-string-face bold)))))
@@ -32,7 +34,8 @@
                           ))
 
   ;; set the headings's icon
-  (setq dashboard-set-heading-icons t)
+  (setq dashboard-set-heading-icons nil)
+  
   (setq dashboard-heading-icons '((recents   . "file-text")
                                   (bookmarks . "bookmark")
                                   (agenda    . "calendar")
@@ -43,8 +46,8 @@
   (setq dashboard-center-content t)
 
   ;; To disable shortcut "jump" indicators for each section, set
-  (setq dashboard-show-shortcuts nil)
-  (setq dashboard-set-file-icons t))
+  (setq dashboard-show-shortcuts t)
+  (setq dashboard-set-file-icons nil))
 
 (use-package page-break-lines
   :ensure t
@@ -56,12 +59,12 @@
 (setq dashboard-set-navigator t)
 (setq dashboard-navigator-buttons
       `(;; line1
-        ((,(all-the-icons-octicon "milestone" :height 1.1 :v-adjust 0.0)
+        ((,(nerd-icons-mdicon "nf-md-backup_restore" :height 1.1);(all-the-icons-octicon "milestone" :height 1.1 :v-adjust 0.0)
          "Homepage"
          "Browser Homepage"
          (lambda (&rest _) (browse-url "Https://thethingsengine.org")))
 
-         (,(all-the-icons-octicon "mark-github" :height 1.1 :v-adjust 0.0)
+         (,(nerd-icons-mdicon "nf-md-github" :height 1.1);(all-the-icons-octicon "mark-github" :height 1.1 :v-adjust 0.0)
          "GitHub"
          "Browser GitHub"
          (lambda (&rest _) (browse-url "https://github.com/ethanlinyf")))
@@ -81,6 +84,8 @@
         ))
 
 (setq thingsengine-icon t)
+;; (setq dashboard-set-file-icons t)
+;; (setq dashboard-set-heading-icons t)
 
 (setq dashboard-set-footer t)
 (setq dashboard-footer (format "\nPowered by ThingsEngine, %s" (format-time-string "%Y")))
