@@ -10,9 +10,6 @@
 ;; Configurations for dashboard.
 ;;--------------------------------------------------------------------
 ;;; Code:
-(use-package hide-mode-line
-  :ensure t
-)
 
 (use-package dashboard
   :diminish dashboard-mode

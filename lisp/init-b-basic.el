@@ -98,6 +98,9 @@
   :ensure t
   :hook (after-init . doom-modeline-mode))
 
+(use-package hide-mode-line
+  :ensure t
+)
 ;;--------------------------------------------------------------------
 (use-package auto-save
   :ensure nil
