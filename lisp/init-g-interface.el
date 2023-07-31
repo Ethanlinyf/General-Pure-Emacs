@@ -40,12 +40,6 @@
   :config
   ;; Enable flashing mode-line on errors
   (doom-themes-visual-bell-config)
-  
-  ;; Corrects (and improves) org-mode's native fontification.
-  (setq doom-themes-treemacs-theme "doom-atom") ; use "doom-colors" for less minimal icon theme
-  (doom-themes-treemacs-config)
-  (doom-themes-org-config)
-  
   :init
   (load-theme 'doom-one t))
 
@@ -65,33 +59,33 @@
   (setq doom-modeline-minor-modes t))
 
 ;;--------------------------------------------------------------------
-;; all-the-icons-ibuffer
-(use-package all-the-icons-ibuffer
+(use-package nerd-icons-ibuffer
   :ensure t
-  :hook (ibuffer-mode . all-the-icons-ibuffer-mode)
+  :hook (ibuffer-mode . nerd-icons-ibuffer-mode)
   :config
-
-  (all-the-icons-ibuffer-mode t)
-
   ;; Whether display the icons.
-  (setq all-the-icons-ibuffer-icon t)
+(setq nerd-icons-ibuffer-icon t)
 
-  ;; Whether display the colorful icons.
-  ;; It respects `all-the-icons-color-icons'.
-  (setq all-the-icons-ibuffer-color-icon t)
+;; Whether display the colorful icons.
+;; It respects `nerd-icons-color-icons'.
+(setq nerd-icons-ibuffer-color-icon t)
 
-  ;; The default icon size in ibuffer.
-  (setq all-the-icons-ibuffer-icon-size 1.0)
+;; The default icon size in ibuffer.
+(setq nerd-icons-ibuffer-icon-size 1.0)
 
-  ;; The default vertical adjustment of the icon in ibuffer.
-  (setq all-the-icons-ibuffer-icon-v-adjust 0.0)
+;; Use human readable file size in ibuffer.
+(setq  nerd-icons-ibuffer-human-readable-size t)
 
-  ;; Use human readable file size in ibuffer.
-  (setq  all-the-icons-ibuffer-human-readable-size t)
+;; A list of ways to display buffer lines with `nerd-icons'.
+;; See `ibuffer-formats' for details.
+nerd-icons-ibuffer-formats
 
-  ;; A list of ways to display buffer lines with `all-the-icons'.
-  ;; See `ibuffer-formats' for details.
-  all-the-icons-ibuffer-formats)
+;; Slow Rendering
+;; If you experience a slow down in performance when rendering multiple icons simultaneously,
+;; you can try setting the following variable
+(setq inhibit-compacting-font-caches t)
+  )
+
 
 ;;--------------------------------------------------------------------
 ;; Slow Rendering
@@ -100,12 +94,13 @@
 (setq inhibit-compacting-font-caches t)
 
 ;;--------------------------------------------------------------------
-;; all-the-icons for completion
-(use-package all-the-icons-completion
-  :after (marginalia all-the-icons)
-  :hook (marginalia-mode . all-the-icons-completion-marginalia-setup)
+;; nerd-icons for completion
+(use-package nerd-icons-completion
+  :after (marginalia nerd-icons)
+  :hook
+  (marginalia-mode . nerd-icons-completion-marginalia-setup)
   :init
-  (all-the-icons-completion-mode))
+  (nerd-icons-completion-mode))
 
 (use-package rainbow-delimiters
   :ensure t

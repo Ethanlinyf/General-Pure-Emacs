@@ -415,13 +415,6 @@
   :hook
   (embark-collect-mode . consult-preview-at-point-mode))
 
-(use-package all-the-icons-completion
-  :after (marginalia all-the-icons)
-  :hook
-  (marginalia-mode . all-the-icons-completion-marginalia-setup)
-  :init
-  (all-the-icons-completion-mode))
-
 (use-package wgrep
   :commands wgrep-change-to-wgrep-mode
   :init

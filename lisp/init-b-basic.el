@@ -144,25 +144,22 @@
   (setq projectile-track-known-projects-automatically nil))
 
 
-
+;; This package will be used in minibuffer.el, dired.el, platerform.el,
+;; interface.el and dashboard.el
 (use-package nerd-icons
   :demand t
+  :init
+  (setq nerd-icons-color-icons t)
+  (defun icon-displayable-p ()
+    "Return non-nil if the icons are displayable."
+    (and (featurep 'nerd-icons)
+         (require 'nerd-icons nil t)))
   ;; :custom
   ;; The Nerd Font you want to use in GUI
   ;; "Symbols Nerd Font Mono" is the default and is recommended
   ;; but you can use any other Nerd Font if you want
   ;; (nerd-icons-font-family "Symbols Nerd Font Mono")
   )
-;; This package will be used in minibuffer.el, dired.el, platerform.el,
-;; interface.el and dashboard.el
-(use-package all-the-icons
-  :ensure t
-  :init
-  (setq all-the-icons-color-icons t)
-  (defun icon-displayable-p ()
-    "Return non-nil if the icons are displayable."
-    (and (display-graphic-p)
-         (require 'all-the-icons nil t))))
 
 ;;--------------------------------------------------------------------
 ;; hydra
@@ -194,7 +191,7 @@
           (v-adjust (or v-adjust 0.0)))
       (concat
        (when (and (icon-displayable-p) icon-type icon-name)
-         (let ((f (intern (format "all-the-icons-%s" icon-type))))
+         (let ((f (intern (format "nerd-icons-%s" icon-type))))
            (when (fboundp f)
              (concat
               (apply f (list icon-name :face face :height height :v-adjust v-adjust))

@@ -160,7 +160,8 @@
               ("C-x t d"   . treemacs-select-directory)
               ("C-x t B"   . treemacs-bookmark)
               ("C-x t C-t" . treemacs-find-file)
-              ("C-x t M-t" . treemacs-find-tag)))
+              ("C-x t M-t" . treemacs-find-tag))
+  )
 
 (use-package treemacs-projectile
   :after (treemacs projectile)
@@ -176,25 +177,12 @@
   :ensure t
   :config (treemacs-set-scope-type 'Perspectives))
 
-;;treemacs-tab-bar if you use tab-bar-mode
-(use-package treemacs-tab-bar
-  :after (treemacs)
-  :ensure t
-  :config (treemacs-set-scope-type 'Tabs))
-
 (use-package treemacs-nerd-icons
   :after (treemacs nerd-icons)
   :ensure t
   :init
   (require 'treemacs-nerd-icons)
   (treemacs-load-theme "nerd-icons"))
-
-;; (use-package treemacs-all-the-icons
-;;   :after (treemacs all-the-icons)
-;;   :ensure t
-;;   :init
-;;   (require 'treemacs-all-the-icons)
-;;   (treemacs-load-theme "all-the-icons"))
 
 ;;--------------------------------------------------------------------
 ;; aweshell with company and company-shell
