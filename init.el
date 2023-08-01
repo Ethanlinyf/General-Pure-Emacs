@@ -49,7 +49,7 @@
 (defconst custom-file (expand-file-name "custom.el" user-emacs-directory))
 (unless (file-exists-p custom-file)
   (shell-command (concat "touch " custom-file)))
-(setq custom-file (expand-file-name "custom.el" user-emacs-directory))
+;; (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 ;; Load the custom file if it exists
 ;; (load custom-file t), or
 (when (file-exists-p custom-file)
@@ -123,7 +123,7 @@
 (require 'init-r-research)
 (require 'init-r-tex)
 
-;; (require 'init-z-test) ; for testing purposes
+(require 'init-z-test) ; for testing purposes
 
 ;;----------------------------------------------------------------------------
-;;; init.el ends here.
+;; init.el ends here.

@@ -69,7 +69,7 @@
        (string-prefix-p "*info*" name)
        (string-prefix-p "*scratch*" name)
        (string-prefix-p "*Messages*" name)
-       (and (string-prefix-p "magit" name)
+       (and (string-prefix-p "*magit" name)
             (not (file-name-extension name)))
        )))
 

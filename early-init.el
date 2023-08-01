@@ -14,7 +14,7 @@
 ;;; Code:
 
 ;; Debugging for the setting update.
-(setq debug-on-error t)
+(setq debug-on-error nil)
 (when init-file-debug
   (profiler-start 'cpu)
   (add-hook 'window-setup-hook #'profiler-stop 0))
@@ -79,5 +79,5 @@
 (setq-default mode-line-format nil)
 (fset 'display-startup-echo-area-message 'ignore)
 
-;;----------------------------------------------------------------------
+;;--------------------------------------------------------------------------------------------------
 ;;; early-init.el ends here.

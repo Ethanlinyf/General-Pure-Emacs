@@ -51,13 +51,10 @@
   :hook
   (dashboard-mode . hide-mode-line-mode))
 
-
-
 (use-package page-break-lines
   :ensure t
   :hook
-  (after-init . page-break-lines-mode)
-  (page-break-lines-mode . hide-mode-line-mode))
+  (after-init . page-break-lines-mode))
 
 (setq dashboard-page-separator "\n\f\n")
 
@@ -93,11 +90,11 @@
 (setq dashboard-set-footer t)
 (setq dashboard-footer (format "\nPowered by ThingsEngine, %s" (format-time-string "%Y")))
 ;; (setq dashboard-footer-messages '("Powered by ThingsEngine"))
- (setq         dashboard-set-footer t
-          dashboard-footer-icon (cond
-                                 ((icon-displayable-p)
-                                  (nerd-icons-octicon "nf-oct-heart" :height 1.2 :face 'nerd-icons-lred))
-                                 (t (propertize ">" 'face 'dashboard-footer))))
+(setq dashboard-set-footer t)
+(setq dashboard-footer-icon (cond
+                             ((icon-displayable-p)
+                              (nerd-icons-octicon "nf-oct-heart" :height 1.2 :face 'nerd-icons-lred))
+                             (t (propertize ">" 'face 'dashboard-footer))))
 
 (defun my-dashboard-insert-copyright ()
       "Insert copyright in the footer."

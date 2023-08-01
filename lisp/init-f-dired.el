@@ -75,19 +75,10 @@
   :hook
   (dired-mode . nerd-icons-dired-mode))
 
-;; ;; make icons available in dired mode
-;; (use-package all-the-icons-dired
-;;   :after all-the-icons
-;;   :ensure t
-;;   :hook (dired-mode . (lambda ()
-;;                           (when (icon-displayable-p)
-;;                             (all-the-icons-dired-mode))))
-;;   :config (setq all-the-icons-dired-monochrome nil)) ; nil means it is colourful in dired-mode
-
 (when (executable-find "fd")
   (use-package fd-dired
     :ensure t))
 
-;;----------------------------------------------------------------------------
+;;--------------------------------------------------------------------------------------------------
 (provide 'init-f-dired)
 ;;; init-f-dired.el ends here
