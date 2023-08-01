@@ -115,6 +115,7 @@
 (require 'init-k-org)
 (require 'init-l-roam)
 
+(require 'init-p-cpp)
 (require 'init-p-python)
 (require 'init-p-lua)
 (require 'init-p-julia)
