@@ -314,6 +314,6 @@ Up^^             Down^^           Miscellaneous           % 2(mc/num-cursors) cu
          ("s-C" . markmacro-rect-mark-columns)
          ("s-S" . markmacro-rect-mark-symbols)))
 
-;;--------------------------------------------------------------------
+;;-------------------------------------------------------------------------------------------------
 (provide 'init-e-enhance)
 ;;; init-e-enhance.el ends here

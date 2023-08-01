@@ -28,6 +28,6 @@
 (add-to-list 'default-frame-alist '(drag-internal-border . 1))
 (add-to-list 'default-frame-alist '(internal-border-width . 5))
 
-;;------------------------------------------------------------------------------
+;;-------------------------------------------------------------------------------------------------
 (provide 'pure-custom)
 ;;; init-custom.el ends here
