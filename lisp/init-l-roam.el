@@ -38,6 +38,6 @@
       (when (featurep 'xwidget-internal)
         (setq org-roam-ui-browser-function #'xwidget-webkit-browse-url)))))
 
-;;----------------------------------------------------------------------------
+;;-------------------------------------------------------------------------------------------------
 (provide 'init-l-roam)
 ;;; init-l-roam.el ends here.

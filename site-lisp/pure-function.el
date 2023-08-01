@@ -295,6 +295,6 @@ If mark is activate, duplicate region lines below."
   "Push current line into the kill ring."
   (interactive)
   (kill-new (thing-at-point 'line)))
-;;--------------------------------------------------------------------
+;;-------------------------------------------------------------------------------------------------
 (provide 'pure-function)
 ;;; pure-function.el ends here

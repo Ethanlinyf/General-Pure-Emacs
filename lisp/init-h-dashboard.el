@@ -103,6 +103,6 @@
          (propertize dashboard-footer 'face 'font-lock-comment-face))))
 (advice-add #'dashboard-insert-footer :after #'my-dashboard-insert-copyright)
 
-;;--------------------------------------------------------------------
+;;-------------------------------------------------------------------------------------------------
 (provide 'init-h-dashboard)
 ;;; init-h-dashboard.el ends here

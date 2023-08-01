@@ -111,6 +111,6 @@
 ;;   :custom (straight-use-package-by-default t))
 ;;   :bind  (("C-<f2>" . hydra-straight-helper/body)))
 
-;;--------------------------------------------------------------------
+;;-------------------------------------------------------------------------------------------------
 (provide 'init-0-bridge)
 ;;; init-0-bridge.el ends here

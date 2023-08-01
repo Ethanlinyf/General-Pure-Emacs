@@ -351,6 +351,6 @@ Other buffer group by `centaur-tabs-get-group-name' with project name."
   :commands mind-wave-chat-ask
   :bind ("s-`" . mind-wave-chat-ask))
 
-;;--------------------------------------------------------------------
+;;-------------------------------------------------------------------------------------------------
 (provide 'init-j-platform)
 ;;; init-j-platform.el ends here
