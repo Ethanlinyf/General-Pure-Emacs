@@ -14,17 +14,18 @@
 #+startup: overview 
 
 #+begin_quote
-The GPE is, not GPE, but named GPE. 
+The GPE is, not GPE, but termed as GPE. 
 #+end_quote
 
 * Introduction
-GPE is an integrated and flexible platform based on Gnu Emacs and
-artificial intelligence (AI) with around 100 packages to facilitate
-learning, teaching, research and project management.
+The GPE is an integrated and flexible platform based on Gnu Emacs that
+harnesses the power of artificial intelligence (AI) with around 100
+packages as plugins to facilitate learning, teaching, research and project
+management.
 
 What is "G.P.E": 
-- General :: The operation with all the integrated facilities is generalised.
-- Pure :: The entire platform is driven by the pure Turing programming
+- General :: The unified operation with all the integrated facilities is generalised.
+- Pure :: The entire platform is powered mainly by the pure Turing programming
   language, elisp.
 - Extensible :: This interactive platform is extensible for whatever you want
   to, even *brew coffee* with it. 
