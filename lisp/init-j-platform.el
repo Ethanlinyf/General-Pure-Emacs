@@ -254,7 +254,8 @@ Other buffer group by `centaur-tabs-get-group-name' with project name."
   ;; :ensure company
   :ensure nil
   :bind ("s-1" . aweshell-dedicated-toggle)
-  :init (setq aweshell-auto-suggestion-p t))
+  :init (setq aweshell-auto-suggestion-p t)
+  :hook (eshell-mode . company-mode))
 
 ;;--------------------------------------------------------------------
 ;; lsp-bridge
