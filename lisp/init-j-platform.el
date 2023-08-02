@@ -106,10 +106,12 @@ Other buffer group by `centaur-tabs-get-group-name' with project name."
        (string-prefix-p " *Mini" name)
        (string-prefix-p "*help" name)
        (string-prefix-p "*straight" name)
-       (string-prefix-p " *temp" name)
+       (string-prefix-p "*temp" name)
        (string-prefix-p "*Help" name)
        (string-prefix-p "*mybuf" name)
        (string-prefix-p "*scratch*" name)
+       (string-prefix-p "*quickrun*" name)
+       (string-prefix-p "*EGLOT" name)
 
        ;; Is not magit buffer.
        (and (string-prefix-p "magit" name)
@@ -121,6 +123,8 @@ Other buffer group by `centaur-tabs-get-group-name' with project name."
   (calendar-mode . centaur-tabs-local-mode)
   (org-agenda-mode . centaur-tabs-local-mode)
   (eshell-mode . centaur-tabs-local-mode)
+  (shell-mode . centaur-tabs-local-mode)
+  (dired-mode . centaur-tabs-local-mode)
   :bind
   ("C-<prior>" . centaur-tabs-backward)
   ("C-<next>" . centaur-tabs-forward)
