@@ -61,7 +61,7 @@
 (setq dashboard-set-navigator t)
 (setq dashboard-navigator-buttons
       `(;; line1
-        ((,(nerd-icons-mdicon "nf-md-backup_restore" :height 1.1);(all-the-icons-octicon "milestone" :height 1.1 :v-adjust 0.0)
+        ((,(nerd-icons-mdicon "nf-md-yin_yang" :height 1.1);(all-the-icons-octicon "milestone" :height 1.1 :v-adjust 0.0)
          "Homepage"
          "Browser Homepage"
          (lambda (&rest _) (browse-url "Https://thethingsengine.org")))
