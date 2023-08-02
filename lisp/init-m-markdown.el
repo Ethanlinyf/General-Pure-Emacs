@@ -8,7 +8,7 @@
 ;;--------------------------------------------------------------------
 ;;; Commentary:
 ;;
-;; Markdown configurations.
+;; Markdown configurations from Centaur Emacs By Vincent Zhang
 ;;
 ;;; Code:
 
