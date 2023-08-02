@@ -23,7 +23,8 @@
 ;;   (push '(python-mode . python-ts-mode) major-mode-remap-alist))
 
 ;;--------------------------------------------------------------------
-
+(when emacs/>=29p
+  (setq pixel-scroll-precision-mode 1))
 ;;-------------------------------------------------------------------------------------------------
 (provide 'init-d-update)
 ;;; init-d-update.el ends here
