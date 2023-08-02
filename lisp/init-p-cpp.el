@@ -13,8 +13,8 @@
 
 (use-package eglot
   :ensure t
-  :init
-  (require 'eglot)
+  :config
+  ;(require 'eglot)
   (add-to-list 'eglot-server-programs '((c++-mode c-mode) "clangd"))
   (add-hook 'c-mode-hook #'eglot-ensure)
   (add-hook 'c++-mode-hook #'eglot-ensure))
@@ -22,16 +22,17 @@
 (use-package quickrun
     :ensure t
     :commands (quickrun)
-    :init
+    :config
     (quickrun-add-command "c++/c1z"
     '((:command . "g++")
 	(:exec . ("%c -std=c++1z %o -o %e %s"
 		"%e %a"))
 	(:remove . ("%e")))
-    :default "c++"))
+    :default "c++")
+    :bind ("<f5>" . quickrun))
 
-(global-set-key (kbd "<f5>") 'quickrun)
+;; (global-set-key (kbd "<f5>") 'quickrun)
 
 ;;--------------------------------------------------------------------------------------------------
 (provide 'init-p-cpp)
-;;; init-z-test.el ends here
+;;; init-p-cpp.el ends here
