@@ -245,17 +245,22 @@ Other buffer group by `centaur-tabs-get-group-name' with project name."
   :ensure t)
 
 (use-package company-shell
+  :after (company)
   :ensure t
-  :config
-  (add-to-list 'company-backends '(company-shell company-shell-env company-fish-shell)))
+  :init
+  (add-to-list 'company-backends '(company-shell company-shell-env company-fish-shell aweshell-autosuggest)))
 
 (use-package aweshell
   :load-path "site-lisp/aweshell"
   ;; :ensure company
   :ensure nil
-  :bind ("s-1" . aweshell-dedicated-toggle)
-  :init (setq aweshell-auto-suggestion-p t)
-  :hook (eshell-mode . company-mode))
+  ;; :functions (aweshell-auto-suggestion)
+  :bind
+  ("s-1" . aweshell-dedicated-toggle)
+  (:map eshell-mode-map ("C-g" . aweshell-dedicated-close))
+  :config (setq aweshell-auto-suggestion-p t)
+  :hook (eshell-mode . company-mode)
+  )
 
 ;;--------------------------------------------------------------------
 ;; lsp-bridge
