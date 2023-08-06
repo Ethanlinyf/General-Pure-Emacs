@@ -169,14 +169,14 @@
 (when (fboundp 'sqlite-open)
   (use-package emacsql-sqlite-builtin))
 
-;; ;; Garbage Collector Magic Hack
-;; (use-package gcmh
-;;   :diminish
-;;   :hook (emacs-startup . gcmh-mode)
-;;   :init
-;;   (setq gcmh-idle-delay 'auto
-;;         gcmh-auto-idle-delay-factor 10
-;;         gcmh-high-cons-threshold #x1000000)) ; 16MB
+;; Garbage Collector Magic Hack
+(use-package gcmh
+  :diminish
+  :hook (emacs-startup . gcmh-mode)
+  :init
+  (setq gcmh-idle-delay 'auto
+        gcmh-auto-idle-delay-factor 10
+        gcmh-high-cons-threshold #x1000000)) ; 16MB
 
 ;;-------------------------------------------------------------------------------------------------
 (provide 'init-1-system)
