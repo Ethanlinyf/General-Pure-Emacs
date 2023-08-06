@@ -39,9 +39,8 @@
 (with-no-warnings
   (cond
    (sys/mac-port-p
-    ;; Compatible with Emacs Mac port
-    (setq mac-option-modifier 'meta
-          mac-command-modifier 'super)
+    (setq mac-command-modifier 'super)
+    (setq mac-option-modifier 'meta)
     (bind-keys ([(super a)] . mark-whole-buffer)
                ([(super c)] . kill-ring-save)
                ([(super l)] . goto-line)
@@ -51,10 +50,9 @@
                ;;([(super w)] . delete-frame)
                ([(super z)] . undo)))
    (sys/win32p
-    ;; make PC keyboard's Win key or other to type Super or Hyper
-    ;; (setq w32-pass-lwindow-to-system nil)
-    (setq w32-lwindow-modifier 'super     ; Left Windows key
-          w32-apps-modifier 'hyper)       ; Menu/App key
+    ;; set Win key as Super and App key as Hyper
+    (setq w32-lwindow-modifier 'super)     ; Left Windows key as Super
+    (setq w32-apps-modifier 'hyper)       ; Menu/App key as Hyper
     (w32-register-hot-key [s-t]))))
 
 ;;--------------------------------------------------------------------
@@ -69,13 +67,27 @@
   (global-set-key (kbd "C-c C-'") 'set-mark-command)  ; keybindings for setting mark
   )
 
-;; Visualize TAB, (HARD) SPACE, NEWLINE
-(setq-default show-trailing-whitespace nil) ; Don't show trailing whitespace by default
-(defun enable-trailing-whitespace ()
-  "Show trailing spaces and delete on saving."
-  (setq show-trailing-whitespace t)
-  (add-hook 'before-save-hook #'delete-trailing-whitespace nil t))
-(add-hook 'prog-mode #'enable-trailing-whitespace)
+;; ;; Visualize TAB, (HARD) SPACE, NEWLINE
+;; (setq-default show-trailing-whitespace nil) ; Don't show trailing whitespace by default
+;; (defun enable-trailing-whitespace ()
+;;   "Show trailing spaces and delete on saving."
+;;   (setq show-trailing-whitespace t)
+;;   (add-hook 'before-save-hook #'delete-trailing-whitespace nil t))
+;; (add-hook 'prog-mode #'enable-trailing-whitespace)
+
+(setq visible-bell t
+      inhibit-compacting-font-caches t  ; Don’t compact font caches during GC
+      delete-by-moving-to-trash t       ; Deleting files go to OS's trash folder
+      make-backup-files nil             ; Forbide to make backup files
+      auto-save-default nil             ; Disable auto save
+
+      uniquify-buffer-name-style 'post-forward-angle-brackets ; Show path if names are same
+      adaptive-fill-regexp "[ t]+|[ t]*([0-9]+.|*+)[ t]*"
+      adaptive-fill-first-line-regexp "^* *$"
+      sentence-end "\\([。！？]\\|……\\|[.?!][]\"')}]*\\($\\|[ \t]\\)\\)[ \t\n]*"
+      sentence-end-double-space nil
+      word-wrap-by-category t)
+
 
 ;;----------------------- Dired Mode ---------------------------------
 (with-eval-after-load "dired"
@@ -99,8 +111,7 @@
   :hook (after-init . doom-modeline-mode))
 
 (use-package hide-mode-line
-  :ensure t
-)
+  :ensure t)
 ;;--------------------------------------------------------------------
 (use-package auto-save
   :ensure nil
