@@ -42,7 +42,10 @@
 ;; Prevent setting it as a rich mode, such as org-mode, which will
 ;; slow down the sartup speed.
 (setq initial-major-mode 'text-mode);
-
+(setq-default major-mode 'text-mode
+              fill-column 80
+              tab-width 4
+              indent-tabs-mode nil)
 ;; (package--init-file-ensured t)
 
 ;; Load the settings recorded through Emacs
