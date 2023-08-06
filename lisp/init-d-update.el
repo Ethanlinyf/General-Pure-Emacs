@@ -11,7 +11,17 @@
 ;;--------------------------------------------------------------------
 ;;; Code:
 
-;; Emacs@29 
+;; Emacs@28
+;; WORKAROUND: fix blank screen issue on macOS.
+(defun fix-fullscreen-cocoa ()
+  "Address blank screen issue with child-frame in fullscreen.
+This issue has been addressed in 28."
+  (and sys/mac-cocoa-p
+       (not emacs/>=28p)
+       (bound-and-true-p ns-use-native-fullscreen)
+       (setq ns-use-native-fullscreen nil)))
+
+;; Emacs@29
 ;;--------------------------------------------------------------------
 ;; (when emacs/>=29p
 ;;   (push '(sh-mode . bash-ts-mode) major-mode-remap-alist)
@@ -25,6 +35,22 @@
 ;;--------------------------------------------------------------------
 (when emacs/>=29p
   (setq pixel-scroll-precision-mode 1))
+
+;; Bugfix
+;;--------------------------------------------------------------------
+;;; doom-one theme:
+;; Warning: setting attribute ‘:background’ of face ‘font-lock-comment-face’: nil value is invalid, use ‘unspecified’ instead.
+
+;; fixed:
+;; (modeline-fg fg) --> (modeline-fg 'unspecified)
+
+;; :background (if doom-one-brighter-comments (doom-lighten bg 0.05)) -->
+;; :background (if doom-one-brighter-comments
+;;                 (doom-lighten bg 0.05)
+;;               'unspecified)
+
+
+
 ;;-------------------------------------------------------------------------------------------------
 (provide 'init-d-update)
 ;;; init-d-update.el ends here
