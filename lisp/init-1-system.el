@@ -64,12 +64,66 @@
 
   ;; Enable recursive minibuffers
   (setq enable-recursive-minibuffers t)
-  
+
   ;; Disable the ring bell function
   (setq ring-bell-function 'ignore))
-
 ;;--------------------------------------------------------------------
-;; Optimisation
+(use-package simple
+  :ensure nil
+  :hook ((after-init . size-indication-mode)
+         (text-mode . visual-line-mode)
+         ((prog-mode markdown-mode conf-mode) . enable-trailing-whitespace))
+  :init
+  (setq column-number-mode t
+        line-number-mode t
+        ;; kill-whole-line t               ; Kill line including '\n'
+        line-move-visual nil
+        track-eol t                     ; Keep cursor at end of lines. Require line-move-visual is nil.
+        set-mark-command-repeat-pop t)  ; Repeating C-SPC after popping mark pops it again
+
+  ;; Visualize TAB, (HARD) SPACE, NEWLINE
+  (setq-default show-trailing-whitespace nil) ; Don't show trailing whitespace by default
+  (defun enable-trailing-whitespace ()
+    "Show trailing spaces and delete on saving."
+    (setq show-trailing-whitespace t)
+    (add-hook 'before-save-hook #'delete-trailing-whitespace nil t))
+
+  ;; Prettify the process list
+  (with-no-warnings
+    (add-hook 'process-menu-mode-hook
+              (lambda ()
+                (setq tabulated-list-format
+                      (vconcat `(("" ,(if (icons-displayable-p) 2 0)))
+                               tabulated-list-format))))
+
+    (defun my-list-processes--prettify ()
+      "Prettify process list."
+      (when-let ((entries tabulated-list-entries))
+        (setq tabulated-list-entries nil)
+        (dolist (p (process-list))
+          (when-let* ((val (cadr (assoc p entries)))
+                      (icon (if (icons-displayable-p)
+                                (concat
+                                 " "
+                                 (nerd-icons-faicon "nf-fa-bolt" :face 'nerd-icons-lblue))
+                              " x"))
+                      (name (aref val 0))
+                      (pid (aref val 1))
+                      (status (aref val 2))
+                      (status (list status
+                                    'face
+                                    (if (memq status '(stop exit closed failed))
+                                        'error
+                                      'success)))
+                      (buf-label (aref val 3))
+                      (tty (list (aref val 4) 'face 'font-lock-doc-face))
+                      (thread (list (aref val 5) 'face 'font-lock-doc-face))
+                      (cmd (list (aref val 6) 'face 'completions-annotations)))
+            (push (list p (vector icon name pid status buf-label tty thread cmd))
+		          tabulated-list-entries)))))
+    (advice-add #'list-processes--refresh :after #'my-list-processes--prettify)))
+;;--------------------------------------------------------------------
+;; I/O optimisation
 (with-no-warnings
   (when sys/win32p
     (setq w32-get-true-file-attributes nil   ; decrease file IO workload
@@ -80,7 +134,7 @@
   (unless sys/linuxp
     (setq command-line-x-option-alist nil))
 
-  ;; Increase how much is read from processes in a single chunk (default is 4kb)
+  ;; Increase how much can be read from processes in a single chunk (default is 4kb)
   (setq read-process-output-max #x10000)  ; 64kb
 
   ;; Don't ping things that look like domain names.
@@ -94,7 +148,7 @@
 ;; implementations.  Be sure to read the documentation string to
 ;;  make sure.
 (use-package compat
-  :ensure t)
+  :demand t)
 
 ;;--------------------------------------------------------------------
 ;; Start server
@@ -105,6 +159,24 @@
 
 ;; kill processes when quit or exit, live-webserver
 (setq confirm-kill-processes nil)
+
+;; Some global keybindings
+(bind-keys ("s-r"     . revert-this-buffer)
+           ("C-x K"   . delete-this-file)
+           ("C-c C-l" . reload-init-file))
+
+;; Sqlite
+(when (fboundp 'sqlite-open)
+  (use-package emacsql-sqlite-builtin))
+
+;; ;; Garbage Collector Magic Hack
+;; (use-package gcmh
+;;   :diminish
+;;   :hook (emacs-startup . gcmh-mode)
+;;   :init
+;;   (setq gcmh-idle-delay 'auto
+;;         gcmh-auto-idle-delay-factor 10
+;;         gcmh-high-cons-threshold #x1000000)) ; 16MB
 
 ;;-------------------------------------------------------------------------------------------------
 (provide 'init-1-system)
