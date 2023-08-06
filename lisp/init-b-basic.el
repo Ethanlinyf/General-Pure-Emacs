@@ -31,7 +31,7 @@
   (line-number-mode 1)    ; Turn on line number and the column-number-mode
   (column-number-mode 1)  ; Change the cursor type
   (global-hl-line-mode 1) ; Enable hightline globally
-  ;; (setq-default cursor-type 'bar) ; Change the type of cursor
+  (setq-default cursor-type 'bar) ; Change the type of cursor
   )
 
 ;;--------------------------------------------------------------------
@@ -164,10 +164,6 @@
   :demand t
   :init
   (setq nerd-icons-color-icons t)
-  (defun icon-displayable-p ()
-    "Return non-nil if the icons are displayable."
-    (and (featurep 'nerd-icons)
-         (require 'nerd-icons nil t)))
   ;; :custom
   ;; The Nerd Font you want to use in GUI
   ;; "Symbols Nerd Font Mono" is the default and is recommended
