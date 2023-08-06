@@ -25,9 +25,9 @@
 ;; another way to manage packages
 ;;--------------------------------------------------------------------
 ;; (defvar puremacs/packages '(
-                            
+
 ;; 			    use-package
-                            
+
 ;;                             )  "Default packages.")
 
 ;; (setq package-selected-packages puremacs/packages)
