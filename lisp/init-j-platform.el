@@ -125,6 +125,7 @@ Other buffer group by `centaur-tabs-get-group-name' with project name."
   (eshell-mode . centaur-tabs-local-mode)
   (shell-mode . centaur-tabs-local-mode)
   (dired-mode . centaur-tabs-local-mode)
+  (use-package-statistics-mode . centaur-tabs-local-mode)
   :bind
   ("C-<prior>" . centaur-tabs-backward)
   ("C-<next>" . centaur-tabs-forward)
