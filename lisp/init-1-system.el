@@ -74,9 +74,7 @@
          (text-mode . visual-line-mode)
          ((prog-mode markdown-mode conf-mode) . enable-trailing-whitespace))
   :init
-  (setq column-number-mode t
-        line-number-mode t
-        ;; kill-whole-line t               ; Kill line including '\n'
+  (setq kill-whole-line t               ; Kill line including '\n'
         line-move-visual nil
         track-eol t                     ; Keep cursor at end of lines. Require line-move-visual is nil.
         set-mark-command-repeat-pop t)  ; Repeating C-SPC after popping mark pops it again
@@ -86,42 +84,7 @@
   (defun enable-trailing-whitespace ()
     "Show trailing spaces and delete on saving."
     (setq show-trailing-whitespace t)
-    (add-hook 'before-save-hook #'delete-trailing-whitespace nil t))
-
-  ;; Prettify the process list
-  (with-no-warnings
-    (add-hook 'process-menu-mode-hook
-              (lambda ()
-                (setq tabulated-list-format
-                      (vconcat `(("" ,(if (icons-displayable-p) 2 0)))
-                               tabulated-list-format))))
-
-    (defun my-list-processes--prettify ()
-      "Prettify process list."
-      (when-let ((entries tabulated-list-entries))
-        (setq tabulated-list-entries nil)
-        (dolist (p (process-list))
-          (when-let* ((val (cadr (assoc p entries)))
-                      (icon (if (icons-displayable-p)
-                                (concat
-                                 " "
-                                 (nerd-icons-faicon "nf-fa-bolt" :face 'nerd-icons-lblue))
-                              " x"))
-                      (name (aref val 0))
-                      (pid (aref val 1))
-                      (status (aref val 2))
-                      (status (list status
-                                    'face
-                                    (if (memq status '(stop exit closed failed))
-                                        'error
-                                      'success)))
-                      (buf-label (aref val 3))
-                      (tty (list (aref val 4) 'face 'font-lock-doc-face))
-                      (thread (list (aref val 5) 'face 'font-lock-doc-face))
-                      (cmd (list (aref val 6) 'face 'completions-annotations)))
-            (push (list p (vector icon name pid status buf-label tty thread cmd))
-		          tabulated-list-entries)))))
-    (advice-add #'list-processes--refresh :after #'my-list-processes--prettify)))
+    (add-hook 'before-save-hook #'delete-trailing-whitespace nil t)))
 ;;--------------------------------------------------------------------
 ;; I/O optimisation
 (with-no-warnings
