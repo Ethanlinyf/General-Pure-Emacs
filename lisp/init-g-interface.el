@@ -130,6 +130,20 @@ nerd-icons-ibuffer-formats
   ("<C-S-left>" . buf-move-left)
   ("<C-S-right>" . buf-move-right))
 
+;; Frame
+(when (display-graphic-p)
+  (add-hook 'window-setup-hook #'fix-fullscreen-cocoa)
+  (bind-key "S-s-<return>" #'toggle-frame-fullscreen)
+  (and sys/mac-x-p (bind-key "C-s-f" #'toggle-frame-fullscreen))
+
+  ;; Resize and re-position frames conveniently, on macOS: use Magnet to achieve it
+  ;; (bind-keys ("C-M-<return>"    . frame-maximize)
+  ;;            ("C-M-<backspace>" . frame-restore)
+  ;;            ("C-M-<left>"      . frame-left-half)
+  ;;            ("C-M-<right>"     . frame-right-half)
+  ;;            ("C-M-<up>"        . frame-top-half)
+  ;;            ("C-M-<down>"      . frame-bottom-half)))
+)
 ;;-------------------------------------------------------------------------------------------------
 (provide 'init-g-interface)
 ;;; init-g-interface.el ends here
