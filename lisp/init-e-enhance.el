@@ -11,6 +11,10 @@
 ;;--------------------------------------------------------------------
 ;;; Code:
 
+;; Session history, enhance package, desktop+, which extends `desktop' by providing more features related to sessions persistance.
+;; (use-package desktop
+;;   :hook (after-init . desktop-save-mode))
+
 ;; Indent Region or Buffer
 (use-package GPE-indent
   :ensure nil
@@ -88,10 +92,9 @@
 ;;--------------------------------------------------------------------
 ;; from centaur emacs
 (use-package recentf
-  :ensure nil
   :bind (("C-x C-r" . recentf-open-files))
   :hook (after-init . recentf-mode)
-  :config
+  :init
   (setq recentf-max-saved-items 300
         recentf-exclude
         '("\\.?cache" ".cask" "url" "COMMIT_EDITMSG\\'" "bookmarks"
@@ -99,15 +102,15 @@
           "\\.?ido\\.last$" "\\.revive$" "/G?TAGS$" "/.elfeed/"
           "^/tmp/" "^/var/folders/.+$" "^/ssh:" "/persp-confs/"
           (lambda (file) (file-in-directory-p file package-user-dir))))
-
-  (push (expand-file-name "elgrep-data.el" user-emacs-directory) recentf-exclude)
-  (add-to-list 'recentf-filename-handlers #'abbreviate-file-name)
   (add-to-list 'recentf-exclude
                (expand-file-name "company-statistics-cache.el" user-emacs-directory)
                (expand-file-name "elgrep-data.el" user-emacs-directory))
-  
+  :config
+  (push (expand-file-name recentf-save-file) recentf-exclude)
+  (add-to-list 'recentf-filename-handlers #'abbreviate-file-name)
   (when sys/macp
-    (global-set-key (kbd "s-3") 'recentf-open-files)))
+    (global-set-key (kbd "s-3") 'recentf-open-files))
+  )
 
 (use-package saveplace
   :ensure nil
