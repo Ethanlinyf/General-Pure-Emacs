@@ -175,6 +175,12 @@
 
 ;; (setq org-ellipsis 0xE2)
 
+(use-package typo
+  :diminish
+  :hook
+  ((org-mode markdown-mode gnus-message-setup) . typo-mode)
+  :config
+  (typo-global-mode 1))
 ;;-------------------------------------------------------------------------------------------------
 (provide 'init-k-org)
 ;;; init-k-org.el ends here.
