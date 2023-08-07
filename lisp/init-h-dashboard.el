@@ -13,8 +13,8 @@
 
 (use-package dashboard
   :diminish dashboard-mode
-    :functions (nerd-icons-faicon
-                nerd-icons-mdicon)
+  :functions (nerd-icons-faicon
+              nerd-icons-mdicon)
   :ensure t
   ;; :requires all-the-icons
   :custom-face (dashboard-heading ((t (:inherit (font-lock-string-face bold)))))
@@ -37,19 +37,17 @@
   ;; set the headings's icon
   (setq dashboard-set-heading-icons t)
   (setq dashboard-heading-icons '((recents   . "nf-oct-history")
-                                    (bookmarks . "nf-oct-bookmark")
-                                    (agenda    . "nf-oct-calendar")
-                                    (projects  . "nf-oct-briefcase")
-                                    (registers . "nf-oct-database")))
+                                  (bookmarks . "nf-oct-bookmark")
+                                  (agenda    . "nf-oct-calendar")
+                                  (projects  . "nf-oct-briefcase")
+                                  (registers . "nf-oct-database")))
 
   ;; Content is not centered by default. To center the content, set this varable as t
   (setq dashboard-center-content t)
 
   ;; To disable shortcut "jump" indicators for each section, set
   (setq dashboard-show-shortcuts t)
-  (setq dashboard-set-file-icons t)
-  :hook
-  (dashboard-mode . hide-mode-line-mode))
+  (setq dashboard-set-file-icons t))
 
 (use-package page-break-lines
   :ensure t
@@ -62,26 +60,26 @@
 (setq dashboard-navigator-buttons
       `(;; line1
         ((,(nerd-icons-mdicon "nf-md-yin_yang" :height 1.1) ;(all-the-icons-octicon "milestone" :height 1.1 :v-adjust 0.0)
-         "Homepage"
-         "Browser Homepage"
-         (lambda (&rest _) (browse-url "Https://thethingsengine.org")))
+          "Homepage"
+          "Browser Homepage"
+          (lambda (&rest _) (browse-url "Https://thethingsengine.org")))
 
          (,(nerd-icons-mdicon "nf-md-github" :height 1.1) ;(all-the-icons-octicon "mark-github" :height 1.1 :v-adjust 0.0)
-         "GitHub"
-         "Browser GitHub"
-         (lambda (&rest _) (browse-url "https://github.com/ethanlinyf")))
+          "GitHub"
+          "Browser GitHub"
+          (lambda (&rest _) (browse-url "https://github.com/ethanlinyf")))
          ;; (,(all-the-icons-faicon "linkedin" :height 1.1 :v-adjust 0.0)
          ;;  "Linkedin"
          ;;  ""
          ;;  (lambda (&rest _) (browse-url "homepage")))
          ("★" "Star" "Visit ThingsEngine Ship" (lambda (&rest _) (browse-url "https://thethingsengine.org/ship/")))
          ("⚑" nil "Show flags" (lambda (&rest _) (message "flag")) error)
-        ("?" "" "?/h" #'show-help nil "<" ">"))
-         ;; line 2
+         ("?" "" "?/h" #'show-help nil "<" ">"))
+        ;; line 2
         ;; ((,(all-the-icons-faicon "linkedin" :height 1.1 :v-adjust 0.0)
-          ;; "Linkedin"
-          ;; ""
-          ;; (lambda (&rest _) (browse-url "homepage")))
+        ;; "Linkedin"
+        ;; ""
+        ;; (lambda (&rest _) (browse-url "homepage")))
         ;; ("⚑" nil "Show flags" (lambda (&rest _) (message "flag")) error))
         ))
 
@@ -97,10 +95,10 @@
                              (t (propertize ">" 'face 'dashboard-footer))))
 
 (defun my-dashboard-insert-copyright ()
-      "Insert copyright in the footer."
-      (when dashboard-set-footer
-        (dashboard-insert-center
-         (propertize dashboard-footer 'face 'font-lock-comment-face))))
+  "Insert copyright in the footer."
+  (when dashboard-set-footer
+    (dashboard-insert-center
+     (propertize dashboard-footer 'face 'font-lock-comment-face))))
 (advice-add #'dashboard-insert-footer :after #'my-dashboard-insert-copyright)
 
 ;;-------------------------------------------------------------------------------------------------
