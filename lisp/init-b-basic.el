@@ -152,11 +152,11 @@
 ;;--------------------------------------------------------------------
 (use-package projectile
   :ensure t
-  ;; :bind (("C-S-c p" . projectile-command-map)  ; The binding should be verified.
+  :bind (("s-p" . projectile-command-map))  ; The binding should be verified.
   :config
   (setq projectile-mode-line "Projectile")
-  (setq projectile-track-known-projects-automatically nil))
-
+  (setq projectile-track-known-projects-automatically nil)
+  :init (projectile-mode +1))
 
 ;; This package will be used in minibuffer.el, dired.el, platerform.el,
 ;; interface.el and dashboard.el
