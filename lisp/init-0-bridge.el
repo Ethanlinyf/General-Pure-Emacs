@@ -1,4 +1,4 @@
-;;; init-bridge --- To Install Plugins for GPE. -*- lexical-binding: t; -*-
+;;; init-0-bridge --- To Install Plugins for GPE. -*- lexical-binding: t; -*-
 ;;
 ;; Copyleft (CL) 2022-2032 YF Lin
 ;;

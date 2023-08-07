@@ -1,4 +1,4 @@
-;;; init-lua.el -- For lua programming language. -*- lexical-binding: t; -*-
+;;; init-p-lua.el -- For lua programming language. -*- lexical-binding: t; -*-
 ;;
 ;; Copyleft (CL) 2022-2032 Dr YF Lin
 ;;

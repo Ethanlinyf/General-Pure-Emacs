@@ -1,4 +1,4 @@
-;;; init-update.el --- Foundamental settings for Emacs. -*- lexical-binding: t; -*-
+;;; init-d-update.el --- Foundamental settings for Emacs. -*- lexical-binding: t; -*-
 ;;
 ;; Copyleft (CL) 2022-2032 YF Lin
 ;;

@@ -41,31 +41,35 @@ Emacs:~$ (init 0 1) --AI--> G.P.E
      |-- init.el
      |
      |-- lisp/
-     |   |-- init-bridge.el
-     |   |-- init-system
+     |   |-- init-0-bridge.el
+     |   |-- init-1-system
      |   |
-     |   |-- init-authentication
-     |   |-- init-basic
-     |   |-- init-i18n
-     |   |-- init-update
+     |   |-- init-a-authentication
+     |   |-- init-b-basic
+     |   |-- init-c-i18n
+     |   |-- init-d-update
      |   |
-     |   |-- init-enhance
-     |   |-- init-dired
-     |   |-- init-interface
-     |   |-- init-dashboard
-     |   |-- init-minibuffer
-     |   |-- init-platform
-     |   |-- init-org
-     |   |-- init-roam
+     |   |-- init-e-enhance
+     |   |-- init-f-dired
+     |   |-- init-g-interface
+     |   |-- init-h-dashboard
+     |   |-- init-i-minibuffer
+     |   |-- init-j-platform
+     |   |-- init-k-org
+     |   |-- init-l-markdown
      |   |
-     |   |-- init-python
-     |   |-- init-java
-     |   |-- init-c/c++
-     |   |-- init-lua
-     |   |-- init-julia
-     |   |-- init-research
-     |   |-- init-tex
-     |   |-- init-test
+     |   |-- init-p-python
+     |   |-- init-p-c/c++
+     |   |-- init-p-java
+     |   |-- init-p-lua
+     |   |-- init-p-julia
+     |   |-- init-p-web
+     |   |
+     |   |-- init-r-roam
+     |   |-- init-r-research
+     |   |-- init-r-tex
+     |   |
+     |   |-- init-z-test
      |
      |-- site-lisp/
      |   |-- lsp-bridge

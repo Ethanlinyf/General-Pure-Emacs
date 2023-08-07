@@ -1,4 +1,4 @@
-;;;init-minibuffer.el --- minibuffer -*- lexical-binding: t; -*-
+;;;init-l-markdown.el --- minibuffer -*- lexical-binding: t; -*-
 ;;
 ;; Copyleft (CL) 2022-2032 YF Lin
 ;;
@@ -120,5 +120,5 @@ mermaid.initialize({
          (t
           (apply fn args)))))))
 ;;-------------------------------------------------------------------------------------------------
-(provide 'init-m-markdown)
-;;;init-m-markdown ends here
+(provide 'init-l-markdown)
+;;;init-l-markdown ends here

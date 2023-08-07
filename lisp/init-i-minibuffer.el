@@ -1,4 +1,4 @@
-;;; init-minibuffer.el --- minibuffer -*- lexical-binding: t; -*-
+;;; init-i-minibuffer.el --- minibuffer -*- lexical-binding: t; -*-
 ;;
 ;; Copyleft (CL) 2022-2032 YF Lin
 ;;
@@ -72,7 +72,7 @@
                 (minibuffer-with-setup-hook
                     (lambda () (setq-local completion-styles '(basic)))
                   (apply args))))
-  
+
   ;; Alternative 2: Complete full paths
   (setq org-refile-use-outline-path 'file
         org-outline-path-complete-in-steps nil)
@@ -183,7 +183,7 @@
      ;; Flex matching
      ((string-prefix-p "~" pattern) `(orderless-flex . ,(substring pattern 1)))
      ((string-suffix-p "~" pattern) `(orderless-flex . ,(substring pattern 0 -1)))))
-  
+
   ;; only for remote files:
   (defun basic-remote-try-completion (string table pred point)
     (and (vertico--remote-p string)
@@ -199,7 +199,7 @@
     (orderless-matching-styles '(orderless-initialism
                                  orderless-literal
                                  orderless-regexp)))
-  
+
   (setq completion-styles '(orderless basic)
         completion-category-defaults nil
         completion-category-overrides
@@ -207,7 +207,7 @@
           (command (styles orderless+initialism))
           (symbol (styles orderless+initialism))
           (variable (styles orderless+initialism)))
-        
+
         orderless-style-dispatchers '(+vertico-orderless-dispatch)
         orderless-component-separator "[ &]")
 
@@ -227,7 +227,7 @@
   (marginalia-align 'center)
   :config
   (advice-add #'marginalia--project-root :override #'projectile-project-root)
-  
+
   (cl-pushnew '(flycheck-error-list-set-filter . builtin) marginalia-command-categories)
   (add-to-list 'marginalia-command-categories '(projectile-switch-to-buffer . buffer))
   (add-to-list 'marginalia-command-categories '(projectile-find-file . project-file))

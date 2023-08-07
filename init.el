@@ -116,15 +116,15 @@
 (require 'init-i-minibuffer)
 (require 'init-j-platform)
 (require 'init-k-org)
-(require 'init-m-markdown)
+(require 'init-l-markdown)
 
-(require 'init-l-roam)
-(require 'init-p-cpp)
 (require 'init-p-python)
+(require 'init-p-cpp)
 (require 'init-p-lua)
 (require 'init-p-julia)
 (require 'init-p-web)
 
+(require 'init-r-roam)
 (require 'init-r-research)
 (require 'init-r-tex)
 

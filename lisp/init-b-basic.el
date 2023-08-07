@@ -152,7 +152,7 @@
 ;;--------------------------------------------------------------------
 (use-package projectile
   :ensure t
-  :bind (("C-S-c p" . projectile-command-map)  ; The binding should be verified.
+  ;; :bind (("C-S-c p" . projectile-command-map)  ; The binding should be verified.
   :config
   (setq projectile-mode-line "Projectile")
   (setq projectile-track-known-projects-automatically nil))

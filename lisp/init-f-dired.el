@@ -27,11 +27,11 @@
 
   (when sys/macp
     (setq dired-use-ls-dired nil)
-    
+
     (when (executable-find "gls")
       (setq insert-directory-program "gls"
             dired-use-ls-dired t)))
-  
+
   (when (or (and sys/macp (executable-find "gls"))
             (and (or sys/linuxp sys/cygwinp) (executable-find "ls")))
     (setq ls-lisp-use-insert-directory-program t)

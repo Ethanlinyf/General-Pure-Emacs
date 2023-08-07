@@ -1,4 +1,4 @@
-;;; init-julia.el --- Settings for Julia. -*- lexical-binding: t; -*-
+;;; init-p-julia.el --- Settings for Julia. -*- lexical-binding: t; -*-
 ;;
 ;; Copyleft (CL) 2022-2032 Dr YF Lin
 ;;

@@ -1,4 +1,4 @@
-;;; init-research.el --- Setup for research. -*- lexical-binding: t; -*-
+;;; init-r-research.el --- Setup for research. -*- lexical-binding: t; -*-
 ;;
 ;; Copyleft (CL) 2022-2032 Dr YF Lin
 ;;

@@ -1,4 +1,4 @@
-;;; init-ts.el --- Settings for Typecript. -*- lexical-binding: t; -*-
+;;; init-p-ts.el --- Settings for Typecript. -*- lexical-binding: t; -*-
 ;;
 ;; Copyleft (CL) 2022-2032 Dr YF Lin
 ;;

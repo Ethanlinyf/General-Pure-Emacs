@@ -1,4 +1,4 @@
-;;; init-python.el --- Settings for Python. -*- lexical-binding: t; -*-
+;;; init-p-python.el --- Settings for Python. -*- lexical-binding: t; -*-
 ;;
 ;; Copyleft (CL) 2022-2032 Dr YF Lin
 ;;
@@ -19,7 +19,7 @@
   :init
   (setq python-shell-completion-native-enable t)
   :config
-  ;; Default to python3, differ from python2. 
+  ;; Default to python3, differ from python2.
   (setq python-indent-offset 4)
   (when (and (executable-find "python3")
              (string= python-shell-interpreter "python3"))

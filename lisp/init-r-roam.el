@@ -1,4 +1,4 @@
-;;; init-roam.el -- Setting for roam -*- lexical-binding: t; -*-
+;;; init-r-roam.el -- Setting for roam -*- lexical-binding: t; -*-
 ;;
 ;; Copyleft (CL) 2022-2032 Dr YF Lin
 ;;
@@ -39,5 +39,5 @@
         (setq org-roam-ui-browser-function #'xwidget-webkit-browse-url)))))
 
 ;;-------------------------------------------------------------------------------------------------
-(provide 'init-l-roam)
-;;; init-l-roam.el ends here.
+(provide 'init-r-roam)
+;;; init-r-roam.el ends here.

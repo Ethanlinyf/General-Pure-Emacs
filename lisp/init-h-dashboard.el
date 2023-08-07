@@ -14,7 +14,7 @@
 (use-package dashboard
   :diminish dashboard-mode
     :functions (nerd-icons-faicon
-                nerd-icons-mdicon)  
+                nerd-icons-mdicon)
   :ensure t
   ;; :requires all-the-icons
   :custom-face (dashboard-heading ((t (:inherit (font-lock-string-face bold)))))
@@ -61,12 +61,12 @@
 (setq dashboard-set-navigator t)
 (setq dashboard-navigator-buttons
       `(;; line1
-        ((,(nerd-icons-mdicon "nf-md-yin_yang" :height 1.1);(all-the-icons-octicon "milestone" :height 1.1 :v-adjust 0.0)
+        ((,(nerd-icons-mdicon "nf-md-yin_yang" :height 1.1) ;(all-the-icons-octicon "milestone" :height 1.1 :v-adjust 0.0)
          "Homepage"
          "Browser Homepage"
          (lambda (&rest _) (browse-url "Https://thethingsengine.org")))
 
-         (,(nerd-icons-mdicon "nf-md-github" :height 1.1);(all-the-icons-octicon "mark-github" :height 1.1 :v-adjust 0.0)
+         (,(nerd-icons-mdicon "nf-md-github" :height 1.1) ;(all-the-icons-octicon "mark-github" :height 1.1 :v-adjust 0.0)
          "GitHub"
          "Browser GitHub"
          (lambda (&rest _) (browse-url "https://github.com/ethanlinyf")))

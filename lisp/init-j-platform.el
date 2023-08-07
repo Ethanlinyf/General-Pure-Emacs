@@ -1,4 +1,4 @@
-;;; init-platform.el --- IDE -*- lexical-binding: t; -*-
+;;; init-j-platform.el --- IDE -*- lexical-binding: t; -*-
 ;;
 ;; Copyleft (CL) 2022-2032 YF Lin
 ;;
@@ -25,7 +25,7 @@
   :init
   (setq centaur-tabs-enable-key-bindings t)
   :config
-  (setq centaur-tabs-icon-type 'nerd-icons ;; or 'all-the-icons
+  (setq centaur-tabs-icon-type 'nerd-icons ; or 'all-the-icons
         centaur-tabs-style "bar"
         centaur-tabs-height 32
         centaur-tabs-set-icons t

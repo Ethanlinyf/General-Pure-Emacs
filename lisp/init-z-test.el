@@ -1,4 +1,4 @@
-;;; init-test.el --- for testing purposes  -*- lexical-binding: t; -*-
+;;; init-z-test.el --- for testing purposes  -*- lexical-binding: t; -*-
 ;;
 ;; Copyleft (CL) 2022-2032 YF Lin
 ;;

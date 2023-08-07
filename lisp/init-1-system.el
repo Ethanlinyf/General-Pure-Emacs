@@ -1,4 +1,4 @@
-;;; init-system.el --- Foundamental settings for Emacs. -*- lexical-binding: t; -*-
+;;; init-1-system.el --- Foundamental settings for Emacs. -*- lexical-binding: t; -*-
 ;;
 ;; Copyleft (CL) 2022-2032 YF Lin
 ;;
