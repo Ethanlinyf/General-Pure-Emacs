@@ -43,7 +43,7 @@
 ;; slow down the sartup speed.
 (setq initial-major-mode 'text-mode);
 (setq-default major-mode 'text-mode
-              fill-column 80
+              fill-column 70
               tab-width 4
               indent-tabs-mode nil)
 ;; (package--init-file-ensured t)
