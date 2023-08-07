@@ -180,6 +180,15 @@
 		        tabulated-list-entries)))))
   (advice-add #'list-processes--refresh :after #'my-list-processes--prettify))
 
+;;--------------------------------------------------------------------
+(use-package hide-mode-line
+  :hook (((treemacs-mode
+           eshell-mode
+           shell-mode
+           term-mode
+           vterm-mode
+           embark-collect-mode
+           pdf-annot-list-mode) . hide-mode-line-mode)))
 ;;-------------------------------------------------------------------------------------------------
 (provide 'init-g-interface)
 ;;; init-g-interface.el ends here
