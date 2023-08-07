@@ -1,4 +1,4 @@
-;; init-b-basic.el -- Better default configurations. -*- lexical-binding: t; -*-
+;;; init-b-basic.el -- Better default configurations. -*- lexical-binding: t; -*-
 ;;
 ;; Copyleft (CL) 2022-2032 YF Lin
 ;;
@@ -28,9 +28,9 @@
 
 ;;--------------------------------------------------------------------
 (with-no-warnings
-  (line-number-mode 1)    ; Turn on line number and the column-number-mode
-  (column-number-mode 1)  ; Change the cursor type
-  (global-hl-line-mode 1) ; Enable hightline globally
+  (line-number-mode 1)            ; Turn on line number and the column-number-mode
+  (column-number-mode 1)          ; Change the cursor type
+  (global-hl-line-mode 1)         ; Enable hightline globally
   (setq-default cursor-type 'bar) ; Change the type of cursor
   )
 
@@ -51,8 +51,8 @@
                ([(super z)] . undo)))
    (sys/win32p
     ;; set Win key as Super and App key as Hyper
-    (setq w32-lwindow-modifier 'super)     ; Left Windows key as Super
-    (setq w32-apps-modifier 'hyper)       ; Menu/App key as Hyper
+    (setq w32-lwindow-modifier 'super)  ; Left Windows key as Super
+    (setq w32-apps-modifier 'hyper)     ; Menu/App key as Hyper
     (w32-register-hot-key [s-t]))))
 
 ;;--------------------------------------------------------------------
@@ -63,7 +63,7 @@
   (delete-selection-mode 1)
   (setq tab-width 4)
   (fset 'yes-or-no-p 'y-or-n-p)
-  (setq-default indent-tabs-mode nil) ; avoid to mixture the tabs and spaces in code
+  (setq-default indent-tabs-mode nil)                 ; avoid to mixture the tabs and spaces in code
   (global-set-key (kbd "C-c C-'") 'set-mark-command)  ; keybindings for setting mark
   )
 
@@ -76,12 +76,12 @@
 ;; (add-hook 'prog-mode #'enable-trailing-whitespace)
 
 (setq visible-bell t
-      inhibit-compacting-font-caches t  ; Don’t compact font caches during GC
-      delete-by-moving-to-trash t       ; Deleting files go to OS's trash folder
-      make-backup-files nil             ; Forbide to make backup files
-      auto-save-default nil             ; Disable auto save
+      inhibit-compacting-font-caches t                                           ; Don’t compact font caches during GC
+      delete-by-moving-to-trash t                                                ; Deleting files go to OS's trash folder
+      make-backup-files nil                                                      ; Forbide to make backup files
+      auto-save-default nil                                                      ; Disable auto save
 
-      uniquify-buffer-name-style 'post-forward-angle-brackets ; Show path if names are same
+      uniquify-buffer-name-style 'post-forward-angle-brackets                    ; Show path if names are same
       adaptive-fill-regexp "[ t]+|[ t]*([0-9]+.|*+)[ t]*"
       adaptive-fill-first-line-regexp "^* *$"
       sentence-end "\\([。！？]\\|……\\|[.?!][]\"')}]*\\($\\|[ \t]\\)\\)[ \t\n]*"
@@ -152,7 +152,7 @@
 ;;--------------------------------------------------------------------
 (use-package projectile
   :ensure t
-  :bind (("C-S-c p" . projectile-command-map)) ; The binding should be verified.
+  :bind (("C-S-c p" . projectile-command-map)  ; The binding should be verified.
   :config
   (setq projectile-mode-line "Projectile")
   (setq projectile-track-known-projects-automatically nil))
