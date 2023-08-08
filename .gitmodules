@@ -1,6 +1,3 @@
-[submodule "site-lisp/aweshell"]
-	path = site-lisp/aweshell
-	url = https://github.com/manateelazycat/aweshell.git
 [submodule "site-lisp/lsp-bridge"]
 	path = site-lisp/lsp-bridge
 	url = https://github.com/manateelazycat/lsp-bridge.git
@@ -16,9 +13,6 @@
 [submodule "site-lisp/mind-wave"]
 	path = site-lisp/mind-wave
 	url = git@github.com:manateelazycat/mind-wave.git
-[submodule "site-lisp/awesome-tab"]
-	path = site-lisp/awesome-tab
-	url = git@github.com:manateelazycat/awesome-tab.git
 [submodule "site-lisp/auto-save"]
 	path = site-lisp/auto-save
 	url = git@github.com:manateelazycat/auto-save.git
