@@ -242,25 +242,25 @@ Other buffer group by `centaur-tabs-get-group-name' with project name."
 
 ;;--------------------------------------------------------------------
 ;; aweshell with company and company-shell
-(use-package company
-  :ensure t)
+;; (use-package company
+;;   :ensure t)
 
-(use-package company-shell
-  :after (company)
-  :ensure t
-  :init
-  (add-to-list 'company-backends '(company-shell company-shell-env company-fish-shell aweshell-autosuggest)))
+;; (use-package company-shell
+;;   :after (company)
+;;   :ensure t
+;;   :init
+;;   (add-to-list 'company-backends '(company-shell company-shell-env company-fish-shell aweshell-autosuggest)))
 
 (use-package aweshell
-  :load-path "site-lisp/aweshell"
+  :load-path "site-lisp/gpe-aweshell"
   ;; :ensure company
   :ensure nil
   ;; :functions (aweshell-auto-suggestion)
   :bind
   ("s-1" . aweshell-dedicated-toggle)
-  (:map eshell-mode-map ("C-g" . aweshell-dedicated-close))
-  :config (setq aweshell-auto-suggestion-p t)
-  :hook (eshell-mode . company-mode)
+  (:map eshell-mode-map ("C-x C-g" . aweshell-dedicated-close))
+  ; :config (setq aweshell-auto-suggestion-p t)
+  ; :hook (eshell-mode . company-mode)
   )
 
 ;;--------------------------------------------------------------------
