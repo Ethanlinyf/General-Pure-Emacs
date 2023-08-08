@@ -101,3 +101,5 @@ mind-wave/chatgpt_api_key.txt
 undo-tree-dir
 init-p-setting.el
 /blink-search/
+/multisession/
+/backup/
