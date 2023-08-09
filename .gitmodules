@@ -16,3 +16,6 @@
 [submodule "site-lisp/auto-save"]
 	path = site-lisp/auto-save
 	url = git@github.com:manateelazycat/auto-save.git
+[submodule "site-lisp/gpe-aweshell"]
+	path = site-lisp/gpe-aweshell
+	url = git@github.com:Ethanlinyf/gpe-aweshell.git
