@@ -45,6 +45,9 @@ This issue has been addressed in 28."
   (setq pixel-scroll-precision-mode 1)
   (global-set-key (kbd "<f8>") 'scratch-buffer))
 
+;; (set-frame-parameter nil 'alpha-background 80)
+;; (push '(alpha . (90 . 90)) default-frame-alist)
+(set-frame-parameter nil 'alpha 0.9)
 
 ;; Bugfix
 ;;--------------------------------------------------------------------
