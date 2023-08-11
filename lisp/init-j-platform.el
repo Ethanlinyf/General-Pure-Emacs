@@ -112,6 +112,7 @@ Other buffer group by `centaur-tabs-get-group-name' with project name."
        (string-prefix-p "*scratch*" name)
        (string-prefix-p "*quickrun*" name)
        (string-prefix-p "*EGLOT" name)
+       (string-prefix-p "*which-key" name)
 
        ;; Is not magit buffer.
        (and (string-prefix-p "magit" name)
@@ -126,6 +127,7 @@ Other buffer group by `centaur-tabs-get-group-name' with project name."
   (shell-mode . centaur-tabs-local-mode)
   (dired-mode . centaur-tabs-local-mode)
   (use-package-statistics-mode . centaur-tabs-local-mode)
+  (pdf-view-mode . centaur-tabs-local-mode)
   :bind
   ("C-<prior>" . centaur-tabs-backward)
   ("C-<next>" . centaur-tabs-forward)

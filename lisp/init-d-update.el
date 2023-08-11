@@ -47,7 +47,7 @@ This issue has been addressed in 28."
 
 ;; (set-frame-parameter nil 'alpha-background 80)
 ;; (push '(alpha . (90 . 90)) default-frame-alist)
-(set-frame-parameter nil 'alpha 0.9)
+;; (set-frame-parameter nil 'alpha 0.99)
 
 ;; Bugfix
 ;;--------------------------------------------------------------------

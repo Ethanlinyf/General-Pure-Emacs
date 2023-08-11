@@ -26,7 +26,7 @@
   :init (setq display-line-numbers-width-start t)
   :hook ((prog-mode
           yaml-mode
-          text-mode
+          TeX-mode
           org-mode
           conf-mode) . display-line-numbers-mode))
 
