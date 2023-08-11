@@ -24,7 +24,11 @@
 (use-package display-line-numbers
   :ensure nil
   :init (setq display-line-numbers-width-start t)
-  :hook ((prog-mode) . display-line-numbers-mode)) ; yaml-mode text-mode org-mode conf-mode
+  :hook ((prog-mode
+          yaml-mode
+          text-mode
+          org-mode
+          conf-mode) . display-line-numbers-mode))
 
 ;;--------------------------------------------------------------------
 (with-no-warnings
