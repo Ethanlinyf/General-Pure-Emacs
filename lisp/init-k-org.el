@@ -182,5 +182,33 @@
   :config
   (typo-global-mode 1))
 ;;-------------------------------------------------------------------------------------------------
+;; (use-package org-modern
+;;   :ensure t
+;;   :after (org)
+;;   :init
+;;   (setq org-modern-table-vertical 2)
+;;   (setq org-modern-block-name t)
+;;   (setq org-modern-keyword t)
+;;   (setq org-modern-timestamp t)
+;;   :hook (org-mode . global-org-modern-mode))
+
+;; (defun my-iconify-org-buffer ()
+;;   (progn
+;;     (push '(":PROPERTIES:" . ?􀈭) prettify-symbols-alist)
+;;     (push '(":ID:      " . ?􀐚) prettify-symbols-alist)
+;;     (push '(":ROAM_ALIASES:" . ?􀅷) prettify-symbols-alist)
+;;     (push '(":END:" . ?􀅽) prettify-symbols-alist)
+;;     (push '("#+TITLE:" . ?􀧵) prettify-symbols-alist)
+;;     (push '("#+AUTHOR:" . ?􀉩) prettify-symbols-alist)
+;;     (push '("#+RESULTS:" . ?􀎚) prettify-symbols-alist)
+;;     (push '("#+ATTR_ORG:" . ?􀌞) prettify-symbols-alist)
+;;     (push '("#+STARTUP: " . ?􀖆) prettify-symbols-alist))
+;;   (prettify-symbols-mode 1))
+;; (add-hook 'org-mode-hook #'my-iconify-org-buffer)
+
+;; (setq org-ellipsis " 􀍠")
+;; (setq org-hide-emphasis-markers t)
+
+;;-------------------------------------------------------------------------------------------------
 (provide 'init-k-org)
 ;;; init-k-org.el ends here.

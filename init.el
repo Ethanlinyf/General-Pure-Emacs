@@ -100,6 +100,7 @@
 ;; (advice-add #'package-initialize :after #'add-extradirs-to-load-path)
 
 (update-load-path)
+(add-to-list 'load-path "~/.emacs.d/site-lisp/holo-layer")
 
 (require 'init-0-bridge)
 (require 'init-1-system)
@@ -128,7 +129,7 @@
 (require 'init-r-research)
 (require 'init-r-tex)
 
-(require 'init-z-test) ; for testing purposes
+;; (require 'init-z-test) ; for testing purposes
 
 ;;-------------------------------------------------------------------------------------------------
 ;; init.el ends here.

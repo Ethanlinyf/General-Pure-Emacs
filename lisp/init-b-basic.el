@@ -15,7 +15,7 @@
 (setq-default
  initial-scratch-message (concat
 ";;--------------------------------------------------------
-;; Welcome to General Pure Emacs for ThingsEngine
+;; Welcome to General Pure Emacs from ThingsEngine
 ;; Somethng Good as Indicated:\n\n\n")
  line-spacing 0.1
  truncate-lines nil
@@ -107,7 +107,7 @@
 (use-package org-superstar
   :ensure t
   :hook
-  (org-mode . (lambda () (org-superstar-mode 1) (org-indent-mode 1))))
+  (org-mode . (lambda () (org-superstar-mode 1) (org-indent-mode 1)))) ;
 
 ;;------------------------ User Interface ----------------------------
 (use-package doom-modeline

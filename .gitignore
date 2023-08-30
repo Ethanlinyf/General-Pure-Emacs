@@ -103,3 +103,5 @@ init-p-setting.el
 /blink-search/
 /multisession/
 /backup/
+/test/
+/elisp/
