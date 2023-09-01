@@ -193,7 +193,6 @@ recommended.
      pip3 install epc openai sexpdata six orjson requests
      pip3 install PyQt6 PyQt6-Qt6 PyQt6-sip PyQt6-WebEngine PyQt6-WebEngine-Qt6
      pip3 install browser_cookie3 enchant ruff-lsp
-     
    #+end_src
 
 4. To fetch the submodules in General Pure Emacs
@@ -221,7 +220,7 @@ recommended.
      needed packages.
 
 6. GUI with icons \\
-   Run: M-x all-the-icons-install-fonts to install the needed fonts.
+   Install nerd fonts, https://www.nerdfonts.com/
 
 7. Obtain OpenAI API Key, and then save the Key to "~/.emacs.d/mind-wave/chatgpt_api_key.txt"
    
