@@ -98,9 +98,7 @@
 
 (advice-add #'package-initialize :after #'update-load-path)
 ;; (advice-add #'package-initialize :after #'add-extradirs-to-load-path)
-
 (update-load-path)
-(add-to-list 'load-path "~/.emacs.d/site-lisp/holo-layer")
 
 (require 'init-0-bridge)
 (require 'init-1-system)
