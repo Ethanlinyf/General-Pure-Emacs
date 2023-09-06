@@ -13,9 +13,6 @@
 [submodule "site-lisp/mind-wave"]
 	path = site-lisp/mind-wave
 	url = git@github.com:manateelazycat/mind-wave.git
-[submodule "site-lisp/auto-save"]
-	path = site-lisp/auto-save
-	url = git@github.com:manateelazycat/auto-save.git
 [submodule "site-lisp/gpe-aweshell"]
 	path = site-lisp/gpe-aweshell
 	url = git@github.com:Ethanlinyf/gpe-aweshell.git
