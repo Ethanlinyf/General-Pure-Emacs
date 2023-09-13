@@ -172,7 +172,7 @@ considerations:
   ThingsEngine Project.
 
 * Installation
-To enhance the default Emacs experience, the latest stable release (28.2) is
+To enhance the default Emacs experience, the latest stable release (29.1) is
 recommended.
 
 1. Backup your existing configuration
@@ -184,17 +184,20 @@ recommended.
    username and email, the same for GitHub with SSH public key. See the [[https://github.com/Ethanlinyf/Git-GitHub-Tutorial][tutorial]] of
    Git/GitHub. 
    #+begin_src shell
-     git clone --depth 1 git@github.com:Ethanlinyf/General-Pure-Emacs.git ~/.emacs.d
+     git clone git@github.com:Ethanlinyf/General-Pure-Emacs.git ~/.emacs.d
    #+end_src
 3. Install the dependencies
-   For MacOS: 
-   #+begin_src shell
-     brew install autoconf automake texinfo gnutls pkg-config libxml2 --debug --verbose
-     pip3 install epc openai sexpdata six orjson requests
-     pip3 install PyQt6 PyQt6-Qt6 PyQt6-sip PyQt6-WebEngine PyQt6-WebEngine-Qt6
-     pip3 install browser_cookie3 enchant ruff-lsp
-   #+end_src
-
+   a. install the [[https://www.nerdfonts.com][needed nerdfonts]]
+   b. based on the listed modules in the .gitmodules to install the related dependencies, for example:
+      - lsp-bridge:
+        #+begin_src shell
+          pip3 install epc orjson sexpdata six paramiko rapidfuzz
+        #+end_src
+      - and others, such as ChatGPT([[https://github.com/manateelazycat/mind-wave/][mind-wave]]) and WebFrame([[https://github.com/manateelazycat/popweb/][popweb]]).
+      - for a specific system, such as macOS:
+        #+begin_src shell
+          brew install autoconf automake texinfo gnutls pkg-config libxml2 --debug --verbose
+        #+end_src
 4. To fetch the submodules in General Pure Emacs
    #+begin_src shell
      cd .emacs.d
@@ -202,12 +205,9 @@ recommended.
    Then, run the following to in a terminal:
    #+begin_src elisp
      git submodule update --init --recursive
-
-     git submodule foreach git reset --hard
    #+end_src
    
-   Maybe you need to run "git submodule foreach git checkout
-   master/main". And to update the submodules, you could use:
+   And to update the submodules, you could use:
 
    #+begin_src shell
      git submodule foreach git pull --rebase
@@ -215,12 +215,13 @@ recommended.
 
 5. Then, open Emacs(>= 28.2) to install the needed package.
    - Yes for "Need to (re)build the epdfinfo program, do it now ?":
-   - Your root password is required to install a pdf-tool server.
+   - Your root password might be required to install a pdf-tool server.
    - You may need to wait for a while to complete downloading the
      needed packages.
 
 6. GUI with icons \\
    Install nerd fonts, https://www.nerdfonts.com/
+   run: M-x nerd-icons-install-fonts
 
 7. Obtain OpenAI API Key, and then save the Key to "~/.emacs.d/mind-wave/chatgpt_api_key.txt"
    
@@ -232,6 +233,10 @@ One more thing, add external tools and language servers to boost your own GPE:
   + ripgrep
   + sqlite3 (optional, for sqlite3 backend)
   + rga (optional, for searching pdf backend)
+  + pdf-tool
+    #+begin_src elisp
+      M-x pdf-tools-install
+    #+end_src
 - LSP servers need for:
   + pyright for Python
   + texlab for LaTeX
