@@ -18,7 +18,7 @@ The GPE is, not GPE, but termed as GPE.
 #+end_quote
 
 * Introduction
- [[./site-lisp/figure/GPE-dashboard.jpeg]]
+ [[./site-lisp/figure/GPE-Dashboard-2023-09-14.png]]
  
 The GPE is an integrated and flexible platform based on Gnu Emacs that
 harnesses the power of artificial intelligence (AI) with around 100
@@ -214,7 +214,7 @@ recommended.
      git submodule foreach git pull --rebase
    #+end_src
 
-5. Then, open Emacs(>= 28.2) to install the needed package.
+5. Then, open Emacs to install the needed package.
    - Yes for "Need to (re)build the epdfinfo program, do it now ?":
    - Your root password might be required to install a pdf-tool server.
    - You may need to wait for a while to complete downloading the
@@ -226,7 +226,7 @@ recommended.
      M-x nerd-icons-install-fonts
    #+end_src
 
-7. Obtain OpenAI API Key, and then save the Key to "~/.emacs.d/mind-wave/chatgpt_api_key.txt"
+7. Generate an OpenAI API key, and then save the Key to "~/.emacs.d/mind-wave/chatgpt_api_key.txt"
    
 8. Enjoy General Pure Emacs with AI ~
 

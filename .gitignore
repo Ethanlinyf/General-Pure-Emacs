@@ -71,7 +71,6 @@ eaf/
 /places
 /projectile-bookmarks.eld
 /issue.org
-/plan.org
 /tmp*
 /org-roam.db
 /test.txt
@@ -104,3 +103,4 @@ init-p-setting.el
 /multisession/
 /test/
 /elisp/
+/todo.org
