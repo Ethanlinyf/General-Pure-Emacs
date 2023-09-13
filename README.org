@@ -221,8 +221,10 @@ recommended.
      needed packages.
 
 6. GUI with icons \\
-   Install nerd fonts, https://www.nerdfonts.com/
-   run: M-x nerd-icons-install-fonts
+   Install nerd fonts, https://www.nerdfonts.com/ \
+   #+begin_src elisp
+     M-x nerd-icons-install-fonts
+   #+end_src
 
 7. Obtain OpenAI API Key, and then save the Key to "~/.emacs.d/mind-wave/chatgpt_api_key.txt"
    
@@ -237,6 +239,10 @@ One more thing, add external tools and language servers to boost your own GPE:
   + pdf-tool
     #+begin_src elisp
       M-x pdf-tools-install
+    #+end_src
+  + Install Tabnine after the installation of lsp-bridge:
+    #+begin_src elisp
+      M-x lsp-bridge-install-tabnine
     #+end_src
 - LSP servers need for:
   + pyright for Python
