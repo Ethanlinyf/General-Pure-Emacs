@@ -18,6 +18,8 @@ The GPE is, not GPE, but termed as GPE.
 #+end_quote
 
 * Introduction
+ [[./site-lisp/figure/GPE-dashboard.jpeg]]
+ 
 The GPE is an integrated and flexible platform based on Gnu Emacs that
 harnesses the power of artificial intelligence (AI) with around 100
 packages as plugins to facilitate learning, teaching, research and project
@@ -101,8 +103,6 @@ considerations:
 [[./site-lisp/figure/Configuration_Metodology_7.jpg]]
 
 * Feature
-- Entrance: a fancy dashboard
-  [[./site-lisp/figure/GPE-dashboard.jpeg]]
 - Integrated
   + Note-taken \\
     Org-mode has useful functionalities to take notes. Quick to open an
@@ -186,9 +186,10 @@ recommended.
    #+begin_src shell
      git clone git@github.com:Ethanlinyf/General-Pure-Emacs.git ~/.emacs.d
    #+end_src
-3. Install the dependencies
-   a. install the [[https://www.nerdfonts.com][needed nerdfonts]]
-   b. based on the listed modules in the .gitmodules to install the related dependencies, for example:
+3. Install the dependencies \
+   a. install the [[https://www.nerdfonts.com][needed nerdfonts]] \
+   b. based on the listed modules in the .gitmodules to install the
+   related dependencies, for example: \
       - lsp-bridge:
         #+begin_src shell
           pip3 install epc orjson sexpdata six paramiko rapidfuzz
