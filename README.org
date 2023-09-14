@@ -35,7 +35,7 @@ management.
 
 [[./site-lisp/figure/GPE-Framework_4.png]]
 
-* A basic structure of configuration
+* A Basic Structure of Configuration
 Emacs:~$ (init 0 1) --AI--> G.P.E
 #+BEGIN_EXAMPLE
   .emacs.d/
@@ -186,18 +186,17 @@ recommended.
      git clone git@github.com:Ethanlinyf/General-Pure-Emacs.git ~/.emacs.d
    #+end_src
 3. Install the dependencies \\
-   a. install the [[https://www.nerdfonts.com][needed nerdfonts]] \\
-   b. based on the listed modules in the .gitmodules to install the
-   related dependencies, for example: \\
-      - lsp-bridge:
-        #+begin_src shell
-          pip3 install epc orjson sexpdata six paramiko rapidfuzz
-        #+end_src
-      - and others, such as ChatGPT([[https://github.com/manateelazycat/mind-wave/][mind-wave]]) and WebFrame([[https://github.com/manateelazycat/popweb/][popweb]]).
-      - for a specific system, such as macOS:
-        #+begin_src shell
-          brew install autoconf automake texinfo gnutls pkg-config libxml2 --debug --verbose
-        #+end_src
+   - Install the [[https://www.nerdfonts.com][needed nerdfonts]]
+   - Based on the listed modules in the .gitmodules to install therelated dependencies, for example:
+     + lsp-bridge:
+       #+begin_src shell
+         pip3 install epc orjson sexpdata six paramiko rapidfuzz
+       #+end_src
+     + And others, such as ChatGPT([[https://github.com/manateelazycat/mind-wave/][mind-wave]]) and WebFrame([[https://github.com/manateelazycat/popweb/][popweb]]).
+     + For a specific system, such as macOS:
+       #+begin_src shell
+         brew install autoconf automake texinfo gnutls pkg-config libxml2 --debug --verbose
+       #+end_src
 4. To fetch the submodules in General Pure Emacs
    #+begin_src shell
      cd .emacs.d
