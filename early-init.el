@@ -20,7 +20,7 @@
   (add-hook 'window-setup-hook #'profiler-stop 0))
 
 ;; Puremacs is compatible from the emacs version 27.1.
-(let ((minver "27.1"))
+(let ((minver "28.2"))
   (when (version< emacs-version minver)
     (error "The GPE requires V%s or higher versions" minver)))
 

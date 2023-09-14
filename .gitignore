@@ -104,3 +104,4 @@ init-p-setting.el
 /test/
 /elisp/
 /todo.org
+/org-persist/

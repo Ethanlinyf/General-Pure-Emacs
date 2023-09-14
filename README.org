@@ -185,10 +185,10 @@ recommended.
    #+begin_src shell
      git clone git@github.com:Ethanlinyf/General-Pure-Emacs.git ~/.emacs.d
    #+end_src
-3. Install the dependencies \
-   a. install the [[https://www.nerdfonts.com][needed nerdfonts]] \
+3. Install the dependencies \\
+   a. install the [[https://www.nerdfonts.com][needed nerdfonts]] \\
    b. based on the listed modules in the .gitmodules to install the
-   related dependencies, for example: \
+   related dependencies, for example: \\
       - lsp-bridge:
         #+begin_src shell
           pip3 install epc orjson sexpdata six paramiko rapidfuzz
