@@ -27,7 +27,8 @@ management.
  [[./site-lisp/figure/GPE-Dashboard-2023-09-14.png]]
 
 *What is "G.P.E":*
-- General :: The unified operation with all the integrated facilities is generalised.
+- General :: A consistent platform is built with simplicity,
+  modularity and clear communication between integrated facilities.
 - Pure :: The entire platform is powered mainly by the pure Turing programming
   language, elisp.
 - Extensible :: This interactive platform is extensible for whatever you want
