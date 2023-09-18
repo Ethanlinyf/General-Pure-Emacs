@@ -285,7 +285,8 @@ Other buffer group by `centaur-tabs-get-group-name' with project name."
   (setq lsp-bridge-enable-search-words t)
   ;; (setq lsp-bridge-enable-org-babel t) ; error popping up, need to be checked.
   :hook
-  (after-init . global-lsp-bridge-mode))
+  (after-init . global-lsp-bridge-mode)
+  (lsp-bridge-mode . (lambda () (corfu-mode -1))))
 
 ;;--------------------------------------------------------------------
 ;; blink-search
