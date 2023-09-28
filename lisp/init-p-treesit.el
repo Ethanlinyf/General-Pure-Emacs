@@ -7,7 +7,7 @@
 ;; Under ThingsEngine Project: https://www.thethingsengine.org
 ;;--------------------------------------------------------------------
 ;;; Commentary:
-;; For debugging and testing purposes
+;; treesit for programming purposes
 ;;--------------------------------------------------------------------
 ;;; Code:
 
