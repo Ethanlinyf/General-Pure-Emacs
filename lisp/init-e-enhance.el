@@ -45,7 +45,7 @@
   :init
   (setq-default abbrev-mode t)
   (setq save-abbrevs nil)
-  
+
   (defconst abbrev-file (expand-file-name "abbrev_defs" user-emacs-directory))
   (unless (file-exists-p abbrev-file)
     (shell-command (concat "touch " abbrev-file)))
