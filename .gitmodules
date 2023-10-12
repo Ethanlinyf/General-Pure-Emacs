@@ -16,3 +16,6 @@
 [submodule "site-lisp/gpe-aweshell"]
 	path = site-lisp/gpe-aweshell
 	url = git@github.com:Ethanlinyf/gpe-aweshell.git
+[submodule "site-lisp/holo-layer"]
+	path = site-lisp/holo-layer
+	url = git@github.com:manateelazycat/holo-layer.git
