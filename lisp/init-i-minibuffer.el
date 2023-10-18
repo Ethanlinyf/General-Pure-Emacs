@@ -466,7 +466,7 @@
   :config
   (defun avy-action-embark (pt)
     (unwind-protect
-	(save-excursion
+    (save-excursion
           (goto-char pt)
           (embark-act))
       (select-window
