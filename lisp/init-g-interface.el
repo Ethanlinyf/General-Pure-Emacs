@@ -177,7 +177,7 @@
                     (thread (list (aref val 5) 'face 'font-lock-doc-face))
                     (cmd (list (aref val 6) 'face 'completions-annotations)))
           (push (list p (vector icon name pid status buf-label tty thread cmd))
-		        tabulated-list-entries)))))
+                tabulated-list-entries)))))
   (advice-add #'list-processes--refresh :after #'my-list-processes--prettify))
 
 ;;--------------------------------------------------------------------

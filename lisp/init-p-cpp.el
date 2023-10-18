@@ -25,9 +25,9 @@
     :config
     (quickrun-add-command "c++/c1z"
     '((:command . "g++")
-	(:exec . ("%c -std=c++1z %o -o %e %s"
-		"%e %a"))
-	(:remove . ("%e")))
+    (:exec . ("%c -std=c++1z %o -o %e %s"
+        "%e %a"))
+    (:remove . ("%e")))
     :default "c++")
     :bind ("<f5>" . quickrun))
 
