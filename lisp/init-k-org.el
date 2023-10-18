@@ -1,4 +1,4 @@
-;;; init-k-orgs.el --- Org settings. -*- lexical-binding: t; -*-
+;;; init-k-org.el --- Org settings. -*- lexical-binding: t; -*-
 ;;
 ;; Copyleft (CL) 2022-2032 Dr YF Lin
 ;;
