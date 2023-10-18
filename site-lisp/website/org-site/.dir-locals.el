@@ -191,5 +191,3 @@
                           (save-and-publish-file)
                           (unless (httpd-running-p) (httpd-start))
                           (browse-url fileurl))))))))
-
-
