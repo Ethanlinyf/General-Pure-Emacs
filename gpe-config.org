@@ -1,0 +1,4253 @@
+#+title: gpe-config
+#+author: Ethan Lin
+#+date: <2023-10-17 Tue>
+
+#+startup: overview
+
+* GPE Configuration Development
+** early-init.el
+:PROPERTIES:
+:HEADER-ARGS: :tangle early-init.el
+:END:
+*** early-init.el header
+#+begin_src emacs-lisp
+  ;;; early-init.el --- Early initialisation. -*- lexical-binding: t -*-
+  ;;
+  ;; Copyleft (CL) 2018-2028 YF Lin
+  ;;
+  ;; Something good as indicated, by Dr YF Lin <e.yflin@gmail.com>
+  ;; URL: https://github.com/Ethanlinyf/General-Pure-Emacs
+  ;; Under ThingsEngine Project: https://www.thethingsengine.org
+  ;;----------------------------------------------------------------------
+  ;;; Commentary:
+  ;; Emacs 27 introduces early-init.el, which is run before init.el,
+  ;; before package and UI initialisation happens.
+  ;; Emacs 29 supports native compilation.
+  ;;----------------------------------------------------------------------
+  ;;; Code:
+#+end_src
+
+*** early-init body
+#+begin_src emacs-lisp
+  ;; Debugging for the setting update.
+  (setq debug-on-error nil)
+
+  (when init-file-debug
+    (profiler-start 'cpu)
+    (add-hook 'window-setup-hook #'profiler-stop 0))
+
+  ;; Puremacs is compatible from the emacs version 27.1.
+  (let ((minver "28.2"))
+    (when (version< emacs-version minver)
+      (error "The GPE requires V%s or higher versions" minver)))
+
+  ;; Garbage collection in the startup process
+  ;; (setq gc-cons-threshold most-positive-fixnum
+  ;;       gc-cons-percentage 0.5)
+  ;; (add-hook 'after-init-hook #'(lambda () (setq gc-cons-threshold 800000)))
+  (setq gc-cons-threshold most-positive-fixnum)
+  (setq gc-cons-percentage 0.5)
+
+  ;; Prevent unwanted run-time compilation for native-comp users
+  (when (>= emacs-major-version 29)
+    (setq inhibit-automatic-native-compilation nil))
+
+  ;; Suppress a second case-insensitive search through the auto-mode-alist
+  (setq auto-mode-case-fold nil)
+
+  ;; access through mini-buffer
+  (setq use-file-dialog nil)
+
+  ;; After early-init-file to initialise 'package'. Make initialisation
+  ;; slightly faster See the (package-initialize) in the file
+  ;; init-0-bridge.el, which make the initiation will be executed just
+  ;; once.
+  (setq package-enable-at-startup nil)
+  ;; Prevent loading from the package cache (same reason).
+  (setq package-quickstart nil)
+
+  ;; In noninteractive sessions, prioritise non-byte-compiled source
+  ;; files to prevent the use of stale byte-code. Otherwise, it saves us
+  ;; a little IO time to skip the time checks on every *.elc file.
+  ;; from Doom Emacs
+  (setq load-prefer-newer noninteractive)
+
+  ;; Inhibit resizing Puremacs frame
+  (setq frame-inhibit-implied-resize t)
+
+  ;; Remove some warnings
+  (setq byte-compile-warnings nil)
+
+  ;; Default settings for the frame before initialisation
+  ;; To prevent the glimpse of un-styled Emacs by disabling the following UI elements early.
+  (push '(menu-bar-lines . 0) default-frame-alist)
+  (push '(tool-bar-lines . 0) default-frame-alist)
+  (push '(vertical-scroll-bars) default-frame-alist)
+  (when (featurep 'ns)
+    (push '(ns-transparent-titlebar . t) default-frame-alist))
+
+  ;; not compile on this stage
+  ;; (setq comp-deferred-compilation nil)
+
+  ;; Turn off the startup help screen
+  (setq inhibit-splash-screen t)
+
+  ;; Prevent flash of un-styled modeline at startup
+  (setq-default mode-line-format nil)
+  (fset 'display-startup-echo-area-message 'ignore)
+#+end_src
+
+*** early-init footer
+#+begin_src emacs-lisp  
+  ;;-------------------------------------------------------------------------------------------------
+  ;;; early-init.el ends here.
+#+end_src
+
+** site-lisp
+*** pure-const.el
+:PROPERTIES:
+:HEADER-ARGS: :tangle site-lisp/pure-const.el :mkdirp yes
+:END:
+
+#+begin_src emacs-lisp
+  ;;; pure-const.el -- Better default configurations. -*- lexical-binding: t; -*-
+  ;;
+  ;; Copyleft (CL) 2022-2032 Dr YF Lin
+  ;;
+  ;; Author: Ethan YF Lin <e.yflin@gmail.com>
+  ;; URL: https://github.com/Ethanlinyf/General-Pure-Emacs
+  ;; Under ThingsEngine Project: https://www.thethingsengine.org/
+  ;;--------------------------------------------------------------------
+  ;;; Commentary:
+  ;; Define constants.
+  ;;--------------------------------------------------------------------
+  ;;; Code:
+
+  (defvar *is-mac* (eq system-type 'darwin) "Current system is mac.")
+  (defvar *is-win* (eq system-type 'windows-nt) "Current system is windows.")
+  (defvar *is-nux* (or (eq system-type 'gnu/linux) (eq system-type 'linux)) "Current system is gnu/linux.")
+
+  (defconst ThingsEngine-homepage
+    "https://thethingsengine.org"
+    "The webpage of ThingsEngine.")
+
+  (defconst puremacs-custom-example-file
+    (expand-file-name "custom-example.el" user-emacs-directory)
+    "Custom example file of Pure Emacs.")
+
+  (defconst puremacs-custom-post-file
+    (expand-file-name "custom-post.el" user-emacs-directory)
+    "Custom file after startup.
+  Put private configurations to override defaults here.")
+
+  (defconst puremacs-custom-post-org-file
+    (expand-file-name "custom-post.org" user-emacs-directory)
+    "Custom org file after startup.
+  Put private configurations to override defaults here.
+  Loaded by `org-babel-load-file'.")
+
+  (defconst sys/win32p
+    (eq system-type 'windows-nt)
+    "Are we running on a WinTel system?")
+
+  (defconst sys/linuxp
+    (eq system-type 'gnu/linux)
+    "Are we running on a GNU/Linux system?")
+
+  (defconst sys/macp
+    (eq system-type 'darwin)
+    "Are we running on a Mac system?")
+
+  (defconst sys/mac-x-p
+    (and (display-graphic-p) sys/macp)
+    "Are we running under X on a Mac system?")
+
+  (defconst sys/mac-ns-p
+    (eq window-system 'ns)
+    "Are we running on a GNUstep or Macintosh Cocoa display?")
+
+  (defconst sys/mac-cocoa-p
+    (featurep 'cocoa)
+    "Are we running with Cocoa on a Mac system?")
+
+  (defconst sys/mac-port-p
+    (eq window-system 'mac)
+    "Are we running a macport build on a Mac system?")
+
+  (defconst sys/linux-x-p
+    (and (display-graphic-p) sys/linuxp)
+    "Are we running under X on a GNU/Linux system?")
+
+  (defconst sys/cygwinp
+    (eq system-type 'cygwin)
+    "Are we running on a Cygwin system?")
+
+  (defconst sys/rootp
+    (string-equal "root" (getenv "USER"))
+    "Are you using ROOT user?")
+
+  (defconst emacs/>=25p
+    (>= emacs-major-version 25)
+    "Emacs is 25 or above.")
+
+  (defconst emacs/>=26p
+    (>= emacs-major-version 26)
+    "Emacs is 26 or above.")
+
+  (defconst emacs/>=25.2p
+    (or emacs/>=26p
+        (and (= emacs-major-version 25)
+             (>= emacs-minor-version 2)))
+    "Emacs is 25.2 or above.")
+
+  (defconst emacs/>=25.3p
+    (or emacs/>=26p
+        (and (= emacs-major-version 25)
+             (>= emacs-minor-version 3)))
+    "Emacs is 25.3 or above.")
+
+  (defconst emacs/>=27p
+    (>= emacs-major-version 27)
+    "Emacs is 27 or above.")
+
+  (defconst emacs/>=28p
+    (>= emacs-major-version 28)
+    "Emacs is 28 or above.")
+
+  (defconst emacs/>=29p
+    (>= emacs-major-version 29)
+    "Emacs is 29 or above.")
+
+  ;;-------------------------------------------------------------------------------------------------
+  (provide 'pure-const)
+  ;;; init-const.el ends here
+
+  ;;;;;; Example: Switch Git Bash
+  ;; (when *is-win*
+  ;;   (setq explicit-shell-file-name
+  ;;         "C:/Program Files/Git/bin/bash.exe")
+  ;;   (setq shell-file-name explicit-shell-file-name)
+  ;;   (add-to-list 'exec-path "C:/Program Files/Git/bin")
+  ;;   )
+#+end_src
+
+*** pure-custom.el
+:PROPERTIES:
+:HEADER-ARGS: :tangle site-lisp/pure-custom.el :mkdirp yes
+:END:
+
+#+begin_src emacs-lisp
+  ;;; pure-custom.el --- Custom set varaiables by hand. -*- lexical-binding: t; -*-
+  ;;
+  ;; Copyleft (CL) 2022-2032 Dr YF Lin
+  ;;
+  ;; Author: Ethan YF Lin <e.yflin@gmail.com>
+  ;; URL: https://github.com/Ethanlinyf/General-Pure-Emacs
+  ;; Under ThingsEngine Project: https://www.thethingsengine.org/
+  ;;--------------------------------------------------------------------
+  ;;; Commentary:
+  ;; Setting variables by hand
+  ;;--------------------------------------------------------------------
+  ;;; Code:
+
+  (when *is-mac*
+    (set-face-attribute 'default nil :font "Menlo-16" ))
+
+
+  ;; Add when is-a-mac.
+  ;; ExecPath: https://www.emacswiki.org/emacs/ExecPath
+  (when *is-mac*
+    (setenv "PATH" (concat (getenv "PATH") ":/opt/homebrew/bin"))
+    (setq exec-path (append exec-path '("/opt/homebrew/bin"))))
+
+
+  ;; (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
+  ;; (add-to-list 'default-frame-alist '(ns-appearance . dark))
+
+  (add-to-list 'default-frame-alist '(drag-internal-border . 1))
+  (add-to-list 'default-frame-alist '(internal-border-width . 5))
+
+  ;;-------------------------------------------------------------------------------------------------
+  (provide 'pure-custom)
+  ;;; init-custom.el ends here
+#+end_src
+*** pure-function.el
+:PROPERTIES:
+:HEADER-ARGS: :tangle site-lisp/pure-function.el :mkdirp yes
+:END:
+
+#+begin_src emacs-lisp
+  ;;; pure-function.el --- Some useful functions. -*- lexical-binding: t; -*-
+  ;;
+  ;; Copyleft (CL) 2022-2032 Ethan YF Lin
+  ;;
+  ;; Author: Ethan YF Lin <e.yflin@gmail.com>
+  ;; URL: https://github.com/Ethanlinyf/General-Pure-Emacs
+  ;; Under ThingsEngine Project: https://www.thethingsengine.org/
+  ;;--------------------------------------------------------------------
+  ;;; Commentary:
+  ;; Some useful functions to facilitate using Emacs
+  ;;--------------------------------------------------------------------
+  ;;; Code:
+
+  (defun TE-decimalNumber-to-binary-string (number)
+    (require 'calculator)
+    (let ((calculator-output-radix 'bin)
+          (calculator-radix-grouping-mode nil))
+      (calculator-number-to-string number)))
+
+  (defun my-subseq (foo n m)
+    (let ((l (length foo)))
+      (setq sub1 (nthcdr n foo))
+      (setq sub2 (butlast sub1 (- l m)))
+      sub2))
+
+  (defun marginalia-annotate-command (cand)
+    "Annotate command CAND with its documentation string.
+  Similar to `marginalia-annotate-symbol', but does not show symbol class."
+    (when-let* ((sym (intern-soft cand))
+                (mode (if (boundp sym)
+                          sym
+                        (lookup-minor-mode-from-indicator cand))))
+      (concat
+       (if (and (boundp mode) (symbol-value mode))
+           (propertize " On" 'face 'marginalia-on)
+         (propertize " Off" 'face 'marginalia-off))
+       (marginalia-annotate-binding cand)
+       (marginalia--documentation (marginalia--function-doc sym)))))
+
+  ;;--------------------------------------------------------------------
+  ;; https://www.emacswiki.org/emacs/OpenNextLine
+  ;; Behave like vi's o command
+  (defun open-next-line (arg)
+    "Move to the next line and then opens a line.
+      See also `newline-and-indent'."
+    (interactive "p")
+    (end-of-line)
+    (open-line arg)
+    (forward-line 1)
+    (when newline-and-indent
+      (indent-according-to-mode)))
+
+  (global-set-key (kbd "C-o") 'open-next-line)
+
+  ;; Behave like vi's O command
+  (defun open-previous-line (arg)
+    "Open a new line before the current one.
+       See also `newline-and-indent'."
+    (interactive "p")
+    (beginning-of-line)
+    (open-line arg)
+    (when newline-and-indent
+      (indent-according-to-mode)))
+
+  (global-set-key (kbd "M-o") 'open-previous-line)
+
+  ;; Autoindent open-*-lines
+  (defvar newline-and-indent t
+    "Modify the behavior of the open-*-line functions to cause them to autoindent.")
+
+  ;;--------------------------------------------------------------------
+  (defun remember-init ()
+    "Remember current position and setup."
+    (interactive)
+    (point-to-register 8)
+    (message "Have remember one position"))
+
+  (defun remember-jump ()
+    "Jump to latest position and setup."
+    (interactive)
+    (let ((tmp (point-marker)))
+      (jump-to-register 8)
+      (set-register 8 tmp))
+    (message "Have back to remember position"))
+
+  ;;--------------------------------------------------------------------
+  (defun GPE-unmark-all-buffers ()
+    "Unmark all have marked buffers."
+    (interactive)
+    (let ((current-element (current-buffer)))
+      (save-excursion
+        (dolist (element (buffer-list))
+          (set-buffer element)
+          (deactivate-mark)))
+      (switch-to-buffer current-element)
+      (deactivate-mark)))
+
+  ;;--------------------------------------------------------------------
+  ;; toggle-one-window, from Andy Stewart
+  (defvar toggle-one-window-window-configuration nil
+    "The window configuration use for `toggle-one-window'.")
+
+  (defun toggle-one-window ()
+    "Toggle between window layout and one window."
+    (interactive)
+    (if (equal (length (cl-remove-if #'window-dedicated-p (window-list))) 1)
+        (if toggle-one-window-window-configuration
+            (progn
+              (set-window-configuration toggle-one-window-window-configuration)
+              (setq toggle-one-window-window-configuration nil))
+          (message "No other windows exist."))
+      (setq toggle-one-window-window-configuration (current-window-configuration))
+      (delete-other-windows)))
+  ;;--------------------------------------------------------------------
+  ;; format the elisp file
+  (defun indent-comment-buffer ()
+    "Indent comment of buffer."
+    (interactive)
+    (indent-comment-region (point-min) (point-max)))
+
+  (defun indent-comment-region (start end)
+    "Indent region."
+    (interactive "r")
+    (save-excursion
+      (setq end (copy-marker end))
+      (goto-char start)
+      (while (< (point) end)
+        (if (comment-search-forward end t)
+            (comment-indent)
+          (goto-char end)))))
+
+  (defun refresh-file ()
+    "Automatic reload current file."
+    (interactive)
+    (cond ((eq major-mode 'emacs-lisp-mode)
+           (indent-buffer)
+           (indent-comment-buffer)
+           (save-buffer)
+           (load-file (buffer-file-name)))
+          ((member major-mode '(lisp-mode c-mode perl-mode))
+           (indent-buffer)
+           (indent-comment-buffer)
+           (save-buffer))
+          ((member major-mode '(haskell-mode sh-mode))
+           (indent-comment-buffer)
+           (save-buffer))
+          ((derived-mode-p 'scss-mode)
+           (require 'css-sort)
+           (css-sort))
+          (t (message "Current mode is not supported, so not reload"))))
+  ;;--------------------------------------------------------------------
+  (defun TE-title-case-region-or-line (@begin @end)
+    "Title case text between nearest brackets, or current line, or text selection.
+  Capitalize first letter of each word, except words like {to, of, the, a, in, or, and, etc}. If a word already contains cap letters such as HTTP, URL, they are left as is.
+
+  When called in a elisp program, *begin *end are region boundaries.
+  URL `http://xahlee.info/emacs/emacs/elisp_title_case_text.html'
+  Version 2017-01-11"
+    (interactive
+     (if (use-region-p)
+         (list (region-beginning) (region-end))
+       (let (
+             $p1
+             $p2
+             ($skipChars "^\"<>(){}[]“”‘’‹›«»「」『』【】〖〗《》〈〉〔〕"))
+         (progn
+           (skip-chars-backward $skipChars (line-beginning-position))
+           (setq $p1 (point))
+           (skip-chars-forward $skipChars (line-end-position))
+           (setq $p2 (point)))
+         (list $p1 $p2))))
+    (let* (
+           ($strPairs [
+                       [" A " " a "]
+                       [" And " " and "]
+                       [" At " " at "]
+                       [" As " " as "]
+                       [" By " " by "]
+                       [" Be " " be "]
+                       [" Into " " into "]
+                       [" In " " in "]
+                       [" Is " " is "]
+                       [" It " " it "]
+                       [" For " " for "]
+                       [" Of " " of "]
+                       [" Or " " or "]
+                       [" On " " on "]
+                       [" Via " " via "]
+                       [" The " " the "]
+                       [" That " " that "]
+                       [" To " " to "]
+                       [" Vs " " vs "]
+                       [" With " " with "]
+                       [" From " " from "]
+                       ["'S " "'s "]
+                       ["'T " "'t "]
+                       ]))
+      (save-excursion
+        (save-restriction
+          (narrow-to-region @begin @end)
+          (upcase-initials-region (point-min) (point-max))
+          (let ((case-fold-search nil))
+            (mapc
+             (lambda ($x)
+               (goto-char (point-min))
+               (while
+                   (search-forward (aref $x 0) nil t)
+                 (replace-match (aref $x 1) "FIXEDCASE" "LITERAL")))
+             $strPairs))))))
+  ;;--------------------------------------------------------------------
+  ;; duplicate a line:
+  (defun duplicate-line-or-region-above (&optional reverse)
+    "Duplicate current line or region above.
+  By default, duplicate current line above.
+  If mark is activate, duplicate region lines above.
+  Default duplicate above, unless option REVERSE is non-nil."
+    (interactive)
+    (let ((original-column (current-column))
+          duplicate-content)
+      (if mark-active
+          ;; If mark active.
+          (let ((region-start-pos (region-beginning))
+                (region-end-pos (region-end)))
+            ;; Set duplicate start line position.
+            (setq region-start-pos (progn
+                                     (goto-char region-start-pos)
+                                     (line-beginning-position)))
+            ;; Set duplicate end line position.
+            (setq region-end-pos (progn
+                                   (goto-char region-end-pos)
+                                   (line-end-position)))
+            ;; Get duplicate content.
+            (setq duplicate-content (buffer-substring region-start-pos region-end-pos))
+            (if reverse
+                ;; Go to next line after duplicate end position.
+                (progn
+                  (goto-char region-end-pos)
+                  (forward-line +1))
+              ;; Otherwise go to duplicate start position.
+              (goto-char region-start-pos)))
+        ;; Otherwise set duplicate content equal current line.
+        (setq duplicate-content (buffer-substring
+                                 (line-beginning-position)
+                                 (line-end-position)))
+        ;; Just move next line when `reverse' is non-nil.
+        (and reverse (forward-line 1))
+        ;; Move to beginning of line.
+        (beginning-of-line))
+      ;; Open one line.
+      (open-line 1)
+      ;; Insert duplicate content and revert column.
+      (insert duplicate-content)
+      (move-to-column original-column t)))
+
+  (defun duplicate-line-or-region-below ()
+    "Duplicate current line or region below.
+  By default, duplicate current line below.
+  If mark is activate, duplicate region lines below."
+    (interactive)
+    (duplicate-line-or-region-above t))
+
+  (defun duplicate-line-above-comment (&optional reverse)
+    "Duplicate current line above, and comment current line."
+    (interactive)
+    (if reverse
+        (duplicate-line-or-region-below)
+      (duplicate-line-or-region-above))
+    (save-excursion
+      (if reverse
+          (forward-line -1)
+        (forward-line +1))
+      (comment-or-uncomment-region+)))
+
+  (defun duplicate-line-below-comment ()
+    "Duplicate current line below, and comment current line."
+    (interactive)
+    (duplicate-line-above-comment t))
+
+  (defun comment-or-uncomment-region+ ()
+    "This function is to comment or uncomment a line or a region."
+    (interactive)
+    (let (beg end)
+      (if mark-active
+          (progn
+            (setq beg (region-beginning))
+            (setq end (region-end)))
+        (setq beg (line-beginning-position))
+        (setq end (line-end-position)))
+      (save-excursion
+        (comment-or-uncomment-region beg end))))
+
+  ;;--------------------------------------------------------------------
+
+  (defun kill-new-line ()
+    "Push current line into the kill ring."
+    (interactive)
+    (kill-new (thing-at-point 'line)))
+  (defun icon-displayable-p ()
+    "Return non-nil if the icons are displayable."
+    (and (featurep 'nerd-icons)
+         (require 'nerd-icons nil t)))
+  ;;-------------------------------------------------------------------------------------------------
+  (provide 'pure-function)
+  ;;; pure-function.el ends here
+#+end_src
+*** pure-macros.el
+:PROPERTIES:
+:HEADER-ARGS: :tangle site-lisp/pure-macros.el :mkdirp yes
+:END:
+
+#+begin_src emacs-lisp
+  ;; (defun jk/org-insert-headline (level)
+  ;;   "Insert `level' * ahead of current line."
+  ;;   (interactive "swhich level: ")
+  ;;   (jk/org-delete-headline)
+  ;;   (let ((x 0) (len (string-to-number level)))
+  ;;     (while (< x len)
+  ;;       (if (= len (+ x 1))
+  ;;           (insert "* ")
+  ;;         (insert "*")
+  ;;         )
+  ;;     (setq x (+ x 1)))))
+
+  ;; (global-set-key (kbd "C-c C-h") 'jk/org-insert-headline)
+  ;;-------------------------------------------------------------------------------------------------
+  (provide 'pure-macros)
+#+end_src
+
+** init.el
+:PROPERTIES:
+:HEADER-ARGS: :tangle init.el
+:END:
+
+#+begin_src emacs-lisp
+  ;;; init.el --- The main entry of Emacs. -*- lexical-binding: t; -*-
+  ;;
+  ;; Copyleft (CL) 2022-2032 YF Lin
+  ;;
+  ;; Something good as indicated, by Dr YF Lin <e.yflin@gmail.com>
+  ;; URL: https://github.com/Ethanlinyf/General-Pure-Emacs
+  ;; Under ThingsEngine Project: https://www.thethingsengine.org
+  ;;--------------------------------------------------------------------
+  ;;; Commentary:
+  ;; init file for General Pure Emacs
+  ;;--------------------------------------------------------------------
+  ;;; Code:
+
+  (require 'cl-lib)
+
+  ;; Startup time
+  (add-hook 'emacs-startup-hook
+            (lambda ()
+              (message "Emacs ready in %s with %d garbage collections."
+                       (format "%.2f seconds"
+                               (float-time
+                                (time-subtract
+                                 after-init-time before-init-time)))
+                       gcs-done)))
+
+  ;; set gc-threshold after init
+  (add-hook 'after-init-hook #'(lambda () (setq gc-cons-threshold (* 20 1024 1024))))
+
+  ;; Enhance the smoothness of Emacs startup
+  (when (display-graphic-p)
+    (setq-default inhibit-redisplay t
+                  inhibit-message t)
+    (defun reset-inhibit-vars ()
+      (setq-default inhibit-redisplay nil
+                    inhibit-message nil)
+      (redraw-frame))
+    (add-hook 'window-setup-hook #'reset-inhibit-vars)
+    (define-advice startup--load-user-init-file (:after (&rest _) reset-inhibit-vars)
+      (and init-file-had-error (reset-inhibit-vars))))
+
+  ;; Initialise the major mode for scratch, fundamental-mode or text-mode
+  ;; Prevent setting it as a rich mode, such as org-mode, which will
+  ;; slow down the sartup speed.
+  (setq initial-major-mode 'text-mode);
+  (setq-default major-mode 'text-mode
+                fill-column 70
+                tab-width 4
+                indent-tabs-mode nil)
+  ;; (package--init-file-ensured t)
+
+  ;; Load the settings recorded through Emacs
+  (defconst custom-file (expand-file-name "custom.el" user-emacs-directory))
+  (unless (file-exists-p custom-file)
+    (shell-command (concat "touch " custom-file)))
+  ;; (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
+  ;; Load the custom file if it exists
+  ;; (load custom-file t), or
+  (when (file-exists-p custom-file)
+    (load custom-file :noerror :nomessage))
+
+  (unless (or (daemonp) noninteractive init-file-debug)
+    ;; Optimise the file handlers operations at startup (from Centaur Emacs).
+    ;; `file-name-handler-alist' is consulted on each call to `require' and `load'
+    (let ((old-value file-name-handler-alist))
+      (setq file-name-handler-alist nil)
+      (set-default-toplevel-value 'file-name-handler-alist file-name-handler-alist)
+      (add-hook 'emacs-startup-hook
+                (lambda ()
+                  "To recover file name handlers."
+                  (setq file-name-handler-alist
+                        (delete-dups (append file-name-handler-alist old-value))))
+                101)))
+
+  ;; Define a file to record emacs macros.
+  (defvar pure-macro (expand-file-name "site-lisp/pure-macros.el" user-emacs-directory)
+    "A file to record Emacs macros.")
+  ;; Load the macro file if it exists
+  (when (file-exists-p pure-macro)
+    (load pure-macro :noerror :nomessage))
+
+  ;; Personal settings.
+  (defvar pure-p-setting (expand-file-name "init-p-setting.el" user-emacs-directory)
+    "A file with personal settings.")
+  ;; Load the personal setting file if it exists
+  (when (file-exists-p pure-p-setting)
+    (load pure-p-setting :noerror :nomessage))
+
+  ;; Add to list to load the el files in a specific folder;
+  (defun update-load-path (&rest _)
+    "To update 'load-path'."
+    (dolist (path '("lisp" "site-lisp"))
+      (push (expand-file-name path user-emacs-directory) load-path)))
+
+  ;; (defun add-extradirs-to-load-path (&rest _)
+  ;;   "Include extra dirs to 'load-path'."
+  ;;   (let ((default-directory (expand-file-name "site-lisp" user-emacs-directory)))
+  ;;     (normal-top-level-add-subdirs-to-load-path)))
+
+  (advice-add #'package-initialize :after #'update-load-path)
+  ;; (advice-add #'package-initialize :after #'add-extradirs-to-load-path)
+  (update-load-path)
+
+  (require 'init-0-bridge)
+  (require 'init-1-system)
+
+  (require 'init-a-authentication)
+  (require 'init-b-basic)
+  (require 'init-c-i18n)
+  (require 'init-d-update)
+
+  (require 'init-e-enhance)
+  (require 'init-f-dired)
+  (require 'init-g-interface)
+  (require 'init-h-dashboard)
+  (require 'init-i-minibuffer)
+  (require 'init-j-platform)
+  (require 'init-k-org)
+  (require 'init-l-markdown)
+
+  (require 'init-p-python)
+  (require 'init-p-cpp)
+  (require 'init-p-lua)
+  (require 'init-p-julia)
+  (require 'init-p-web)
+  (require 'init-p-treesit)
+
+  (require 'init-r-roam)
+  (require 'init-r-research)
+  (require 'init-r-tex)
+
+  (require 'init-z-test)
+
+  ;;-------------------------------------------------------------------------------------------------
+  ;; init.el ends here.
+#+end_src
+
+** lisp
+*** init-0-bridge.el
+:PROPERTIES:
+:HEADER-ARGS: :tangle lisp/init-0-bridge.el :mkdirp yes
+:END:
+
+#+begin_src emacs-lisp
+  ;;; init-0-bridge --- To Install Plugins for GPE. -*- lexical-binding: t; -*-
+  ;;
+  ;; Copyleft (CL) 2022-2032 YF Lin
+  ;;
+  ;; Something good as indicated, by Dr YF Lin <e.yflin@gmail.com>
+  ;; URL: https://github.com/Ethanlinyf/General-Pure-Emacs
+  ;; Under ThingsEngine Project: https://www.thethingsengine.org
+  ;;--------------------------------------------------------------------
+  ;;; Commentary:
+  ;; How to add plugins, add pacakges or by use-package
+  ;;--------------------------------------------------------------------
+  ;;; Code:
+
+  (require 'package)
+
+  (when (>= emacs-major-version 27)
+    (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/") t)
+    (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
+    (add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/") t)
+    )
+  (unless (bound-and-true-p package--initialized)
+    (package-initialize))
+
+  ;;--------------------------------------------------------------------
+  ;; another way to manage packages
+  ;;--------------------------------------------------------------------
+  ;; (defvar puremacs/packages '(
+
+  ;; 			    use-package
+
+  ;;                             )  "Default packages.")
+
+  ;; (setq package-selected-packages puremacs/packages)
+
+  ;; (defun puremacs/packages-installed-p ()
+  ;;   "Looping all the packages."
+  ;;   (cl-loop for pkg in puremacs/packages
+  ;; 	   when (not (package-installed-p pkg)) do (cl-return nil)
+  ;; 	   finally (cl-return t)))
+
+  ;; (unless (puremacs/packages-installed-p)
+  ;;   (message "%s" "Refreshing package database...")
+  ;;   (package-refresh-contents)
+  ;;   (dolist (pkg puremacs/packages)
+  ;;     (when (not (package-installed-p pkg))
+  ;;       (package-install pkg))))
+
+  ;;--------------------------------------------------------------------
+  ;; use-package with straight
+  ;;--------------------------------------------------------------------
+  ;; (setq package-check-signature t
+  ;;        load-prefer-newer t)
+  ;;
+  ;; ;; Install straight.el
+  ;; (defvar bootstrap-version)
+  ;; (let ((bootstrap-file
+  ;;        (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+  ;;       (bootstrap-version 5))
+  ;;   (unless (file-exists-p bootstrap-file)
+  ;;     (with-current-buffer
+  ;;         (url-retrieve-synchronously
+  ;;          "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+  ;;          'silent 'inhibit-cookies)
+  ;;       (goto-char (point-max))
+  ;;       (eval-print-last-sexp)))
+  ;;   (load bootstrap-file nil 'nomessage))
+
+  ;;--------------------------------------------------------------------
+  ;; Setup 'use-package'
+  (when (version< emacs-version "29.0")
+    (unless (package-installed-p 'use-package)
+      (package-refresh-contents)
+      (package-install 'use-package)))
+
+  ;; ;; Should set before loading `use-package'
+  (eval-and-compile
+    (setq use-package-always-ensure t)
+    (setq use-package-always-defer t)
+    (setq use-package-expand-minimally t)
+    (setq use-package-enable-imenu-support t))
+
+  (eval-when-compile
+    (require 'use-package)
+    (setq use-package-compute-statistics t))
+
+  ;; Required by `use-package', as use-package optional dependency
+  (use-package diminish)
+  (use-package bind-key)
+
+  ;; Update GPG keyring for GNU ELPA
+  (use-package gnu-elpa-keyring-update
+    :ensure t)
+
+  ;; interactive macro expansion
+  (use-package macrostep
+    :custom-face
+    (macrostep-expansion-highlight-face ((t (:inherit tooltip :extend t))))
+    :bind (:map emacs-lisp-mode-map
+           ("C-c e" . macrostep-expand)
+           :map lisp-interaction-mode-map
+           ("C-c e" . macrostep-expand)))
+
+  (use-package things-engine
+    :ensure nil
+    :init
+    (message "Something Good as Indicated"))
+
+  ;;--------------------------------------------------------------------
+  ;;  (straight-use-package 'use-package
+  ;;  (use-package straight
+  ;;   :custom (straight-use-package-by-default t))
+  ;;   :bind  (("C-<f2>" . hydra-straight-helper/body)))
+
+  ;;-------------------------------------------------------------------------------------------------
+  (provide 'init-0-bridge)
+  ;;; init-0-bridge.el ends here
+#+end_src
+
+*** init-1-system.el
+:PROPERTIES:
+:HEADER-ARGS: :tangle lisp/init-1-system.el :mkdirp yes
+:END:
+
+#+begin_src emacs-lisp
+  ;;; init-1-system.el --- Foundamental settings for Emacs. -*- lexical-binding: t; -*-
+  ;;
+  ;; Copyleft (CL) 2022-2032 YF Lin
+  ;;
+  ;; Something good as indicated, by Dr YF Lin <e.yflin@gmail.com>
+  ;; URL: https://github.com/Ethanlinyf/General-Pure-Emacs
+  ;; Under ThingsEngine Project: https://www.thethingsengine.org
+  ;;--------------------------------------------------------------------
+  ;;; Commentary:
+  ;; Fundamental settings for General Pure Emacs
+  ;;--------------------------------------------------------------------
+  ;;; Code:
+
+  (require 'pure-const)
+  (require 'pure-custom)
+  (require 'pure-function)
+  (require 'subr-x)
+
+  ;; Use to install the needed software for the host system
+  (use-package use-package-ensure-system-package
+    :ensure t)
+
+  ;; Set time
+  (use-package time
+    :ensure nil
+    :config
+    (setq system-time-locale "C"
+          display-time-24hr-format t
+          display-time t ;display-time-day-and-date t
+          ))
+
+  ;; Environment: the same path as in your shell, bash or zsh
+  (when (or sys/macp sys/linuxp (daemonp))
+    (use-package exec-path-from-shell
+      ;; :demand t
+      :config (setq exec-path-from-shell-check-startup-files nil)
+      :hook (after-init . exec-path-from-shell-initialize)))
+
+  ;;--------------------------------------------------------------------
+  ;; A few more useful configurations...
+  (use-package emacs
+    :ensure nil
+    :init
+    ;; Add prompt indicator to `completing-read-multiple'.
+    ;; We display [CRM<separator>], e.g., [CRM,] if the separator is a comma.
+    (defun crm-indicator (args)
+      (cons (format "[CRM%s] %s"
+                    (replace-regexp-in-string
+                     "\\`\\[.*?]\\*\\|\\[.*?]\\*\\'" ""
+                     crm-separator)
+                    (car args))
+            (cdr args)))
+    (advice-add #'completing-read-multiple :filter-args #'crm-indicator)
+
+    ;; Do not allow the cursor in the minibuffer prompt
+    (setq minibuffer-prompt-properties
+          '(read-only t cursor-intangible t face minibuffer-prompt))
+    (add-hook 'minibuffer-setup-hook #'cursor-intangible-mode)
+
+    ;; Emacs 28: Hide commands in M-x which do not work in the current mode.
+    ;; Vertico commands are hidden in normal buffers.
+    (setq read-extended-command-predicate
+          #'command-completion-default-include-p)
+
+    ;; Enable recursive minibuffers
+    (setq enable-recursive-minibuffers t)
+
+    ;; Disable the ring bell function
+    (setq ring-bell-function 'ignore))
+  ;;--------------------------------------------------------------------
+  (use-package simple
+    :ensure nil
+    :hook ((after-init . size-indication-mode)
+           (text-mode . visual-line-mode)
+           ((prog-mode markdown-mode conf-mode) . enable-trailing-whitespace))
+    :init
+    (setq kill-whole-line t               ; Kill line including '\n'
+          line-move-visual nil
+          track-eol t                     ; Keep cursor at end of lines. Require line-move-visual is nil.
+          set-mark-command-repeat-pop t)  ; Repeating C-SPC after popping mark pops it again
+
+    ;; Visualize TAB, (HARD) SPACE, NEWLINE
+    (setq-default show-trailing-whitespace nil) ; Don't show trailing whitespace by default
+    (defun enable-trailing-whitespace ()
+      "Show trailing spaces and delete on saving."
+      (setq show-trailing-whitespace t)
+      (add-hook 'before-save-hook #'delete-trailing-whitespace nil t)))
+  ;;--------------------------------------------------------------------
+  ;; I/O optimisation
+  (with-no-warnings
+    (when sys/win32p
+      (setq w32-get-true-file-attributes nil   ; decrease file IO workload
+            w32-pipe-read-delay 0              ; faster IPC
+            w32-pipe-buffer-size (* 64 1024))) ; read more at a time (was 4K)
+    (unless sys/macp
+      (setq command-line-ns-option-alist nil))
+    (unless sys/linuxp
+      (setq command-line-x-option-alist nil))
+
+    ;; Increase how much can be read from processes in a single chunk (default is 4kb)
+    (setq read-process-output-max #x10000)  ; 64kb
+
+    ;; Don't ping things that look like domain names.
+    (setq ffap-machine-p-known 'reject))
+
+  ;; Compatibility
+  ;; To allow for the usage of Emacs functions and macros that are
+  ;; defined in newer versions of Emacs, compat.el provides definitions
+  ;; that are installed ONLY if necessary.  These reimplementations
+  ;;  of functions and macros are at least subsets of the actual
+  ;; implementations.  Be sure to read the documentation string to
+  ;;  make sure.
+  (use-package compat
+    :demand t)
+
+  ;;--------------------------------------------------------------------
+  ;; Start server
+  (use-package server
+    :ensure nil
+    :if nil ;; to be integrated with thethingsengine.org
+    :hook (after-init . server-mode))
+
+  ;; kill processes when quit or exit, live-webserver
+  (setq confirm-kill-processes nil)
+
+  ;; Some global keybindings
+  (bind-keys ("s-r"     . revert-this-buffer)
+             ("C-x K"   . delete-this-file)
+             ("C-c C-l" . reload-init-file))
+
+  ;; Sqlite
+  (when (fboundp 'sqlite-open)
+    (use-package emacsql-sqlite-builtin))
+
+  ;; Garbage Collector Magic Hack
+  (use-package gcmh
+    :diminish
+    :hook (emacs-startup . gcmh-mode)
+    :init
+    (setq gcmh-idle-delay 'auto
+          gcmh-auto-idle-delay-factor 10
+          gcmh-high-cons-threshold #x1000000)) ; 16MB
+
+  ;;-------------------------------------------------------------------------------------------------
+  (provide 'init-1-system)
+  ;;; init-1-system.el ends here.
+#+end_src
+
+*** init-a-authentication.el
+:PROPERTIES:
+:HEADER-ARGS: :tangle lisp/init-a-authentication.el :mkdirp yes
+:END:
+
+#+begin_src emacs-lisp
+  ;;; init-a-authentication.el -- Authentication for General Pure Emacs -*- lexical-binding: t; -*-
+  ;;
+  ;; Copyleft (CL) 2022-2032 YF Lin
+  ;;
+  ;; Something good as indicated, by Dr YF Lin <e.yflin@gmail.com>
+  ;; URL: https://github.com/Ethanlinyf/General-Pure-Emacs
+  ;; Under ThingsEngine Project: https://www.thethingsengine.org
+  ;;--------------------------------------------------------------------
+  ;;; Commentary:
+  ;; reserve for authentication
+  ;;--------------------------------------------------------------------
+  ;;; Code:
+
+  ;;;; Personal Information
+  ;; (setq user-full-name "Your name")
+  ;; (setq user-mail-address "Your address")
+
+  ;;--------------------------------------------------------------------
+  ;;; ChatGPT applications:
+  ;; Obtain OpenAI API Key, and save the API Key to the ~/.emacs.d/mind-wave/chatgpt_api_key.txt file
+  ;; (Or set the environment variable OPENAI_API_KEY in init-p-setting.el.).
+
+
+  ;;-------------------------------------------------------------------------------------------------
+  (provide 'init-a-authentication)
+  ;;; init-a-authentication.el ends here.
+#+end_src
+
+*** init-b-basic.el
+:PROPERTIES:
+:HEADER-ARGS: :tangle lisp/init-b-basic.el :mkdirp yes
+:END:
+
+#+begin_src emacs-lisp
+  ;;; init-b-basic.el -- Better default configurations. -*- lexical-binding: t; -*-
+  ;;
+  ;; Copyleft (CL) 2022-2032 YF Lin
+  ;;
+  ;; Something good as indicated, by Dr YF Lin <e.yflin@gmail.com>
+  ;; URL: https://github.com/Ethanlinyf/General-Pure-Emacs
+  ;; Under ThingsEngine Project: https://www.thethingsengine.org
+  ;;--------------------------------------------------------------------
+  ;;; Commentary:
+  ;; Add feature defined in the Lisp folder
+  ;;--------------------------------------------------------------------
+  ;;; Code:
+
+  ;; Set the initial scratch message
+  (setq-default
+   initial-scratch-message (concat
+  ";;--------------------------------------------------------
+  ;; Welcome to General Pure Emacs from ThingsEngine
+  ;; Somethng Good as Indicated:\n\n\n")
+   line-spacing 0.1
+   truncate-lines nil
+   word-wrap t)
+
+  (use-package display-line-numbers
+    :ensure nil
+    :init (setq display-line-numbers-width-start t)
+    :hook ((prog-mode
+            yaml-mode
+            TeX-mode
+            org-mode
+            conf-mode) . display-line-numbers-mode))
+
+  ;;--------------------------------------------------------------------
+  (with-no-warnings
+    (line-number-mode 1)            ; Turn on line number and the column-number-mode
+    (column-number-mode 1)          ; Change the cursor type
+    (global-hl-line-mode 1)         ; Enable hightline globally
+    (setq-default cursor-type 'bar) ; Change the type of cursor
+    )
+
+  ;;--------------------------------------------------------------------
+  ;; Key Modifiers
+  (with-no-warnings
+    (cond
+     (sys/mac-port-p
+      (setq mac-command-modifier 'super)
+      (setq mac-option-modifier 'meta)
+      (bind-keys ([(super a)] . mark-whole-buffer)
+                 ([(super c)] . kill-ring-save)
+                 ([(super l)] . goto-line)
+                 ([(super q)] . save-buffers-kill-emacs)
+                 ([(super s)] . save-buffer)
+                 ([(super v)] . yank)
+                 ;;([(super w)] . delete-frame)
+                 ([(super z)] . undo)))
+     (sys/win32p
+      ;; set Win key as Super and App key as Hyper
+      (setq w32-lwindow-modifier 'super)  ; Left Windows key as Super
+      (setq w32-apps-modifier 'hyper)     ; Menu/App key as Hyper
+      (w32-register-hot-key [s-t]))))
+
+  ;;--------------------------------------------------------------------
+  ;; manage by git and disable make-backup-files and auto-save-default
+  (with-no-warnings
+    (setq make-backup-files nil)
+    (setq auto-save-default nil)
+    (delete-selection-mode 1)
+    (setq tab-width 4)
+    (fset 'yes-or-no-p 'y-or-n-p)
+    (setq-default indent-tabs-mode nil)                 ; avoid to mixture the tabs and spaces in code
+    (global-set-key (kbd "C-c C-'") 'set-mark-command)  ; keybindings for setting mark
+    )
+
+  ;; ;; Visualize TAB, (HARD) SPACE, NEWLINE
+  ;; (setq-default show-trailing-whitespace nil) ; Don't show trailing whitespace by default
+  ;; (defun enable-trailing-whitespace ()
+  ;;   "Show trailing spaces and delete on saving."
+  ;;   (setq show-trailing-whitespace t)
+  ;;   (add-hook 'before-save-hook #'delete-trailing-whitespace nil t))
+  ;; (add-hook 'prog-mode #'enable-trailing-whitespace)
+
+  (setq visible-bell t
+        inhibit-compacting-font-caches t                                           ; Don’t compact font caches during GC
+        delete-by-moving-to-trash t                                                ; Deleting files go to OS's trash folder
+        make-backup-files nil                                                      ; Forbide to make backup files
+        auto-save-default nil                                                      ; Disable auto save
+
+        uniquify-buffer-name-style 'post-forward-angle-brackets                    ; Show path if names are same
+        adaptive-fill-regexp "[ t]+|[ t]*([0-9]+.|*+)[ t]*"
+        adaptive-fill-first-line-regexp "^* *$"
+        sentence-end "\\([。！？]\\|……\\|[.?!][]\"')}]*\\($\\|[ \t]\\)\\)[ \t\n]*"
+        sentence-end-double-space nil
+        word-wrap-by-category t)
+
+
+  ;;----------------------- Dired Mode ---------------------------------
+  (with-eval-after-load "dired"
+    (put 'dired-find-alternate-file 'disabled nil)
+    (define-key dired-mode-map (kbd "RET") 'dired-find-alternate-file)
+    (define-key dired-mode-map (kbd "<mouse-2>") 'dired-find-alternate-file))
+
+  (when *is-mac*
+    (setq insert-directory-program "gls" dired-use-ls-dired t)
+    (setq dired-listing-switches "-al --group-directories-first"))
+
+  ;;----------------- For org mode ------------------------------------
+  (use-package org-superstar
+    :ensure t
+    :hook
+    (org-mode . (lambda () (org-superstar-mode 1) (org-indent-mode 1)))) ;
+
+  ;;------------------------ User Interface ----------------------------
+  (use-package doom-modeline
+    :ensure t
+    :hook (after-init . doom-modeline-mode))
+
+  (use-package hide-mode-line
+    :ensure t)
+  ;;--------------------------------------------------------------------
+  (use-package auto-save
+    :ensure nil
+    :load-path "site-lisp/auto-save"
+    :hook (find-file-hook . auto-save-enable)
+    :config
+    (auto-save-idle 1)
+    (auto-save-silent t)
+    (auto-save-delete-trailing-whitespace t))
+
+  ;;--------------------------------------------------------------------
+  ;; Yet another snippet extension
+  (use-package yasnippet
+    :diminish yas-minor-mode
+    :hook
+    (after-init . yas-global-mode)
+    :init
+    (setq yas-verbosity 0) ; 1 or higher to show Yasnippet messages again
+    :config
+    (yas-reload-all)
+    ;; unbind <TAB> completion
+    (define-key yas-minor-mode-map [(tab)]        nil)
+    (define-key yas-minor-mode-map (kbd "TAB")    nil)
+    (define-key yas-minor-mode-map (kbd "<tab>")  nil)
+    :bind
+    (:map yas-minor-mode-map ("S-<tab>" . yas-expand)))
+
+  ;; Collection of yasnippet snippets
+  (use-package yasnippet-snippets
+    :ensure t
+    :after yasnippet)
+
+  ;;--------------------------------------------------------------------
+  (use-package so-long
+    :ensure t
+    :hook (after-init . global-so-long-mode))
+
+  ;;--------------------------------------------------------------------
+  (use-package projectile
+    :ensure t
+    :bind (("s-p" . projectile-command-map))  ; The binding should be verified.
+    :config
+    (setq projectile-mode-line "Projectile")
+    (setq projectile-track-known-projects-automatically nil)
+    :init (projectile-mode +1))
+
+  ;; This package will be used in minibuffer.el, dired.el, platerform.el,
+  ;; interface.el and dashboard.el
+  (use-package nerd-icons
+    :demand t
+    :init
+    (setq nerd-icons-color-icons t)
+    ;; :custom
+    ;; The Nerd Font you want to use in GUI
+    ;; "Symbols Nerd Font Mono" is the default and is recommended
+    ;; but you can use any other Nerd Font if you want
+    ;; (nerd-icons-font-family "Symbols Nerd Font Mono")
+    )
+
+  ;;--------------------------------------------------------------------
+  ;; hydra
+  (use-package hydra
+    :ensure t
+    :hook (emacs-lisp-mode . hydra-add-imenu)
+    :init
+    (require 'hydra))
+
+  ;; From Centaur Emacs
+  (use-package pretty-hydra
+    :ensure
+    :after hydra
+    ;; :bind ("<f8>" . toggles-hydra/body)
+    :hook (emacs-lisp-mode . (lambda()
+                               (add-to-list
+                                'imenu-generic-expression
+                                '("Hydras"
+                                  "^.*(\\(pretty-hydra-define\\) \\([a-zA-Z-]+\\)"
+                                  2))))
+    :init
+    (require 'pretty-hydra)
+    :config
+    (cl-defun pretty-hydra-title (title &optional icon-type icon-name
+                                        &key face height v-adjust)
+      "Add an icon in the hydra title."
+      (let ((face (or face `(:foreground ,(face-background 'highlight))))
+            (height (or height 1.0))
+            (v-adjust (or v-adjust 0.0)))
+        (concat
+         (when (and (icon-displayable-p) icon-type icon-name)
+           (let ((f (intern (format "nerd-icons-%s" icon-type))))
+             (when (fboundp f)
+               (concat
+                (apply f (list icon-name :face face :height height :v-adjust v-adjust))
+                " "))))
+         (propertize title 'face face)))))
+
+  (use-package use-package-hydra
+    :ensure t
+    :after use-package hydra
+    :init
+    (require 'use-package-hydra))
+
+  ;;-------------------------------------------------------------------------------------------------
+  (provide 'init-b-basic)
+  ;;; init-b-basic.el ends here.
+#+end_src
+
+*** init-c-i18n.el
+:PROPERTIES:
+:HEADER-ARGS: :tangle lisp/init-c-i18n.el :mkdirp yes
+:END:
+
+#+begin_src emacs-lisp
+  ;; init-c-i18n.el -- Settings for Internationalisation . -*- lexical-binding: t; -*-
+  ;;
+  ;; Copyleft (CL) 2022-2032 YF Lin
+  ;;
+  ;; Something good as indicated, by Dr YF Lin <e.yflin@gmail.com>
+  ;; URL: https://github.com/Ethanlinyf/General-Pure-Emacs
+  ;; Under ThingsEngine Project: https://www.thethingsengine.org
+  ;;--------------------------------------------------------------------
+  ;;; Commentary:
+  ;; The configurations for internationalisation, including imput methods, fonts, coding system, and so on.
+  ;;--------------------------------------------------------------------
+  ;;; Code:
+
+  ;; Set UTF-8 as the default coding system
+  (when (fboundp 'set-charset-priority)
+    (set-charset-priority 'unicode))
+
+  (setq locale-coding-system 'utf-8)
+  (set-language-environment 'utf-8)
+  (set-default-coding-systems 'utf-8)
+  (prefer-coding-system 'utf-8)
+
+  (unless sys/win32p
+    (set-selection-coding-system 'utf-8))
+
+  ;;--------------------------------------------------------------------
+  (use-package pyim
+    :ensure t)
+
+  (use-package define-word
+    :commands define-word-at-point
+    :ensure t
+    :bind
+    ("s-6" . define-word-at-point))
+
+  (use-package powerthesaurus
+    :commands powerthesaurus-lookup-dwim
+    :ensure t
+    :bind
+    ("s-7" . powerthesaurus-lookup-dwim))
+
+  ;;-------------------------------------------------------------------------------------------------
+  (provide 'init-c-i18n)
+  ;;; init-c-i18n.el ends here
+#+end_src
+
+*** init-d-update.el
+:PROPERTIES:
+:HEADER-ARGS: :tangle lisp/init-d-update.el :mkdirp yes
+:END:
+
+#+begin_src emacs-lisp
+  ;;; init-d-update.el --- Foundamental settings for Emacs. -*- lexical-binding: t; -*-
+  ;;
+  ;; Copyleft (CL) 2022-2032 YF Lin
+  ;;
+  ;; Something good as indicated, by Dr YF Lin <e.yflin@gmail.com>
+  ;; URL: https://github.com/Ethanlinyf/General-Pure-Emacs
+  ;; Under ThingsEngine Project: https://www.thethingsengine.org
+  ;;--------------------------------------------------------------------
+  ;;; Commentary:
+  ;; This will be used for the Emacs update from V29.1 for GPE
+  ;;--------------------------------------------------------------------
+  ;;; Code:
+
+  ;;; Emacs@28
+  ;; WORKAROUND: fix blank screen issue on macOS.
+  (defun fix-fullscreen-cocoa ()
+    "Address blank screen issue with child-frame in fullscreen.
+  This issue has been addressed in 28."
+    (and sys/mac-cocoa-p
+         (not emacs/>=28p)
+         (bound-and-true-p ns-use-native-fullscreen)
+         (setq ns-use-native-fullscreen nil)))
+
+  ;;; Emacs@29
+  ;;--------------------------------------------------------------------
+  ;; (when emacs/>=29p
+  ;;   (push '(sh-mode . bash-ts-mode) major-mode-remap-alist)
+  ;;   (push '(c-mode . c-ts-mode) major-mode-remap-alist)
+  ;;   (push '(c++-mode . c++-ts-mode) major-mode-remap-alist)
+  ;;   (push '(css-mode . css-ts-mode) major-mode-remap-alist)
+  ;;   (push '(javascript-mode . js-ts-mode) major-mode-remap-alist)
+  ;;   (push '(js-json-mode . json-ts-mode) major-mode-remap-alist)
+  ;;   (push '(python-mode . python-ts-mode) major-mode-remap-alist))
+  ;;--------------------------------------------------------------------
+  ;; Change the font size globally
+  ;; To increase the font size, type "C-x C-M-= or +"; to decrease it
+  ;; type "C-x C-M--"; to restore the size, type "C-x C-M-0"
+  ;;--------------------------------------------------------------------
+  ;; "delet-process" is a command. "restart-emacs"
+  ;; "C-x 8 e" inserts Emoji, 🐋
+  ;; "package-upgrade" "package-upgrade-all"
+  ;; "package-recompile" & "package-recompike-all"
+  ;;--------------------------------------------------------------------
+  (when emacs/>=29p
+    (setq pixel-scroll-precision-mode 1)
+    ;; (setq visible-bell t)
+    (setq ring-bell-function 'ignore)
+    (global-set-key (kbd "<f8>") 'scratch-buffer))
+
+  ;; (set-frame-parameter nil 'alpha-background 80)
+  ;; (push '(alpha . (90 . 90)) default-frame-alist)
+  ;; (set-frame-parameter nil 'alpha 0.99)
+
+  ;; Bugfix
+  ;;--------------------------------------------------------------------
+  ;;; doom-one theme:
+  ;; Warning: setting attribute ‘:background’ of face ‘font-lock-comment-face’: nil value is invalid, use ‘unspecified’ instead.
+
+  ;; fixed:
+  ;; (modeline-fg fg) --> (modeline-fg 'unspecified)
+
+  ;; :background (if doom-one-brighter-comments (doom-lighten bg 0.05)) -->
+  ;; :background (if doom-one-brighter-comments
+  ;;                 (doom-lighten bg 0.05)
+  ;;               'unspecified)
+
+  ;;----------------------------------------------------------------------------------------------
+  ;; include package-vc
+  ;; (require 'cl-lib)
+  ;; (require 'use-package-core)
+
+  ;; (cl-defun slot/vc-install (&key (fetcher "github") repo name rev backend)
+  ;;   (let* ((url (format "https://www.%s.com/%s" fetcher repo))
+  ;;          (iname (when name (intern name)))
+  ;;          (package-name (or iname (intern (file-name-base repo)))))
+  ;;     (unless (package-installed-p package-name)
+  ;;       (package-vc-install url iname rev backend))))
+
+  ;; (defvar package-vc-use-package-keyword :vc)
+
+  ;; (defun package-vc-use-package-set-keyword ()
+  ;;   (unless (member package-vc-use-package-keyword use-package-keywords)
+  ;;     (setq use-package-keywords
+  ;;           (let* ((pos (cl-position :unless use-package-keywords))
+  ;;                  (head (cl-subseq use-package-keywords 0 (+ 1 pos)))
+  ;;                  (tail (nthcdr (+ 1 pos) use-package-keywords)))
+  ;;             (append head (list package-vc-use-package-keyword) tail)))))
+
+  ;; (defun use-package-normalize/:vc (name-symbol keyword args)
+  ;;   (let ((arg (car args)))
+  ;;     (pcase arg
+  ;;       ((or `nil `t) (list name-symbol))
+  ;;       ((pred symbolp) args)
+  ;;       ((pred listp) (cond
+  ;;                      ((listp (car arg)) arg)
+  ;;                      ((string-match "^:" (symbol-name (car arg))) (cons name-symbol arg))
+  ;;                      ((symbolp (car arg)) args)))
+  ;;       (_ nil))))
+
+  ;; (defun use-package-handler/:vc (name-symbol keyword args rest state)
+  ;;   (let ((body (use-package-process-keywords name-symbol rest state)))
+  ;;     ;; This happens at macro expansion time, not when the expanded code is
+  ;;     ;; compiled or evaluated.
+  ;;     (if args
+  ;;         (use-package-concat
+  ;;          `((unless (package-installed-p ',(pcase (car args)
+  ;;                                             ((pred symbolp) (car args))
+  ;;                                             ((pred listp) (car (car args)))))
+  ;;              (apply #'slot/vc-install ',(cdr args))))
+  ;;          body)
+  ;;       body)))
+
+  ;; (defun package-vc-use-package-override-:ensure (func name-symbol keyword ensure rest state)
+  ;;   (let ((ensure (if (plist-member rest :vc)
+  ;;                     nil
+  ;;                   ensure)))
+  ;;     (funcall func name-symbol keyword ensure rest state)))
+
+  ;; (defun package-vc-use-package-activate-advice ()
+  ;;   (advice-add
+  ;;    'use-package-handler/:ensure
+  ;;    :around
+  ;;    #'package-vc-use-package-override-:ensure))
+
+  ;; (defun package-vc-use-package-deactivate-advice ()
+  ;;   (advice-remove
+  ;;    'use-package-handler/:ensure
+  ;;    #'package-vc-use-package-override-:ensure))
+
+  ;; ;; register keyword on require
+  ;; (package-vc-use-package-set-keyword)
+
+  ;; (use-package gpe-aweshell
+  ;;   :vc (:fetcher "github" :repo "Ethanlinyf/gpe-aweshell"))
+
+  ;;-------------------------------------------------------------------------------------------------
+  (provide 'init-d-update)
+  ;;; init-d-update.el ends here
+#+end_src
+
+*** init-e-enhance.el
+:PROPERTIES:
+:HEADER-ARGS: :tangle lisp/init-e-enhance.el :mkdirp yes
+:END:
+
+#+begin_src emacs-lisp
+  ;;; init-e-enhance.el --- Enhancement. -*- lexical-binding: t; -*-
+  ;;
+  ;; Copyleft (CL) 2022-2032 YF Lin
+  ;;
+  ;; Something good as indicated, by Dr YF Lin <e.yflin@gmail.com>
+  ;; URL: https://github.com/Ethanlinyf/General-Pure-Emacs
+  ;; Under ThingsEngine Project: https://www.thethingsengine.org
+  ;;--------------------------------------------------------------------
+  ;;; Commentary:
+  ;; Some enhancement for editting
+  ;;--------------------------------------------------------------------
+  ;;; Code:
+
+  ;; Session history, enhance package, desktop+, which extends `desktop' by providing more features related to sessions persistance.
+  ;; (use-package desktop
+  ;;   :hook (after-init . desktop-save-mode))
+
+  ;; Indent Region or Buffer
+  (use-package GPE-indent
+    :ensure nil
+    :commands (indent-region-or-buffer)
+    :bind (("C-M-\\" . indent-region-or-buffer))
+    :init
+    (defun indent-buffer()
+      "To indent the buffer."
+      (interactive)
+      (indent-region (point-min) (point-max)))
+
+    (defun indent-region-or-buffer()
+      "To indent the region or buffer."
+      (interactive)
+      (save-excursion
+        (if (region-active-p)
+            (progn
+              (indent-region (region-beginning) (region-end))
+              (message "Indent selected region."))
+          (progn
+            (indent-buffer)
+            (message "Indent buffer."))))))
+
+  ;;--------------------------------------------------------------------
+  ;; abbrev settings
+  (use-package GPE-abbrev
+    :ensure nil
+    :init
+    (setq-default abbrev-mode t)
+    (setq save-abbrevs nil)
+
+    (defconst abbrev-file (expand-file-name "abbrev_defs" user-emacs-directory))
+    (unless (file-exists-p abbrev-file)
+      (shell-command (concat "touch " abbrev-file)))
+    (setq abbrev-file-name abbrev-file))
+
+  ;;--------------------------------------------------------------------
+  ;; Further Enhancement
+  (use-package GPE-enhancement
+    :ensure nil
+    :init
+    (setq delete-by-moving-to-trash t) ; disable delete directly
+    (add-hook 'after-init-hook 'electric-pair-mode)
+    (add-hook 'after-init-hook 'winner-mode)
+    (add-hook 'after-init-hook 'global-auto-revert-mode)
+    (add-hook 'after-init-hook 'electric-indent-mode)
+    (add-hook 'prog-mode-hook (lambda() (setq split-width-threshold 80)))
+
+    (add-hook 'after-init-hook 'show-paren-mode)
+    (define-advice show-paren-function (:around (fn) fix-show-paren-function)
+      "Highlight enclosing parens."
+      (cond ((looking-at-p "\\s(") (funcall fn))
+            (t (save-excursion
+                 (ignore-errors (backward-up-list))
+                 (funcall fn))))))
+
+  ;;--------------------------------------------------------------------
+  ;;happie-expand
+  (use-package GPE-hippie-expand
+    :ensure nil
+    :commands (hippie-expand)
+    :bind ("M-/" . hippie-expand)
+    :init
+    (setq hippie-expand-try-function-list '(try-expand-debbrev
+                        try-expand-debbrev-all-buffers
+                        try-expand-debbrev-from-kill
+                        try-complete-file-name-partially
+                        try-complete-file-name
+                        try-expand-all-abbrevs
+                        try-expand-list
+                        try-expand-line
+                        try-complete-lisp-symbol-partially
+                        try-complete-lisp-symbol)))
+
+  ;;--------------------------------------------------------------------
+  ;; from centaur emacs
+  (use-package recentf
+    :bind (("C-x C-r" . recentf-open-files))
+    :hook (after-init . recentf-mode)
+    :init
+    (setq recentf-max-saved-items 300
+          recentf-exclude
+          '("\\.?cache" ".cask" "url" "COMMIT_EDITMSG\\'" "bookmarks"
+            "\\.\\(?:gz\\|gif\\|svg\\|png\\|jpe?g\\|bmp\\|xpm\\)$"
+            "\\.?ido\\.last$" "\\.revive$" "/G?TAGS$" "/.elfeed/"
+            "^/tmp/" "^/var/folders/.+$" "^/ssh:" "/persp-confs/"
+            (lambda (file) (file-in-directory-p file package-user-dir))))
+    (add-to-list 'recentf-exclude
+                 (expand-file-name "company-statistics-cache.el" user-emacs-directory)
+                 (expand-file-name "elgrep-data.el" user-emacs-directory))
+    :config
+    (push (expand-file-name recentf-save-file) recentf-exclude)
+    (add-to-list 'recentf-filename-handlers #'abbreviate-file-name)
+    (when sys/macp
+      (global-set-key (kbd "s-3") 'recentf-open-files))
+    )
+
+  (use-package saveplace
+    :ensure nil
+    :hook (after-init . save-place-mode))
+
+  ;; ALT + number to swith to the number of a specific window
+  (use-package window-numbering
+    :hook (after-init . window-numbering-mode))
+
+  (use-package which-key
+    :diminish
+    :bind ("C-h M-m" . which-key-show-major-mode)
+    :hook (after-init . which-key-mode)
+    :config
+    (setq which-key-max-description-length 30
+          which-key-show-remaining-keys t))
+
+  ;;--------------------------------------------------------------------
+  ;; Hungry deletion
+  (use-package hungry-delete
+    :diminish
+    :hook (after-init . global-hungry-delete-mode)
+    :init (setq hungry-delete-chars-to-skip " \t\f\v"
+                hungry-delete-except-modes
+                '(minibuffer-mode help-modeminibuffer-inactive-mode calc-mode)))
+
+  ;;--------------------------------------------------------------------
+  ;; spell checking
+  ;; (use-package jinx
+  ;;  :ensure t
+  ;;  :hook
+  ;;  (tex-mode . jinx-mode)
+  ;;  (org-mode . jinx-mode)
+  ;;  (conf-mode . jinx-mode)
+  ;;  :hook
+  ;;  (emacs-startup . global-jinx-mode))
+
+  ;;--------------------------------------------------------------------
+  ;; An intuitive and efficient solution for single-buffer text search
+  (use-package ctrlf
+    :ensure t
+    :init
+    (ctrlf-mode +1))
+
+  ;;--------------------------------------------------------------------
+  ;; goto-line-preview
+  (use-package goto-line-preview
+    :ensure t)
+
+  ;;--------------------------------------------------------------------
+  ;; golden-ratio
+  (use-package golden-ratio
+    :ensure t
+    ;;:hook
+    ;;(after-init . golden-ratio-mode)
+    :config
+    (setq golden-ratio-auto-scale t))
+
+  ;;--------------------------------------------------------------------
+  ;; undo-tree
+  (use-package undo-tree
+    :diminish
+    :hook (after-init . global-undo-tree-mode)
+    :init (setq undo-tree-visualizer-timestamps t
+                undo-tree-visualizer-diff t
+                undo-tree-enable-undo-in-region nil
+                undo-tree-auto-save-history nil))
+  ;;--------------------------------------------------------------------
+  ;; Elisp API Demos
+  ;; C-h x command RET (describe-command) displays the documentation of the named command, in a window.
+  (use-package elisp-demos
+    :ensure t
+    :init
+    (advice-add 'describe-function-1 :after #'elisp-demos-advice-describe-function-1))
+
+  ;;--------------------------------------------------------------------
+  ;; ace-window
+  (use-package ace-window
+    :ensure t
+    :hook
+    (emacs-startup . ace-window-display-mode)
+    :bind
+    ([remap other-window] . ace-window))
+
+  ;;--------------------------------------------------------------------
+  (use-package multiple-cursors
+    :bind
+    ("C-s-<mouse-1>" . mc/toggle-cursor-on-click))
+
+
+  ;; To be enhanced as follows:
+  (use-package multiple-cursors
+    :ensure t
+    :after hydra
+    :bind
+    (("C-x C-h m" . hydra-multiple-cursors/body)
+     ("C-S-<mouse-1>" . mc/toggle-cursor-on-click))
+    :hydra (hydra-multiple-cursors
+        (:hint nil)
+        "
+  Up^^             Down^^           Miscellaneous           % 2(mc/num-cursors) cursor%s(if (> (mc/num-cursors) 1) \"s\" \"\")
+  ------------------------------------------------------------------
+   [_p_]   Prev     [_n_]   Next     [_l_] Edit lines  [_0_] Insert numbers
+   [_P_]   Skip     [_N_]   Skip     [_a_] Mark all    [_A_] Insert letters
+   [_M-p_] Unmark   [_M-n_] Unmark   [_s_] Search      [_q_] Quit
+   [_|_] Align with input CHAR       [Click] Cursor at point"
+        ("l" mc/edit-lines :exit t)
+        ("a" mc/mark-all-like-this :exit t)
+        ("n" mc/mark-next-like-this)
+        ("N" mc/skip-to-next-like-this)
+        ("M-n" mc/unmark-next-like-this)
+        ("p" mc/mark-previous-like-this)
+        ("P" mc/skip-to-previous-like-this)
+        ("M-p" mc/unmark-previous-like-this)
+        ("|" mc/vertical-align)
+        ("s" mc/mark-all-in-region-regexp :exit t)
+        ("0" mc/insert-numbers :exit t)
+        ("A" mc/insert-letters :exit t)
+        ("<mouse-1>" mc/add-cursor-on-click)
+        ;; Help with click recognition in this hydra
+        ("<down-mouse-1>" ignore)
+        ("<drag-mouse-1>" ignore)
+        ("q" nil)))
+
+  ;;--------------------------------------------------------------------
+  ;; Rectangle from Centaur Emacs
+  (use-package rect
+    :ensure nil
+    :bind (:map text-mode-map
+                ("<C-return>" . rect-hydra/body)
+                :map prog-mode-map
+                ("<C-return>" . rect-hydra/body))
+    :init
+    (with-eval-after-load 'org
+      (bind-key "<s-return>" #'rect-hydra/body org-mode-map))
+    (with-eval-after-load 'wgrep
+      (bind-key "<C-return>" #'rect-hydra/body wgrep-mode-map))
+    (with-eval-after-load 'wdired
+      (bind-key "<C-return>" #'rect-hydra/body wdired-mode-map))
+    :pretty-hydra
+    ((:title (pretty-hydra-title "Rectangle" 'material "border_all" :height 1.2 :v-adjust -0.225)
+             :color amaranth :body-pre (rectangle-mark-mode) :post (deactivate-mark) :quit-key ("q" "C-g"))
+     ("Move"
+      (("h" backward-char "←")
+       ("j" next-line "↓")
+       ("k" previous-line "↑")
+       ("l" forward-char "→"))
+      "Action"
+      (("w" copy-rectangle-as-kill "copy") ; C-x r M-w
+       ("y" yank-rectangle "yank")         ; C-x r y
+       ("t" string-rectangle "string")     ; C-x r t
+       ("d" kill-rectangle "kill")         ; C-x r d
+       ("c" clear-rectangle "clear")       ; C-x r c
+       ("o" open-rectangle "open"))        ; C-x r o
+      "Misc"
+      (("N" rectangle-number-lines "number lines")        ; C-x r N
+       ("e" rectangle-exchange-point-and-mark "exchange") ; C-x C-x
+       ("u" undo "undo")
+       ("r" (if (region-active-p)
+                (deactivate-mark)
+              (rectangle-mark-mode 1))
+        "reset")))))
+
+  ;;--------------------------------------------------------------------
+  (use-package highlight-symbol
+    :ensure t
+    :bind ("<f7>" . highlight-symbol))
+
+  ;;--------------------------------------------------------------------
+  ;; enhance the helpful
+  (use-package helpful
+    :ensure t
+    :commands (helpful-callable helpful-variable helpful-command helpful-key helpful-mode)
+    :bind (([remap describe-command] . helpful-command)
+           ("C-h f" . helpful-callable)
+           ("C-h v" . helpful-variable)
+           ("C-h s" . helpful-symbol)
+           ("C-h S" . describe-syntax)
+           ("C-h m" . describe-mode)
+           ("C-h F" . describe-face)
+           ([remap describe-key] . helpful-key))
+    )
+
+  ;;--------------------------------------------------------------------
+  (use-package mwim
+    :ensure t
+    :bind
+    ("C-a" . mwim-beginning-of-code-or-line)
+    ("C-e" . mwim-end-of-code-or-line))
+
+  ;;--------------------------------------------------------------------
+  ;; Markmacro
+  (use-package markmacro
+    :ensure nil
+    :load-path "site-lisp/markmacro"
+    :bind (("s-/" . markmacro-mark-words)
+           ("s-?" . markmacro-mark-lines)
+           ("s-<" . markmacro-apply-all)
+           ("s->" . markmacro-apply-all-except-first)
+           ("s-M" . markmacro-rect-set)
+           ("s-D" . markmacro-rect-delete)
+           ("s-F" . markmacro-rect-replace)
+           ("s-I" . markmacro-rect-insert)
+           ("s-C" . markmacro-rect-mark-columns)
+           ("s-S" . markmacro-rect-mark-symbols)))
+
+  ;;-------------------------------------------------------------------------------------------------
+  (provide 'init-e-enhance)
+  ;;; init-e-enhance.el ends here
+#+end_src
+
+*** init-f-dired.el
+:PROPERTIES:
+:HEADER-ARGS: :tangle lisp/init-f-dired.el :mkdirp yes
+:END:
+
+#+begin_src emacs-lisp
+  ;;; init-f-dired.el --- Settings for dired-mode -*- lexical-binding: t; -*-
+  ;;
+  ;; Copyleft (CL) 2022-2032 Dr YF Lin
+  ;;
+  ;; Author: Ethan YF Lin <e.yflin@gmail.com>
+  ;; URL: https://github.com/Ethanlinyf/General-Pure-Emacs
+  ;; Under ThingsEngine Project: https://www.thethingsengine.org/
+  ;;--------------------------------------------------------------------
+  ;;; Commentary:
+  ;; Configurations for dired-mode
+  ;;--------------------------------------------------------------------
+  ;;; Code:
+
+  ;; dired-mode
+  (use-package dired
+    :ensure nil
+    :bind (:map dired-mode-map
+                ("RET" . dired-find-alternate-file)
+                ;; allow to edit the names of files within a dired buffer under wdired-mode
+                ("C-c C-p" . wdired-change-to-wdired-mode)
+                )
+    :config
+    (setq dired-recursive-deletes 'always
+          dired-recursive-copies 'always
+          dirvish-override-dired-mode t)
+    (put 'dired-find-alternate-file 'disabled nil)
+
+    (when sys/macp
+      (setq dired-use-ls-dired nil)
+
+      (when (executable-find "gls")
+        (setq insert-directory-program "gls"
+              dired-use-ls-dired t)))
+
+    (when (or (and sys/macp (executable-find "gls"))
+              (and (or sys/linuxp sys/cygwinp) (executable-find "ls")))
+      (setq ls-lisp-use-insert-directory-program t)
+      (setq dired-listing-switches "-alh --group-directories-first")))
+
+  ;; From Centaur Emacs
+  (use-package dired-plus
+    :ensure nil
+    :config
+    (let ((cmd (cond (sys/mac-x-p "open")
+                     (sys/linux-x-p "xdg-open")
+                     (sys/win32p "start")
+                     (t ""))))
+      (setq dired-guess-shell-alist-user
+            `(("\\.pdf\\'" ,cmd)
+              ("\\.docx\\'" ,cmd)
+              ("\\.\\(?:djvu\\|eps\\)\\'" ,cmd)
+              ("\\.\\(?:jpg\\|jpeg\\|png\\|gif\\|xpm\\)\\'" ,cmd)
+              ("\\.\\(?:xcf\\)\\'" ,cmd)
+              ("\\.csv\\'" ,cmd)
+              ("\\.tex\\'" ,cmd)
+              ("\\.\\(?:mp4\\|mkv\\|avi\\|flv\\|rm\\|rmvb\\|ogv\\)\\(?:\\.part\\)?\\'" ,cmd)
+              ("\\.\\(?:mp3\\|flac\\)\\'" ,cmd)
+              ("\\.html?\\'" ,cmd)
+              ("\\.md\\'" ,cmd))))
+
+    (setq dired-omit-files
+          (concat dired-omit-files "\\|^.DS_Store$\\|^.projectile$\\|^.git*\\|^.svn$\\|^.vscode$\\|\\.js\\.meta$\\|\\.meta$\\|\\.elc$\\|^.emacs.*")))
+
+  ;; Colourful dired-mode
+  (use-package diredfl
+    :ensure t
+    :hook (dired-mode . diredfl-mode))
+
+  ;; Show git informatio in dired mode
+  (use-package dired-git-info
+    :bind (:map dired-mode-map
+                (")" . dired-git-info-mode)))
+
+  (use-package nerd-icons-dired
+    :hook
+    (dired-mode . nerd-icons-dired-mode))
+
+  (when (executable-find "fd")
+    (use-package fd-dired
+      :ensure t))
+
+  ;;-------------------------------------------------------------------------------------------------
+  (provide 'init-f-dired)
+  ;;; init-f-dired.el ends here
+#+end_src
+
+*** init-g-interface.el
+:PROPERTIES:
+:HEADER-ARGS: :tangle lisp/init-g-interface.el :mkdirp yes
+:END:
+
+#+begin_src emacs-lisp
+  ;; init-g-interface.el -- UI configurations. -*- lexical-binding: t; -*-
+  ;;
+  ;; Copyleft (CL) 2022-2032 Dr YF Lin
+  ;;
+  ;; Author: Ethan YF Lin <e.yflin@gmail.com>
+  ;; URL: https://github.com/Ethanlinyf/General-Pure-Emacs
+  ;; Under ThingsEngine Project: https://www.thethingsengine.org/
+  ;;--------------------------------------------------------------------
+  ;;; Commentary:
+  ;; Configurations for User Interface
+  ;;--------------------------------------------------------------------
+  ;;; Code:
+
+  ;; set a title for the active frame
+  (setq frame-title-format
+        '("Puremacs"  ": "
+          (:eval (if (buffer-file-name)
+                     (abbreviate-file-name (buffer-file-name))
+                   "%b"))))
+
+  (setq initial-frame-alist (quote ((fullscreen . maximized))))
+
+  ;; Window size and features
+  (setq-default
+   window-resize-pixelwise t
+   frame-resize-pixelwise t)
+
+  (when (and *is-mac* (fboundp 'toggle-frame-fullscreen))
+    ;; Command-Option-f to toggle fullscreen mode
+    ;; Hint: Customize `ns-use-native-fullscreen'
+    (global-set-key (kbd "M-s-f") 'toggle-frame-fullscreen))
+
+  ;;--------------------------------------------------------------------
+  ;; theme doom-one
+  ;; see the PR: https://github.com/doomemacs/themes/pull/779
+  (use-package doom-themes
+    :custom
+    (doom-themes-enable-bold t)   ; if nil, bold is universally disabled
+    (doom-themes-enable-italic t) ; if nil, italics is universally disabled
+    :config
+    ;; Enable flashing mode-line on errors
+    (doom-themes-visual-bell-config)
+    :init
+    (load-theme 'doom-one t))
+
+  ;;--------------------------------------------------------------------
+  (use-package ns-auto-titlebar
+    :if *is-mac*
+    :ensure t
+    :init
+    (ns-auto-titlebar-mode t))
+
+  ;;--------------------------------------------------------------------
+  ;; Display minor-mode in the mode line
+  (use-package minions
+    :ensure t
+    :hook (after-init . minions-mode)
+    :init
+    (setq doom-modeline-minor-modes t))
+
+  ;;--------------------------------------------------------------------
+  (use-package nerd-icons-ibuffer
+    :ensure t
+    :hook (ibuffer-mode . nerd-icons-ibuffer-mode)
+    :config
+    ;; Whether display the icons.
+    (setq nerd-icons-ibuffer-icon t)
+
+    ;; Whether display the colorful icons.
+    ;; It respects `nerd-icons-color-icons'.
+    (setq nerd-icons-ibuffer-color-icon t)
+
+    ;; The default icon size in ibuffer.
+    (setq nerd-icons-ibuffer-icon-size 1.0)
+
+    ;; Use human readable file size in ibuffer.
+    (setq  nerd-icons-ibuffer-human-readable-size t)
+
+    ;; A list of ways to display buffer lines with `nerd-icons'.
+    ;; See `ibuffer-formats' for details.
+    nerd-icons-ibuffer-formats
+
+    ;; Slow Rendering
+    ;; If you experience a slow down in performance when rendering multiple icons simultaneously,
+    ;; you can try setting the following variable
+    (setq inhibit-compacting-font-caches t)
+    )
+
+
+  ;;--------------------------------------------------------------------
+  ;; Slow Rendering
+  ;; If you experience a slow down in performance when rendering multiple icons simultaneously,
+  ;; you can try setting the following variable
+  (setq inhibit-compacting-font-caches t)
+
+  ;;--------------------------------------------------------------------
+  ;; nerd-icons for completion
+  (use-package nerd-icons-completion
+    :after (marginalia nerd-icons)
+    :hook
+    (marginalia-mode . nerd-icons-completion-marginalia-setup)
+    :init
+    (nerd-icons-completion-mode))
+
+  (use-package rainbow-delimiters
+    :ensure t
+    :hook
+    (foo-mode . rainbow-delimiters-mode)
+    (prog-mode . rainbow-delimiters-mode))
+
+  ;; osx-lib
+  (use-package osx-lib
+    :if *is-mac*)
+
+  (use-package popwin
+    :ensure t
+    :hook (after-init . popwin-mode))
+
+  ;;--------------------------------------------------------------------
+  (auto-image-file-mode 1)
+  (face-remap-add-relative 'font-lock-keyword-face '(:inherit default))
+  (face-remap-add-relative 'font-lock-keyword-face `(:foreground ,(face-foreground 'default)))
+
+  ;;--------------------------------------------------------------------
+  (use-package buffer-move
+    :ensure t
+    :bind
+    ("<C-S-up>" . buf-move-up)  ; (global-set-key (kbd "<C-S-up>") 'buf-move-up)
+    ("<C-S-down>" . buf-move-down)
+    ("<C-S-left>" . buf-move-left)
+    ("<C-S-right>" . buf-move-right))
+
+  ;; Frame
+  (when (display-graphic-p)
+    (add-hook 'window-setup-hook #'fix-fullscreen-cocoa)
+    (bind-key "S-s-<return>" #'toggle-frame-fullscreen)
+    (and sys/mac-x-p (bind-key "C-s-f" #'toggle-frame-fullscreen))
+
+    ;; Resize and re-position frames conveniently, on macOS: use Magnet to achieve it
+    ;; (bind-keys ("C-M-<return>"    . frame-maximize)
+    ;;            ("C-M-<backspace>" . frame-restore)
+    ;;            ("C-M-<left>"      . frame-left-half)
+    ;;            ("C-M-<right>"     . frame-right-half)
+    ;;            ("C-M-<up>"        . frame-top-half)
+    ;;            ("C-M-<down>"      . frame-bottom-half)))
+    )
+
+  ;; Prettify the process list
+  (with-no-warnings
+    (add-hook 'process-menu-mode-hook
+              (lambda ()
+                (setq tabulated-list-format
+                      (vconcat `(("" ,(if (icon-displayable-p) 2 0)))
+                               tabulated-list-format))))
+
+    (defun my-list-processes--prettify ()
+      "Prettify process list."
+      (when-let ((entries tabulated-list-entries))
+        (setq tabulated-list-entries nil)
+        (dolist (p (process-list))
+          (when-let* ((val (cadr (assoc p entries)))
+                      (icon (if (icons-displayable-p)
+                                (concat
+                                 " "
+                                 (nerd-icons-faicon "nf-fa-bolt" :face 'nerd-icons-lblue))
+                              " x"))
+                      (name (aref val 0))
+                      (pid (aref val 1))
+                      (status (aref val 2))
+                      (status (list status
+                                    'face
+                                    (if (memq status '(stop exit closed failed))
+                                        'error
+                                      'success)))
+                      (buf-label (aref val 3))
+                      (tty (list (aref val 4) 'face 'font-lock-doc-face))
+                      (thread (list (aref val 5) 'face 'font-lock-doc-face))
+                      (cmd (list (aref val 6) 'face 'completions-annotations)))
+            (push (list p (vector icon name pid status buf-label tty thread cmd))
+                  tabulated-list-entries)))))
+    (advice-add #'list-processes--refresh :after #'my-list-processes--prettify))
+
+  ;;--------------------------------------------------------------------
+  (use-package hide-mode-line
+    :hook (((treemacs-mode
+             eshell-mode
+             shell-mode
+             term-mode
+             vterm-mode
+             embark-collect-mode
+             pdf-annot-list-mode) . hide-mode-line-mode)))
+
+  ;;--------------------------------------------------------------------
+  ;; add holo-layer
+  (use-package holo-layer
+    :ensure nil
+    :load-path "site-lisp/holo-layer"
+    :commands holo-layer-enable
+    :init
+    (setq holo-layer-enable-cursor-animation t)
+    (setq holo-layer-enable-window-border t)
+    ;; (holo-layer-enable)
+    )
+
+  ;;-------------------------------------------------------------------------------------------------
+  (provide 'init-g-interface)
+  ;;; init-g-interface.el ends here
+#+end_src
+
+*** init-h-dashboard.el
+:PROPERTIES:
+:HEADER-ARGS: :tangle lisp/init-h-dashboard.el :mkdirp yes
+:END:
+
+#+begin_src emacs-lisp
+  ;;; init-h-dashboard.el --- General Pure Emacs Dashboard configurations. -*- lexical-binding: t no-byte-compile: t -*-
+  ;;
+  ;; Copyleft (CL) 2022-2032 Dr YF Lin
+  ;;
+  ;; Author: Ethan YF Lin <e.yflin@gmail.com>
+  ;; URL: https://github.com/Ethanlinyf/General-Pure-Emacs
+  ;; Under ThingsEngine Project: https://www.thethingsengine.org/
+  ;;--------------------------------------------------------------------
+  ;;; Commentary:
+  ;; Configurations for dashboard.
+  ;;--------------------------------------------------------------------
+  ;;; Code:
+
+  (use-package dashboard
+    :diminish dashboard-mode
+    :functions (nerd-icons-faicon
+                nerd-icons-mdicon)
+    :ensure t
+    ;; :requires all-the-icons
+    :custom-face (dashboard-heading ((t (:inherit (font-lock-string-face bold)))))
+    :init
+    (dashboard-setup-startup-hook)
+    :config
+    ;; Set the title
+    (setq dashboard-banner-logo-title "Something Good as Indicated by ThingsEngine")
+
+    ;; set the number of items for each heading
+    (setq dashboard-items '((recents  . 8)
+                            (bookmarks . 5)
+                            (projects . 6)
+                            ;;(agenda . 5)
+                            ;;(registers . 5)
+                            ))
+
+    (setq dashboard-display-icons-p t)
+    (setq dashboard-icon-type 'nerd-icons)
+    ;; set the headings's icon
+    (setq dashboard-set-heading-icons t)
+    (setq dashboard-heading-icons '((recents   . "nf-oct-history")
+                                    (bookmarks . "nf-oct-bookmark")
+                                    (agenda    . "nf-oct-calendar")
+                                    (projects  . "nf-oct-briefcase")
+                                    (registers . "nf-oct-database")))
+
+    ;; Content is not centered by default. To center the content, set this varable as t
+    (setq dashboard-center-content t)
+
+    ;; To disable shortcut "jump" indicators for each section, set
+    (setq dashboard-show-shortcuts t)
+    (setq dashboard-set-file-icons t))
+
+  (use-package page-break-lines
+    :ensure t
+    :hook
+    (after-init . page-break-lines-mode))
+
+  (setq dashboard-page-separator "\n\f\n")
+
+  (setq dashboard-set-navigator t)
+  (setq dashboard-navigator-buttons
+        `(;; line1
+          ((,(nerd-icons-mdicon "nf-md-yin_yang" :height 1.1) ;(all-the-icons-octicon "milestone" :height 1.1 :v-adjust 0.0)
+            "Homepage"
+            "Browser Homepage"
+            (lambda (&rest _) (browse-url "Https://thethingsengine.org")))
+
+           (,(nerd-icons-mdicon "nf-md-github" :height 1.1) ;(all-the-icons-octicon "mark-github" :height 1.1 :v-adjust 0.0)
+            "GitHub"
+            "Browser GitHub"
+            (lambda (&rest _) (browse-url "https://github.com/ethanlinyf")))
+           ;; (,(all-the-icons-faicon "linkedin" :height 1.1 :v-adjust 0.0)
+           ;;  "Linkedin"
+           ;;  ""
+           ;;  (lambda (&rest _) (browse-url "homepage")))
+           ("★" "Star" "Visit ThingsEngine Ship" (lambda (&rest _) (browse-url "https://thethingsengine.org/ship/")))
+           ("⚑" nil "Show flags" (lambda (&rest _) (message "flag")) error)
+           ("?" "" "?/h" #'show-help nil "<" ">"))
+          ;; line 2
+          ;; ((,(all-the-icons-faicon "linkedin" :height 1.1 :v-adjust 0.0)
+          ;; "Linkedin"
+          ;; ""
+          ;; (lambda (&rest _) (browse-url "homepage")))
+          ;; ("⚑" nil "Show flags" (lambda (&rest _) (message "flag")) error))
+          ))
+
+  (setq thingsengine-icon t)
+
+  (setq dashboard-set-footer t)
+  (setq dashboard-footer (format "\nPowered by ThingsEngine, %s" (format-time-string "%Y")))
+  ;; (setq dashboard-footer-messages '("Powered by ThingsEngine"))
+  (setq dashboard-set-footer t)
+  (setq dashboard-footer-icon (cond
+                               ((icon-displayable-p)
+                                (nerd-icons-octicon "nf-oct-heart" :height 1.2 :face 'nerd-icons-lred))
+                               (t (propertize ">" 'face 'dashboard-footer))))
+
+  (defun my-dashboard-insert-copyright ()
+    "Insert copyright in the footer."
+    (when dashboard-set-footer
+      (dashboard-insert-center
+       (propertize dashboard-footer 'face 'font-lock-comment-face))))
+  (advice-add #'dashboard-insert-footer :after #'my-dashboard-insert-copyright)
+
+  ;;-------------------------------------------------------------------------------------------------
+  (provide 'init-h-dashboard)
+  ;;; init-h-dashboard.el ends here
+#+end_src
+
+*** init-i-minibuffer.el
+:PROPERTIES:
+:HEADER-ARGS: :tangle lisp/init-i-minibuffer.el :mkdirp yes
+:END:
+
+#+begin_src emacs-lisp
+  ;;; init-i-minibuffer.el --- minibuffer -*- lexical-binding: t; -*-
+  ;;
+  ;; Copyleft (CL) 2022-2032 YF Lin
+  ;;
+  ;; Something good as indicated, by Dr YF Lin <e.yflin@gmail.com>
+  ;; URL: https://github.com/Ethanlinyf/General-Pure-Emacs
+  ;; Under ThingsEngine Project: https://www.thethingsengine.org
+  ;;--------------------------------------------------------------------
+  ;;; Commentary:
+  ;; Minibufer enhancement, M-x
+  ;; 1. Vertico
+  ;; 1.1 vertico-directory
+  ;; 1.2 vertico-multiform
+  ;; 1.3 vertico-quick
+  ;; 2.1 Savehist
+  ;; 2.2 precient-vertico: sorting
+  ;; 3. Orderless
+  ;; 4. Marginalia
+  ;; 5. Embark
+  ;; 6. Consult
+  ;; 7. Embark-Consult and Wgrep
+  ;; 8. Fine tune Vertico with extensions.
+  ;; 9. all-the-icons-completion
+  ;; 10. popper
+  ;; 11 avy and with Embark
+  ;;--------------------------------------------------------------------
+  ;;; Code:
+
+  (require 'cl-lib)
+
+  ;;--------------------------------------------------------------------
+  ;; completion by vertico
+  (use-package vertico
+    :ensure t
+    :bind (("M-P" . vertico-repeat) ; effective in the specific mode
+           :map vertico-map
+           ("<tab>" . vertico-insert)
+           ("<escape>" . minibuffer-keyboard-quit)
+           ("C-M-n" . vertico-next-group)
+           ("C-M-p" . vertico-previous-group)
+           ("M-RET" . minibuffer-force-complete-and-exit)
+           ("M-TAB" . minibuffer-complete)
+           :map minibuffer-local-map
+           ("M-h" . backward-kill-word))
+    :init
+    (vertico-mode)
+    :hook
+    (minibuffer-setup .vertico-repeat-save)
+    :custom
+    (vertico-scroll-margin 0)
+    (vertico-count 10)
+    (vertico-resize t)
+    (vertico-cycle nil)
+    (vertico-buffer-display-action '(display-buffer-reuse-window)) ; need to be clear
+    :config
+    ;; "» ", as an indicator infront of the candidate
+    (advice-add #'vertico--format-candidate :around
+                (lambda (orig cand prefix suffix index _start)
+                  (setq cand (funcall orig cand prefix suffix index _start))
+                  (concat
+                   (if (= vertico--index index)
+                       (propertize "» " 'face 'vertico-current)
+                     "  ")
+                   cand)))
+
+    ;; Problematic completion commands: org-refile
+    ;; Alternative 1: Use the basic completion style
+    (setq org-refile-use-outline-path 'file
+          org-outline-path-complete-in-steps t)
+    (advice-add #'org-olpath-completing-read :around
+                (lambda (&rest args)
+                  (minibuffer-with-setup-hook
+                      (lambda () (setq-local completion-styles '(basic)))
+                    (apply args))))
+
+    ;; Alternative 2: Complete full paths
+    (setq org-refile-use-outline-path 'file
+          org-outline-path-complete-in-steps nil)
+
+    ;; tmm-menubar
+    (advice-add #'tmm-add-prompt :after #'minibuffer-hide-completions)
+
+    ;; ffap-menu:
+    (advice-add #'ffap-menu-ask :around (lambda (&rest args)
+                                          (cl-letf (((symbol-function #'minibuffer-completion-help)
+                                                     #'ignore))
+                                            (apply args)))))
+
+  ;; Configure directory extension with more convenient directory navigation commands
+  (use-package vertico-directory
+    :after vertico
+    :ensure nil
+    :bind (:map vertico-map
+                ("RET" . vertico-directory-enter)
+                ("DEL" . vertico-directory-delete-char)
+                ("M-DEL" . vertico-directory-delete-word) ; Mac Keyboard
+                ("C-<backspace>" . vertico-directory-delete-word)) ;; for different keyboard (c-w for all)
+    :hook
+    (rfn-eshadow-update-overlay . vertico-directory-tidy)) ; to tidy shadowed file names
+
+  (use-package vertico-multiform
+    :after vertico
+    :ensure nil
+    :bind (:map vertico-map
+                ("M-G" . vertico-multiform-grid)
+                ("M-F" . vertico-multiform-flat)
+                ("M-R" . vertico-multiform-reverse)
+                ("M-U" . vertico-multiform-unobtrusive))
+
+    :custom
+    (vertico-grid-separator "   |    ")
+    (vertico-grid-lookahead 50)
+
+    (vertico-multiform-categories
+     '((file) ;; Defaul vertico display, (file grid indexed)
+       (consult-location buffer)
+       (consult-grep buffer)
+       (minor-mode reverse)
+       (library reverse indexed)
+       (imenu buffer)
+       (org-roam-node reverse indexed)
+       (t reverse) ;; unobtrusive
+       ))
+    (vertico-multiform-commands
+     '((consult-dir reverse)
+       ("flyspell-correct-*" grid reverse)
+       (execute-extended-command indexed)
+       (org-refile grid reverse indexed)
+       (embark-prefix-help-command flat)
+       (consult-yank-pop indexed)
+       (consult-flycheck)
+       (completion-at-point reverse)))
+    :init
+    (vertico-multiform-mode)
+    )
+
+  (use-package vertico-quick
+    :after vertico
+    :ensure nil
+    :bind (:map vertico-map
+                ("C-i" . vertico-quick-insert) ; insert to excute
+                ("C-o" . vertico-quick-exit) ; excute
+                ))
+
+  ;;--------------------------------------------------------------------
+  ;; Persist history over Emacs restarts. Vertico sorts by history position.
+  (use-package savehist
+    :ensure nil
+    :hook (after-init . savehist-mode)
+    :init (setq enable-recursive-minibuffers t ; Allow commands in minibuffers
+                history-length 1000
+                savehist-additional-variables '(mark-ring
+                                                global-mark-ring
+                                                search-ring
+                                                regexp-search-ring
+                                                extended-command-history
+                                                vertico-repeat-history)
+                savehist-autosave-interval 300))
+
+  ;;--------------------------------------------------------------------
+  ;; Optionally use the orderless' completion style.
+  (use-package orderless
+    :demand t ;; it is better to be loaded immediately to enable the macro: orderless-define-completion-style
+    :config
+    (defun +vertico-orderless-dispatch (pattern _index _total) ; from doom-emacs
+      (cond
+       ;; Ensure $ works with Consult commands, which add disambiguation suffixes
+       ((string-suffix-p "$" pattern)
+        `(orderless-regexp . ,(concat (substring pattern 0 -1) "[\x200000-\x300000]*$")))
+       ;; Ignore single !
+       ((string= "!" pattern) `(orderless-literal . ""))
+       ;; Without literal
+       ((string-prefix-p "!" pattern) `(orderless-without-literal . ,(substring pattern 1)))
+       ;; Character folding
+       ((string-prefix-p "%" pattern) `(char-fold-to-regexp . ,(substring pattern 1)))
+       ((string-suffix-p "%" pattern) `(char-fold-to-regexp . ,(substring pattern 0 -1)))
+       ;; Initialism matching
+       ((string-prefix-p "`" pattern) `(orderless-initialism . ,(substring pattern 1)))
+       ((string-suffix-p "`" pattern) `(orderless-initialism . ,(substring pattern 0 -1)))
+       ;; Literal matching
+       ((string-prefix-p "=" pattern) `(orderless-literal . ,(substring pattern 1)))
+       ((string-suffix-p "=" pattern) `(orderless-literal . ,(substring pattern 0 -1)))
+       ;; Flex matching
+       ((string-prefix-p "~" pattern) `(orderless-flex . ,(substring pattern 1)))
+       ((string-suffix-p "~" pattern) `(orderless-flex . ,(substring pattern 0 -1)))))
+
+    ;; only for remote files:
+    (defun basic-remote-try-completion (string table pred point)
+      (and (vertico--remote-p string)
+           (completion-basic-try-completion string table pred point)))
+    (defun basic-remote-all-completions (string table pred point)
+      (and (vertico--remote-p string)
+           (completion-basic-all-completions string table pred point)))
+    (add-to-list
+     'completion-styles-alist
+     '(basic-remote basic-remote-try-completion basic-remote-all-completions nil))
+
+    (orderless-define-completion-style orderless+initialism
+      (orderless-matching-styles '(orderless-initialism
+                                   orderless-literal
+                                   orderless-regexp)))
+
+    (setq completion-styles '(orderless basic)
+          completion-category-defaults nil
+          completion-category-overrides
+          '((file (styles basic-remote orderless partial-completion))
+            (command (styles orderless+initialism))
+            (symbol (styles orderless+initialism))
+            (variable (styles orderless+initialism)))
+
+          orderless-style-dispatchers '(+vertico-orderless-dispatch)
+          orderless-component-separator "[ &]")
+
+    ;; highlighting
+    (set-face-attribute 'completions-first-difference nil :inherit nil))
+
+  ;;--------------------------------------------------------------------
+  ;; Enable richer annotations using the Marginalia package
+  (use-package marginalia
+    :ensure t
+    :bind (:map minibuffer-local-map
+                ("M-A" . marginalia-cycle))
+    :hook
+    (after-init . marginalia-mode)
+    :custom
+    (marginalia-max-relative-age 0)
+    (marginalia-align 'center)
+    :config
+    (advice-add #'marginalia--project-root :override #'projectile-project-root)
+
+    (cl-pushnew '(flycheck-error-list-set-filter . builtin) marginalia-command-categories)
+    (add-to-list 'marginalia-command-categories '(projectile-switch-to-buffer . buffer))
+    (add-to-list 'marginalia-command-categories '(projectile-find-file . project-file))
+    (add-to-list 'marginalia-command-categories '(projectile-recentf . project-file))
+    (add-to-list 'marginalia-command-categories '(projectile-switch-project . project-file)))
+
+  ;;--------------------------------------------------------------------
+  (use-package embark
+    :ensure t
+    :bind
+    (("s-." . embark-act)         ; pick some comfortable binding
+     ("s-;" . embark-dwim)        ; good alternative: M-.
+     ("C-h B" . embark-bindings)) ; alternative for `describe-bindings'
+    :init
+    ;; Optionally replace the key help with a completing-read interface
+    (setq which-key-use-C-h-commands nil
+          prefix-help-command #'embark-prefix-help-command)
+    :config
+    ;; Hide the mode line of the Embark live/completions buffers
+    (add-to-list 'display-buffer-alist
+                 '("\\`\\*Embark Collect \\(Live\\|Completions\\)\\*"
+                   nil
+                   (window-parameters (mode-line-format . none))))
+
+    (eval-when-compile
+      (defmacro my/embark-ace-action (fn)
+        `(defun ,(intern (concat "my/embark-ace-" (symbol-name fn))) ()
+           (interactive)
+           (with-demoted-errors "%s"
+             (require 'ace-window)
+             (let ((aw-dispatch-always t))
+               (aw-switch-to-window (aw-select nil))
+               (call-interactively (symbol-function ',fn)))))))
+
+    (define-key embark-file-map     (kbd "o") (my/embark-ace-action find-file))
+    (define-key embark-buffer-map   (kbd "o") (my/embark-ace-action switch-to-buffer))
+    (define-key embark-bookmark-map (kbd "o") (my/embark-ace-action bookmark-jump))
+
+    (eval-when-compile
+      (defmacro my/embark-split-action (fn split-type)
+        `(defun ,(intern (concat "my/embark-"
+                                 (symbol-name fn)
+                                 "-"
+                                 (car (last  (split-string
+                                              (symbol-name split-type) "-"))))) ()
+           (interactive)
+           (funcall #',split-type)
+           (call-interactively #',fn))))
+
+    (define-key embark-file-map     (kbd "2") (my/embark-split-action find-file split-window-below))
+    (define-key embark-buffer-map   (kbd "2") (my/embark-split-action switch-to-buffer split-window-below))
+    (define-key embark-bookmark-map (kbd "2") (my/embark-split-action bookmark-jump split-window-below))
+
+    (define-key embark-file-map     (kbd "3") (my/embark-split-action find-file split-window-right))
+    (define-key embark-buffer-map   (kbd "3") (my/embark-split-action switch-to-buffer split-window-right))
+    (define-key embark-bookmark-map (kbd "3") (my/embark-split-action bookmark-jump split-window-right)))
+
+  ;;--------------------------------------------------------------------
+  ;; Example configuration for Consult
+  (use-package consult
+    :ensure t
+    :bind (;; C-c bindings (mode-specific-map)
+           ("C-c h" . consult-history)
+           ("C-c m" . consult-mode-command)
+           ("C-c k" . consult-kmacro)
+           ;; C-x bindings (ctl-x-map)
+           ("C-x M-:" . consult-complex-command)     ; orig. repeat-complex-command
+           ("C-x b" . consult-buffer)                ; orig. switch-to-buffer
+           ("C-x 4 b" . consult-buffer-other-window) ; orig. switch-to-buffer-other-window
+           ("C-x 5 b" . consult-buffer-other-frame)  ; orig. switch-to-buffer-other-frame
+           ("C-x r b" . consult-bookmark)            ; orig. bookmark-jump
+           ("C-x p b" . consult-project-buffer)      ; orig. project-switch-to-buffer
+           ;; Custom M-# bindings for fast register access
+           ("M-#" . consult-register-load)
+           ("M-'" . consult-register-store)          ; orig. abbrev-prefix-mark (unrelated)
+           ("C-M-#" . consult-register)
+           ;; Other custom bindings
+           ("M-y" . consult-yank-pop)                ; orig. yank-pop
+           ("<help> a" . consult-apropos)            ; orig. apropos-command
+           ;; M-g bindings (goto-map)
+           ("M-g e" . consult-compile-error)
+           ("M-g f" . consult-flymake)               ; Alternative: consult-flycheck
+           ("M-g g" . consult-goto-line)             ; orig. goto-line
+           ("M-g M-g" . consult-goto-line)           ; orig. goto-line
+           ("M-g o" . consult-outline)               ; Alternative: consult-org-heading
+           ("M-g m" . consult-mark)
+           ("M-g k" . consult-global-mark)
+           ("M-g i" . consult-imenu)
+           ("M-g I" . consult-imenu-multi)
+           ;; M-s bindings (search-map)
+           ("M-s d" . consult-find)
+           ("M-s D" . consult-locate)
+           ("M-s g" . consult-grep)
+           ("M-s G" . consult-git-grep)
+           ("M-s r" . consult-ripgrep)
+           ("M-s l" . consult-line)
+           ("M-s L" . consult-line-multi)
+           ("M-s m" . consult-multi-occur)
+           ("M-s k" . consult-keep-lines)
+           ("M-s u" . consult-focus-lines)
+           ;; Isearch integration
+           ("M-s e" . consult-isearch-history)
+           :map isearch-mode-map
+           ("M-e" . consult-isearch-history)         ; orig. isearch-edit-string
+           ("M-s e" . consult-isearch-history)       ; orig. isearch-edit-string
+           ("M-s l" . consult-line)                  ; needed by consult-line to detect isearch
+           ("M-s L" . consult-line-multi)            ; needed by consult-line to detect isearch
+           ;; Minibuffer history
+           :map minibuffer-local-map
+           ("M-s" . consult-history)                 ; orig. next-matching-history-element
+           ("M-r" . consult-history))                ; orig. previous-matching-history-element
+
+    ;; Enable automatic preview at point in the *Completions* buffer. This is
+    ;; relevant when you use the default completion UI.
+    :hook (completion-list-mode . consult-preview-at-point-mode)
+    :init
+    ;; Optionally configure the register formatting. This improves the register
+    ;; preview for `consult-register', `consult-register-load',
+    ;; `consult-register-store' and the Emacs built-ins.
+    (setq register-preview-delay 0.5
+          register-preview-function #'consult-register-format)
+
+    ;; Optionally tweak the register preview window.
+    ;; This adds thin lines, sorting and hides the mode line of the window.
+    (advice-add #'register-preview :override #'consult-register-window)
+
+    ;; Optionally replace `completing-read-multiple' with an enhanced version.
+    (advice-add #'completing-read-multiple :override #'consult-completing-read-multiple)
+
+    ;; Use Consult to select xref locations with preview
+    (setq xref-show-xrefs-function #'consult-xref
+          xref-show-definitions-function #'consult-xref)
+
+    ;; Configure other variables and modes in the :config section,
+    ;; after lazily loading the package.
+    :config
+
+    ;; Optionally configure preview. The default value
+    ;; is 'any, such that any key triggers the preview.
+    ;; (setq consult-preview-key 'any)
+    ;; (setq consult-preview-key (kbd "M-."))
+    ;; (setq consult-preview-key (list (kbd "<S-down>") (kbd "<S-up>")))
+    ;; For some commands and buffer sources it is useful to configure the
+    ;; :preview-key on a per-command basis using the `consult-customize' macro.
+    (consult-customize
+     consult-theme
+     :preview-key '(:debounce 0.2 any)
+     consult-ripgrep consult-git-grep consult-grep
+     consult-bookmark consult-recent-file consult-xref
+     consult--source-bookmark consult--source-recent-file
+     consult--source-project-recent-file
+     :preview-key "M-.")
+
+    ;; Optionally configure the narrowing key.
+    ;; Both < and C-+ work reasonably well.
+    (setq consult-narrow-key "<") ;; (kbd "C-+")
+
+    ;; Optionally make narrowing help available in the minibuffer.
+    ;; You may want to use `embark-prefix-help-command' or which-key instead.
+    ;; (define-key consult-narrow-map (vconcat consult-narrow-key "?") #'consult-narrow-help)
+
+    ;; By default `consult-project-function' uses `project-root' from project.el.
+    ;; Optionally configure a different project root function.
+    ;; There are multiple reasonable alternatives to chose from.
+    ;;;; 1. project.el (project-roots)
+    (setq consult-project-root-function
+          (lambda ()
+            (when-let (project (project-current))
+              (car (project-roots project)))))
+    ;; (setq consult-project-function #'consult--default-project--function)
+    ;;;; 2. projectile.el (projectile-project-root)
+    ;; (autoload 'projectile-project-root "projectile")
+    ;; (setq consult-project-function (lambda (_) (projectile-project-root)))
+    ;;;; 3. vc.el (vc-root-dir)
+    ;; (setq consult-project-function (lambda (_) (vc-root-dir)))
+    ;;;; 4. locate-dominating-file
+    ;; (setq consult-project-function (lambda (_) (locate-dominating-file "." ".git")))
+    )
+
+  ;; Consult users will also want the emConsultbark package.
+  (use-package embark-consult
+    :after (embark consult)
+    :demand t ; only necessary if you have the hook below
+    ;; if you want to have consult previews as you move around an auto-updating embark collect buffer
+    :hook
+    (embark-collect-mode . consult-preview-at-point-mode))
+
+  (use-package wgrep
+    :commands wgrep-change-to-wgrep-mode
+    :init
+    (setq wgrep-auto-save-buffer t)
+    (setq wgrep-change-readonly-file t))
+
+  ;; if you like postframe, you could make it available
+  ;; (use-package vertico-posframe
+  ;;   :ensure t
+  ;;   :hook (vertico-mode . vertico-posframe-mode)
+  ;;   :config
+  ;;   (add-hook 'doom-after-reload-hook #'posframe-delete-all))
+
+  (use-package consult-dir
+    :ensure t
+    :bind (("C-x C-d" . consult-dir)
+           :map minibuffer-local-completion-map
+           ("C-x C-d" . consult-dir)
+           ("C-x C-j" . consult-dir-jump-file)))
+
+  (use-package consult-projectile
+    :ensure t
+    :after (projectile)
+    :init
+    (setq projectile-switch-project-action 'projectile-dired)) ; open directory in dired-mode from dashboard
+
+  (use-package 0x0
+    :ensure t)
+
+  (use-package popper
+    :ensure t
+    :bind (("C-`"   . popper-toggle-latest)
+           ("M-`"   . popper-cycle)
+           ("C-M-`" . popper-toggle-type))
+    :config
+    (setq popper-reference-buffers
+          '("\\*Messages\\*"
+            "Output\\*$"
+            "\\*Async Shell Command\\*"
+            help-mode
+            compilation-mode))
+    (popper-mode +1)
+    (popper-echo-mode +1)) ; for echo area hints
+
+  (global-set-key (kbd "M-j") nil)
+
+  (use-package avy
+    :ensure t
+    :config
+    (defun avy-action-embark (pt)
+      (unwind-protect
+      (save-excursion
+            (goto-char pt)
+            (embark-act))
+        (select-window
+         (cdr (ring-ref avy-ring 0))))
+      t)
+    (setf (alist-get ?e avy-dispatch-alist) 'avy-action-embark)
+    :bind
+    (("M-j C-SPC" . avy-goto-char-timer)))
+
+  (use-package corfu
+    :init
+    (progn
+      (setq corfu-auto t)
+      (setq corfu-cycle t)
+      (setq corfu-quit-at-boundary t)
+      (setq corfu-quit-no-match t)
+      (setq corfu-preview-current nil)
+      (setq corfu-min-width 80)
+      (setq corfu-max-width 100)
+      (setq corfu-auto-delay 0.2)
+      (setq corfu-auto-prefix 1)
+      (setq corfu-on-exact-match nil)
+      (global-corfu-mode)
+      ))
+
+  ;; Add extensions
+  (use-package cape
+    ;; Bind dedicated completion commands
+    ;; Alternative prefix keys: C-c p, M-p, M-+, ...
+    :bind (("C-c p p" . completion-at-point) ;; capf
+           ("C-c p t" . complete-tag)        ;; etags
+           ("C-c p d" . cape-dabbrev)        ;; or dabbrev-completion
+           ("C-c p h" . cape-history)
+           ("C-c p f" . cape-file)
+           ("C-c p k" . cape-keyword)
+           ("C-c p s" . cape-elisp-symbol)
+           ("C-c p e" . cape-elisp-block)
+           ("C-c p a" . cape-abbrev)
+           ("C-c p l" . cape-line)
+           ("C-c p w" . cape-dict)
+           ("C-c p :" . cape-emoji)
+           ("C-c p \\" . cape-tex)
+           ("C-c p _" . cape-tex)
+           ("C-c p ^" . cape-tex)
+           ("C-c p &" . cape-sgml)
+           ("C-c p r" . cape-rfc1345))
+    :init
+    ;; Add to the global default value of `completion-at-point-functions' which is
+    ;; used by `completion-at-point'.  The order of the functions matters, the
+    ;; first function returning a result wins.  Note that the list of buffer-local
+    ;; completion functions takes precedence over the global list.
+    (add-to-list 'completion-at-point-functions #'cape-dabbrev)
+    (add-to-list 'completion-at-point-functions #'cape-file)
+    (add-to-list 'completion-at-point-functions #'cape-elisp-block)
+    (add-to-list 'completion-at-point-functions #'cape-history)
+    ;;(add-to-list 'completion-at-point-functions #'cape-keyword)
+    ;;(add-to-list 'completion-at-point-functions #'cape-tex)
+    ;;(add-to-list 'completion-at-point-functions #'cape-sgml)
+    ;;(add-to-list 'completion-at-point-functions #'cape-rfc1345)
+    ;;(add-to-list 'completion-at-point-functions #'cape-abbrev)
+    ;;(add-to-list 'completion-at-point-functions #'cape-dict)
+    ;;(add-to-list 'completion-at-point-functions #'cape-elisp-symbol)
+    ;;(add-to-list 'completion-at-point-functions #'cape-line)
+    )
+
+  ;; ;; Merge the dabbrev, dict and keyword capfs, display candidates together.
+  ;; (setq-local completion-at-point-functions
+  ;;             (list (cape-capf-super #'cape-dabbrev #'cape-dict #'cape-keyword)))
+
+  ;; ;; Alternative: Define named Capf instead of using the anonymous Capf directly
+  ;; (defun cape-dabbrev-dict-keyword ()
+  ;;   (cape-wrap-super #'cape-dabbrev #'cape-dict #'cape-keyword))
+  ;; (setq-local completion-at-point-functions (list #'cape-dabbrev-dict-keyword))
+
+
+  ;;-------------------------------------------------------------------------------------------------
+  (provide 'init-i-minibuffer)
+  ;;; init-i-minibuffer.el ends here
+#+end_src
+
+*** init-j-platform.el
+:PROPERTIES:
+:HEADER-ARGS: :tangle lisp/init-j-platform.el :mkdirp yes
+:END:
+
+#+begin_src emacs-lisp
+  ;;; init-j-platform.el --- IDE -*- lexical-binding: t; -*-
+  ;;
+  ;; Copyleft (CL) 2022-2032 YF Lin
+  ;;
+  ;; Something good as indicated, by Dr YF Lin <e.yflin@gmail.com>
+  ;; URL: https://github.com/Ethanlinyf/General-Pure-Emacs
+  ;; Under ThingsEngine Project: https://www.thethingsengine.org
+  ;;--------------------------------------------------------------------
+  ;;; Commentary:
+  ;; Integrated Development Environment
+  ;;--------------------------------------------------------------------
+  ;;; Code:
+
+  ;; magit for git/GitHub
+  (use-package magit
+    :ensure t
+    :bind (("C-x g" . magit-status))
+    ; :functions (centaur-tabs-hide-tab)
+    :init
+    (setq magit-diff-refine-hunk t))
+
+  ;;--------------------------------------------------------------------
+  ;; Centaur-tabs
+  (use-package centaur-tabs
+    :init
+    (setq centaur-tabs-enable-key-bindings t)
+    :config
+    (setq centaur-tabs-icon-type 'nerd-icons ; or 'all-the-icons
+          centaur-tabs-style "bar"
+          centaur-tabs-height 32
+          centaur-tabs-set-icons t
+          centaur-tabs-show-new-tab-button t
+          centaur-tabs-set-modified-marker t
+          centaur-tabs-show-navigation-buttons t
+          centaur-tabs-set-bar 'left
+          centaur-tabs-show-count nil
+          ;; centaur-tabs-label-fixed-length 15
+          ;; centaur-tabs-gray-out-icons 'buffer
+          ;; centaur-tabs-plain-icons t
+          x-underline-at-descent-line t
+          centaur-tabs-left-edge-margin nil)
+    ;; (centaur-tabs-change-fonts (face-attribute 'default :font) 110)
+    (centaur-tabs-headline-match)
+    ;; (centaur-tabs-enable-buffer-alphabetical-reordering)
+    ;; (setq centaur-tabs-adjust-buffer-order t)
+    (centaur-tabs-mode t)
+    (setq uniquify-separator "/")
+    (setq uniquify-buffer-name-style 'forward)
+    (defun centaur-tabs-buffer-groups ()
+      "`centaur-tabs-buffer-groups' control buffers' group rules.
+
+  Group centaur-tabs with mode if buffer is derived from `eshell-mode' `emacs-lisp-mode' `dired-mode' `org-mode' `magit-mode'.
+  All buffer name start with * will group to \"Emacs\".
+  Other buffer group by `centaur-tabs-get-group-name' with project name."
+      (list
+       (cond
+        ;; ((not (eq (file-remote-p (buffer-file-name)) nil))
+        ;; "Remote")
+        ((or (string-equal "*" (substring (buffer-name) 0 1))
+             (memq major-mode '(magit-process-mode
+                                magit-status-mode
+                                magit-diff-mode
+                                magit-log-mode
+                                magit-file-mode
+                                magit-blob-mode
+                                magit-blame-mode
+                                )))
+         "Emacs")
+        ((derived-mode-p 'prog-mode)
+         "Editing")
+        ((derived-mode-p 'dired-mode)
+         "Dired")
+        ((memq major-mode '(helpful-mode
+                            help-mode))
+         "Help")
+        ((memq major-mode '(org-mode
+                            org-agenda-clockreport-mode
+                            org-src-mode
+                            org-agenda-mode
+                            org-beamer-mode
+                            org-indent-mode
+                            org-bullets-mode
+                            org-cdlatex-mode
+                            org-agenda-log-mode
+                            diary-mode))
+         "OrgMode")
+        (t
+         (centaur-tabs-get-group-name (current-buffer))))))
+    (defun centaur-tabs-hide-tab (x)
+      "Do no to show buffer X in tabs."
+      (let ((name (format "%s" x)))
+        (or
+         ;; Current window is not dedicated window.
+         (window-dedicated-p (selected-window))
+
+         ;; Buffer name not match below blacklist.
+         (string-prefix-p "*epc" name)
+         (string-prefix-p "*Messages*" name)
+         (string-prefix-p "*helm" name)
+         (string-prefix-p "*Helm" name)
+         (string-prefix-p "*Compile-Log*" name)
+         (string-prefix-p "*lsp" name)
+         (string-prefix-p "*company" name)
+         (string-prefix-p "*Flycheck" name)
+         (string-prefix-p "*tramp" name)
+         (string-prefix-p " *Mini" name)
+         (string-prefix-p "*help" name)
+         (string-prefix-p "*straight" name)
+         (string-prefix-p "*temp" name)
+         (string-prefix-p "*Help" name)
+         (string-prefix-p "*mybuf" name)
+         (string-prefix-p "*scratch*" name)
+         (string-prefix-p "*quickrun*" name)
+         (string-prefix-p "*EGLOT" name)
+         (string-prefix-p "*which-key" name)
+
+         ;; Is not magit buffer.
+         (and (string-prefix-p "magit" name)
+              (not (file-name-extension name)))
+         )))
+    :hook
+    (dashboard-mode . centaur-tabs-local-mode)
+    (term-mode . centaur-tabs-local-mode)
+    (calendar-mode . centaur-tabs-local-mode)
+    (org-agenda-mode . centaur-tabs-local-mode)
+    (eshell-mode . centaur-tabs-local-mode)
+    (shell-mode . centaur-tabs-local-mode)
+    (dired-mode . centaur-tabs-local-mode)
+    (use-package-statistics-mode . centaur-tabs-local-mode)
+    (pdf-view-mode . centaur-tabs-local-mode)
+    :bind
+    ("C-<prior>" . centaur-tabs-backward)
+    ("C-<next>" . centaur-tabs-forward)
+    ("C-S-<prior>" . centaur-tabs-move-current-tab-to-left)
+    ("C-S-<next>" . centaur-tabs-move-current-tab-to-right))
+
+  ;;--------------------------------------------------------------------
+  ;; treemacs
+  (use-package treemacs
+    :ensure t
+    :defer t
+    :config
+    (progn
+      (setq treemacs-collapse-dirs                   (if treemacs-python-executable 3 0)
+            treemacs-deferred-git-apply-delay        0.5
+            treemacs-directory-name-transformer      #'identity
+            treemacs-display-in-side-window          t
+            treemacs-eldoc-display                   'simple
+            treemacs-file-event-delay                5000
+            treemacs-file-extension-regex            treemacs-last-period-regex-value
+            treemacs-file-follow-delay               0.2
+            treemacs-file-name-transformer           #'identity
+            treemacs-follow-after-init               t
+            treemacs-expand-after-init               t
+            treemacs-find-workspace-method           'find-for-file-or-pick-first
+            treemacs-git-command-pipe                ""
+            treemacs-goto-tag-strategy               'refetch-index
+            ;; treemacs-header-scroll-indicators        '(nil . "^^^^^^")
+            treemacs-indentation                     2
+            treemacs-indentation-string              " "
+            treemacs-indent-guide-style              'line
+            treemacs-is-never-other-window           nil
+            treemacs-max-git-entries                 5000
+            treemacs-missing-project-action          'ask
+            treemacs-move-forward-on-expand          nil
+            treemacs-no-png-images                   nil
+            treemacs-no-delete-other-windows         t
+            treemacs-project-follow-cleanup          nil
+            treemacs-persist-file                    (expand-file-name ".cache/treemacs-persist" user-emacs-directory)
+            treemacs-position                        'left
+            treemacs-read-string-input               'from-child-frame
+            treemacs-recenter-distance               0.1
+            treemacs-recenter-after-file-follow      nil; treemacs-recenter-after-tag-follow       nil
+            treemacs-recenter-after-project-jump     'always
+            treemacs-recenter-after-project-expand   'on-distance
+            treemacs-litter-directories              '("/node_modules" "/.venv" "/.cask")
+            treemacs-show-cursor                     nil
+            treemacs-show-hidden-files               t
+            treemacs-silent-filewatch                nil
+            treemacs-silent-refresh                  nil
+            treemacs-sorting                         'alphabetic-asc
+            treemacs-select-when-already-in-treemacs 'move-back
+            treemacs-space-between-root-nodes        t
+            treemacs-tag-follow-cleanup              t
+            treemacs-tag-follow-delay                1.5
+            treemacs-text-scale                      nil
+            treemacs-user-mode-line-format           nil
+            treemacs-user-header-line-format         nil
+            treemacs-wide-toggle-width               70
+            treemacs-width                           30
+            treemacs-width-increment                 1
+            treemacs-width-is-initially-locked       t
+            treemacs-workspace-switch-cleanup        nil
+            )
+
+      ;; The default width and height of the icons is 22 pixels. If you are
+      ;; using a Hi-DPI display, uncomment this to double the icon size.
+      ;;(treemacs-resize-icons 44)
+
+      (treemacs-follow-mode t)
+      (treemacs-filewatch-mode t)
+      (treemacs-fringe-indicator-mode 'always)
+      (treemacs-indent-guide-mode t)
+
+      (pcase (cons (not (null (executable-find "git")))
+                   (not (null treemacs-python-executable)))
+        (`(t . t)
+         (treemacs-git-mode 'deferred))
+        (`(t . _)
+         (treemacs-git-mode 'simple)))
+
+      (treemacs-hide-gitignored-files-mode nil))
+    :bind (:map global-map
+                ("C-M-0"     . treemacs-select-window)
+                ("C-x t 1"   . treemacs-delete-other-windows)
+                ("C-x t t"   . treemacs)
+                ("s-2"       . treemacs)
+                ("C-x t d"   . treemacs-select-directory)
+                ("C-x t B"   . treemacs-bookmark)
+                ("C-x t C-t" . treemacs-find-file)
+                ("C-x t M-t" . treemacs-find-tag))
+    )
+
+  (use-package treemacs-projectile
+    :after (treemacs projectile)
+    :ensure t)
+
+  (use-package treemacs-magit
+    :after (treemacs magit)
+    :ensure t)
+
+  ;;treemacs-perspective if you use perspective.el vs. persp-mode
+  (use-package treemacs-persp
+    :after (treemacs persp-mode) ;;or perspective vs. persp-mode
+    :ensure t
+    :config (treemacs-set-scope-type 'Perspectives))
+
+  (use-package treemacs-nerd-icons
+    :after (treemacs nerd-icons)
+    :ensure t
+    :init
+    (require 'treemacs-nerd-icons)
+    (treemacs-load-theme "nerd-icons"))
+
+  ;;--------------------------------------------------------------------
+  ;; aweshell with company and company-shell
+  ;; (use-package company
+  ;;   :ensure t)
+
+  ;; (use-package company-shell
+  ;;   :after (company)
+  ;;   :ensure t
+  ;;   :init
+  ;;   (add-to-list 'company-backends '(company-shell company-shell-env company-fish-shell aweshell-autosuggest)))
+
+  (use-package aweshell
+    :load-path "site-lisp/gpe-aweshell"
+    ;; :ensure company
+    :ensure nil
+    ;; :functions (aweshell-auto-suggestion)
+    :bind
+    ("s-1" . aweshell-dedicated-toggle)
+    (:map eshell-mode-map ("C-x C-g" . aweshell-dedicated-close))
+    ; :config (setq aweshell-auto-suggestion-p t)
+    ; :hook (eshell-mode . company-mode)
+    )
+
+  ;;--------------------------------------------------------------------
+  ;; lsp-bridge
+  (use-package markdown-mode
+    :ensure t)
+
+  (use-package epc
+    :ensure t)
+
+  (use-package lsp-bridge
+    :load-path "site-lisp/lsp-bridge"
+    ;; :ensure-system-package
+    ;; ((epc . "pip install epc")
+    ;;  (orjson . "pip install orjson")
+    ;;  (six . "pip install six"))
+    :commands lsp-bridge-mode
+    :ensure nil
+    :config
+    (setq lsp-bridge-enable-search-words t)
+    ;; (setq lsp-bridge-enable-org-babel t) ; error popping up, need to be checked.
+    :hook
+    (after-init . global-lsp-bridge-mode)
+    (lsp-bridge-mode . (lambda () (corfu-mode -1))))
+
+  ;;--------------------------------------------------------------------
+  ;; blink-search
+  (use-package blink-search
+    :ensure nil
+    :load-path "site-lisp/blink-search"
+    :commands blink-search
+    :bind ("s-8" . blink-search))
+
+  ;;--------------------------------------------------------------------
+  ;; popweb
+  (use-package dash
+    :ensure t)
+
+  (use-package popweb
+    :ensure nil
+    :load-path "site-lisp/popweb")
+
+  (use-package popweb-dict
+    :ensure nil
+    :load-path "site-lisp/popweb/extension/dict"
+    :config
+    (require 'popweb-dict)
+    :bind ("s-4" . popweb-dict-youdao-pointer))
+
+  (use-package popweb-url
+    :ensure nil
+    :load-path "site-lisp/popweb/extension/url-preview"
+    ;; :custom
+    ;; (setq popweb-url-web-window-size-use-absolute t)
+    ;; (setq popweb-url-web-window-width-absolute 375)
+    ;; (setq popweb-url-web-window-height-absolute 677)
+    ;; (setq popweb-url-web-window-width-scale 0.8)
+    ;; (setq popweb-url-web-window-height-scale 0.8)
+    :config
+    (require 'popweb-url)
+    :bind ("s-5" . popweb-url-preview-pointer))
+
+  ;; ;;--------------------------------------------------------------------
+  ;; ;; ChatGPT
+  (use-package mind-wave
+    :ensure nil
+    :load-path "site-lisp/mind-wave"
+    :commands mind-wave-chat-ask
+    :bind ("s-`" . mind-wave-chat-ask))
+
+  ;;-------------------------------------------------------------------------------------------------
+  (provide 'init-j-platform)
+  ;;; init-j-platform.el ends here
+#+end_src
+
+*** init-k-org.el
+:PROPERTIES:
+:HEADER-ARGS: :tangle lisp/init-k-org.el :mkdirp yes
+:END:
+
+#+begin_src emacs-lisp
+  ;;; init-k-org.el --- Org settings. -*- lexical-binding: t; -*-
+  ;;
+  ;; Copyleft (CL) 2022-2032 Dr YF Lin
+  ;;
+  ;; Author: Ethan YF Lin <e.yflin@gmail.com>
+  ;; URL: https://github.com/Ethanlinyf/General-Pure-Emacs
+  ;; Under ThingsEngine Project: https://www.thethingsengine.org/
+  ;;--------------------------------------------------------------------
+  ;;; Commentary:
+  ;; Configurations for org-mode
+  ;;--------------------------------------------------------------------
+  ;;; Code:
+
+  ;; (setq org-directory "~/Documents/Org")
+
+  (defvar org-directory (expand-file-name "GPE-Org/" user-emacs-directory))
+  (unless (file-exists-p org-directory)
+    (make-directory org-directory))
+
+  (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
+
+  (use-package tablist
+    :ensure t)
+
+  (use-package org-noter
+    :ensure t)
+
+  (use-package org-noter-pdftools
+    :ensure t)
+
+  ;; (setq org-src-fontify-natively t)
+
+  (setq org-babel-load-languages
+        '((js . t)
+          (java . t)
+          (python . t)
+          (sqlite . t)
+          (emacs-lisp . t)
+          (shell . t)
+          (ditaa . t)))
+  ;;(require 'org-bullets)
+  ;;(add-hook 'org-mode-hook #'org-bullets-mode)
+  ;; (require 'org-superstar)
+  ;; (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1)
+  ;;                                     (org-indent-mode 1))
+  ;;(auto-save-and-publish-file-mode -1)
+  ;; )
+
+  (setq org-pretty-entities t
+        org-src-fontify-natively t
+        org-fontify-whole-heading-line t
+        org-fontify-done-headline t
+        org-fontify-quote-and-verse-blocks t)
+
+  (setq org-todo-keywords
+        (quote ((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d!/!)")
+                (sequence "PROJECT(p)" "|" "DONE(d!/!)" "CANCELLED(c@/!)")
+                (sequence "WAITING(w@/!)" "DELEGATED(e!)" "HOLD(h)" "|" "CANCELLED(c@/!)")))
+        org-todo-repeat-to-state "NEXT")
+
+  (setq org-todo-keyword-faces
+        (quote (("NEXT" :inherit warning)
+                ("PROJECT" :inherit font-lock-string-face))))
+
+
+  (setq org-default-notes-file (concat org-directory "/note.org"))
+
+  (add-hook 'org-mode-hook #'auto-fill-mode)
+  ;; (setq-default fill-column 70)
+  (setq visual-line-mode t)
+
+  (with-eval-after-load 'org
+    (setq org-startup-indented t) ; Enable `org-indent-mode' by default
+    (add-hook 'org-mode-hook #'visual-line-mode))
+
+  ;; (setq org-todo-keywords
+  ;;       '((sequence "TODO(t)" "WAIT(w@)" "NEXT(n!)" "CALENDAR(c@)" "|" "DONE(D!/!)")
+  ;; 	(sequence "SOMEDAY(s@)" "REFER(r@)"  "|" "TRASH(T)")
+  ;; 	(sequence "PROJECT(p@)" "|" "DONE(D!/!)" "CANCELLED(C@/!)")
+  ;; 	(sequence "BUG(b@)" "KNOWNCAUSE(k@)" "|" "FIXED(F@/!)")
+  ;;         (sequence "ANCHOR(a)" "|" "DONE(D)")))
+
+  ;; (setq org-todo-keyword-faces
+  ;;       '(("TODO" . "red")
+  ;; 	("WAIT" . "green")
+  ;; 	("NEXT" . "green")
+  ;; 	("DONE" . "grey")
+  ;; 	("SOMEDAY" . "yellow")
+  ;; 	("REFER" . (:background "gold" :foreground "white" :weight bold))
+  ;; 	("PROJECT" . (:background "blue" :foreground "white" :weight bold))
+  ;; 	("TRASH" . "grey")
+  ;; 	("CANCELLED" . "lightblue")
+  ;; 	("BUG" . "red")
+  ;; 	("KNOWNCAUSE" . "yellow")
+  ;; 	("FIXED" . "grey")))
+
+  (define-key global-map "\C-cc" 'org-capture)
+  (global-set-key "\C-ca" 'org-agenda)
+  (global-set-key "\C-cl" 'org-store-link)
+
+
+  (use-package pangu-spacing
+    :ensure t
+    :hook
+    (org-mode . pangu-spacing-mode)
+    (org-mode . (lambda ()
+                  (set (make-local-variable 'pangu-spacing-real-insert-separtor) t))))
+
+  ;; Pangu-spacing support: real insert separator
+  ;; (add-hook 'org-mode-hook
+  ;;           (lambda ()
+  ;;            (set (make-local-variable 'pangu-spacing-real-insert-separtor) t)))
+
+  ;; (add-hook 'org-mode-hook #'awesome-tab-mode)
+  ;;(require 'org-tempo)
+  ;;(add-to-list 'org-modules 'org-tempo t)
+
+  (use-package valign
+    :ensure t
+    :hook
+    (org-mode . valign-mode))
+
+
+  ;; (add-hook 'org-mode-hook #'valign-mode)
+
+
+  ;;--------------------------------------------------------------------
+  ;; pangu-spacing
+  ;; (require 'pangu-spacing)
+  ;; (global-pangu-spacing-mode 1)
+
+  ;; (add-hook 'org-mode-hook #'pangu-spacing-mode)
+  ;; (add-hook 'org-mode-hook
+  ;;            '(lambda ()
+  ;;             (set (make-local-variable 'pangu-spacing-real-insert-separtor) t)))
+
+  ;; (require 'org-download)
+  (use-package org-download
+    :ensure t
+    :hook
+    (dired-mode . org-download-enable))
+
+  ;; Drag-and-drop to `dired`
+                                          ; (add-hook 'dired-mode-hook 'org-download-enable)
+
+
+
+
+  (defun eli/org-noter-set-highlight (&rest _arg)
+    "Highlight current org-noter note."
+    (save-excursion
+      (with-current-buffer (org-noter--session-notes-buffer org-noter--session)
+        (remove-overlays (point-min) (point-max) 'org-noter-current-hl t)
+        (goto-char (org-entry-beginning-position))
+        (let* ((hl (org-element-context))
+               (hl-begin (plist-get  (plist-get hl 'headline) :begin))
+               (hl-end (1- (plist-get  (plist-get hl 'headline) :contents-begin)))
+               (hl-ov (make-overlay hl-begin hl-end)))
+          (overlay-put hl-ov 'face 'mindre-keyword)
+          (overlay-put hl-ov 'org-noter-current-hl t))
+        (org-cycle-hide-drawers 'all))))
+
+  (advice-add #'org-noter--focus-notes-region
+              :after #'eli/org-noter-set-highlight)
+  (advice-add #'org-noter-insert-note
+              :after #'eli/org-noter-set-highlight)
+
+  ;;--------------------------------------------------------------------
+  ;; pandoc
+  ;; (use-package ox-pandoc
+  ;;   :ensure t
+  ;;   :init
+  ;;   (with-eval-after-load 'ox
+  ;;     (require 'ox-pandoc)))
+
+  ;; (setq org-ellipsis 0xE2)
+
+  (use-package typo
+    :diminish
+    :hook
+    ((org-mode markdown-mode gnus-message-setup) . typo-mode)
+    :config
+    (typo-global-mode 1))
+  ;;-------------------------------------------------------------------------------------------------
+  ;; (use-package org-modern
+  ;;   :ensure t
+  ;;   :after (org)
+  ;;   :init
+  ;;   (setq org-modern-table-vertical 2)
+  ;;   (setq org-modern-block-name t)
+  ;;   (setq org-modern-keyword t)
+  ;;   (setq org-modern-timestamp t)
+  ;;   :hook (org-mode . global-org-modern-mode))
+
+  ;; (defun my-iconify-org-buffer ()
+  ;;   (progn
+  ;;     (push '(":PROPERTIES:" . ?􀈭) prettify-symbols-alist)
+  ;;     (push '(":ID:      " . ?􀐚) prettify-symbols-alist)
+  ;;     (push '(":ROAM_ALIASES:" . ?􀅷) prettify-symbols-alist)
+  ;;     (push '(":END:" . ?􀅽) prettify-symbols-alist)
+  ;;     (push '("#+TITLE:" . ?􀧵) prettify-symbols-alist)
+  ;;     (push '("#+AUTHOR:" . ?􀉩) prettify-symbols-alist)
+  ;;     (push '("#+RESULTS:" . ?􀎚) prettify-symbols-alist)
+  ;;     (push '("#+ATTR_ORG:" . ?􀌞) prettify-symbols-alist)
+  ;;     (push '("#+STARTUP: " . ?􀖆) prettify-symbols-alist))
+  ;;   (prettify-symbols-mode 1))
+  ;; (add-hook 'org-mode-hook #'my-iconify-org-buffer)
+
+  ;; (setq org-ellipsis " 􀍠")
+  ;; (setq org-hide-emphasis-markers t)
+
+  ;;-------------------------------------------------------------------------------------------------
+  (provide 'init-k-org)
+  ;;; init-k-org.el ends here.
+#+end_src
+
+*** init-l-markdown.el
+:PROPERTIES:
+:HEADER-ARGS: :tangle lisp/init-l-markdown.el :mkdirp yes
+:END:
+
+#+begin_src emacs-lisp
+  ;;;init-l-markdown.el --- minibuffer -*- lexical-binding: t; -*-
+  ;;
+  ;; Copyleft (CL) 2022-2032 YF Lin
+  ;;
+  ;; Something good as indicated, by Dr YF Lin <e.yflin@gmail.com>
+  ;; URL: https://github.com/Ethanlinyf/General-Pure-Emacs
+  ;; Under ThingsEngine Project: https://www.thethingsengine.org
+  ;;--------------------------------------------------------------------
+  ;;; Commentary:
+  ;;
+  ;; Markdown configurations from Centaur Emacs By Vincent Zhang
+  ;;
+  ;;; Code:
+
+  (use-package markdown-mode
+    :mode (("README\\.md\\'" . gfm-mode))
+    :init
+    (setq markdown-enable-wiki-links t
+          markdown-italic-underscore t
+          markdown-asymmetric-header t
+          markdown-make-gfm-checkboxes-buttons t
+          markdown-gfm-uppercase-checkbox t
+          markdown-fontify-code-blocks-natively t
+
+          markdown-content-type "application/xhtml+xml"
+          markdown-css-paths '("https://cdn.jsdelivr.net/npm/github-markdown-css/github-markdown.min.css"
+                               "https://cdn.jsdelivr.net/gh/highlightjs/cdn-release/build/styles/github.min.css")
+          markdown-xhtml-header-content "
+  <meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
+  <style>
+  body {
+    box-sizing: border-box;
+    max-width: 740px;
+    width: 100%;
+    margin: 40px auto;
+    padding: 0 10px;
+  }
+  </style>
+
+  <link rel='stylesheet' href='https://cdn.jsdelivr.net/gh/highlightjs/cdn-release/build/styles/default.min.css'>
+  <script src='https://cdn.jsdelivr.net/gh/highlightjs/cdn-release/build/highlight.min.js'></script>
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    document.body.classList.add('markdown-body');
+    document.querySelectorAll('pre code').forEach((code) => {
+      if (code.className != 'mermaid') {
+        hljs.highlightBlock(code);
+      }
+    });
+  });
+  </script>
+
+  <script src='https://unpkg.com/mermaid@8.4.8/dist/mermaid.min.js'></script>
+  <script>
+  mermaid.initialize({
+    theme: 'default',  // default, forest, dark, neutral
+    startOnLoad: true
+  });
+  </script>
+  "
+          markdown-gfm-additional-languages "Mermaid")
+
+    ;; `multimarkdown' is necessary for `highlight.js' and `mermaid.js'
+    (when (executable-find "multimarkdown")
+      (setq markdown-command "multimarkdown"))
+    :config
+    ;; Support `mermaid'
+    (add-to-list 'markdown-code-lang-modes '("mermaid" . mermaid-mode))
+
+    (with-no-warnings
+      ;; Use `which-key' instead
+      (advice-add #'markdown--command-map-prompt :override #'ignore)
+      (advice-add #'markdown--style-map-prompt   :override #'ignore)
+
+      ;; Preview with built-in webkit
+      (defun my-markdown-export-and-preview (fn)
+        "Preview with `xwidget' if applicable, otherwise with the default browser."
+        (if (featurep 'xwidget-internal)
+            (centaur-webkit-browse-url (concat "file://" (markdown-export)) t)
+          (funcall fn)))
+      (advice-add #'markdown-export-and-preview :around #'my-markdown-export-and-preview))
+
+    ;; Preview via `grip'
+    ;; Install: pip install grip
+    (use-package grip-mode
+      :defines org-mode-map
+      :bind (:map markdown-mode-command-map
+                  ("g" . grip-mode))
+      :init
+      (with-eval-after-load 'org
+        (bind-key "C-c C-g" #'grip-mode org-mode-map))
+
+      (setq grip-update-after-change nil)
+      (when-let ((credential (auth-source-user-and-password "api.github.com")))
+        (setq grip-github-user (car credential)
+              grip-github-password (cadr credential))))
+
+    ;; Table of contents
+    (use-package markdown-toc
+      :diminish
+      :bind (:map markdown-mode-command-map
+                  ("r" . markdown-toc-generate-or-refresh-toc))
+      :hook (markdown-mode . markdown-toc-mode)
+      :init (setq markdown-toc-indentation-space 2
+                  markdown-toc-header-toc-title "\n## Table of Contents"
+                  markdown-toc-user-toc-structure-manipulation-fn 'cdr)
+      :config
+      (with-no-warnings
+        (define-advice markdown-toc-generate-toc (:around (fn &rest args) lsp)
+          "Generate or refresh toc after disabling lsp."
+          (cond
+           ((bound-and-true-p lsp-managed-mode)
+            (lsp-managed-mode -1)
+            (apply fn args)
+            (lsp-managed-mode 1))
+           ((bound-and-true-p eglot--manage-mode)
+            (eglot--manage-mode -1)
+            (apply fn args)
+            (eglot--manage-mode 1))
+           (t
+            (apply fn args)))))))
+  ;;-------------------------------------------------------------------------------------------------
+  (provide 'init-l-markdown)
+  ;;;init-l-markdown ends here
+#+end_src
+
+*** init-p-cpp.el
+:PROPERTIES:
+:HEADER-ARGS: :tangle lisp/init-p-cpp.el :mkdirp yes
+:END:
+
+#+begin_src emacs-lisp
+  ;;; init-p-cpp.el --- Settings for C/C++. -*- lexical-binding: t; -*-
+  ;;
+  ;; Copyleft (CL) 2022-2032 Dr YF Lin
+  ;;
+  ;; Author: Ethan YF Lin <e.yflin@gmail.com>
+  ;; URL: https://github.com/Ethanlinyf/General-Pure-Emacs
+  ;; Under ThingsEngine Project: https://www.thethingsengine.org/
+  ;;--------------------------------------------------------------------
+  ;;; Commentary:
+  ;; Configurations for C/C++ programming
+  ;;--------------------------------------------------------------------
+  ;;; Code:
+
+  (use-package eglot
+    :ensure t
+    :config
+    ;(require 'eglot)
+    (add-to-list 'eglot-server-programs '((c++-mode c-mode) "clangd"))
+    (add-hook 'c-mode-hook #'eglot-ensure)
+    (add-hook 'c++-mode-hook #'eglot-ensure))
+
+  (use-package quickrun
+      :ensure t
+      :commands (quickrun)
+      :config
+      (quickrun-add-command "c++/c1z"
+      '((:command . "g++")
+      (:exec . ("%c -std=c++1z %o -o %e %s"
+          "%e %a"))
+      (:remove . ("%e")))
+      :default "c++")
+      :bind ("<f5>" . quickrun))
+
+  ;; (global-set-key (kbd "<f5>") 'quickrun)
+
+  ;;--------------------------------------------------------------------------------------------------
+  (provide 'init-p-cpp)
+  ;;; init-p-cpp.el ends here
+#+end_src
+
+*** init-p-julia.el
+:PROPERTIES:
+:HEADER-ARGS: :tangle lisp/init-p-julia.el :mkdirp yes
+:END:
+
+#+begin_src emacs-lisp
+  ;;; init-p-julia.el --- Settings for Julia. -*- lexical-binding: t; -*-
+  ;;
+  ;; Copyleft (CL) 2022-2032 Dr YF Lin
+  ;;
+  ;; Author: Ethan YF Lin <e.yflin@gmail.com>
+  ;; URL: https://github.com/Ethanlinyf/General-Pure-Emacs
+  ;; Under ThingsEngine Project: https://www.thethingsengine.org/
+  ;;--------------------------------------------------------------------
+  ;;; Commentary:
+  ;; Configurations for Julia programming
+  ;;--------------------------------------------------------------------
+  ;;; Code:
+
+  (use-package julia-mode
+    :ensure t)
+
+  (use-package julia-repl
+    :ensure t
+    :hook (julia-mode . julia-repl-mode))
+
+  ;;-------------------------------------------------------------------------------------------------
+  (provide 'init-p-julia)
+  ;;; init-p-julia.el ends here.
+#+end_src
+
+*** init-p-lua.el
+:PROPERTIES:
+:HEADER-ARGS: :tangle lisp/init-p-lua.el :mkdirp yes
+:END:
+
+#+begin_src emacs-lisp
+  ;;; init-p-lua.el -- For lua programming language. -*- lexical-binding: t; -*-
+  ;;
+  ;; Copyleft (CL) 2022-2032 Dr YF Lin
+  ;;
+  ;; Author: Ethan YF Lin <e.yflin@gmail.com>
+  ;; URL: https://github.com/Ethanlinyf/General-Pure-Emacs
+  ;; Under ThingsEngine Project: https://www.thethingsengine.org/
+  ;;--------------------------------------------------------------------
+  ;;; Commentary:
+  ;; Configurations for lua programming language for Neovim settings
+  ;;--------------------------------------------------------------------
+  ;;; Code:
+
+  (use-package lua-mode
+    :ensure t
+    :magic ("\\.lua$" . lua-mode)
+    :config
+    (add-to-list 'interpreter-mode-alist '("lua" . lua-mode)))
+
+  ;;-------------------------------------------------------------------------------------------------
+  (provide 'init-p-lua)
+  ;;; init-p-lua.el ends here.
+#+end_src
+
+*** init-p-python.el
+:PROPERTIES:
+:HEADER-ARGS: :tangle lisp/init-p-python.el :mkdirp yes
+:END:
+
+#+begin_src emacs-lisp
+  ;;; init-p-python.el --- Settings for Python. -*- lexical-binding: t; -*-
+  ;;
+  ;; Copyleft (CL) 2022-2032 Dr YF Lin
+  ;;
+  ;; Author: Ethan YF Lin <e.yflin@gmail.com>
+  ;; URL: https://github.com/Ethanlinyf/General-Pure-Emacs
+  ;; Under ThingsEngine Project: https://www.thethingsengine.org/
+  ;;--------------------------------------------------------------------
+  ;;; Commentary:
+  ;; Configurations for Python programming
+  ;;--------------------------------------------------------------------
+  ;;; Code:
+
+  (use-package python
+    :ensure nil
+    :hook (inferior-python-mode . (lambda ()
+                                    (process-query-on-exit-flag
+                                     (get-process "Python"))))
+    :init
+    (setq python-shell-completion-native-enable t)
+    :config
+    ;; Default to python3, differ from python2.
+    (setq python-indent-offset 4)
+    (when (and (executable-find "python3")
+               (string= python-shell-interpreter "python3"))
+      (setq python-shell-interpreter "python3")))
+
+  ;; Live Coding in Python
+  (use-package live-py-mode
+    :ensure t)
+
+  ;;-------------------------------------------------------------------------------------------------
+  (provide 'init-p-python)
+  ;;; init-p-python.el ends here
+#+end_src
+
+*** init-p-treesit.el
+:PROPERTIES:
+:HEADER-ARGS: :tangle lisp/init-p-treesit.el :mkdirp yes
+:END:
+
+#+begin_src emacs-lisp
+  ;;; init-p-treesit.el --- for testing purposes  -*- lexical-binding: t; -*-
+  ;;
+  ;; Copyleft (CL) 2022-2032 YF Lin
+  ;;
+  ;; Something good as indicated, by Dr YF Lin <e.yflin@gmail.com>
+  ;; URL: https://github.com/Ethanlinyf/General-Pure-Emacs
+  ;; Under ThingsEngine Project: https://www.thethingsengine.org
+  ;;--------------------------------------------------------------------
+  ;;; Commentary:
+  ;; treesit for programming purposes
+  ;;--------------------------------------------------------------------
+  ;;; Code:
+
+  (require 'treesit)
+
+  ;; M-x `treesit-install-language-grammar` to install language grammar.
+  (setq treesit-language-source-alist
+        '((bash . ("https://github.com/tree-sitter/tree-sitter-bash"))
+          (c . ("https://github.com/tree-sitter/tree-sitter-c"))
+          (cpp . ("https://github.com/tree-sitter/tree-sitter-cpp"))
+          (css . ("https://github.com/tree-sitter/tree-sitter-css"))
+          (cmake . ("https://github.com/uyha/tree-sitter-cmake"))
+          (csharp     . ("https://github.com/tree-sitter/tree-sitter-c-sharp.git"))
+          (dockerfile . ("https://github.com/camdencheek/tree-sitter-dockerfile"))
+          (elisp . ("https://github.com/Wilfred/tree-sitter-elisp"))
+          (go . ("https://github.com/tree-sitter/tree-sitter-go"))
+          (gomod      . ("https://github.com/camdencheek/tree-sitter-go-mod.git"))
+          (html . ("https://github.com/tree-sitter/tree-sitter-html"))
+          (java       . ("https://github.com/tree-sitter/tree-sitter-java.git"))
+          (javascript . ("https://github.com/tree-sitter/tree-sitter-javascript"))
+          (json . ("https://github.com/tree-sitter/tree-sitter-json"))
+          (lua . ("https://github.com/Azganoth/tree-sitter-lua"))
+          (make . ("https://github.com/alemuller/tree-sitter-make"))
+          (markdown . ("https://github.com/MDeiml/tree-sitter-markdown" nil "tree-sitter-markdown/src"))
+          (ocaml . ("https://github.com/tree-sitter/tree-sitter-ocaml" nil "ocaml/src"))
+          (org . ("https://github.com/milisims/tree-sitter-org"))
+          (python . ("https://github.com/tree-sitter/tree-sitter-python"))
+          (php . ("https://github.com/tree-sitter/tree-sitter-php"))
+          (typescript . ("https://github.com/tree-sitter/tree-sitter-typescript" nil "typescript/src"))
+          (tsx . ("https://github.com/tree-sitter/tree-sitter-typescript" nil "tsx/src"))
+          (ruby . ("https://github.com/tree-sitter/tree-sitter-ruby"))
+          (rust . ("https://github.com/tree-sitter/tree-sitter-rust"))
+          (sql . ("https://github.com/m-novikov/tree-sitter-sql"))
+          (vue . ("https://github.com/merico-dev/tree-sitter-vue"))
+          (yaml . ("https://github.com/ikatyang/tree-sitter-yaml"))
+          (toml . ("https://github.com/tree-sitter/tree-sitter-toml"))
+          (zig . ("https://github.com/GrayJack/tree-sitter-zig"))))
+
+  (setq major-mode-remap-alist
+        '((c-mode          . c-ts-mode)
+          (c++-mode        . c++-ts-mode)
+          (cmake-mode      . cmake-ts-mode)
+          (conf-toml-mode  . toml-ts-mode)
+          (css-mode        . css-ts-mode)
+          (js-mode         . js-ts-mode)
+          (js-json-mode    . json-ts-mode)
+          (python-mode     . python-ts-mode)
+          (sh-mode         . bash-ts-mode)
+          (typescript-mode . typescript-ts-mode)
+          (rust-mode       . rust-ts-mode)
+          (java-mode       . java-ts-mode)
+          ))
+
+  (add-hook 'markdown-mode-hook #'(lambda () (treesit-parser-create 'markdown)))
+
+  (add-hook 'zig-mode-hook #'(lambda () (treesit-parser-create 'zig)))
+
+  (add-hook 'web-mode-hook #'(lambda ()
+                               (let ((file-name (buffer-file-name)))
+                                 (when file-name
+                                   (treesit-parser-create
+                                    (pcase (file-name-extension file-name)
+                                      ("vue" 'vue)
+                                      ("html" 'html)
+                                      ("php" 'php))))
+                                 )))
+
+  (add-hook 'emacs-lisp-mode-hook #'(lambda () (treesit-parser-create 'elisp)))
+  (add-hook 'ielm-mode-hook #'(lambda () (treesit-parser-create 'elisp)))
+  (add-hook 'json-mode-hook #'(lambda () (treesit-parser-create 'json)))
+  (add-hook 'go-mode-hook #'(lambda () (treesit-parser-create 'go)))
+  (add-hook 'java-mode-hook #'(lambda () (treesit-parser-create 'java)))
+  (add-hook 'java-ts-mode-hook #'(lambda () (treesit-parser-create 'java)))
+  (add-hook 'php-mode-hook #'(lambda () (treesit-parser-create 'php)))
+  (add-hook 'php-ts-mode-hook #'(lambda () (treesit-parser-create 'php)))
+  (add-hook 'java-ts-mode-hook #'(lambda () (treesit-parser-create 'java)))
+
+  ;;-------------------------------------------------------------------------------------------------
+  (provide 'init-p-treesit)
+  ;;;init-treesit ends here
+#+end_src
+
+*** init-p-web.el
+:PROPERTIES:
+:HEADER-ARGS: :tangle lisp/init-p-web.el :mkdirp yes
+:END:
+
+#+begin_src emacs-lisp
+  ;;; init-p-ts.el --- Settings for Typecript. -*- lexical-binding: t; -*-
+  ;;
+  ;; Copyleft (CL) 2022-2032 Dr YF Lin
+  ;;
+  ;; Author: Ethan YF Lin <e.yflin@gmail.com>
+  ;; URL: https://github.com/Ethanlinyf/General-Pure-Emacs
+  ;; Under ThingsEngine Project: https://www.thethingsengine.org/
+  ;;--------------------------------------------------------------------
+  ;;; Commentary:
+  ;; Configurations for Web programming
+  ;;--------------------------------------------------------------------
+  ;;; Code:
+
+  ;; Tide, TypeScript Interactive Development Environment for Emacs: https://github.com/ananthakumaran/tide/
+  ;; ts-comint, a Typescript REPL in Emacs: https://github.com/emacs-typescript/typescript.el
+  (use-package typescript-mode
+    :ensure t
+    :mode ("\\.ts[x]\\'" . typescript-mode))
+
+  (use-package json-mode
+    :ensure t)
+
+  ;;-------------------------------------------------------------------------------------------------
+  (provide 'init-p-web)
+  ;;; init-p-web.el ends here
+#+end_src
+
+*** init-r-research.el
+:PROPERTIES:
+:HEADER-ARGS: :tangle lisp/init-r-research.el :mkdirp yes
+:END:
+
+#+begin_src emacs-lisp
+  ;;; init-r-research.el --- Setup for research. -*- lexical-binding: t; -*-
+  ;;
+  ;; Copyleft (CL) 2022-2032 Dr YF Lin
+  ;;
+  ;; Author: Ethan YF Lin <e.yflin@gmail.com>
+  ;; URL: https://github.com/Ethanlinyf/General-Pure-Emacs
+  ;; Under ThingsEngine Project: https://www.thethingsengine.org/
+  ;;--------------------------------------------------------------------
+  ;;; Commentary:
+  ;; Configurations for research
+  ;;--------------------------------------------------------------------
+  ;;; Code:
+
+  (when (version< "27.2" emacs-version)
+    (use-package obsidian
+      :ensure t
+      :config
+      (defvar GPE-research (expand-file-name "GPE-Org/research/" user-emacs-directory))
+      (unless (file-exists-p GPE-research)
+        (make-directory GPE-research))
+      (obsidian-specify-path GPE-research)
+      (global-obsidian-mode t)
+      :custom
+      ;; This directory will be used for `obsidian-capture' if set.
+      (obsidian-inbox-directory "Inbox")
+      :bind (:map obsidian-mode-map
+                  ;; Replace C-c C-o with Obsidian.el's implementation. It's ok to use another key binding.
+                  ("C-c C-o" . obsidian-follow-link-at-point)
+                  ;; Jump to backlinks
+                  ("C-c C-b" . obsidian-backlink-jump)
+                  ;; If you prefer you can use `obsidian-insert-link'
+                  ("C-c C-l" . obsidian-insert-wikilink))))
+
+  ;;--------------------------------------------------------------------
+  (use-package zotxt
+    :ensure t
+    :hook
+    (org-mode . org-zotxt-mode))
+
+  ;;--------------------------------------------------------------------
+  ;; Emacs for Overleaf
+  (use-package atomic-chrome
+    :ensure t
+    :config ; :init
+    (atomic-chrome-start-server))
+
+  (use-package ess
+    :ensure t)
+
+  ;;-------------------------------------------------------------------------------------------------
+  (provide 'init-r-research)
+  ;;; init-r-research.el ends here
+#+end_src
+
+*** init-r-roam.el
+:PROPERTIES:
+:HEADER-ARGS: :tangle lisp/init-r-roam.el :mkdirp yes
+:END:
+
+#+begin_src emacs-lisp
+  ;;; init-r-roam.el -- Setting for roam -*- lexical-binding: t; -*-
+  ;;
+  ;; Copyleft (CL) 2022-2032 Dr YF Lin
+  ;;
+  ;; Author: Ethan YF Lin <e.yflin@gmail.com>
+  ;; URL: https://github.com/Ethanlinyf/General-Pure-Emacs
+  ;; Under ThingsEngine Project: https://www.thethingsengine.org/
+  ;;--------------------------------------------------------------------
+  ;;; Commentary:
+  ;; Configurations for roam research
+  ;;--------------------------------------------------------------------
+  ;;; Code:
+  (use-package org-roam
+    :ensure t
+    :init
+    (defvar GPE-roam (expand-file-name "GPE-Org/roam/" user-emacs-directory))
+    (unless (file-directory-p GPE-roam)
+      (make-directory GPE-roam))
+    :custom
+    (org-roam-directory (file-truename GPE-roam))
+    :bind (("C-c n l" . org-roam-buffer-toggle)
+           ("C-c n f" . org-roam-node-find)
+           ("C-c n g" . org-roam-graph)
+           ("C-c n i" . org-roam-node-insert)
+           ("C-c n c" . org-roam-capture)
+           ;; Dailies
+           ("C-c n j" . org-roam-dailies-capture-today))
+    :config
+    ;; If you're using a vertical completion framework, you might want a more informative completion interface
+    (setq org-roam-node-display-template (concat "${title:*} " (propertize "${tags:10}" 'face 'org-tag)))
+    (org-roam-db-autosync-mode)
+    ;; If using org-roam-protocol
+    (require 'org-roam-protocol)
+    (when emacs/>=27p
+      (use-package org-roam-ui
+        :ensure t
+        :init
+        (when (featurep 'xwidget-internal)
+          (setq org-roam-ui-browser-function #'xwidget-webkit-browse-url)))))
+
+  ;;-------------------------------------------------------------------------------------------------
+  (provide 'init-r-roam)
+  ;;; init-r-roam.el ends here.
+#+end_src
+
+*** init-r-tex.el
+:PROPERTIES:
+:HEADER-ARGS: :tangle lisp/init-r-tex.el :mkdirp yes
+:END:
+
+#+begin_src emacs-lisp
+  ;;; init-r-tex.el --- Setup for latex. -*- lexical-binding: t; -*-
+  ;;
+  ;; Copyleft (CL) 2022-2032 Dr YF Lin
+  ;;
+  ;; Author: Ethan YF Lin <e.yflin@gmail.com>
+  ;; URL: https://github.com/Ethanlinyf/General-Pure-Emacs
+  ;; Under ThingsEngine Project: https://www.thethingsengine.org/
+  ;;--------------------------------------------------------------------
+  ;;; Commentary:
+  ;; Configurations for the TeX system
+  ;;--------------------------------------------------------------------
+  ;;; Code:
+
+  (add-hook 'LaTeX-mode-hook 'lsp-bridge-mode)
+
+  (use-package auctex
+    :ensure t
+    :init
+    (load "auctex.el" nil t t)
+    :config
+    (setq TeX-auto-save t)
+    (setq TeX-parse-self t)
+    (setq-default TeX-master nil))
+
+  ;;--------------------------------------------------------------------
+  ;; REFTEX Settings
+  (require 'reftex)
+  (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
+  (setq reftex-plug-into-AUCTeX t)
+  (setq reftex-enable-partial-scans t)
+  (setq reftex-save-parse-info t)
+  (setq reftex-use-multiple-selection-buffers t)
+  (setq reftex-toc-split-windows-horizontally t)                       ; *toc*buffer on left。
+  (setq reftex-toc-split-windows-fraction 0.2)                         ; *toc*buffer ratio。
+  (autoload 'reftex-mode "reftex" "RefTeX Minor Mode" t)
+  (autoload 'turn-on-reftex "reftex" "RefTeX Minor Mode" nil)
+  (autoload 'reftex-citation "reftex-cite" "Make citation" nil)
+  (autoload 'reftex-index-phrase-mode "reftex-index" "Phrase mode" t)
+
+  ;;--------------------------------------------------------------------
+  ;; CDLATEX Settings
+  (use-package cdlatex
+    :ensure t
+    :hook
+    (LaTeX-mode . turn-on-cdlatex))
+
+  ;;--------------------------------------------------------------------
+  ;; pdf-tools
+  (use-package pdf-tools
+    :ensure t
+    :custom
+    (pdf-view-display-size 'fit-width)
+    (pdf-annot-activate-created-annotations t "automatically annotate highlights")
+    :config
+    (define-key pdf-view-mode-map (kbd "C-s") 'isearch-forward)
+    :hook
+    (pdf-view-mode . (lambda() (setq display-line-numbers-mode nil))))
+
+  ;;--------------------------------------------------------------------
+  (add-hook 'LaTeX-mode-hook (lambda ()
+                               (pdf-tools-install)
+                               (require 'tex-site)
+                               (setq pdf-view-use-scaling t)
+                               (TeX-fold-mode 1)
+                               (auto-fill-mode 1)
+
+                               (flyspell-mode 1)
+                               (setq flyspell-sort-corrections nil)
+                               (setq flyspell-doublon-as-error-flag nil)
+
+                               (setq split-width-threshold 80) ;  pdf-tool to open a pdf in the right side
+                               (turn-on-auto-fill)             ; LaTeX mode，turn off auto fold
+                               (latex-math-mode 1)
+                               (outline-minor-mode 1)
+                               (imenu-add-menubar-index)
+
+                               (setq TeX-show-compilation nil) ; NOT display compilation windows
+                               (setq TeX-global-PDF-mode t)    ; PDF mode enable, not plain
+                               ;;(setq TeX-engine 'default)      ; use xelatex default
+                               (setq TeX-clean-confirm nil)
+                               (setq TeX-save-query nil)
+
+                               (setq font-latex-fontify-script t)
+                               (define-key LaTeX-mode-map (kbd "TAB") 'TeX-complete-symbol)
+                               ;;(setq TeX-electric-escape t)      ; press \ then, jump to mini-buffer to input commands
+                               ;;(setq TeX-view-program-list '(("Evince" "evince %o"))) ;;
+                               ;;(setq TeX-view-program-selection '((output-pdf "Evince")))
+                               (setq TeX-view-program-selection '((output-pdf "PDF Tools"))
+                                     TeX-view-program-list '(("PDF Tools" TeX-pdf-tools-sync-view))
+                                     TeX-source-correlate-start-server t)
+                               ;;(add-to-list 'TeX-command-list '("XeLaTeX" "%`xelatex%(mode)%' %t" TeX-run-TeX nil t))
+                               ;;(setq TeX-command-default "XeLaTeX")
+                               (add-to-list 'TeX-command-list '("LaTeX" "%`pdflatex -shell-escape --synctex=1%(mode)%' %t" TeX-run-TeX nil t))
+                               (setq TeX-command-default "LaTeX")
+                               ;;(setq TeX-command-default "pdflatex --synctex=1")
+
+                               (setq TeX-fold-env-spec-list (quote (("[comment]" ("comment")) ("[figure]" ("figure")) ("[table]" ("table"))("[itemize]"("itemize"))("[enumerate]"("enumerate"))("[description]"("description"))("[overpic]"("overpic"))("[tabularx]"("tabularx"))("[code]"("code"))("[shell]"("shell")))))
+
+
+                               (define-key LaTeX-mode-map (kbd "C-c C-p") 'reftex-parse-all)
+                               (define-key LaTeX-mode-map (kbd "C-c C-g") #'pdf-sync-forward-search)
+
+                               (setq LaTeX-section-hook
+                                     '(LaTeX-section-heading
+                                       LaTeX-section-title
+                                       LaTeX-section-toc
+                                       LaTeX-section-section
+                                       LaTeX-section-label))
+
+                               (setq pdf-sync-backward-display-action t
+                                     pdf-sync-forward-display-action t
+                                     TeX-source-correlate-mode t
+                                     TeX-source-correlate-method '(
+                                                                   (dvi . source-specials)
+                                                                   (pdf . synctex))
+                                     TeX-source-correlate-start-server t  ; [C-c C-g] to switch between source code and PDF
+                                     reftex-plug-into-AUCTeX t)
+                               (add-hook 'TeX-after-compilation-finished-functions
+                                         #'TeX-revert-document-buffer) ;
+                               (add-hook 'pdf-view-mode-hook (lambda() (display-line-numbers-mode -1)))
+                               ))
+
+  ;;-------------------------------------------------------------------------------------------------
+  (provide 'init-r-tex)
+  ;;; init-r-tex.el ends here
+#+end_src
+
+*** init-z-test.el
+:PROPERTIES:
+:HEADER-ARGS: :tangle lisp/init-z-test.el :mkdirp yes
+:END:
+
+#+begin_src emacs-lisp
+  ;;; init-z-test.el --- for testing purposes  -*- lexical-binding: t; -*-
+  ;;
+  ;; Copyleft (CL) 2022-2032 YF Lin
+  ;;
+  ;; Something good as indicated, by Dr YF Lin <e.yflin@gmail.com>
+  ;; URL: https://github.com/Ethanlinyf/General-Pure-Emacs
+  ;; Under ThingsEngine Project: https://www.thethingsengine.org
+  ;;--------------------------------------------------------------------
+  ;;; Commentary:
+  ;; For debugging and testing purposes
+  ;;--------------------------------------------------------------------
+  ;;; Code:
+
+  ;; (setq debug-on-error t)
+
+
+
+  ;;-------------------------------------------------------------------------------------------------
+  (provide 'init-z-test)
+  ;;; init-z-test.el ends here
+#+end_src
+
+** backup
+*** org-site
+:PROPERTIES:
+:HEADER-ARGS: :tangle site-lisp/website/org-site/.dir-locals.el :mkdirp yes
+:END:
+
+#+begin_src emacs-lisp
+  ;;; .dir-locals.el --- local variables for Org-site Project. -*- lexical-binding: t; -*-
+  ;;
+  ;; Copyleft (CL) 2022-2032 Ethan YF Lin
+  ;;
+  ;; Author: Ethan YF Lin <e.yflin@gmail.com>
+  ;; URL: https://github.com/Ethanlinyf/General-Pure-Emacs
+  ;; Under ThingsEngine Project: https://www.thethingsengine.org/
+  ;;--------------------------------------------------------------------
+  ;;; Commentary:
+  ;;  Define a set of local variables for Org-website Project
+  ;;--------------------------------------------------------------------
+  ;;; Code:
+
+  ((org-mode . (
+                (user-full-name . "Dr YF Lin")
+                (org-export-in-background . t)
+                (org-html-htmlize-output-type . inline-css)
+                (org-html-head-include-default-style . nil)
+                (org-html-head-include-scripts . nil)
+                (org-publish-project-alist . (("orgfiles"
+                                               ;; source and public for this project.
+                                               :base-directory "~/Org-site/source/org/" ;; the source org folder to export html files
+                                               :publishing-directory "~/Org-site/public/" ;; publishing-directory for this project 
+                                               ;; :preparation-function
+                                               ;; :complete-function
+                                               :base-extension "org"
+                                               ;; :exclude "PrivatePage.org"     ;; regexp supported
+                                               ;; :include
+                                               :recursive t
+                                               ;; :auto-sitemap t
+                                               ;; :sitemap-filename "sitemap.org"
+                                               ;; :sitemap-title "Sitemap"
+                                               ;; :sitemap-sort-folders last           
+
+                                               ;;Publishing behaviours
+                                               :publishing-function org-html-publish-to-html
+
+                                               ;; Generic properties for this project
+                                               :headline-levels 4    ;; org-export-headline-levels
+                                               :language "en"        ;; org-export-default-language
+                                               :section-numbers nil  ;; org-export-with-section-numbers
+                                               :with-planning t      ;; org-export-with-planning
+                                               :with-priority t      ;; org-export-with-priority ;
+                                               ;;  :with-tags not-in-toc ;; org-export-with-tags
+                                               :with-toc t           ;; org-export-with-toc
+
+                                               :html-doctype "html5" ;; org-html-doctype
+                                               ;;  :html-metadata-timestamp-format "%Y-%m-%d" ;; org-html-metadata-timestamp-format
+                                               :html-head-include-default-style nil ;; org-html-head-include-default-style
+                                               :html-head-include-scripts nil ;; org-html-head-include-scripts
+                                               ;; :html-head
+                                               ;; "<link rel=\"shortcut icon\" href=\"themes/assets/icon.png\" type=\"image/x-icon\" />
+                                               ;; <link rel=\"stylesheet\" href=\"themes/style.css\" type=\"text/css\"  />
+                                               ;; <script type=\"module\" src=\"themes/main.js\" defer></script>" ;; org-html-head
+                                               :html-checkbox-type unicode  ;; org-html-checkbox-type
+                                               :html-indent t               ;; org-html-indent
+                                               ;; :html-link-home "index.html"	;; org-html-link-home
+                                               ;; :html-link-up "uUP"          ;; org-html-link-up
+                                               :html-validation-link "<a href=\"http://www.thingsengine.org/\">ThingsEngine</a>"    ;; org-html-validation-link
+                                               )
+
+                                              ;; static assets
+                                              ("org-site"
+                                               :base-directory "~/Org-site/source/"
+                                               :base-extension "js"
+                                               :publishing-directory "~/Org-site/public/"
+                                               :recursive nil
+                                               :publishing-function org-publish-attachment
+                                               )
+                                              ("images"
+                                               :base-directory "~/Org-site/source/img"
+                                               :base-extension any
+                                               :publishing-directory "~/Org-site/public/img"
+                                               :recursive t
+                                               :publishing-function org-publish-attachment
+                                               )
+                                              ("themes"
+                                               :base-directory "~/Org-site/source/theme/"
+                                               :base-extension any
+                                               :publishing-directory "~/Org-site/public/theme/"
+                                               :recursive t
+                                               :publishing-function org-publish-attachment
+                                               )
+
+                                              ;; reverse static assets
+                                              ("rorg-site"
+                                               :base-directory "~/Org-site/public/"
+                                               :base-extension "js"
+                                               :publishing-directory "~/Org-site/source/"
+                                               :recursive nil
+                                               :publishing-function org-publish-attachment
+                                               )
+                                              ("rimages"
+                                               :base-directory "~/Org-site/public/img/"
+                                               :base-extension any
+                                               :publishing-directory "~/Org-site/source/img/"
+                                               :recursive t
+                                               :publishing-function org-publish-attachment
+                                               )
+                                              ("rthemes"
+                                               :base-directory "~/Org-site/public/theme/"
+                                               :base-extension any
+                                               :publishing-directory "~/Org-site/source/theme/"
+                                               :recursive t
+                                               :publishing-function org-publish-attachment
+                                               )
+
+                                              ("website" :components ("orgfiles" "org-site" "images" "themes"))
+                                              ("statics" :components ("confs" "images" "themes"))
+                                              ("rstatics" :components ("rorg-site" "rimages" "rthemes"))
+                                              ))
+                (eval .
+                      (progn
+                        (defun save-and-publish-website()
+                          "Save all buffers and publish."
+                          (interactive)
+                          (when (yes-or-no-p "Really save and publish current project?")
+                            (save-some-buffers t)
+                            (org-publish-project "website" t)
+                            (message "Site published done.")))
+
+
+                        (defun save-and-publish-statics ()
+                          "Just copy statics like js, css, and image file .etc."
+                          (interactive)
+                          (org-publish-project "statics" t)
+                          (message "Copy statics done."))
+
+                        (defun save-and-publish-rstatics ()
+                          "Just copy statics like js, css, and image file .etc.
+                           Which is a reverse operation of `save-and-publish-statics'."
+                          (interactive)
+                          (org-publish-project "rstatics" t)
+                          (message "Copy rstatics done."))
+
+                        (defun save-and-publish-file ()
+                          "Save current buffer and publish."
+                          (interactive)
+                          (save-buffer t)
+                          (org-publish-current-file t))
+
+                        (defun delete-org-and-html ()
+                          "Delete current org and the relative html when it exists."
+                          (interactive)
+                          (when (yes-or-no-p "Really delete current org and the relative html?")
+
+                            (let ((fileurl (concat "~/site/public/" (file-name-base (buffer-name)) ".html")))
+                              (if (file-exists-p fileurl)
+                                  (delete-file fileurl))
+                              (delete-file (buffer-file-name))
+                              (kill-this-buffer)
+                              (message "Delete org and the relative html done."))))
+
+                        (defun just-delete-relative-html ()
+                          "Just delete the relative html when it exists."
+                          (interactive)
+                          (when (yes-or-no-p "Really delete the relative html?")
+
+                            (let ((fileurl (concat "~/site/public/" (file-name-base (buffer-name)) ".html")))
+                              (if (file-exists-p fileurl)
+                                  (progn
+                                    (delete-file fileurl)
+                                    (message "Delete the relative html done.")
+                                    )
+                                (message "None relative html.")))))
+
+                        (define-minor-mode auto-save-and-publish-file-mode
+                          "Toggle auto save and publish current file."
+                          :global nil
+                          :lighter ""
+                          (if auto-save-and-publish-file-mode
+                              ;; When the mode is enabled
+                              (progn
+                                (add-hook 'after-save-hook #'save-and-publish-file :append :local))
+                            ;; When the mode is disabled
+                            (remove-hook 'after-save-hook #'save-and-publish-file :local)))
+                        ;; (use-package auto-save-and-publish-file-mode
+                        ;;   :hook (org-mode))
+
+                        (add-hook 'org-mode-hook #'auto-save-and-publish-file-mode)
+
+                        (use-package simple-httpd
+                          :ensure t
+                          :config
+                          (setq httpd-root "~/Org-site/public"))
+
+                        (defun preview-current-buffer-in-browser ()
+                          "Open current buffer as html."
+                          (interactive)
+                          (let ((fileurl (concat "http://127.0.0.1:8080/" (file-name-base (buffer-name)) ".html")))
+                            (save-and-publish-file)
+                            (unless (httpd-running-p) (httpd-start))
+                            (browse-url fileurl))))))))
+#+end_src
+
+
+* ends this configuration
