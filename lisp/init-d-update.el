@@ -54,7 +54,8 @@ This issue has been addressed in 28."
 ;; Bugfix
 ;;--------------------------------------------------------------------
 ;;; doom-one theme:
-;; Warning: setting attribute ‘:background’ of face ‘font-lock-comment-face’: nil value is invalid, use ‘unspecified’ instead.
+;; Warning: setting attribute ‘:background’ of face ‘font-lock-comment-face’:
+;; nil value is invalid, use ‘unspecified’ instead.
 
 ;; fixed:
 ;; (modeline-fg fg) --> (modeline-fg 'unspecified)

@@ -151,7 +151,8 @@ Similar to `marginalia-annotate-symbol', but does not show symbol class."
 ;;--------------------------------------------------------------------
 (defun TE-title-case-region-or-line (@begin @end)
   "Title case text between nearest brackets, or current line, or text selection.
-Capitalize first letter of each word, except words like {to, of, the, a, in, or, and, etc}. If a word already contains cap letters such as HTTP, URL, they are left as is.
+Capitalize first letter of each word, except words like {to, of, the, a, in, or, and, etc}.
+If a word already contains cap letters such as HTTP, URL, they are left as is.
 
 When called in a elisp program, *begin *end are region boundaries.
 URL `http://xahlee.info/emacs/emacs/elisp_title_case_text.html'
