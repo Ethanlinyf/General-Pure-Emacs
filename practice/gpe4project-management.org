@@ -14,3 +14,16 @@
 #+cite_export:
 
 * Git & GitHub
+** Rename a branch "pioneer" to "dev"
+- git switch main
+  Switch to the main via the command “git checkout main”.
+- git branch -m pioneer dev
+  Enter the following command to rename a Git branch: “git branch -m old-name new-name”.
+- git branch -a
+  To ensure that the rename was successful, retrieve the current status of the branch using the “git branch -a” command.
+- git branch -d pioneer (may be needed)
+- git switch dev
+- git push origin -u dev
+  Push the renamed branch
+- git push origin --delete pioneer
+  Delete the old remote branch
