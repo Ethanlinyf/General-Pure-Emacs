@@ -1,0 +1,276 @@
+#+options: ':nil *:t -:t ::t <:t H:3 \n:nil ^:t arch:headline author:t
+#+options: broken-links:nil c:nil creator:nil d:(not "LOGBOOK") date:t e:t
+#+options: email:nil f:t inline:t num:nil p:nil pri:nil prop:nil stat:t tags:t
+#+options: tasks:t tex:t timestamp:t title:t toc:t todo:t |:t
+#+title: GPE is a Platform of Emacs
+#+date: <2022-08-15 Mon>
+#+author: Ethan YF Lin
+#+email: e.yflin@gmail.com
+#+language: en
+#+select_tags: export
+#+exclude_tags: noexport
+#+creator: Emacs 29.1.50 (Org mode 9.5.4)
+#+cite_export:
+#+startup: overview 
+
+#+begin_quote
+The GPE is, not GPE, but termed as GPE. 
+#+end_quote
+
+* Introduction
+ 
+The GPE is an integrated and flexible platform based on [[https://www.gnu.org/software/emacs/][Gnu Emacs]] that
+harnesses the power of artificial intelligence (AI) with around 100
+packages as plugins to facilitate learning, teaching, research and project
+management.
+
+ [[./site-lisp/figure/GPE-Dashboard-2023-09-14.png]]
+
+*What is "G.P.E":*
+- General :: A consistent platform is built with simplicity,
+  modularity and clear communication between integrated facilities.
+- Pure :: The entire platform is powered mainly by the pure Turing programming
+  language, elisp.
+- Extensible :: This interactive platform is extensible for whatever you want
+  to, even *brew coffee* with it. 
+
+[[./site-lisp/figure/GPE-Framework_4.png]]
+
+* A Basic Structure of Configuration
+Emacs:~$ (init 0 1) --AI--> G.P.E
+#+BEGIN_EXAMPLE
+  .emacs.d/
+     |
+     |-- early-init
+     |-- init.el
+     |
+     |-- lisp/
+     |   |-- init-0-bridge.el
+     |   |-- init-1-system
+     |   |
+     |   |-- init-a-authentication
+     |   |-- init-b-basic
+     |   |-- init-c-i18n
+     |   |-- init-d-update
+     |   |
+     |   |-- init-e-enhance
+     |   |-- init-f-dired
+     |   |-- init-g-interface
+     |   |-- init-h-dashboard
+     |   |-- init-i-minibuffer
+     |   |-- init-j-platform
+     |   |-- init-k-org
+     |   |-- init-l-markdown
+     |   |
+     |   |-- init-p-python
+     |   |-- init-p-c/c++
+     |   |-- init-p-java
+     |   |-- init-p-lua
+     |   |-- init-p-julia
+     |   |-- init-p-web
+     |   |
+     |   |-- init-r-roam
+     |   |-- init-r-research
+     |   |-- init-r-tex
+     |   |
+     |   |-- init-z-test
+     |
+     |-- site-lisp/
+     |   |-- lsp-bridge
+     |   |-- aweshell
+     |   |-- blink-search
+     |   |-- popweb
+     |   |-- pure-const
+     |   |-- pure-custom
+     |   |-- pure-function
+     |   |-- pure-macros
+     |
+     |-- custom.el
+     |-- README.org
+     |
+     |-- .gitignore
+     |-- .gitmodules
+     |
+     |-- ...
+#+END_EXAMPLE
+** Configuration Methodology
+Adhere to the principles (G.P.E) of this platform, the configuration will be crafted with the following key considerations:
+- Easy to integrate and debug
+- Lower coupling and higher cohesion
+- More aggregation and less inheritance
+- To precipitate the common into the bottom layers, and make flexible on the top:
+
+[[./site-lisp/figure/Configuration_Metodology_7.jpg]]
+
+* Feature
+- Integrated
+  + Note-taken \\
+    Org-mode has useful functionalities to take notes. Quick to open an
+    file for note-taking, an Org file can be bounded to the key "F1":
+    #+begin_src emacs-lisp
+      (defun open-note-file ()
+        "Quickly open an org file for note taking."
+        (interactive)
+        (find-file "~/Documents/Org/note.org"))
+      (global-set-key (kbd "<f1>") 'open-note-file)
+    #+end_src
+
+    Further extended with the Org-Roam (V2) package by saving all the links between
+    files and headings in a database[fn:1].
+    [[./site-lisp/figure/org-roam-network.png]]
+
+  + Programming as an IDE:
+
+    [[./site-lisp/figure/Emacs_elisp_programming.png]]
+
+  + Plan and schedule
+
+    [[./site-lisp/figure/TaskManagement.png]]
+
+  + [[https://www.thethingsengine.org/git-for-research.html][Management for research purposes]] as below:
+
+    [[./site-lisp/figure/Git-for-research-project.png]]
+
+- Custmisable \\
+  Nothing cannot be custmised in this General Pure Emacs. For example,
+  mode-line customised by doom-modeline:
+
+  [[./site-lisp/figure/mode-line.png]]
+
+- Extensible
+  + Multiple threading and asynchronous processing
+    - Scheduler for requests
+    - Flexible capacity tray
+    - Focus-oriented
+
+  + literate programming[fn:2] \\
+
+    [[./site-lisp/figure/literate-programming.png]]
+
+    The literate programming mode, Org-Babel, is able to embed multiple
+    programming languages in a org file to make it as an active document.
+  + roam-network
+
+    * How to import and visualize your roam research, obsidian and
+      zettelkasten markdown format notes, a graphical front-end for
+      your org-roam Zettelkasten, org-roam-ui[fn:3]:
+
+      [[./site-lisp/figure/roam-research-ui.png]]
+
+- Creative and Innovative \\
+  + A creative workshop in this platform is established to publish [[https://www.thethingsengine.org/org2xhtml.html][org
+    files to XHTML]] files with customised theme file (css and js) to be
+    hosted as a website ([[https://www.thethingsengine.org/index.html][Something-Good]]) in GitHub:
+    [[./site-lisp/figure/org2xhtml.png]]
+  Push at the boundary of knowledge with GPE [fn:4]:
+
+  [[./site-lisp/figure/creative_emacs.jpg]]
+
+- Instructive \\
+  The tutorial how to build this platform will be illustrated at the
+  website [[https://thethingsengine.org][Something-Good]] under the
+  ThingsEngine Project.
+
+* Installation
+To enhance the default Emacs experience, the latest stable release (29.1) is
+recommended.
+
+1. Backup your existing configuration
+   #+begin_src shell
+     mv ~/.emacs.d ~/.emacs.d.bak
+   #+end_src
+2. Clone this repository
+   You should install Git in your system first, as well as set your
+   username and email, the same for GitHub with SSH public key. See the [[https://github.com/Ethanlinyf/Git-GitHub-Tutorial][tutorial]] of
+   Git/GitHub. 
+   #+begin_src shell
+     git clone git@github.com:Ethanlinyf/General-Pure-Emacs.git ~/.emacs.d
+   #+end_src
+3. Install the dependencies \\
+   - Install the [[https://www.nerdfonts.com][needed nerdfonts]]
+   - Based on the listed modules in the .gitmodules to install therelated dependencies, for example:
+     + lsp-bridge:
+       #+begin_src shell
+         pip3 install epc orjson sexpdata six paramiko rapidfuzz
+       #+end_src
+     + And others, such as ChatGPT([[https://github.com/manateelazycat/mind-wave/][mind-wave]]) and WebFrame([[https://github.com/manateelazycat/popweb/][popweb]]).
+     + For a specific system, such as macOS:
+       #+begin_src shell
+         brew install autoconf automake texinfo gnutls pkg-config libxml2 --debug --verbose
+       #+end_src
+4. To fetch the submodules in General Pure Emacs
+   #+begin_src shell
+     cd .emacs.d
+   #+end_src
+   Then, run the following to in a terminal:
+   #+begin_src elisp
+     git submodule update --init --recursive
+   #+end_src
+   
+   And to update the submodules, you could use:
+
+   #+begin_src shell
+     git submodule foreach git pull --rebase
+   #+end_src
+
+5. Then, open Emacs to install the needed package.
+   - Yes for "Need to (re)build the epdfinfo program, do it now ?":
+   - Your root password might be required to install a pdf-tool server.
+   - You may need to wait for a while to complete downloading the
+     needed packages.
+
+6. GUI with icons \\
+   Install nerd fonts, https://www.nerdfonts.com/ \
+   #+begin_src elisp
+     M-x nerd-icons-install-fonts
+   #+end_src
+
+7. Generate an OpenAI API key, and then save the Key to "~/.emacs.d/mind-wave/chatgpt_api_key.txt"
+   
+8. Enjoy General Pure Emacs with AI ~
+
+One more thing, add external tools and language servers to boost your own GPE:
+- External tools
+  + fd
+  + ripgrep
+  + sqlite3 (optional, for sqlite3 backend)
+  + rga (optional, for searching pdf backend)
+  + pdf-tool
+    #+begin_src elisp
+      M-x pdf-tools-install
+    #+end_src
+  + Install Tabnine after the installation of lsp-bridge:
+    #+begin_src elisp
+      M-x lsp-bridge-install-tabnine
+    #+end_src
+- LSP servers need for:
+  + pyright for Python
+  + texlab for LaTeX
+  + eclipse.jdt.ls for Java
+  + clangd for C and/or C++
+* Support/Feedback
+Bug reports are highly welcome and appreciated!
+
+Please feedback any issues about configuration at this repository and
+welcome any suggestions.
+* License
+This program is free software. You can redistribute and/or modify it
+under [[https://www.gnu.org/licenses/gpl-3.0.en.html][GNU General Public License]] published by the Free Software
+Foundation, as well as Copyleft under [[https://thethingsengine.org][ThingsEngine]] project. The
+contributions are shared with the hope that this program will be
+useful, helpful and inspiring, but without any warranty; without even
+the implied warranty of merchantability or fitness for a particular
+purpose.
+
+* Footnote
+[fn:1] [[https://lucidmanager.org/data-science/visualise-org-roam/][Visualise Org-Roam Networks With igraph and R]]
+
+[fn:2] [[http://www.jstatsoft.org/v46/i03/][A Multi-Language Computing Environment for Literate
+Programming and Reproducible Research]]
+
+[fn:3] [[org-roam-ui]]
+
+[fn:4] [[http://academiclifehistories.weebly.com/blog/phd-pitfalls-part-i-the-reality-of-your-contribution][PhD pitfalls: The reality of your contribution]]
+
+
+
