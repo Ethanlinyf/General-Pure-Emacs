@@ -11,7 +11,8 @@
 ;;--------------------------------------------------------------------
 ;;; Code:
 
-;; Session history, enhance package, desktop+, which extends `desktop' by providing more features related to sessions persistance.
+;; Session history, enhance package, desktop+, which extends `desktop'
+;; by providing more features related to sessions persistance.
 ;; (use-package desktop
 ;;   :hook (after-init . desktop-save-mode))
 
