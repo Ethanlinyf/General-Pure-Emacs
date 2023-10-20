@@ -1,0 +1,9 @@
+.DS_Store
+*.*~
+/auto-save-list
+/zull
+/eshell
+/init-p-setting.el
+/custom.el
+*.elc
+*.pyc
