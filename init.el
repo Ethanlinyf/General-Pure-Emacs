@@ -1,16 +1,12 @@
 ;;; init.el --- The main entry of Emacs. -*- lexical-binding: t; -*-
 ;;
-;; Copyleft (CL) 2022-2032 YF Lin
-;;
-;; Something good as indicated, by Dr YF Lin <e.yflin@gmail.com>
-;; URL: https://github.com/Ethanlinyf/General-Pure-Emacs
+;; Copyleft (CL) 2022-2032 Dr YF Lin
 ;; Under ThingsEngine Project: https://www.thethingsengine.org
-;;--------------------------------------------------------------------
+
 ;;; Commentary:
 ;; init file for General Pure Emacs basic branch
-;;--------------------------------------------------------------------
-;;; Code:
 
+;;; Code:
 (require 'cl-lib)
 
 ;; Startup time
@@ -61,47 +57,28 @@
 ;; Add to list to load the el files in a specific folder;
 (defun update-load-path (&rest _)
   "To update 'load-path'."
-  (dolist (path '("core" "site-lisp"))
+  (dolist (path '("core" "extension" "module/platform" "module/practice"))
     (push (expand-file-name path user-emacs-directory) load-path)))
 
-(defun add-extradirs-to-load-path (&rest _)
-  "Include extra dirs to 'load-path'."
-  (let ((default-directory (expand-file-name "module" user-emacs-directory)))
-    (normal-top-level-add-subdirs-to-load-path)))
 
 (advice-add #'package-initialize :after #'update-load-path)
-(advice-add #'package-initialize :after #'add-extradirs-to-load-path)
 (update-load-path)
 
-;; (require 'init-0-bridge)
-;; (require 'init-1-system)
+(require 'init-system)
+(require 'init-bridge)
+(require 'init-builtin)
+(require 'init-enhancement)
 
-;; (require 'init-a-authentication)
-;; (require 'init-b-basic)
-;; (require 'init-c-i18n)
-;; (require 'init-d-update)
+(require 'mpf-minibuffer)
+(require 'mpf-completion)
+(require 'mpf-userinterface)
+(require 'mpf-workspace)
 
-;; (require 'init-e-enhance)
-;; (require 'init-f-dired)
-;; (require 'init-g-interface)
-;; (require 'init-h-dashboard)
-;; (require 'init-i-minibuffer)
-;; (require 'init-j-platform)
-;; (require 'init-k-org)
-;; (require 'init-l-markdown)
-
-;; (require 'init-p-python)
-;; (require 'init-p-cpp)
-;; (require 'init-p-lua)
-;; (require 'init-p-julia)
-;; (require 'init-p-web)
-;; (require 'init-p-treesit)
-
-;; (require 'init-r-roam)
-;; (require 'init-r-research)
-;; (require 'init-r-tex)
-
-;; (require 'init-z-test)
+(require 'mpc-org)
+(require 'mpc-tex)
+(require 'mpc-python)
+(require 'mpc-markdown)
 
 ;;-------------------------------------------------------------------------------------------------
-;; init.el ends here.
+(provide 'init)
+;;; init.el ends here.
