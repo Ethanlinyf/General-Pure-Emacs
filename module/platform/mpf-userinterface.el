@@ -28,6 +28,8 @@
 (use-package hide-mode-line
   :ensure t)
 
+(toggle-frame-fullscreen)
+
 ;;-------------------------------------------------------------------------------------------------
 (provide 'mpf-userinterface)
 

@@ -8,8 +8,6 @@
 
 ;;; code:
 
-(toggle-frame-fullscreen)
-
 (when (or sys/macp sys/linuxp (daemonp))
   (use-package exec-path-from-shell
     ;; :demand t
