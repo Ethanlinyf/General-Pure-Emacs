@@ -12,9 +12,12 @@
 /recentf
 /zull
 /backup
+/snippets/
 
 .DS_Store
 *.elc
 *.pyc
 *.*~
 .*.*~
+/abbrev_defs
+/projectitle-bookmarks
