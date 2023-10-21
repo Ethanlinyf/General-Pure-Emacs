@@ -130,7 +130,7 @@
 (require 'init-r-research)
 (require 'init-r-tex)
 
-(require 'init-z-test)
+;; (require 'init-z-test)
 
 ;;-------------------------------------------------------------------------------------------------
 ;; init.el ends here.
