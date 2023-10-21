@@ -1,3 +1,6 @@
 [submodule "extension/lsp-bridge"]
 	path = extension/lsp-bridge
 	url = git@github.com:manateelazycat/lsp-bridge.git
+[submodule "extension/gpe-aweshell"]
+	path = extension/gpe-aweshell
+	url = git@github.com:Ethanlinyf/gpe-aweshell.git

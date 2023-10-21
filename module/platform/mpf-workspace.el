@@ -17,6 +17,25 @@
 (global-set-key (kbd "C-<next>") 'centaur-tabs-forward)
 
 
+;; (use-package aweshell
+;;   :load-path "site-lisp/gpe-aweshell"
+;;   ;; :ensure company
+;;   :ensure nil
+;;   ;; :functions (aweshell-auto-suggestion)
+;;   :bind
+;;   ("s-1" . aweshell-dedicated-toggle)
+;;   (:map eshell-mode-map ("C-x C-g" . aweshell-dedicated-close))
+;;   ; :config (setq aweshell-auto-suggestion-p t)
+;;   ; :hook (eshell-mode . company-mode)
+;;   )
+
+(add-to-list 'load-path "/Users/ethanlin/.emacs.d/extension/gpe-aweshell/")
+(require 'aweshell)
+(global-set-key (kbd "s-1") 'aweshell-dedicated-toggle)
+
+
+
+
 (message "project")
 
 ;;-------------------------------------------------------------------------------------------------
