@@ -26,6 +26,9 @@
                             centaur-tabs
                             markdown-mode
                             yasnippet
+                            exec-path-from-shell
+                            doom-themes
+                            doom-modeline
 
                             )  "Default packages.")
 

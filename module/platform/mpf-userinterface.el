@@ -8,6 +8,25 @@
 
 ;;; Code:
 
+;;--------------------------------------------------------------------
+;; theme doom-one
+;; see the PR: https://github.com/doomemacs/themes/pull/779
+(use-package doom-themes
+  :custom
+  (doom-themes-enable-bold t)   ; if nil, bold is universally disabled
+  (doom-themes-enable-italic t) ; if nil, italics is universally disabled
+  :config
+  ;; Enable flashing mode-line on errors
+  (doom-themes-visual-bell-config)
+  :init
+  (load-theme 'doom-one t))
+
+(use-package doom-modeline
+  :ensure t
+  :hook (after-init . doom-modeline-mode))
+
+(use-package hide-mode-line
+  :ensure t)
 
 ;;-------------------------------------------------------------------------------------------------
 (provide 'mpf-userinterface)

@@ -10,6 +10,12 @@
 
 (toggle-frame-fullscreen)
 
+(when (or sys/macp sys/linuxp (daemonp))
+  (use-package exec-path-from-shell
+    ;; :demand t
+    :config (setq exec-path-from-shell-check-startup-files nil)
+    :hook (after-init . exec-path-from-shell-initialize)))
+
 (setq-default
  initial-scratch-message (concat
 ";;--------------------------------------------------------
@@ -75,6 +81,13 @@
 (setq-default tab-width 4)
 
 (global-set-key (kbd "C-x C-r") #'recentf-open-files)
+
+;; exec-path-from-shell
+;; (when (or sys/macp sys/linuxp (daemonp))
+;;   (require 'exec-path-from-shell)
+;;   (setq exec-path-from-shell-check-startup-files nil)
+;;   (add-hook 'after-init-hook #'exec-path-from-shell-initialize))
+
 
 (message "init-builtin")
 
