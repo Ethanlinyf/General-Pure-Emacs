@@ -29,6 +29,7 @@
                             exec-path-from-shell
                             doom-themes
                             doom-modeline
+                            embark-consult
 
                             )  "Default packages.")
 
