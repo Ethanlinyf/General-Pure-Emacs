@@ -24,6 +24,8 @@
                             vertico
                             which-key
                             centaur-tabs
+                            markdown-mode
+                            yasnippet
 
                             )  "Default packages.")
 
