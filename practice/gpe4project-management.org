@@ -14,3 +14,27 @@
 #+cite_export:
 
 * Git & GitHub
+** Rename a branch "pioneer" to "dev"
+- git switch main
+  Switch to the main via the command “git checkout main”.
+- git branch -m pioneer dev
+  Enter the following command to rename a Git branch: “git branch -m old-name new-name”.
+- git branch -a
+  To ensure that the rename was successful, retrieve the current status of the branch using the “git branch -a” command.
+- git branch -d pioneer (may be needed)
+- git switch dev
+- git push origin -u dev
+  Push the renamed branch
+- git push origin --delete pioneer
+  Delete the old remote branch
+** Create a new empty branch
+- $ git checkout --orphan NEWBRANCH
+  --orphan creates a new branch, but it starts without any commit. After running the above command you are on a new branch "NEWBRANCH", and the first commit you create from this state will start a new history without any ancestry.
+- $ git rm -rf .
+  Make sure it's empty
+- git push -u origin basic
+  The -u parameter in the git push command is used to set up a
+  tracking relationship between the local branch and the remote
+  branch. When you use git push -u, you are pushing your local branch
+  to the remote repository and setting it as the upstream branch for
+  the remote branch. Use "git branch -a" for checking the settings. 
