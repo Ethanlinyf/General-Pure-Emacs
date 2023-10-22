@@ -19,27 +19,27 @@
   (package-initialize))
 
 (defvar gpe/packages '(
-                            treemacs
-                            magit
-                            vertico
-                            which-key
-                            centaur-tabs
-                            markdown-mode
-                            yasnippet
-                            exec-path-from-shell
-                            doom-themes
-                            doom-modeline
-                            embark-consult
+                       treemacs
+                       magit
+                       vertico
+                       which-key
+                       centaur-tabs
+                       markdown-mode
+                       yasnippet
+                       exec-path-from-shell
+                       doom-themes
+                       doom-modeline
+                       embark-consult
 
-                            )  "Default packages.")
+                       )  "Default packages.")
 
 (setq package-selected-packages gpe/packages)
 
 (defun puremacs/packages-installed-p ()
   "Looping all the packages."
   (cl-loop for pkg in gpe/packages
-	   when (not (package-installed-p pkg)) do (cl-return nil)
-	   finally (cl-return t)))
+	       when (not (package-installed-p pkg)) do (cl-return nil)
+	       finally (cl-return t)))
 
 (unless (puremacs/packages-installed-p)
   (message "%s" "Refreshing package database...")
@@ -98,9 +98,9 @@
   :custom-face
   (macrostep-expansion-highlight-face ((t (:inherit tooltip :extend t))))
   :bind (:map emacs-lisp-mode-map
-         ("C-c e" . macrostep-expand)
-         :map lisp-interaction-mode-map
-         ("C-c e" . macrostep-expand)))
+              ("C-c e" . macrostep-expand)
+              :map lisp-interaction-mode-map
+              ("C-c e" . macrostep-expand)))
 
 (use-package things-engine
   :ensure nil
@@ -114,4 +114,8 @@
 ;;   :bind  (("C-<f2>" . hydra-straight-helper/body)))
 ;;-------------------------------------------------------------------------------------------------
 (provide 'init-bridge)
+
+;; Local Variables:
+;; byte-compile-warnings: (not free-vars unresolved)
+;; End:
 ;;; init-bridge.el ends here
