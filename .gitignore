@@ -13,6 +13,7 @@
 /zull
 /backup
 /snippets/
+/tree-sitter/
 
 .DS_Store
 *.elc
@@ -21,3 +22,4 @@
 .*.*~
 /abbrev_defs
 /projectile-bookmarks.eld
+/org-roam.db
