@@ -40,7 +40,6 @@
 ;; `delete-selection-mode' is provided by delsel.el (builtin)
 (add-hook 'after-init-hook 'delete-selection-mode)
 
-
 ;; Delete trailing whitespace
 (add-hook 'before-save-hook #'delete-trailing-whitespace)
 ;; Enable to delete the selection
