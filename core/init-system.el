@@ -37,6 +37,7 @@
 (when sys/macp
   (setq ns-use-native-fullscreen t))
 
+;; UTF-8 support for the system
 (set-language-environment 'utf-8)
 (prefer-coding-system 'utf-8)
 (setq locale-coding-system 'utf-8)
@@ -55,9 +56,6 @@
 
 ;; Enable recursive minibuffers
 (setq enable-recursive-minibuffers t)
-
-;; Disable the ring bell function
-(setq ring-bell-function 'ignore)
 
 ;;-------------------------------------------------------------------------------------------------
 (provide 'init-system)

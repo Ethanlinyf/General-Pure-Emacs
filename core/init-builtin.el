@@ -16,9 +16,6 @@
  truncate-lines nil
  word-wrap t)
 
-;; Disable the ring bell function
-(setq ring-bell-function 'ignore)
-
 (setq-default make-backup-files nil)
 (setq-default require-final-newline t)
 (setq-default scroll-conservatively 1000)
@@ -29,6 +26,9 @@
 (fset 'yes-or-no-p 'y-or-n-p)
 (global-set-key (kbd "C-c C-'") 'set-mark-command)
 
+;; Disable the ring bell function
+(setq ring-bell-function 'ignore)
+
 ;; auto revert
 ;; `global-auto-revert-mode' is provided by autorevert.el (builtin)
 (add-hook 'after-init-hook 'global-auto-revert-mode)
@@ -36,12 +36,13 @@
 ;; auto save to the visited file (provided by `files.el')
 (add-hook 'after-init-hook 'auto-save-visited-mode)
 
-;; Delete Behavior
+;; Delete Behaviour
 ;; `delete-selection-mode' is provided by delsel.el (builtin)
 (add-hook 'after-init-hook 'delete-selection-mode)
 
-;; Delete trailing whitespace
+;; Delete trailing white space
 (add-hook 'before-save-hook #'delete-trailing-whitespace)
+
 ;; Enable to delete the selection
 (add-hook 'after-init-hook #'delete-selection-mode)
 
@@ -78,12 +79,6 @@
 
 (use-package which-key :ensure t :defer t
   :hook (after-init . which-key-mode))
-
-;; exec-path-from-shell
-;; (when (or sys/macp sys/linuxp (daemonp))
-;;   (require 'exec-path-from-shell)
-;;   (setq exec-path-from-shell-check-startup-files nil)
-;;   (add-hook 'after-init-hook #'exec-path-from-shell-initialize))
 
 ;;-------------------------------------------------------------------------------------------------
 (provide 'init-builtin)
