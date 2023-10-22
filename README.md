@@ -7,3 +7,5 @@ Regarding your wish, the G.P.E is to facilitate your further development.
 
 Suppose you have a new idea, and we are looking forward to your pull request to be integrated into G.P.E.
 It's our creation.
+
+![GPE Layout](./extension/gpe-figure/TE-GPE-Basic_1diagram_1.drawio.png)
