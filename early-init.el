@@ -23,7 +23,6 @@
 ;; but after `early-init-file'.
 (setq package-enable-at-startup nil)
 
-
 ;; Inhibit frame resizing
 (setq frame-inhibit-implied-resize t)
 (setq inhibit-startup-screen t)

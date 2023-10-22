@@ -7,11 +7,16 @@
 ;; Enhancements for programming
 
 ;;; Code:
+(when (or sys/macp sys/linuxp (daemonp))
+  (use-package exec-path-from-shell
+    ;; :demand t
+    :config (setq exec-path-from-shell-check-startup-files nil)
+    :hook (after-init . exec-path-from-shell-initialize)))
+
 ;; Configs for programming languages
 (add-hook 'prog-mode-hook (lambda () (setq-local column-number-mode t)))
 (add-hook 'prog-mode-hook 'display-line-numbers-mode)
 (add-hook 'prog-mode-hook 'electric-pair-mode)
-(add-hook 'prog-mode-hook 'flymake-mode)
 (add-hook 'prog-mode-hook 'hs-minor-mode)
 (add-hook 'prog-mode-hook 'prettify-symbols-mode) ; lambda --> λ
 ;; (add-hook 'prog-mode-hook 'which-function-mode)
@@ -22,6 +27,10 @@
   :defer t
   :hook (prog-mode . format-all-mode)
   :bind ("C-c f" . #'format-all-region-or-buffer))
+
+;; only use spaces instead of TAB, use C-q TAB to input the TAB char
+(setq-default indent-tabs-mode nil)  ; avoid to mixture the tabs and spaces in code
+(setq-default tab-width 4)
 
 ;; flymake
 (use-package flymake
