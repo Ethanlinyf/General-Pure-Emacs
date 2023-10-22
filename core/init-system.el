@@ -12,29 +12,52 @@
 (require 'gpe-macro)
 (require 'gpe-function)
 
-
-
 (setq system-time-locale "C"
-        display-time-24hr-format t
-        display-time t ;display-time-day-and-date t
-        )
+      display-time-24hr-format t
+      display-time t ;display-time-day-and-date t
+      )
 
-  ;; Do not allow the cursor in the minibuffer prompt
-  (setq minibuffer-prompt-properties
-        '(read-only t cursor-intangible t face minibuffer-prompt))
-  (add-hook 'minibuffer-setup-hook #'cursor-intangible-mode)
+;; I/O optimisation
+(with-no-warnings
+  (when sys/win32p
+    (setq w32-get-true-file-attributes nil   ; decrease file IO workload
+          w32-pipe-read-delay 0              ; faster IPC
+          w32-pipe-buffer-size (* 64 1024))) ; read more at a time (was 4K)
+  (unless sys/macp
+    (setq command-line-ns-option-alist nil))
+  (unless sys/linuxp
+    (setq command-line-x-option-alist nil))
 
-  ;; Emacs 28: Hide commands in M-x which do not work in the current mode.
-  ;; Vertico commands are hidden in normal buffers.
-  (setq read-extended-command-predicate
-        #'command-completion-default-include-p)
+  ;; Increase how much can be read from processes in a single chunk (default is 4kb)
+  (setq read-process-output-max #x10000)  ; 64kb
 
-  ;; Enable recursive minibuffers
-  (setq enable-recursive-minibuffers t)
+  ;; Don't ping things that look like domain names.
+  (setq ffap-machine-p-known 'reject))
 
-  ;; Disable the ring bell function
-  (setq ring-bell-function 'ignore)
+(when sys/macp
+  (setq ns-use-native-fullscreen t))
 
+(set-language-environment 'utf-8)
+(prefer-coding-system 'utf-8)
+(setq locale-coding-system 'utf-8)
+(unless sys/win32p
+  (set-selection-coding-system 'utf-8))
+
+;; Do not allow the cursor in the minibuffer prompt
+(setq minibuffer-prompt-properties
+      '(read-only t cursor-intangible t face minibuffer-prompt))
+(add-hook 'minibuffer-setup-hook #'cursor-intangible-mode)
+
+;; Emacs 28: Hide commands in M-x which do not work in the current mode.
+;; Vertico commands are hidden in normal buffers.
+(setq read-extended-command-predicate
+      #'command-completion-default-include-p)
+
+;; Enable recursive minibuffers
+(setq enable-recursive-minibuffers t)
+
+;; Disable the ring bell function
+(setq ring-bell-function 'ignore)
 
 ;;-------------------------------------------------------------------------------------------------
 (provide 'init-system)
