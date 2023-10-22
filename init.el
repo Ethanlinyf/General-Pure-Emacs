@@ -44,7 +44,7 @@
 
 ;; Add to list to load the el files in a specific folder;
 (defun update-load-path (&rest _)
-  "To update 'load-path'."
+  "To update the path to be loaded."
   (dolist (path '("core" "extension" "module/platform" "module/practice"))
     (push (expand-file-name path user-emacs-directory) load-path)))
 
