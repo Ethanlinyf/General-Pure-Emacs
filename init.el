@@ -19,9 +19,6 @@
                                after-init-time before-init-time)))
                      gcs-done)))
 
-;; set gc-threshold after init
-(add-hook 'after-init-hook #'(lambda () (setq gc-cons-threshold (* 20 1024 1024))))
-
 ;; Initialise the major mode for scratch, fundamental-mode or text-mode
 (setq initial-major-mode 'text-mode);
 (setq-default major-mode 'text-mode
@@ -35,15 +32,6 @@
   (shell-command (concat "touch " custom-file)))
 (when (file-exists-p custom-file)
   (load custom-file :noerror :nomessage))
-
-;; Define a file to record emacs macros.
-(defvar gpe-macro (expand-file-name "core/gpe-macros.el" user-emacs-directory)
-  "A file to record Emacs macros.")
-(unless (file-exists-p gpe-macro)
-  (shell-command (concat "touch " gpe-macro)))
-;; Load the macro file if it exists
-(when (file-exists-p gpe-macro)
-  (load gpe-macro :noerror :nomessage))
 
 ;; Personal settings.
 (defvar gpe-u-setting (expand-file-name "gpe-u-setting.el" user-emacs-directory)
@@ -59,7 +47,6 @@
   "To update 'load-path'."
   (dolist (path '("core" "extension" "module/platform" "module/practice"))
     (push (expand-file-name path user-emacs-directory) load-path)))
-
 
 (advice-add #'package-initialize :after #'update-load-path)
 (update-load-path)

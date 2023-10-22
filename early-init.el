@@ -1,4 +1,5 @@
-;;; early-init.el --- Early initialisation. -*- lexical-binding: t -*-
+;;; early-init.el --- Early initialisation. -*- lexical-binding: t; -*-
+
 ;;
 ;; Copyleft (CL) 2018-2028 Dr YF Lin
 ;; Under ThingsEngine Project: https://www.thethingsengine.org
@@ -10,49 +11,32 @@
 ;; Debugging for the setting update.
 (setq debug-on-error nil)
 
-;; Puremacs is compatible from the emacs version 29.1.
-(let ((minver "29.1"))
-  (when (version< emacs-version minver)
-    (error "The GPE Baisc requires V%s or higher versions" minver)))
-
 ;; Garbage collection in the startup process
 (setq gc-cons-threshold most-positive-fixnum)
-(setq gc-cons-percentage 0.5)
+(add-hook 'after-init-hook #'(lambda () (setq gc-cons-threshold 800000)))
 
-;; Prevent unwanted run-time compilation for native-comp users
-(when (>= emacs-major-version 29)
-  (setq inhibit-automatic-native-compilation t))
-
-;; After early-init-file to initialise 'package'. Make initialisation slightly faster
-(setq package-enable-at-startup nil)
-;; Prevent loading from the package cache (same reason).
-(setq package-quickstart nil)
-
-;; In noninteractive sessions, prioritise non-byte-compiled source
-;; files to prevent the use of stale byte-code. Otherwise, it saves us
-;; a little IO time to skip the time checks on every *.elc file.
+;; Prevent unwanted runtime compilation for native-comp users
+(setq native-comp-deferred-compilation nil)
 (setq load-prefer-newer noninteractive)
+
+;; Package initialize occurs automatically, before `user-init-file' is loaded
+;; but after `early-init-file'.
+(setq package-enable-at-startup nil)
+
 
 ;; Inhibit frame resizing
 (setq frame-inhibit-implied-resize t)
-
-;; Ignore compile warnings
-(setq byte-compile-warnings nil)
+(setq inhibit-startup-screen t)
 
 ;; Default settings for the frame before initialisation
-(push '(menu-bar-lines . 0) default-frame-alist)
-(push '(tool-bar-lines . 0) default-frame-alist)
-(push '(vertical-scroll-bars) default-frame-alist)
-(when (featurep 'ns)
-  (push '(ns-transparent-titlebar . t) default-frame-alist))
+(push '(scroll-bar-mode . nil) default-frame-alist)
+(push '(tool-bar-mode . nil) default-frame-alist)
 
-;; not compile on this stage
-(setq comp-deferred-compilation nil)
+(when (fboundp 'tool-bar-mode) (tool-bar-mode -1))
+(when (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 
 ;; Turn off the startup help screen
 (setq inhibit-splash-screen t)
-
-(fset 'display-startup-echo-area-message 'ignore)
 
 ;;-------------------------------------------------------------------------------------------------
 ;;; early-init.el ends here.
