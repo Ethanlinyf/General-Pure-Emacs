@@ -18,12 +18,12 @@
 
 (setq-default make-backup-files nil)
 (setq-default require-final-newline t)
-(setq-default scroll-conservatively 1000)
+;; (setq-default scroll-conservatively 1000)
 (setq-default read-process-output-max (* 4 1024 1024))
 (setq-default show-trailing-whitespace t)
 (setq-default use-short-answers t)
 (setq-default abbrev-mode t)
-(fset 'yes-or-no-p 'y-or-n-p)
+;; (fset 'yes-or-no-p 'y-or-n-p)
 (global-set-key (kbd "C-c C-'") 'set-mark-command)
 
 ;; Disable the ring bell function
@@ -35,10 +35,6 @@
 
 ;; auto save to the visited file (provided by `files.el')
 (add-hook 'after-init-hook 'auto-save-visited-mode)
-
-;; Delete Behaviour
-;; `delete-selection-mode' is provided by delsel.el (builtin)
-(add-hook 'after-init-hook 'delete-selection-mode)
 
 ;; Delete trailing white space
 (add-hook 'before-save-hook #'delete-trailing-whitespace)
@@ -68,7 +64,9 @@
 ;;   :when (display-graphic-p)
 ;;   :hook (prog-mode . hl-line-mode))
 
-(defun pulse-save-buffers (&rest args)
+;; (defun pulse-save-buffers (&rest args)
+(defun pulse-save-buffers ()
+  "Pulse save buffers."
   (save-some-buffers t)
   (pulse-momentary-highlight-one-line (point)))
 ;; auto save when frame lose focus, Alt-Tab

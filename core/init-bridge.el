@@ -30,18 +30,18 @@
                        doom-themes
                        doom-modeline
                        embark-consult
-                       
-                       )  "Default packages.")
+
+                       )  "Default packages." )
 
 (setq package-selected-packages gpe/packages)
 
-(defun puremacs/packages-installed-p ()
+(defun gpe/packages-installed-p ()
   "Looping all the packages."
   (cl-loop for pkg in gpe/packages
 	       when (not (package-installed-p pkg)) do (cl-return nil)
 	       finally (cl-return t)))
 
-(unless (puremacs/packages-installed-p)
+(unless (gpe/packages-installed-p)
   (message "%s" "Refreshing package database...")
   (package-refresh-contents)
   (dolist (pkg gpe/packages)
