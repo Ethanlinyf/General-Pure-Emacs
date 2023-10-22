@@ -38,4 +38,8 @@
 (setq inhibit-splash-screen t)
 
 ;;-------------------------------------------------------------------------------------------------
+
+;; Local Variables:
+;; byte-compile-warnings: (not free-vars unresolved)
+;; End:
 ;;; early-init.el ends here.

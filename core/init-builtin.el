@@ -49,6 +49,9 @@
 ;; Electric-Pair
 (add-hook 'after-init-hook #'electric-indent-mode)
 
+;; Highlight line mode
+(add-hook 'after-init-hook #'global-hl-line-mode)
+
 ;; Recent Files
 (add-hook 'after-init-hook (lambda ()
 			                 (recentf-mode 1)
@@ -60,10 +63,10 @@
 ;; Save Place
 (add-hook 'after-init-hook 'save-place-mode)
 
-;; Highlight Current Line
-(use-package hl-line
-  :when (display-graphic-p)
-  :hook (prog-mode . hl-line-mode))
+;; ;; Highlight Current Line
+;; (use-package hl-line
+;;   :when (display-graphic-p)
+;;   :hook (prog-mode . hl-line-mode))
 
 (defun pulse-save-buffers (&rest args)
   (save-some-buffers t)

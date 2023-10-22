@@ -30,7 +30,7 @@
                        doom-themes
                        doom-modeline
                        embark-consult
-
+                       
                        )  "Default packages.")
 
 (setq package-selected-packages gpe/packages)

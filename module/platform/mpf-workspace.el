@@ -46,7 +46,7 @@
           treemacs-position                        'left
           treemacs-read-string-input               'from-child-frame
           treemacs-recenter-distance               0.1
-          treemacs-recenter-after-file-follow      nil; treemacs-recenter-after-tag-follow       nil
+          treemacs-recenter-after-file-follow      nil ; treemacs-recenter-after-tag-follow       nil
           treemacs-recenter-after-project-jump     'always
           treemacs-recenter-after-project-expand   'on-distance
           treemacs-litter-directories              '("/node_modules" "/.venv" "/.cask")

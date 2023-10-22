@@ -21,6 +21,14 @@
 (add-hook 'prog-mode-hook 'prettify-symbols-mode) ; lambda --> λ
 ;; (add-hook 'prog-mode-hook 'which-function-mode)
 
+(use-package projectile
+  :ensure t
+  :bind (("s-p" . projectile-command-map))  ; The binding should be verified.
+  :config
+  (setq projectile-mode-line "Projectile")
+  (setq projectile-track-known-projects-automatically nil)
+  :init (projectile-mode +1))
+
 ;; Programming format
 (use-package format-all
   :ensure t

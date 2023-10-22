@@ -68,4 +68,8 @@
 
 ;;-------------------------------------------------------------------------------------------------
 (provide 'init)
+
+;; Local Variables:
+;; byte-compile-warnings: (not free-vars unresolved)
+;; End:
 ;;; init.el ends here.
