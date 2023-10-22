@@ -140,11 +140,6 @@
 (require 'aweshell)
 (global-set-key (kbd "s-1") 'aweshell-dedicated-toggle)
 
-
-
-
-(message "project")
-
 ;;-------------------------------------------------------------------------------------------------
 (provide 'mpf-workspace)
 
