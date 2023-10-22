@@ -102,7 +102,7 @@
   (setq acm-enable-tabnine t)
   ;; (setq lsp-bridge-enable-org-babel t) ; error popping up, need to be checked.
   :hook
-  (after-init . global-lsp-bridge-mode)
+  (prog-mode . lsp-bridge-mode)
   (lsp-bridge-mode . (lambda () (corfu-mode -1))))
 
 ;;-------------------------------------------------------------------------------------------------
