@@ -7,6 +7,42 @@
 ;;
 
 ;;; Code:
+;; set a title for the active frame
+(setq frame-title-format
+      '("GPE-Basic"  ": "
+        (:eval (if (buffer-file-name)
+                   (abbreviate-file-name (buffer-file-name))
+                 "%b"))))
+
+(setq initial-frame-alist (quote ((fullscreen . maximized))))
+;; (toggle-frame-fullscreen)
+
+(auto-image-file-mode 1)
+
+;; Frame
+;;; Emacs@28
+;; WORKAROUND: fix blank screen issue on macOS.
+(defun fix-fullscreen-cocoa ()
+  "Address blank screen issue with child-frame in fullscreen.
+This issue has been addressed in 28."
+  (and sys/mac-cocoa-p
+       (not emacs/>=28p)
+       (bound-and-true-p ns-use-native-fullscreen)
+       (setq ns-use-native-fullscreen nil)))
+
+(when (display-graphic-p)
+  (add-hook 'window-setup-hook #'fix-fullscreen-cocoa)
+  (bind-key "S-s-<return>" #'toggle-frame-fullscreen)
+  (and sys/mac-x-p (bind-key "C-s-f" #'toggle-frame-fullscreen))
+
+  ;; Resize and re-position frames conveniently, on macOS: use Magnet to achieve it
+  ;; (bind-keys ("C-M-<return>"    . frame-maximize)
+  ;;            ("C-M-<backspace>" . frame-restore)
+  ;;            ("C-M-<left>"      . frame-left-half)
+  ;;            ("C-M-<right>"     . frame-right-half)
+  ;;            ("C-M-<up>"        . frame-top-half)
+  ;;            ("C-M-<down>"      . frame-bottom-half)))
+  )
 
 ;;--------------------------------------------------------------------
 ;; theme doom-one
@@ -29,9 +65,21 @@
   :hook (after-init . doom-modeline-mode))
 
 (use-package hide-mode-line
-  :ensure t)
+  :hook (((;; treemacs-mode
+           eshell-mode
+           shell-mode
+           term-mode
+           vterm-mode
+           embark-collect-mode
+           pdf-annot-list-mode) . hide-mode-line-mode)))
 
-(toggle-frame-fullscreen)
+(use-package buffer-move
+  :ensure t
+  :bind
+  ("<C-S-up>" . buf-move-up)  ; (global-set-key (kbd "<C-S-up>") 'buf-move-up)
+  ("<C-S-down>" . buf-move-down)
+  ("<C-S-left>" . buf-move-left)
+  ("<C-S-right>" . buf-move-right))
 
 ;;-------------------------------------------------------------------------------------------------
 (provide 'mpf-en-userinterface)
