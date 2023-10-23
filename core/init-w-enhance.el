@@ -46,17 +46,8 @@
 (when *is-win*
   (add-hook 'prog-mode-hook 'flyspell-prog-mode))
 
-;; ;; iedit - edit same text in one buffer or region
-;; (use-package iedit
-;;   :ensure t
-;;   :bind ("C-;" . iedit-mode))
-
-;; ;; Language Server (eglot - builtin since v29)
-;; (use-package eglot
-;;   :hook (prog-mode . eglot-ensure)
-;;   :bind ("C-c e f" . eglot-format)
-;;   :config
-;;   (advice-add 'eglot-code-action-organize-imports :before #'eglot-format))
+;;--------------------------------------------------------------------
+;; treesit implementation
 
 (require 'treesit)
 ;; M-x `treesit-install-language-grammar` to install language grammar.
