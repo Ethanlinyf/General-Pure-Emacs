@@ -8,4 +8,7 @@ Regarding your wish, the G.P.E is to facilitate your further development.
 Suppose you have a new idea, and we are looking forward to your pull request to be integrated into G.P.E.
 It's our creation.
 
+![B.P.E Basic Platform](./extension/basic-figure/G.P.E_basic_1.png)
+
+## Configuration Methodology
 ![GPE Layout](./extension/basic-figure/TE-GPE-Basic_1diagram_1.drawio.png)
