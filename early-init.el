@@ -1,7 +1,6 @@
 ;;; early-init.el --- Early initialisation. -*- lexical-binding: t; -*-
-
 ;;
-;; Copyleft (CL) 2018-2028 Dr YF Lin
+;; Copyleft (CL) 2022-2032 Dr YF Lin <e.yflin@gmail.com>
 ;; Under ThingsEngine Project: https://www.thethingsengine.org
 
 ;;; Commentary:
@@ -46,8 +45,8 @@
 (when (fboundp 'tool-bar-mode) (tool-bar-mode -1))
 (when (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 
-;; Turn off the startup help screen
-(setq inhibit-splash-screen t)
+(push '(ns-transparent-titlebar . t) default-frame-alist)
+(push '(ns-appearance . dark) default-frame-alist)
 
 ;;-------------------------------------------------------------------------------------------------
 
