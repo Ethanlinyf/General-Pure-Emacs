@@ -46,7 +46,14 @@
 ;; (require 'iedit)
 ;; (global-set-key (kbd "C-;") #'iedit-mode)
 
-
+;; undo-tree
+(use-package undo-tree
+  :diminish
+  :hook (after-init . global-undo-tree-mode)
+  :init (setq undo-tree-visualizer-timestamps t
+              undo-tree-visualizer-diff t
+              undo-tree-enable-undo-in-region nil
+              undo-tree-auto-save-history nil))
 ;;--------------------------------------------------------------------
 ;; treesit implementation
 (require 'treesit)

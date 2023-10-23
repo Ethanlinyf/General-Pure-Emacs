@@ -25,3 +25,6 @@
 /abbrev_defs
 /projectile-bookmarks.eld
 /org-roam.db
+*.~undo-tree~
+/undo-tree-dir
+undo-tree-dir
