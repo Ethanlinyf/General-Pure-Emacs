@@ -17,7 +17,7 @@
  word-wrap t)
 
 (setq-default require-final-newline t)
-;; (setq-default scroll-conservatively s00)
+;; (setq-default scroll-conservatively 1000)
 (setq-default read-process-output-max (* 4 1024 1024))
 (setq-default show-trailing-whitespace t)
 (setq-default use-short-answers t)
@@ -35,6 +35,8 @@
 ;; auto save to the visited file (provided by `files.el')
 (add-hook 'after-init-hook 'auto-save-visited-mode)
 
+(add-hook 'prog-mode-hook (lambda() (setq split-width-threshold 80)))
+
 ;; Delete trailing white space
 (add-hook 'before-save-hook #'delete-trailing-whitespace)
 
@@ -51,10 +53,21 @@
 ;; Recent Files
 (add-hook 'after-init-hook (lambda ()
 			                 (recentf-mode 1)
-			                 (add-to-list 'recentf-exclude '("~\/.emacs.d\/elpa\/"))))
-(setq-default recentf-max-menu-items 20
-	          recentf-max-saved-items 20)
+			                 (add-to-list 'recentf-exclude '("~\/.emacs.d\/elpa\/" "~\/.emacs.d\/.cache\/treemacs-persist\/"))))
+(setq-default recentf-max-menu-items 20)
 (global-set-key (kbd "C-x C-r") #'recentf-open-files)
+(setq recentf-max-saved-items 300
+      recentf-exclude
+      '("\\.?cache" ".cask" "url" "COMMIT_EDITMSG\\'" "bookmarks"
+        "\\.\\(?:gz\\|gif\\|svg\\|png\\|jpe?g\\|bmp\\|xpm\\)$"
+        "\\.?ido\\.last$" "\\.revive$" "/G?TAGS$" "/.elfeed/"
+        "^/tmp/" "^/var/folders/.+$" "^/ssh:" "/persp-confs/"
+        (lambda (file) (file-in-directory-p file package-user-dir))))
+(add-to-list 'recentf-exclude
+             (expand-file-name "company-statistics-cache.el" user-emacs-directory)
+             (expand-file-name "elgrep-data.el" user-emacs-directory))
+(when sys/macp
+  (global-set-key (kbd "s-3") 'recentf-open-files))
 
 ;; Save Place
 (add-hook 'after-init-hook 'save-place-mode)
@@ -76,15 +89,15 @@
 
 ;; enable hippie implementation
 (setq hippie-expand-try-function-list '(try-expand-debbrev
-					try-expand-debbrev-all-buffers
-					try-expand-debbrev-from-kill
-					try-complete-file-name-partially
-					try-complete-file-name
-					try-expand-all-abbrevs
-					try-expand-list
-					try-expand-line
-					try-complete-lisp-symbol-partially
-					try-complete-lisp-symbol))
+					                    try-expand-debbrev-all-buffers
+					                    try-expand-debbrev-from-kill
+					                    try-complete-file-name-partially
+					                    try-complete-file-name
+					                    try-expand-all-abbrevs
+					                    try-expand-list
+					                    try-expand-line
+					                    try-complete-lisp-symbol-partially
+					                    try-complete-lisp-symbol))
 
 (global-set-key (kbd "s-/") 'hippie-expand)
 
