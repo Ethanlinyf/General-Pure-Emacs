@@ -1,6 +1,6 @@
 ;;; init.el --- The main entry of Emacs. -*- lexical-binding: t; -*-
 ;;
-;; Copyleft (CL) 2022-2032 Dr YF Lin
+;; Copyleft (CL) 2022-2032 Dr YF Lin <e.yflin@gmail.com>
 ;; Under ThingsEngine Project: https://www.thethingsengine.org
 
 ;;; Commentary:
@@ -8,6 +8,8 @@
 
 ;;; Code:
 (require 'cl-lib)
+
+(add-hook 'after-init-hook #'(lambda () (setq gc-cons-threshold 800000)))
 
 ;; Startup time
 (add-hook 'emacs-startup-hook
@@ -36,9 +38,6 @@
 ;; Personal settings.
 (defvar gpe-u-setting (expand-file-name "gpe-u-setting.el" user-emacs-directory)
   "A file with personal settings.")
-(unless (file-exists-p  gpe-u-setting)
-  (shell-command (concat "touch " gpe-u-setting)))
-;; Load the personal setting file if it exists
 (when (file-exists-p gpe-u-setting)
   (load gpe-u-setting :noerror :nomessage))
 
