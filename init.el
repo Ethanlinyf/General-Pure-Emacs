@@ -54,7 +54,7 @@
 (require 'init-e-system)
 (require 'init-n-bridge)
 (require 'init-s-builtin)
-(require 'init-w-enhancement)
+(require 'init-w-enhance)
 
 (require 'mpf-en-userinterface)
 (require 'mpf-es-completion)
