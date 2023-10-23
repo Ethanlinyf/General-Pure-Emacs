@@ -15,7 +15,7 @@
 
 ;; Configs for programming languages
 (add-hook 'prog-mode-hook (lambda () (setq-local column-number-mode t)))
-(add-hook 'prog-mode-hook 'display-line-numbers-mode)
+;; (add-hook 'prog-mode-hook 'display-line-numbers-mode)
 (add-hook 'prog-mode-hook 'electric-pair-mode)
 (add-hook 'prog-mode-hook 'hs-minor-mode)
 (add-hook 'prog-mode-hook 'prettify-symbols-mode) ; lambda --> λ
@@ -36,17 +36,15 @@
 (setq-default indent-tabs-mode nil)  ; avoid to mixture the tabs and spaces in code
 (setq-default tab-width 4)
 
-(require 'flymake)
-(add-hook 'prog-mode-hook 'flymake-mode)
-(global-set-key (kbd "M-n") #'flymake-goto-next-error)
-(global-set-key (kbd "M-p") #'flymake-goto-prev-error)
+(require 'flycheck)
+(add-hook 'prog-mode-hook #'flycheck)
 
 (require 'flyspell)
 (when *is-win*
   (add-hook 'prog-mode-hook 'flyspell-prog-mode))
 
-(require 'iedit)
-(global-set-key (kbd "C-;") #'iedit-mode)
+;; (require 'iedit)
+;; (global-set-key (kbd "C-;") #'iedit-mode)
 
 
 ;;--------------------------------------------------------------------

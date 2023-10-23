@@ -35,6 +35,7 @@
                        flymake
                        flyspell
                        iedit
+                       flycheck
 
                        )  "Default packages." )
 
