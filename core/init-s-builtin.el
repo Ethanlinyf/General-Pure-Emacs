@@ -76,9 +76,6 @@
                    previous-buffer))
   (advice-add command :after #'pulse-save-buffers))
 
-;; (use-package which-key :ensure t :defer t
-;;   :hook (after-init . which-key-mode))
-
 (require 'which-key)
 (add-hook 'after-init-hook #'which-key-mode)
 
