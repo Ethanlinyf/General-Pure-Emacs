@@ -51,6 +51,8 @@
 (advice-add #'package-initialize :after #'update-load-path)
 (update-load-path)
 
+(setq-default make-backup-files nil)
+
 (require 'init-e-system)
 (require 'init-n-bridge)
 (require 'init-s-builtin)

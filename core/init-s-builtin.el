@@ -16,7 +16,6 @@
  truncate-lines nil
  word-wrap t)
 
-(setq-default make-backup-files nil)
 (setq-default require-final-newline t)
 ;; (setq-default scroll-conservatively s00)
 (setq-default read-process-output-max (* 4 1024 1024))
@@ -46,7 +45,8 @@
 (add-hook 'after-init-hook #'electric-indent-mode)
 
 ;; Highlight line mode
-(add-hook 'after-init-hook #'global-hl-line-mode)
+(when (display-graphic-p)
+  (add-hook 'after-init-hook #'global-hl-line-mode))
 
 ;; Recent Files
 (add-hook 'after-init-hook (lambda ()
@@ -58,11 +58,6 @@
 
 ;; Save Place
 (add-hook 'after-init-hook 'save-place-mode)
-
-;; ;; Highlight Current Line
-;; (use-package hl-line
-;;   :when (display-graphic-p)
-;;   :hook (prog-mode . hl-line-mode))
 
 (defun pulse-save-buffers (&rest args)
   (save-some-buffers t)
