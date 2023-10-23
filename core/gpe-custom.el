@@ -8,6 +8,11 @@
 
 ;;; Code:
 
+(add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
+(add-to-list 'default-frame-alist '(ns-appearance . dark))
+
+(add-to-list 'default-frame-alist '(drag-internal-border . 1))
+(add-to-list 'default-frame-alist '(internal-border-width . 5))
 
 ;;-------------------------------------------------------------------------------------------------
 (provide 'gpe-custom)
