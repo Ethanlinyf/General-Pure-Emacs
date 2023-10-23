@@ -4,9 +4,10 @@
 ;; Under ThingsEngine Project: https://www.thethingsengine.org
 
 ;;; Commentary:
-;;
+;; configurations for user interface.
 
 ;;; Code:
+
 ;; set a title for the active frame
 (setq frame-title-format
       '("GPE-Basic"  ": "

@@ -8,12 +8,7 @@
 
 ;;; code:
 
-(require 'yasnippet)
-(yas-global-mode 1)
-
 ;; lsp-bridge
-(use-package markdown-mode
-  :ensure t)
 
 (use-package epc
   :ensure t)
