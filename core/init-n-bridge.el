@@ -36,6 +36,7 @@
                        flyspell
                        iedit
                        flycheck
+                       nerd-icons
 
                        )  "Default packages." )
 
