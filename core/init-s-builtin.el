@@ -28,6 +28,8 @@
 ;; Disable the ring bell function
 (setq ring-bell-function 'ignore)
 
+(setq fast-but-imprecise-scrolling t)
+
 ;; auto revert
 ;; `global-auto-revert-mode' is provided by autorevert.el (builtin)
 (add-hook 'after-init-hook 'global-auto-revert-mode)
