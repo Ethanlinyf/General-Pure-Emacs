@@ -101,6 +101,12 @@
 
 (global-set-key (kbd "s-/") 'hippie-expand)
 
+(when emacs/>=29p
+  (setq pixel-scroll-precision-mode 1)
+  ;; (setq visible-bell t)
+  (setq ring-bell-function 'ignore)
+  (global-set-key (kbd "<f1>") 'scratch-buffer))
+
 ;;-------------------------------------------------------------------------------------------------
 (provide 'init-s-builtin)
 
