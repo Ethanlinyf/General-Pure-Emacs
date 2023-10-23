@@ -37,7 +37,7 @@
 (setq-default tab-width 4)
 
 (require 'flycheck)
-(add-hook 'prog-mode-hook #'flycheck)
+(add-hook 'prog-mode-hook #'flycheck-mode)
 
 (require 'flyspell)
 (when *is-win*
@@ -49,7 +49,6 @@
 
 ;;--------------------------------------------------------------------
 ;; treesit implementation
-
 (require 'treesit)
 ;; M-x `treesit-install-language-grammar` to install language grammar.
 (setq treesit-language-source-alist
