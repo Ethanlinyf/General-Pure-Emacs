@@ -34,6 +34,7 @@
                        format-all
                        flymake
                        flyspell
+                       iedit
 
                        )  "Default packages." )
 

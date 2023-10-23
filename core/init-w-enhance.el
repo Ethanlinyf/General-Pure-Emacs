@@ -8,10 +8,10 @@
 
 ;;; Code:
 ;; ensure environment variables inside Emacs look the same as in the user's shell
-(require 'exec-path-from-shell)
-(when (or sys/macp sys/linuxp (daemonp))
-  (setq exec-path-from-shell-check-startup-files nil)
-  (add-hook 'after-init-hook #'exec-path-from-shell-initialize))
+(with-eval-after-load 'exec-path-from-shell
+  (when (or sys/macp sys/linuxp (daemonp))
+    (setq exec-path-from-shell-check-startup-files nil)
+    (add-hook 'after-init-hook #'exec-path-from-shell-initialize)))
 
 ;; Configs for programming languages
 (add-hook 'prog-mode-hook (lambda () (setq-local column-number-mode t)))
@@ -29,7 +29,6 @@
   (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map))
 
 (require 'format-all)
-;;;###autoload
 (add-hook 'prog-mode-hook #'format-all-mode)
 (global-set-key (kbd "C-c f") 'format-all-region-or-buffer)
 
@@ -45,6 +44,10 @@
 (require 'flyspell)
 (when *is-win*
   (add-hook 'prog-mode-hook 'flyspell-prog-mode))
+
+(require 'iedit)
+(global-set-key (kbd "C-;") #'iedit-mode)
+
 
 ;;--------------------------------------------------------------------
 ;; treesit implementation
