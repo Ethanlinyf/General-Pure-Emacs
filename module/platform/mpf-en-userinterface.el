@@ -17,7 +17,10 @@
   (doom-themes-enable-italic t) ; if nil, italics is universally disabled
   :config
   ;; Enable flashing mode-line on errors
-  (doom-themes-visual-bell-config)
+  ;; (doom-themes-visual-bell-config)
+  (setq doom-themes-treemacs-theme "doom-atom") ; use "doom-colors" for less minimal icon theme
+  ;; Corrects (and improves) org-mode's native fontification.
+  (doom-themes-org-config)
   :init
   (load-theme 'doom-one t))
 
