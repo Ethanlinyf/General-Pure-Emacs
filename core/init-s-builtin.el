@@ -64,9 +64,7 @@
 ;;   :when (display-graphic-p)
 ;;   :hook (prog-mode . hl-line-mode))
 
-;; (defun pulse-save-buffers (&rest args)
-(defun pulse-save-buffers ()
-  "Pulse save buffers."
+(defun pulse-save-buffers (&rest args)
   (save-some-buffers t)
   (pulse-momentary-highlight-one-line (point)))
 ;; auto save when frame lose focus, Alt-Tab
@@ -78,8 +76,11 @@
                    previous-buffer))
   (advice-add command :after #'pulse-save-buffers))
 
-(use-package which-key :ensure t :defer t
-  :hook (after-init . which-key-mode))
+;; (use-package which-key :ensure t :defer t
+;;   :hook (after-init . which-key-mode))
+
+(require 'which-key)
+(add-hook 'after-init-hook #'which-key-mode)
 
 ;;-------------------------------------------------------------------------------------------------
 (provide 'init-s-builtin)
