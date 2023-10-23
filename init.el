@@ -51,20 +51,20 @@
 (advice-add #'package-initialize :after #'update-load-path)
 (update-load-path)
 
-(require 'init-system)
-(require 'init-bridge)
-(require 'init-builtin)
-(require 'init-enhancement)
+(require 'init-e-system)
+(require 'init-n-bridge)
+(require 'init-s-builtin)
+(require 'init-w-enhancement)
 
-(require 'mpf-minibuffer)
-(require 'mpf-completion)
-(require 'mpf-userinterface)
-(require 'mpf-workspace)
+(require 'mpf-en-userinterface)
+(require 'mpf-es-completion)
+(require 'mpf-wn-minibuffer)
+(require 'mpf-ws-workspace)
 
-(require 'mpc-org)
-(require 'mpc-tex)
-(require 'mpc-python)
-(require 'mpc-markdown)
+(require 'mpc-000-org)
+(require 'mpc-001-markdown)
+(require 'mpc-010-python)
+(require 'mpc-011-tex)
 
 ;;-------------------------------------------------------------------------------------------------
 (provide 'init)

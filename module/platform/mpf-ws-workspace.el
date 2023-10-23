@@ -1,4 +1,4 @@
-;;; mpf-workspace.el --- Project Utilities -*- lexical-binding: t; -*-
+;;; mpf-ws-workspace.el --- Project Utilities -*- lexical-binding: t; -*-
 ;;
 ;; Copyleft (CL) 2022-2032 Dr YF Lin
 ;; Under ThingsEngine Project: https://www.thethingsengine.org
@@ -129,9 +129,9 @@
 (global-set-key (kbd "s-1") 'aweshell-dedicated-toggle)
 
 ;;-------------------------------------------------------------------------------------------------
-(provide 'mpf-workspace)
+(provide 'mpf-ws-workspace)
 
 ;; Local Variables:
 ;; byte-compile-warnings: (not free-vars unresolved)
 ;; End:
-;;; mpf-workspace.el ends here.
+;;; mpf-ws-workspace.el ends here.

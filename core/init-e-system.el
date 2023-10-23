@@ -1,4 +1,4 @@
-;;; init-system.el --- GPE essential settings -*- lexical-binding: t; -*-
+;;; init-e-system.el --- GPE essential settings -*- lexical-binding: t; -*-
 ;;
 ;; Copyleft (CL) 2022-2032 Dr YF Lin
 ;; Under ThingsEngine Project: https://www.thethingsengine.org
@@ -29,7 +29,7 @@
     (setq command-line-x-option-alist nil))
 
   ;; Increase how much can be read from processes in a single chunk (default is 4kb)
-  (setq read-process-output-max #x10000)  ; 64kb
+  (setq read-process-output-max #x1ee)  ; 64kb
 
   ;; Don't ping things that look like domain names.
   (setq ffap-machine-p-known 'reject))
@@ -58,9 +58,9 @@
 (setq enable-recursive-minibuffers t)
 
 ;;-------------------------------------------------------------------------------------------------
-(provide 'init-system)
+(provide 'init-e-system)
 
 ;; Local Variables:
 ;; byte-compile-warnings: (not free-vars unresolved)
 ;; End:
-;;; init-system.el ends here.
+;;; init-e-system.el ends here.

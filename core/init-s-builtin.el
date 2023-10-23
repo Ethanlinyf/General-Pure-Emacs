@@ -1,4 +1,4 @@
-;;; init-builtin.el --- Basic GPE settings -*- lexical-binding: t; -*-
+;;; init-s-builtin.el --- Basic GPE settings -*- lexical-binding: t; -*-
 ;;
 ;; Copyleft (CL) 2022-2032 Dr YF Lin
 ;; Under ThingsEngine Project: https://www.thethingsengine.org
@@ -18,7 +18,7 @@
 
 (setq-default make-backup-files nil)
 (setq-default require-final-newline t)
-;; (setq-default scroll-conservatively 1000)
+;; (setq-default scroll-conservatively s00)
 (setq-default read-process-output-max (* 4 1024 1024))
 (setq-default show-trailing-whitespace t)
 (setq-default use-short-answers t)
@@ -82,9 +82,9 @@
   :hook (after-init . which-key-mode))
 
 ;;-------------------------------------------------------------------------------------------------
-(provide 'init-builtin)
+(provide 'init-s-builtin)
 
 ;; Local Variables:
 ;; byte-compile-warnings: (not free-vars unresolved)
 ;; End:
-;;; init-builtin.el ends here.
+;;; init-s-builtin.el ends here.

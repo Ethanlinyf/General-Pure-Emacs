@@ -1,4 +1,4 @@
-;;; mpc-org.el --- Elisp Template . -*- lexical-binding: t; -*-
+;;; mpc-000-org.el --- Elisp Template . -*- lexical-binding: t; -*-
 ;;
 ;; Copyleft (CL) 2022-2032 Dr YF Lin
 ;; Under ThingsEngine Project: https://www.thethingsengine.org
@@ -218,9 +218,9 @@
   (setq org-roam-database-connector 'sqlite-builtin)
   (org-roam-db-autosync-mode))
 ;;-------------------------------------------------------------------------------------------------
-(provide 'mpc-org)
+(provide 'mpc-000-org)
 
 ;; Local Variables:
 ;; byte-compile-warnings: (not free-vars unresolved)
 ;; End:
-;;; mpc-org.el ends here.
+;;; mpc-000-org.el ends here.

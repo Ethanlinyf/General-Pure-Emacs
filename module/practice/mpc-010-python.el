@@ -1,4 +1,4 @@
-;;; mpc-markdown.el --- Elisp Template . -*- lexical-binding: t; -*-
+;;; mpc-010-python.el --- Elisp Template . -*- lexical-binding: t; -*-
 ;;
 ;; Copyleft (CL) 2022-2032 Dr YF Lin
 ;; Under ThingsEngine Project: https://www.thethingsengine.org
@@ -10,9 +10,9 @@
 
 
 ;;-------------------------------------------------------------------------------------------------
-(provide 'mpc-markdown)
+(provide 'mpc-010-python)
 
 ;; Local Variables:
 ;; byte-compile-warnings: (not free-vars unresolved)
 ;; End:
-;;; mpc-markdown.el ends here.
+;;; mpc-010-python.el ends here.
