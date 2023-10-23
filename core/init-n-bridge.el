@@ -30,6 +30,10 @@
                        doom-themes
                        doom-modeline
                        embark-consult
+                       projectile
+                       format-all
+                       flymake
+                       flyspell
 
                        )  "Default packages." )
 

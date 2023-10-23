@@ -7,11 +7,11 @@
 ;; Enhancements for programming
 
 ;;; Code:
+;; ensure environment variables inside Emacs look the same as in the user's shell
+(require 'exec-path-from-shell)
 (when (or sys/macp sys/linuxp (daemonp))
-  (use-package exec-path-from-shell
-    ;; :demand t
-    :config (setq exec-path-from-shell-check-startup-files nil)
-    :hook (after-init . exec-path-from-shell-initialize)))
+  (setq exec-path-from-shell-check-startup-files nil)
+  (add-hook 'after-init-hook #'exec-path-from-shell-initialize))
 
 ;; Configs for programming languages
 (add-hook 'prog-mode-hook (lambda () (setq-local column-number-mode t)))
@@ -21,35 +21,30 @@
 (add-hook 'prog-mode-hook 'prettify-symbols-mode) ; lambda --> λ
 ;; (add-hook 'prog-mode-hook 'which-function-mode)
 
-(use-package projectile
-  :ensure t
-  :bind (("s-p" . projectile-command-map))  ; The binding should be verified.
-  :config
-  (setq projectile-mode-line "Projectile")
-  (setq projectile-track-known-projects-automatically nil)
-  :init (projectile-mode +1))
+(require 'projectile)
+(projectile-mode +1)
+(when sys/macp
+  (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map))
+(when (or sys/linuxp sys/win32p)
+  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map))
 
-;; Programming format
-(use-package format-all
-  :ensure t
-  :defer t
-  :hook (prog-mode . format-all-mode)
-  :bind ("C-c f" . #'format-all-region-or-buffer))
+(require 'format-all)
+;;;###autoload
+(add-hook 'prog-mode-hook #'format-all-mode)
+(global-set-key (kbd "C-c f") 'format-all-region-or-buffer)
 
 ;; only use spaces instead of TAB, use C-q TAB to input the TAB char
 (setq-default indent-tabs-mode nil)  ; avoid to mixture the tabs and spaces in code
 (setq-default tab-width 4)
 
-;; flymake
-(use-package flymake
-  :hook (prog-mode . flymake-mode)
-  :bind (("M-n" . #'flymake-goto-next-error)
-	 ("M-p" . #'flymake-goto-prev-error)))
+(require 'flymake)
+(add-hook 'prog-mode-hook 'flymake-mode)
+(global-set-key (kbd "M-n") #'flymake-goto-next-error)
+(global-set-key (kbd "M-p") #'flymake-goto-prev-error)
 
-;; flyspell
-(use-package flyspell
-  :unless *is-win*
-  :hook (prog-mode . flyspell-prog-mode))
+(require 'flyspell)
+(when *is-win*
+  (add-hook 'prog-mode-hook 'flyspell-prog-mode))
 
 ;; ;; iedit - edit same text in one buffer or region
 ;; (use-package iedit
