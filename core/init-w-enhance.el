@@ -15,6 +15,7 @@
 
 ;; Configs for programming languages
 (add-hook 'prog-mode-hook (lambda () (setq-local column-number-mode t)))
+
 ;; (add-hook 'prog-mode-hook 'display-line-numbers-mode)
 (add-hook 'prog-mode-hook 'electric-pair-mode)
 (add-hook 'prog-mode-hook 'hs-minor-mode)
@@ -54,6 +55,29 @@
               undo-tree-visualizer-diff t
               undo-tree-enable-undo-in-region nil
               undo-tree-auto-save-history nil))
+
+;;--------------------------------------------------------------------
+;; Yet another snippet extension
+(use-package yasnippet
+  :diminish yas-minor-mode
+  :hook
+  (after-init . yas-global-mode)
+  :init
+  (setq yas-verbosity 0) ; 1 or higher to show Yasnippet messages again
+  :config
+  (yas-reload-all)
+  ;; unbind <TAB> completion
+  (define-key yas-minor-mode-map [(tab)]        nil)
+  (define-key yas-minor-mode-map (kbd "TAB")    nil)
+  (define-key yas-minor-mode-map (kbd "<tab>")  nil)
+  :bind
+  (:map yas-minor-mode-map ("S-<tab>" . yas-expand)))
+
+;; Collection of yasnippet snippets
+(use-package yasnippet-snippets
+  :ensure t
+  :after yasnippet)
+
 ;;--------------------------------------------------------------------
 ;; treesit implementation
 (require 'treesit)
