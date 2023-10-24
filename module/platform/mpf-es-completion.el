@@ -96,7 +96,8 @@
   (setq acm-enable-quick-access t)
   (setq acm-backend-yas-match-by-trigger-keyword t)
   (setq acm-enable-tabnine t)
-  ;; (setq lsp-bridge-enable-org-babel t) ; error popping up, need to be checked.
+  (setq acm-enable-copilot nil)
+  (setq lsp-bridge-enable-org-babel t) ; error popping up, need to be checked.
   :hook
   (prog-mode . lsp-bridge-mode)
   (lsp-bridge-mode . (lambda () (corfu-mode -1))))
