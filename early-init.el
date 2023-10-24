@@ -37,7 +37,7 @@
 (setq inhibit-startup-buffer-menu t)
 (setq inhibit-x-resources t)
 (setq inhibit-default-init t)
-
+(setq inhibit-startup-message t)
 
 ;; Default settings for the frame before initialisation
 (push '(scroll-bar-mode . nil) default-frame-alist)
