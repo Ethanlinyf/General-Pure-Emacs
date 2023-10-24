@@ -121,4 +121,4 @@ mermaid.initialize({
 ;; Local Variables:
 ;; byte-compile-warnings: (not free-vars unresolved)
 ;; End:
-;;; mpc-markdown.el ends here.
+;;; mpc-001-markdown.el ends here.

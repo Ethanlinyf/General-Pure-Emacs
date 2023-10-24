@@ -1,6 +1,7 @@
 ;;; init.el --- The main entry of Emacs. -*- lexical-binding: t; -*-
 ;;
 ;; Copyleft (CL) 2022-2032 Dr YF Lin <e.yflin@gmail.com>
+;;
 ;; Under ThingsEngine Project: https://www.thethingsengine.org
 
 ;;; Commentary:
