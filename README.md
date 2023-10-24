@@ -11,4 +11,4 @@ It's our creation.
 ![B.P.E Basic Platform](./core/site-lisp/basic-figure/G.P.E_basic_1.png)
 
 ## Configuration Methodology
-![GPE Layout](./core/site-lisp/basic-figure/TE-GPE-Basic_1diagram_1.drawio.png)
+![GPE Layout](./core/site-lisp/basic-figure/TE-GPE-Basic_diagram_2.png)
