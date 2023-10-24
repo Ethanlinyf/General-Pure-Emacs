@@ -57,6 +57,11 @@
 ;; Enable recursive minibuffers
 (setq enable-recursive-minibuffers t)
 
+(add-hook 'after-init-hook #'server-mode)
+
+;; kill processes when quit or exit, live-webserver
+(setq confirm-kill-processes nil)
+
 ;;-------------------------------------------------------------------------------------------------
 (provide 'init-e-system)
 
