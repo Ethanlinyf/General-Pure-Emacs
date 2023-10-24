@@ -109,6 +109,16 @@
   (setq ring-bell-function 'ignore)
   (global-set-key (kbd "<f1>") 'scratch-buffer))
 
+;;----------------------- Dired Mode ---------------------------------
+(with-eval-after-load "dired"
+  (put 'dired-find-alternate-file 'disabled nil)
+  (define-key dired-mode-map (kbd "RET") 'dired-find-alternate-file)
+  (define-key dired-mode-map (kbd "<mouse-2>") 'dired-find-alternate-file))
+
+(when *is-mac*
+  (setq insert-directory-program "gls" dired-use-ls-dired t)
+  (setq dired-listing-switches "-al --group-directories-first"))
+
 ;;-------------------------------------------------------------------------------------------------
 (provide 'init-s-builtin)
 
