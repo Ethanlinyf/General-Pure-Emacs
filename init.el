@@ -22,6 +22,31 @@
                                after-init-time before-init-time)))
                      gcs-done)))
 
+;; Enhance the smoothness of Emacs startup
+(when (display-graphic-p)
+  (setq-default inhibit-redisplay t
+                inhibit-message t)
+  (defun reset-inhibit-vars ()
+    (setq-default inhibit-redisplay nil
+                  inhibit-message nil)
+    (redraw-frame))
+  (add-hook 'window-setup-hook #'reset-inhibit-vars)
+  (define-advice startup--load-user-init-file (:after (&rest _) reset-inhibit-vars)
+    (and init-file-had-error (reset-inhibit-vars))))
+
+(unless (or (daemonp) noninteractive init-file-debug)
+  ;; Optimise the file handlers operations at startup (from Centaur Emacs).
+  ;; `file-name-handler-alist' is consulted on each call to `require' and `load'
+  (let ((old-value file-name-handler-alist))
+    (setq file-name-handler-alist nil)
+    (set-default-toplevel-value 'file-name-handler-alist file-name-handler-alist)
+    (add-hook 'emacs-startup-hook
+              (lambda ()
+                "To recover file name handlers."
+                (setq file-name-handler-alist
+                      (delete-dups (append file-name-handler-alist old-value))))
+              101)))
+
 ;; Initialise the major mode for scratch, fundamental-mode or text-mode
 (setq initial-major-mode 'text-mode);
 (setq-default major-mode 'text-mode
