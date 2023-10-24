@@ -1,4 +1,4 @@
-;;; init-s-builtin.el --- Basic GPE settings -*- lexical-binding: t; -*-
+;;; init-builtin.el --- Basic GPE settings -*- lexical-binding: t; -*-
 ;;
 ;; Copyleft (CL) 2022-2032 Dr YF Lin
 ;; Under ThingsEngine Project: https://www.thethingsengine.org
@@ -120,9 +120,9 @@
   (setq dired-listing-switches "-al --group-directories-first"))
 
 ;;-------------------------------------------------------------------------------------------------
-(provide 'init-s-builtin)
+(provide 'init-builtin)
 
 ;; Local Variables:
 ;; byte-compile-warnings: (not free-vars unresolved)
 ;; End:
-;;; init-s-builtin.el ends here.
+;;; init-builtin.el ends here.

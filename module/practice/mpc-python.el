@@ -1,4 +1,4 @@
-;;; mpc-010-python.el --- Elisp Template . -*- lexical-binding: t; -*-
+;;; mpc-python.el --- Elisp Template . -*- lexical-binding: t; -*-
 ;;
 ;; Copyleft (CL) 2022-2032 Dr YF Lin
 ;; Under ThingsEngine Project: https://www.thethingsengine.org
@@ -26,9 +26,9 @@
   :ensure t)
 
 ;;-------------------------------------------------------------------------------------------------
-(provide 'mpc-010-python)
+(provide 'mpc-python)
 
 ;; Local Variables:
 ;; byte-compile-warnings: (not free-vars unresolved)
 ;; End:
-;;; mpc-010-python.el ends here.
+;;; mpc-python.el ends here.

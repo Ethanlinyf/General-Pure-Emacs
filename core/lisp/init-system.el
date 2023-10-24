@@ -1,4 +1,4 @@
-;;; init-e-system.el --- GPE essential settings -*- lexical-binding: t; -*-
+;;; init-system.el --- GPE essential settings -*- lexical-binding: t; -*-
 ;;
 ;; Copyleft (CL) 2022-2032 Dr YF Lin
 ;; Under ThingsEngine Project: https://www.thethingsengine.org
@@ -63,9 +63,9 @@
 (setq confirm-kill-processes nil)
 
 ;;-------------------------------------------------------------------------------------------------
-(provide 'init-e-system)
+(provide 'init-system)
 
 ;; Local Variables:
 ;; byte-compile-warnings: (not free-vars unresolved)
 ;; End:
-;;; init-e-system.el ends here.
+;;; init-system.el ends here.

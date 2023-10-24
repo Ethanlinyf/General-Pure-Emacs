@@ -1,4 +1,4 @@
-;;; init-n-bridge.el --- The main entry of Emacs. -*- lexical-binding: t; -*-
+;;; init-bridge.el --- The main entry of Emacs. -*- lexical-binding: t; -*-
 ;;
 ;; Copyleft (CL) 2022-2032 Dr YF Lin
 ;; Under ThingsEngine Project: https://www.thethingsengine.org
@@ -120,9 +120,9 @@
 ;;   :custom (straight-use-package-by-default t))
 ;;   :bind  (("C-<f2>" . hydra-straight-helper/body)))
 ;;-------------------------------------------------------------------------------------------------
-(provide 'init-n-bridge)
+(provide 'init-bridge)
 
 ;; Local Variables:
 ;; byte-compile-warnings: (not free-vars unresolved)
 ;; End:
-;;; init-n-bridge.el ends here
+;;; init-bridge.el ends here

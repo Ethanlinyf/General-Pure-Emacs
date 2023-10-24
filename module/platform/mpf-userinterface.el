@@ -1,4 +1,4 @@
-;;; mpf-en-userinterface.el --- Elisp Template . -*- lexical-binding: t; -*-
+;;; mpf-userinterface.el --- Elisp Template . -*- lexical-binding: t; -*-
 ;;
 ;; Copyleft (CL) 2022-2032 Dr YF Lin
 ;; Under ThingsEngine Project: https://www.thethingsengine.org
@@ -83,9 +83,9 @@ This issue has been addressed in 28."
   ("<C-S-right>" . buf-move-right))
 
 ;;-------------------------------------------------------------------------------------------------
-(provide 'mpf-en-userinterface)
+(provide 'mpf-userinterface)
 
 ;; Local Variables:
 ;; byte-compile-warnings: (not free-vars unresolved)
 ;; End:
-;;; mpf-en-userinterface.el ends here
+;;; mpf-userinterface.el ends here

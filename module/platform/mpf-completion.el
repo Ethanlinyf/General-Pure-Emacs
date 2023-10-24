@@ -1,4 +1,4 @@
-;;; mpf-es-completion.el --- Basic GPE settings -*- lexical-binding: t; -*-
+;;; mpf-completion.el --- Basic GPE settings -*- lexical-binding: t; -*-
 ;;
 ;; Copyleft (CL) 2022-2032 Dr YF Lin
 ;; Under ThingsEngine Project: https://www.thethingsengine.org
@@ -103,9 +103,9 @@
   (lsp-bridge-mode . (lambda () (corfu-mode -1))))
 
 ;;-------------------------------------------------------------------------------------------------
-(provide 'mpf-es-completion)
+(provide 'mpf-completion)
 
 ;; Local Variables:
 ;; byte-compile-warnings: (not free-vars unresolved)
 ;; End:
-;;; mpf-es-completion.el ends here
+;;; mpf-completion.el ends here

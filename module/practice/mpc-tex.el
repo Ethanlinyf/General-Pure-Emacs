@@ -1,4 +1,4 @@
-;;; mpc-011-tex.el --- Elisp Template . -*- lexical-binding: t; -*-
+;;; mpc-tex.el --- Elisp Template . -*- lexical-binding: t; -*-
 ;;
 ;; Copyleft (CL) 2022-2032 Dr YF Lin
 ;; Under ThingsEngine Project: https://www.thethingsengine.org
@@ -118,9 +118,9 @@
                              ))
 
 ;;-------------------------------------------------------------------------------------------------
-(provide 'mpc-011-tex)
+(provide 'mpc-tex)
 
 ;; Local Variables:
 ;; byte-compile-warnings: (not free-vars unresolved)
 ;; End:
-;;; mpc-011-tex.el ends here.
+;;; mpc-tex.el ends here.

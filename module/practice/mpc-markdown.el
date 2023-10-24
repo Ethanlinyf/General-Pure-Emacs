@@ -1,4 +1,4 @@
-;;; mpc-001-markdown.el --- Elisp Template . -*- lexical-binding: t; -*-
+;;; mpc-markdown.el --- Elisp Template . -*- lexical-binding: t; -*-
 ;;
 ;; Copyleft (CL) 2022-2032 Dr YF Lin
 ;; Under ThingsEngine Project: https://www.thethingsengine.org
@@ -116,9 +116,9 @@ mermaid.initialize({
          (t
           (apply fn args)))))))
 ;;-------------------------------------------------------------------------------------------------
-(provide 'mpc-001-markdown)
+(provide 'mpc-markdown)
 
 ;; Local Variables:
 ;; byte-compile-warnings: (not free-vars unresolved)
 ;; End:
-;;; mpc-001-markdown.el ends here.
+;;; mpc-markdown.el ends here.

@@ -1,4 +1,4 @@
-;;; mpf-ws-workspace.el --- Project Utilities -*- lexical-binding: t; -*-
+;;; mpf-workspace.el --- Project Utilities -*- lexical-binding: t; -*-
 ;;
 ;; Copyleft (CL) 2022-2032 Dr YF Lin
 ;; Under ThingsEngine Project: https://www.thethingsengine.org
@@ -234,9 +234,9 @@ Other buffer group by `centaur-tabs-get-group-name' with project name."
 (global-set-key (kbd "s-1") 'aweshell-dedicated-toggle)
 
 ;;-------------------------------------------------------------------------------------------------
-(provide 'mpf-ws-workspace)
+(provide 'mpf-workspace)
 
 ;; Local Variables:
 ;; byte-compile-warnings: (not free-vars unresolved)
 ;; End:
-;;; mpf-ws-workspace.el ends here.
+;;; mpf-workspace.el ends here.

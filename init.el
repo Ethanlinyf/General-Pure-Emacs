@@ -78,20 +78,21 @@
 
 (setq-default make-backup-files nil)
 
-(require 'init-e-system)
-(require 'init-n-bridge)
-(require 'init-s-builtin)
-(require 'init-w-enhance)
-
-(require 'mpf-en-userinterface)
-(require 'mpf-es-completion)
-(require 'mpf-wn-minibuffer)
-(require 'mpf-ws-workspace)
-
-(require 'mpc-000-org)
-(require 'mpc-001-markdown)
-(require 'mpc-010-python)
-(require 'mpc-011-tex)
+;; core
+(require 'init-system)
+(require 'init-bridge)
+(require 'init-builtin)
+(require 'init-enhance)
+;;module/platform
+(require 'mpf-userinterface)
+(require 'mpf-completion)
+(require 'mpf-minibuffer)
+(require 'mpf-workspace)
+;;module/practice
+(require 'mpc-org)
+(require 'mpc-markdown)
+(require 'mpc-python)
+(require 'mpc-tex)
 
 ;;-------------------------------------------------------------------------------------------------
 (provide 'init)

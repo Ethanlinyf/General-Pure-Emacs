@@ -1,4 +1,4 @@
-;;; mpf-wn-minibuffer.el --- Basic GPE settings -*- lexical-binding: t; -*-
+;;; mpf-minibuffer.el --- Basic GPE settings -*- lexical-binding: t; -*-
 ;;
 ;; Copyleft (CL) 2022-2032 Dr YF Lin
 ;; Under ThingsEngine Project: https://www.thethingsengine.org
@@ -474,9 +474,9 @@
   (("M-j C-SPC" . avy-goto-char-timer)))
 
 ;;-------------------------------------------------------------------------------------------------
-(provide 'mpf-wn-minibuffer)
+(provide 'mpf-minibuffer)
 
 ;; Local Variables:
 ;; byte-compile-warnings: (not free-vars unresolved)
 ;; End:
-;;; mpf-wn-minibuffer.el ends here
+;;; mpf-minibuffer.el ends here

@@ -1,4 +1,4 @@
-;;; init-w-enhance.el --- Elisp Template . -*- lexical-binding: t; -*-
+;;; init-enhance.el --- Elisp Template . -*- lexical-binding: t; -*-
 ;;
 ;; Copyleft (CL) 2022-2032 Dr YF Lin
 ;; Under ThingsEngine Project: https://www.thethingsengine.org
@@ -154,9 +154,9 @@
 (add-hook 'java-ts-mode-hook #'(lambda () (treesit-parser-create 'java)))
 
 ;;-------------------------------------------------------------------------------------------------
-(provide 'init-w-enhance)
+(provide 'init-enhance)
 
 ;; Local Variables:
 ;; byte-compile-warnings: (not free-vars unresolved)
 ;; End:
-;;; init-w-enhance.el ends here.
+;;; init-enhance.el ends here.
