@@ -49,6 +49,7 @@
 (push '(ns-transparent-titlebar . t) default-frame-alist)
 (push '(ns-appearance . dark) default-frame-alist)
 
+(fset 'display-startup-echo-area-message 'ignore)
 ;;-------------------------------------------------------------------------------------------------
 
 ;; Local Variables:
