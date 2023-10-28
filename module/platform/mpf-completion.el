@@ -29,6 +29,13 @@
     (global-corfu-mode)
     ))
 
+;; (use-package corfu-terminal
+;;   :after (corfu)
+;;   :hook (eshell-mode . corfu-terminal-mode))
+
+
+(add-hook 'eshell-mode-hook 'corfu-terminal-mode)
+
 ;; Add extensions
 (use-package cape
   ;; Bind dedicated completion commands
