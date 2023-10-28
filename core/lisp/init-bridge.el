@@ -37,6 +37,8 @@
                        iedit
                        flycheck
                        nerd-icons
+                       shut-up
+                       corfu-terminal
 
                        )  "Default packages." )
 
