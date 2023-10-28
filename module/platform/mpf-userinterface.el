@@ -59,7 +59,7 @@ This issue has been addressed in 28."
   ;; Corrects (and improves) org-mode's native fontification.
   (doom-themes-org-config)
   :init
-  (load-theme 'doom-one t))
+  (load-theme 'doom-nord-aurora t))
 
 (use-package doom-modeline
   :ensure t
