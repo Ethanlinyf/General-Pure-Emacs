@@ -7,6 +7,11 @@
 ;; init file for General Pure Emacs basic branch
 
 ;;; code:
+
+(require 'shut-up)
+(when noninteractive
+  (shut-up-silence-emacs))
+
 (setq-default
  initial-scratch-message (concat
                           ";;--------------------------------------------------------
