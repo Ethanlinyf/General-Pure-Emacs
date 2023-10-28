@@ -7,6 +7,9 @@
 ;;
 
 ;;; Code:
+
+(require 'org)
+
 ;; (setq org-directory "~/Documents/Org")
 
 (defvar org-directory (expand-file-name "GPE-Org/" user-emacs-directory))
@@ -217,6 +220,49 @@
   :config
   (setq org-roam-database-connector 'sqlite-builtin)
   (org-roam-db-autosync-mode))
+
+
+(define-key org-mode-map (kbd "<C-tab>") 'org-global-cycle)
+
+;; (global-set-key (kbd "<C-tab>") 'org-global-cycle)
+;;--------------------------------------------------------------------
+(use-package org-present
+  :config
+  (defun gpe/org-present-prepare-slide (buffer-name heading)
+    (org-overview)  ; Show only top-level headlines
+    (org-show-entry); Unfold the current entry
+    (org-show-children))   ; show recent sub-heading
+
+  (defun gpe/org-present-start () ; pre-present settings
+    ;; (turn-off-evil-mode)
+    (setq visual-fill-column-width 110
+          visual-fill-column-center-text t)
+    ;; 调整字体大小
+    (setq-local face-remapping-alist '((default (:height 1.5) variable-pitch)
+                                       (header-line (:height 4.0) variable-pitch)
+                                       (org-document-title (:height 1.75) org-document-title)
+                                       (org-code (:height 1.55) org-code)
+                                       (org-verbatim (:height 1.55) org-verbatim)
+                                       (org-block (:height 1.25) org-block)
+                                       (org-block-begin-line (:height 0.7) org-block)))
+    (setq header-line-format " ") ; add a line infron of the heading
+    (display-line-numbers-mode 0)
+    (org-display-inline-images) ; display image
+    (read-only-mode 1)) ; read only
+
+  (defun gpe/org-present-end () ; reset back the previous setting
+    (setq-local face-remapping-alist
+                '((default variable-pitch default)))
+    (setq header-line-format nil)
+    (org-remove-inline-images)
+    (org-present-small)
+    (read-only-mode 0)
+    (display-line-numbers-mode 1))
+
+
+  (add-hook 'org-present-mode-hook 'gpe/org-present-start)
+  (add-hook 'org-present-mode-quit-hook 'gpe/org-present-end)
+  (add-hook 'org-present-after-navigate-functions 'gpe/org-present-prepare-slide))
 ;;-------------------------------------------------------------------------------------------------
 (provide 'mpc-org)
 
