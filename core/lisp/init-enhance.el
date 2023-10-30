@@ -78,6 +78,10 @@
   :ensure t
   :after yasnippet)
 
+(use-package move-text
+  :bind (("<C-M-up>" . move-text-up)
+         ("<C-M-down>" . move-text-down)))
+
 ;;--------------------------------------------------------------------
 ;; treesit implementation
 (require 'treesit)
