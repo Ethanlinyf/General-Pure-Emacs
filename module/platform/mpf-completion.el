@@ -13,28 +13,33 @@
 (use-package epc
   :ensure t)
 
-(use-package corfu
-  :init
-  (progn
-    (setq corfu-auto t)
-    (setq corfu-cycle t)
-    (setq corfu-quit-at-boundary t)
-    (setq corfu-quit-no-match t)
-    (setq corfu-preview-current nil)
-    (setq corfu-min-width 80)
-    (setq corfu-max-width 100)
-    (setq corfu-auto-delay 0.2)
-    (setq corfu-auto-prefix 1)
-    (setq corfu-on-exact-match nil)
-    (global-corfu-mode)
-    ))
+(require 'corfu)
+(progn
+  (setq corfu-auto t)
+  (setq corfu-cycle t)
+  (setq corfu-quit-at-boundary t)
+  (setq corfu-quit-no-match t)
+  (setq corfu-preview-current nil)
+  (setq corfu-min-width 80)
+  (setq corfu-max-width 100)
+  (setq corfu-auto-delay 0.2)
+  (setq corfu-auto-prefix 1)
+  (setq corfu-on-exact-match nil))
+(global-corfu-mode)
 
-;; (use-package corfu-terminal
-;;   :after (corfu)
-;;   :hook (eshell-mode . corfu-terminal-mode))
+;; (require 'corfu-terminal)
+;; (add-hook 'eshell-mode-hook 'corfu-terminal-mode)
 
+(autoload 'corfu-terminal "corfu-terminal" "Start corfu-terminal mode." t)
+(autoload 'global-corfu-terminal-mode "corfu-terminal" "Enable corfu-terminal globally." t)
 
-(add-hook 'eshell-mode-hook 'corfu-terminal-mode)
+(defun my-setup-corfu ()
+  (if (featurep 'corfu)
+      (progn
+        (require 'corfu-terminal)
+        (corfu-terminal-mode 1))))
+
+(add-hook 'after-init-hook 'my-setup-corfu)
 
 ;; Add extensions
 (use-package cape
