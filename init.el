@@ -88,6 +88,7 @@
 (require 'mpf-completion)
 (require 'mpf-minibuffer)
 (require 'mpf-workspace)
+(require 'mpf-programming)
 ;;module/practice
 (require 'mpc-org)
 (require 'mpc-markdown)
