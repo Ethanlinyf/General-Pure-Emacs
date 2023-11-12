@@ -13,9 +13,8 @@
 (when (>= emacs-major-version 27)
   (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/") t)
   (add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/") t)
-  (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
+  (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t))
 
-  )
 (unless (bound-and-true-p package--initialized)
   (package-initialize))
 
@@ -39,6 +38,8 @@
                        flycheck
                        nerd-icons
                        shut-up
+                       corfu-terminal
+                       corfu
                        corfu-terminal
 
                        )  "Default packages." )
