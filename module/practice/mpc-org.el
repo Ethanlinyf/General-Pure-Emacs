@@ -23,6 +23,8 @@
   :hook
   (org-mode . (lambda () (org-superstar-mode 1) (org-indent-mode 1))))
 
+(add-hook 'org-mode-hook #'org-indent-mode)
+
 (use-package tablist
   :ensure t)
 
@@ -263,6 +265,8 @@
   (add-hook 'org-present-mode-hook 'gpe/org-present-start)
   (add-hook 'org-present-mode-quit-hook 'gpe/org-present-end)
   (add-hook 'org-present-after-navigate-functions 'gpe/org-present-prepare-slide))
+
+;; (setq org-bullets-bullet-list '("☯" "☰" "☱" "☲" "☳" "☴" "☵" "☶" "☷"));; need to be checked
 ;;-------------------------------------------------------------------------------------------------
 (provide 'mpc-org)
 
