@@ -8,6 +8,14 @@
 
 ;;; Code:
 
+(defun TE-decimalNumber-to-binary-string (number)
+  (require 'calculator)
+  (let ((calculator-output-radix 'bin)
+        (calculator-radix-grouping-mode nil))
+    (calculator-number-to-string number)))
+
+(TE-decimalNumber-to-binary-string 23)
+
 (defun hidden-dos-eol ()
   "Do not show ^M in files containing mixed UNIX and DOS line endings."
   (interactive)
