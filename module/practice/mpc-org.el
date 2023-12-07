@@ -266,6 +266,9 @@
   (add-hook 'org-present-mode-quit-hook 'gpe/org-present-end)
   (add-hook 'org-present-after-navigate-functions 'gpe/org-present-prepare-slide))
 
+(eval-after-load "org"
+  '(require 'ox-gfm nil t))
+
 ;; (setq org-bullets-bullet-list '("☯" "☰" "☱" "☲" "☳" "☴" "☵" "☶" "☷"));; need to be checked
 ;;-------------------------------------------------------------------------------------------------
 (provide 'mpc-org)
