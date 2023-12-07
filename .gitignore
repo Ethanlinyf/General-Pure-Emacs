@@ -8,6 +8,7 @@
 /GPE-Org
 /gpe-u-setting.el
 /gpe_basic_dev.org
+/gpe_basic_dev.md
 /history
 /places
 /recentf
@@ -28,3 +29,5 @@
 *.~undo-tree~
 /undo-tree-dir
 undo-tree-dir
+
+/README.md.tmp
