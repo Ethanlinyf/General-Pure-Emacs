@@ -71,6 +71,8 @@
   :bind (("<C-M-up>" . move-text-up)
          ("<C-M-down>" . move-text-down)))
 
+(setq split-width-threshold 80)
+
 ;;-------------------------------------------------------------------------------------------------
 (provide 'init-enhance)
 
