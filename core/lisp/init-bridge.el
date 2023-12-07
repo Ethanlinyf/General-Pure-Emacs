@@ -41,6 +41,10 @@
                        corfu-terminal
                        corfu
                        corfu-terminal
+                       ox-gfm
+                       spacemacs-theme
+                       ef-themes
+                       modus-themes
 
                        )  "Default packages." )
 
