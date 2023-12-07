@@ -46,20 +46,65 @@ This issue has been addressed in 28."
   )
 
 ;;--------------------------------------------------------------------
-;; theme doom-one
-;; see the PR: https://github.com/doomemacs/themes/pull/779
-(use-package doom-themes
-  :custom
-  (doom-themes-enable-bold t)   ; if nil, bold is universally disabled
-  (doom-themes-enable-italic t) ; if nil, italics is universally disabled
-  :config
-  ;; Enable flashing mode-line on errors
-  ;; (doom-themes-visual-bell-config)
-  (setq doom-themes-treemacs-theme "doom-atom") ; use "doom-colors" for less minimal icon theme
-  ;; Corrects (and improves) org-mode's native fontification.
-  (doom-themes-org-config)
-  :init
-  (load-theme 'doom-nord-aurora t))
+;; ;; theme doom-one
+;; ;; see the PR: https://github.com/doomemacs/themes/pull/779
+;; (use-package doom-themes
+;;   :custom
+;;   (doom-themes-enable-bold t)   ; if nil, bold is universally disabled
+;;   (doom-themes-enable-italic t) ; if nil, italics is universally disabled
+;;   :config
+;;   ;; Enable flashing mode-line on errors
+;;   ;; (doom-themes-visual-bell-config)
+;;   (setq doom-themes-treemacs-theme "doom-atom") ; use "doom-colors" for less minimal icon theme
+;;   ;; Corrects (and improves) org-mode's native fontification.
+;;   (doom-themes-org-config)
+;;   :init
+;;   (load-theme 'doom-nord-aurora t))
+
+;; (setq my$day-themes
+;;       '(doom-solarized-light
+;;         spacemacs-light
+;;         doom-one-light
+;;         ef-tritanopia-light
+;;         ef-cyprus
+;;         ef-light)
+;;       my$night-themes
+;;       '(spacemacs-dark
+;;         doom-one
+;;         doom-nord-aurora
+;;         doom-opera))
+
+;; (when (display-graphic-p)
+;;     (push 'modus-vivendi my$night-themes)
+;;     (push 'modus-operandi my$day-themes)
+;;     (push 'ef-dark my$night-themes))
+
+;;(require 'spacemacs-theme)
+
+;; ;; (load-theme 'spacemacs-light t)
+
+;; (defun switch-theme-based-on-macos ()
+;;   (let ((theme (shell-command-to-string "osascript ~/.emacs.d/core/site-lisp/detect_theme.scpt")))
+;;     (cond ((string-match "Dark" theme)
+;;            (load-theme 'doom-nord-aurora t))
+;;           ((string-match "Light" theme)
+;;            (load-theme 'doom-one-light t)))))
+
+;; ;; Call the function on Emacs startup
+;; (switch-theme-based-on-macos)
+
+;; ;; Optionally, set a timer to check periodically (e.g., every 5 minutes)
+;; (run-with-timer 0 300 'switch-theme-based-on-macos)
+(require 'doom-themes)
+(defun my/apply-theme (appearance)
+  "Load theme, taking current system APPEARANCE into consideration."
+  (mapc #'disable-theme custom-enabled-themes)
+  (pcase appearance
+    ('light (load-theme 'doom-one-light t))
+    ('dark (load-theme 'doom-nord-aurora t))))
+
+(add-hook 'ns-system-appearance-change-functions #'my/apply-theme)
+
 
 (use-package doom-modeline
   :ensure t
