@@ -99,6 +99,7 @@ Other buffer group by `centaur-tabs-get-group-name' with project name."
        (string-prefix-p "*quickrun*" name)
        (string-prefix-p "*EGLOT" name)
        (string-prefix-p "*which-key" name)
+       (string-prefix-p "*xwidget-webkit" name)
 
        ;; Is not magit buffer.
        (and (string-prefix-p "magit" name)
@@ -114,6 +115,7 @@ Other buffer group by `centaur-tabs-get-group-name' with project name."
   (dired-mode . centaur-tabs-local-mode)
   (use-package-statistics-mode . centaur-tabs-local-mode)
   (pdf-view-mode . centaur-tabs-local-mode)
+  (xwidget-webkit-mode . centaur-tabs-local-mode)
   (after-init . centaur-tabs-mode)
   :bind
   ("C-<prior>" . centaur-tabs-backward)
