@@ -12,3 +12,5 @@ It's our creation.
 
 ## Configuration Methodology
 ![GPE Layout](./core/site-lisp/basic-figure/TE-GPE-Basic_diagram_2.png)
+
+## The code Layout
