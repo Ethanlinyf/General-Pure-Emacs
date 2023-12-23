@@ -117,6 +117,10 @@
               :map lisp-interaction-mode-map
               ("C-c e" . macrostep-expand)))
 
+;; Environment: the same path as in your shell, bash or zsh
+(when (or sys/mac-x-p sys/linux-x-p (daemonp))
+  (exec-path-from-shell-initialize))
+
 (use-package things-engine
   :ensure nil
   :init
