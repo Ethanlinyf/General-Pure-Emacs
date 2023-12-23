@@ -95,12 +95,15 @@ This issue has been addressed in 28."
 
 ;; ;; Optionally, set a timer to check periodically (e.g., every 5 minutes)
 ;; (run-with-timer 0 300 'switch-theme-based-on-macos)
+
+;; auto-dark-emacs could be also considered.
 (require 'doom-themes)
+(require 'modus-themes)
 (defun my/apply-theme (appearance)
   "Load theme, taking current system APPEARANCE into consideration."
   (mapc #'disable-theme custom-enabled-themes)
   (pcase appearance
-    ('light (load-theme 'doom-one-light t))
+    ('light (load-theme 'modus-operandi-tritanopia t))
     ('dark (load-theme 'doom-nord-aurora t))))
 
 (add-hook 'ns-system-appearance-change-functions #'my/apply-theme)
