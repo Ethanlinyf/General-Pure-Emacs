@@ -119,6 +119,7 @@
 
 ;; Environment: the same path as in your shell, bash or zsh
 (when (or sys/mac-x-p sys/linux-x-p (daemonp))
+  (setq exec-path-from-shell-arguments '("-l"))
   (exec-path-from-shell-initialize))
 
 (use-package things-engine

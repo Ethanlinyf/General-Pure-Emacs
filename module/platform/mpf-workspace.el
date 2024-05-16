@@ -7,6 +7,8 @@
 ;; Needed elements for a project as IDE
 
 ;;; code:
+
+(add-to-list 'auto-mode-alist '("\\.te\\'" . thingsengine-mode))
 (use-package centaur-tabs
   :init
   (setq centaur-tabs-enable-key-bindings t)
