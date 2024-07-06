@@ -100,6 +100,8 @@
 ;; (advice-add #'package-initialize :after #'add-extradirs-to-load-path)
 (update-load-path)
 
+(setq load-prefer-newer t)
+
 (require 'init-0-bridge)
 (require 'init-1-system)
 
