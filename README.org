@@ -131,8 +131,8 @@ Adhere to the principles (G.P.E) of this platform, the configuration will be cra
 
     [[./site-lisp/figure/Git-for-research-project.png]]
 
-  + System and Network Administration
-    [[./site-lisp/figure/cybernet_workstation_1.png][Cybernet Workstation]]
+  + System and Network Administration \\
+    [[./site-lisp/figure/cybernet_workstation_1.png]]
 
 - Custmisable \\
   Nothing cannot be custmised in this General Pure Emacs. For example,
