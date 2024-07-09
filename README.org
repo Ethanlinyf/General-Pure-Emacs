@@ -19,7 +19,7 @@ The GPE is, not GPE, but termed as GPE.
 
 * Introduction
  
-The GPE is an integrated and flexible platform based on [[https://www.gnu.org/software/emacs/][Gnu Emacs]] that
+The GPE is an integrated and flexible platform built on [[https://www.gnu.org/software/emacs/][Gnu Emacs]] that
 harnesses the power of artificial intelligence (AI) with around 100
 packages as plugins to facilitate learning, teaching, research and project
 management.
@@ -130,6 +130,9 @@ Adhere to the principles (G.P.E) of this platform, the configuration will be cra
   + [[https://www.thethingsengine.org/git-for-research.html][Management for research purposes]] as below:
 
     [[./site-lisp/figure/Git-for-research-project.png]]
+
+  + System and Network Administration
+    [[./site-lisp/figure/cybernet_workstation_1.png][Cybernet Workstation]]
 
 - Custmisable \\
   Nothing cannot be custmised in this General Pure Emacs. For example,
