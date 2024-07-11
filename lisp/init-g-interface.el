@@ -191,16 +191,16 @@
            pdf-annot-list-mode) . hide-mode-line-mode)))
 
 ;;--------------------------------------------------------------------
-;; add holo-layer
-(use-package holo-layer
-  :ensure nil
-  :load-path "site-lisp/holo-layer"
-  :commands holo-layer-enable
-  :init
-  (setq holo-layer-enable-cursor-animation t)
-  (setq holo-layer-enable-window-border t)
-  ;; (holo-layer-enable)
-  )
+;; add holo-layer; It was removed
+;; (use-package holo-layer
+;;   :ensure nil
+;;   :load-path "site-lisp/holo-layer"
+;;   :commands holo-layer-enable
+;;   :init
+;;   (setq holo-layer-enable-cursor-animation t)
+;;   (setq holo-layer-enable-window-border t)
+;;   ;; (holo-layer-enable)
+;;   )
 
 ;;-------------------------------------------------------------------------------------------------
 (provide 'init-g-interface)

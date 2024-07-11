@@ -228,10 +228,6 @@ recommended.
      M-x nerd-icons-install-fonts
    #+end_src
 
-7. Generate an OpenAI API key, and then save the Key to "~/.emacs.d/mind-wave/chatgpt_api_key.txt"
-   
-8. Enjoy General Pure Emacs with AI ~
-
 One more thing, add external tools and language servers to boost your own GPE:
 - External tools
   + fd
