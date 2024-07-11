@@ -19,7 +19,7 @@ The GPE is, not GPE, but termed as GPE.
 
 * Introduction
  
-The GPE is an integrated and flexible platform based on [[https://www.gnu.org/software/emacs/][Gnu Emacs]] that
+The GPE is an integrated and flexible platform built on [[https://www.gnu.org/software/emacs/][Gnu Emacs]] that
 harnesses the power of artificial intelligence (AI) with around 100
 packages as plugins to facilitate learning, teaching, research and project
 management.
@@ -131,6 +131,9 @@ Adhere to the principles (G.P.E) of this platform, the configuration will be cra
 
     [[./site-lisp/figure/Git-for-research-project.png]]
 
+  + System and Network Administration \\
+    [[./site-lisp/figure/cybernet_workstation_1.png]]
+
 - Custmisable \\
   Nothing cannot be custmised in this General Pure Emacs. For example,
   mode-line customised by doom-modeline:
@@ -224,10 +227,6 @@ recommended.
    #+begin_src elisp
      M-x nerd-icons-install-fonts
    #+end_src
-
-7. Generate an OpenAI API key, and then save the Key to "~/.emacs.d/mind-wave/chatgpt_api_key.txt"
-   
-8. Enjoy General Pure Emacs with AI ~
 
 One more thing, add external tools and language servers to boost your own GPE:
 - External tools

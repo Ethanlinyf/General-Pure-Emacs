@@ -326,12 +326,12 @@ Other buffer group by `centaur-tabs-get-group-name' with project name."
   :bind ("s-5" . popweb-url-preview-pointer))
 
 ;; ;;--------------------------------------------------------------------
-;; ;; ChatGPT
-(use-package mind-wave
-  :ensure nil
-  :load-path "site-lisp/mind-wave"
-  :commands mind-wave-chat-ask
-  :bind ("s-`" . mind-wave-chat-ask))
+;; ;; ChatGPT was removed
+;; (use-package mind-wave
+;;   :ensure nil
+;;   :load-path "site-lisp/mind-wave"
+;;   :commands mind-wave-chat-ask
+;;   :bind ("s-`" . mind-wave-chat-ask))
 
 ;;-------------------------------------------------------------------------------------------------
 (provide 'init-j-platform)
