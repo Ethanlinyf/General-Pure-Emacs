@@ -17,8 +17,8 @@
 (require 'subr-x)
 
 ;; Use to install the needed software for the host system
-(use-package use-package-ensure-system-package
-  :ensure t)
+;; (use-package use-package-ensure-system-package
+    ;; :ensure t)
 
 ;; Set time
 (use-package time
@@ -129,8 +129,8 @@
            ("C-c C-l" . reload-init-file))
 
 ;; Sqlite
-(when (fboundp 'sqlite-open)
-  (use-package emacsql-sqlite-builtin))
+;; (when (fboundp 'sqlite-open)
+;;   (use-package emacsql-sqlite-builtin))
 
 ;; Garbage Collector Magic Hack
 (use-package gcmh
