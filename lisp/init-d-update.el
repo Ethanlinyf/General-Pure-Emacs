@@ -19,7 +19,11 @@ This issue has been addressed in 28."
   (and sys/mac-cocoa-p
        (not emacs/>=28p)
        (bound-and-true-p ns-use-native-fullscreen)
-       (setq ns-use-native-fullscreen nil)))
+       (setq ns-use-native-fullscreen nil)
+       ))
+
+(when sys/macp
+  (select-frame-set-input-focus (selected-frame)))
 
 ;;; Emacs@29
 ;;--------------------------------------------------------------------

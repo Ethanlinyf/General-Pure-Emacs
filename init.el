@@ -124,7 +124,7 @@
 (require 'init-p-lua)
 (require 'init-p-julia)
 (require 'init-p-web)
-(require 'init-p-treesit)
+;; (require 'init-p-treesit)
 
 (require 'init-r-roam)
 (require 'init-r-research)

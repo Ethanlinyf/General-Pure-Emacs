@@ -22,7 +22,7 @@
         (cmake . ("https://github.com/uyha/tree-sitter-cmake"))
         (csharp     . ("https://github.com/tree-sitter/tree-sitter-c-sharp.git"))
         (dockerfile . ("https://github.com/camdencheek/tree-sitter-dockerfile"))
-        (elisp . ("https://github.com/Wilfred/tree-sitter-elisp"))
+        ;; (elisp . ("https://github.com/Wilfred/tree-sitter-elisp"))
         (go . ("https://github.com/tree-sitter/tree-sitter-go"))
         (gomod      . ("https://github.com/camdencheek/tree-sitter-go-mod.git"))
         (html . ("https://github.com/tree-sitter/tree-sitter-html"))
@@ -76,7 +76,7 @@
                                )))
 
 (add-hook 'emacs-lisp-mode-hook #'(lambda () (treesit-parser-create 'elisp)))
-(add-hook 'ielm-mode-hook #'(lambda () (treesit-parser-create 'elisp)))
+;; (add-hook 'ielm-mode-hook #'(lambda () (treesit-parser-create 'elisp)))
 (add-hook 'json-mode-hook #'(lambda () (treesit-parser-create 'json)))
 (add-hook 'go-mode-hook #'(lambda () (treesit-parser-create 'go)))
 (add-hook 'java-mode-hook #'(lambda () (treesit-parser-create 'java)))

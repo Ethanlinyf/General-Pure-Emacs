@@ -209,6 +209,11 @@ recommended.
    #+begin_src elisp
      git submodule update --init --recursive
    #+end_src
+
+   #+begin_src elisp
+     git submodule foreach git checkout $(git remote show origin | awk '/HEAD 分支|HEAD branch/ {split($0, a, "："); print a[2]}')
+   #+end_src
+   
    
    And to update the submodules, you could use:
 
