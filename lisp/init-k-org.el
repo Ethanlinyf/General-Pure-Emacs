@@ -209,6 +209,8 @@
 ;; (setq org-ellipsis " 􀍠")
 ;; (setq org-hide-emphasis-markers t)
 
+(require 'ox-beamer)
+
 ;;-------------------------------------------------------------------------------------------------
 (provide 'init-k-org)
 ;;; init-k-org.el ends here.
